@@ -1,0 +1,2 @@
+use "model"; 
+newgamescreenbmp = ImportImageFromFile("newgamescreen.png", false); 

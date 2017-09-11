@@ -1,0 +1,11 @@
+<Font|headerFont>CARGO: Reloading (*, Ctrl-R)<Font|helpFont><p><p>
+
+Reloading allows you to control the replenishment of ammo and fuel resources. If ammo or fuel is completely depleted, a reload sequence will automatically start. However, if you wish to reload even though you're half empty (in order to prepare for combat), use the NumPad * or Ctrl-R.
+
+<p><p>Reload your turrets' ammo whenever you have a chance. Empty turrets in the heat of battle that must wait for the reload sequence to complete itself can be costly. Turrets should always be full if they're not in combat. Apply the same rule to fuel and weapons' ammo. Reloading in a dogfight can render you defenseless for many seconds, which will surely cost you your ship and whatever mission you were engaged if you're up against competent pilots.
+
+<p><p>Reloading will replenish whatever can possibly be replenished in your ship. This includes fuel, weapons' ammo, turrets' ammo, missiles, dispensor (when applicable), and countermeasures. However, if you are using one of those resources, and press *, the resource will not be reloaded, but others will. For example, if I am boosting, the fuel tank thus being not full, but only have half ammo left in my weapons, I can press * and only my ammo will be refilled, allowing me to continue boosting. Note that this remains true for turrets. Since the pilot is never firing the turrets, reloading will reload turret ammo regardless of whether the gunners are firing them or not.
+
+<p><p>When reloading, whatever is being reloaded cannot be used for the duration of the reload sequence. Do not reload turrets seconds before a fight, they will be unable to fire for a few seconds, which can be crucial. Same for fuel/ammo.
+
+<p><p>A reload sequence will only occur if three conditions are met. 1) The resource must not be full. Full ammo will never be reloaded. 2) The resource must not currently be in use. If you're firing your weapon, engaging a reload sequence throughout your ship will not reload your ammo. 3) There must be refill present in cargo. You can't reload a weapon if there is no ammo left.

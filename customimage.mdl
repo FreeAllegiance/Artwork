@@ -1,0 +1,192 @@
+use "model";
+//briefingimage.mdl
+//This file is to define the common artwork files
+//with easy-to-reference names, so that people
+//using the custom briefings don't have to worry
+//about things like 'iconXXXbmp.mdl' or 'xxxloadoutpanebmp.mdl'
+//Instead, they can just use XXXlobby, XXXloadout, and XXXicon.
+//There's pretty much everything I could find in the artwork
+//folder, plus the Squad images that I created.
+//
+//Define the hull info images.
+//They're all the same, so it doesn't matter.
+custom1hullinfobmp = ImportImage("hullinfobmp", false);
+custom2hullinfobmp = ImportImage("hullinfobmp", false);
+custom3hullinfobmp = ImportImage("hullinfobmp", false);
+custom4hullinfobmp = ImportImage("hullinfobmp", false);
+custom5hullinfobmp = ImportImage("hullinfobmp", false);
+custom6hullinfobmp = ImportImage("hullinfobmp", false);
+
+//Define the Belters images we need.
+beltlobby = ImportImage("belterslobbybmp", false); //Lobby
+beltloadout = ImportImage("beltersloadoutpanebmp", false); //Loadout background
+belticon = ImportImage("iconbeltersbmp", false); //Icon for F6/Briefing
+
+//Define the Bios images we need
+bioslobby = ImportImage("bioslobbybmp", false); //Lobby
+biosloadout = ImportImage("biosloadoutpanebmp", false); //Loadout background
+biosicon = ImportImage("iconbiosbmp", false); //Icon for F6/Briefing
+
+//Define the Dreghklar images we need
+dreglobby = ImportImage("lizardslobbybmp", false); //Lobby
+dregloadout = ImportImage("lizardsloadoutpanebmp", false); //Loadout background
+dregicon = ImportImage("iconlizardsbmp", false); //Icon for F6/Briefing
+
+//Define the Ga'Taraan images we need
+gtlobby = ImportImage("gataaranlobbybmp", false); //Lobby
+gtloadout = ImportImage("gataaranloadoutpanebmp", false); //Loadout background
+gticon = ImportImage("icongataaranbmp", false); //Icon for F6/Briefing
+
+//Define the Gigacorp images we need
+gigalobby = ImportImage("crimsonlobbybmp", false); //Lobby
+gigaloadout = ImportImage("crimsonloadoutpanebmp", false); //Loadout background
+gigaicon = ImportImage("iconcrimsonbmp", false); //Icon for F6/Briefing
+
+//Define the Iron Coalition images we need
+iclobby = ImportImage("ironleaguelobbybmp", false); //Lobby
+icloadout = ImportImage("ironleagueloadoutpanebmp", false); //Loadout background
+icicon = ImportImage("iconironleaguebmp", false); //Icon for F6/Briefing
+
+//Define the Rixian images we need
+rixlobby = ImportImage("rixianlobbybmp", false); //Lobby
+rixloadout = ImportImage("rixianloadoutpanebmp", false); //Loadout background
+rixicon = ImportImage("iconrixianbmp", false); //Icon for F6/Briefing
+
+//Define the Technoflux images we need
+tflobby = ImportImage("technofluxlobbybmp", false); //Lobby
+tfloadout = ImportImage("technofluxloadoutpanebmp", false); //Loadout background
+tficon = ImportImage("icontechnofluxbmp", false); //Icon for F6/Briefing
+
+//Define the Faction X images we need
+//Commented out becasue they aren't there yet
+//fxlobby = ImportImage("factionxlobbybmp", false); //Lobby
+//fxloadout = ImportImage("factionxloadoutpanebmp", false); //Loadout background
+//fxicon = ImportImage("iconfactionxbmp", false); //Icon for F6/Briefing
+
+//Define the IC Rookies images we need
+rooklobby = ImportImage("ictrainerlobbybmp", false); //Lobby
+rookloadout = ImportImage("ictrainerloadoutpanebmp", false); //Loadout background
+rookicon = ImportImage("iconictrainerbmp", false); //Icon for F6/Briefing
+
+//Define the Phoenix images we need
+pnxlobby = ImportImage("dn_faphbklobbybmp", false); //Lobby
+pnxloadout = ImportImage("dn_faphbkloadoutpanebmp", false); //Loadout background
+pnxicon = ImportImage("icondn_faphbkbmp", false); //Icon for F6/Briefing
+
+//Define the Effix images we need
+effixlobby = ImportImage("effixlobbybmp", false); //Lobby
+effixloadout = ImportImage("effixloadoutpanebmp", false); //Loadout background
+effixicon = ImportImage("iconeffixbmp", false); //Icon for F6/Briefing
+
+//Define the Omicron Hive images we need
+//Commented out because they aren't there yet
+//ohlobby = ImportImage("faohbklobbybmp", false); //Lobby
+//ohloadout = ImportImage("faohbkloadoutpanebmp", false); //Loadout background
+//ohicon = ImportImage("iconfaohbkbmp", false); //Icon for F6/Briefing
+
+//Define the Colonial images we need
+collobby = ImportImage("coloniallobbybmp", false); //Lobby
+colloadout = ImportImage("colonialloadoutpanebmp", false); //Loadout background
+colicon = ImportImage("iconcolonialbmp", false); //Icon for F6/Briefing
+
+//Define the Earth images we need
+earthlobby = ImportImage("earthlobbybmp", false); //Lobby
+earthloadout = ImportImage("earthloadoutpanebmp", false); //Loadout background
+earthicon = ImportImage("iconearthbmp", false); //Icon for F6/Briefing
+
+//Define the Jupiter images we need
+juplobby = ImportImage("jupiterlobbybmp", false); //Lobby
+juploadout = ImportImage("jupiterloadoutpanebmp", false); //Loadout background
+jupicon = ImportImage("iconjupiterbmp", false); //Icon for F6/Briefing
+
+//Define the Mars images we need
+marslobby = ImportImage("marslobbybmp", false); //Lobby
+marsloadout = ImportImage("marsloadoutpanebmp", false); //Loadout background
+marsicon = ImportImage("iconmarsbmp", false); //Icon for F6/Briefing
+
+//Define the Saturn images we need
+satlobby = ImportImage("saturnlobbybmp", false); //Lobby
+satloadout = ImportImage("saturnloadoutpanebmp", false); //Loadout background
+saticon = ImportImage("iconsaturnbmp", false); //Icon for F6/Briefing
+
+//Define the Venus images we need
+venlobby = ImportImage("venuslobbybmp", false); //Lobby
+venloadout = ImportImage("venusloadoutpanebmp", false); //Loadout background
+venicon = ImportImage("iconvenusbmp", false); //Icon for F6/Briefing
+
+//Define the Galactic Empire images we need
+gelobby = ImportImage("sw_elobbybmp", false); //Lobby
+geloadout = ImportImage("sw_eloadoutpanebmp", false); //Loadout background
+geicon = ImportImage("iconsw_ebmp", false); //Icon for F6/Briefing
+
+//Define the Rebel Alliance images we need
+ralobby = ImportImage("sw_rlobbybmp", false); //Lobby
+raloadout = ImportImage("sw_rloadoutpanebmp", false); //Loadout background
+raicon = ImportImage("iconsw_rbmp", false); //Icon for F6/Briefing
+
+//Define the default watermark for a lobby image
+deflobby = ImportImage("defaultwatermarkbmp", false); //Lobby
+
+//Define the default loadout pane
+defloadout = ImportImage("loadoutpanebmp", false); //Loadout background
+
+//Define the defailt color icons
+yellowicon = ImportImage("iconteamyellowbmp", false); //Icon for F6/Briefing
+blueicon = ImportImage("iconteambluebmp", false); //Icon for F6/Briefing
+purpleicon = ImportImage("iconteampurplebmp", false); //Icon for F6/Briefing
+greenicon = ImportImage("iconteamgreenbmp", false); //Icon for F6/Briefing
+redicon = ImportImage("iconteamredbmp", false); //Icon for F6/Briefing
+whiteicon = ImportImage("iconteamwhitebmp", false); //Icon for F6/Briefing
+
+//Define the squad images
+//squad images are stored in the artwork/squadimages folder for ease of access
+
+//Black Shadow
+bslobby = ImportImageFromFile("bslobby.png", false); //Lobby
+bsicon = ImportImageFromFile("bsicon.png", false); //Icon for F6/Briefing
+bsloadout = ImportImageFromFile("bsloadout.png", false); //Loadout screen
+
+//German Borg
+gblobby = ImportImageFromFile("gblobby.png", false); //Lobby
+gbicon = ImportImageFromFile("gbicon.png", false); //Icon for F6/Briefing
+gbloadout = ImportImageFromFile("gbloadout.png", false); //Loadout screen
+
+//Palidor's Knights
+pklobby = ImportImageFromFile("pklobby.png", false); //Lobby
+pkicon = ImportImageFromFile("pkicon.png", false); //Icon for F6/Briefing
+pkloadout = ImportImageFromFile("pkloadout.png", false); //Loadout screen
+
+//Rolling Thunder
+rtlobby = ImportImageFromFile("rtlobby.png", false); //Lobby
+rticon = ImportImageFromFile("rticon.png", false); //Icon for F6/Briefing
+rtloadout = ImportImageFromFile("rtloadout.png", false); //Loadout screen
+
+//Steel Fury
+sflobby = ImportImageFromFile("sflobby.png", false); //Lobby
+sficon = ImportImageFromFile("sficon.png", false); //Icon for F6/Briefing
+sfloadout = ImportImageFromFile("sfloadout.png", false); //Loadout screen
+
+//Roman Legion
+spqrlobby = ImportImageFromFile("spqrlobby.png", false); //Lobby
+spqricon = ImportImageFromFile("spqricon.png", false); //Icon for F6/Briefing
+spqrloadout = ImportImageFromFile("spqrloadout.png", false); //Loadout screen
+
+//Slipshod Research and Mining
+srmlobby = ImportImageFromFile("srmlobby.png", false); //Lobby
+srmicon = ImportImageFromFile("srmicon.png", false); //Icon for F6/Briefing
+srmloadout = ImportImageFromFile("srmloadout.png", false); //Loadout screen
+
+//System X
+sysxlobby = ImportImageFromFile("sysxlobby.png", false); //Lobby
+sysxicon = ImportImageFromFile("sysxicon.png", false); //Icon for F6/Briefing
+sysxloadout = ImportImageFromFile("sysxloadout.png", false); //Loadout screen
+
+//WildCards
+acelobby = ImportImageFromFile("acelobby.png", false); //Lobby
+aceicon = ImportImageFromFile("aceicon.png", false); //Icon for F6/Briefing
+aceloadout = ImportImageFromFile("aceloadout.png", false); //Loadout screen
+
+//XenoTech
+xtlobby = ImportImageFromFile("xtlobby.png", false); //Lobby
+xticon = ImportImageFromFile("xticon.png", false); //Icon for F6/Briefing
+xtloadout = ImportImageFromFile("xtloadout.png", false);

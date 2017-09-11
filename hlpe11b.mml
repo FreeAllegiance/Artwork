@@ -1,0 +1,13 @@
+<Font|headerFont>CARGO: Turrets (Y, U, I, O)<Font|helpFont><p><p>
+
+Ships can have up to four turrets, covering the letters Y, U, I and O in your F4 window. Turrets are controlled by pilots, so you cannot just activate or deactivate them like weapons. However, you can send their turret weapon in the cargo, or change the turret weapon with another stored in cargo, using the same controls as weapons controls.
+
+<p><p>Example: Turret Y must be switched from 'AC turret' to 'Skycap turret'. First, you must have a skycap turret in cargo. Second, press Ctrl-Y, and the AC turret will be stored in cargo as the skycap turret will be mounted for turret Y. If you have to send a turret weapon in cargo, because...the turret gunner is being irresponsible or something, make sure you have room in cargo, and press Ctrl-letter. It will either send the turret in cargo, or replace the turret by another turret type (like in the previous example). If it does place another turret type, pressing Ctrl-letter again will take this last turret in cargo. This removes the turret gun from the turret gunner's control. As such, the gunner can no longer rotate his view around the ship, nor fire.
+
+<p><p>When you have other pilots in your ship as gunners, you can promote one of them to pilot the ship and take his/her place as turret. Pressing Shift-letter will promote the corresponding player as pilot of the ship. Note that s/he becomes the new pilot, and takes control of the F4 window and the ship controls. This can be useful if a gunner accumulates a high kill bonus by turreting in enemy territory, thus accumulating kills. Switching this pilot to the bomber pilot's seat, with his high kill bonus, will result in a damage bonus to the most important part of the job: the damage to the station.
+
+<p><p>Firing the turret, just like a weapon, increases the signature. As such, if your bomber is not seen, make sure your turrets don't fire uselessly. You can use the Inventory window to see which gunner is firing (remember, his slot will turn yellow) and place his turret in cargo if you need to make sure he won't fire.
+
+<p><p>Turret gunners can eject from a ship if they wish. Pressing ctrl-shift and d (press d three times) will eject the gunner's pod out of the ship, which can be immediately recovered by the bomber pilot, sending the pod back home, or by any other ship.
+
+<p><p>The Inventory provides information about the turret's range, and firing rate and damage.

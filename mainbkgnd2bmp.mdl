@@ -1,0 +1,2 @@
+use "model"; 
+mainbkgnd2bmp = ImportImageFromFile("mainbkgnd2.png", false); 

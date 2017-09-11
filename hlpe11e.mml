@@ -1,0 +1,7 @@
+<Font|headerFont>CARGO: Cargo Bays<Font|helpFont><p><p>
+
+Cargo bays are where you keep all items that are not mounted and all items that serve as refill (ammo refill for weapons and fuel refills for boosters), as well as what you pickup in space. The only moments where you will be using Ctrl-S is to dump items in space, useful when room is required either to unmount an item that is currently mounted but for which there is no room in cargo, or to pickup a piece of technology in space. However, you usually don't want to dump anything. Some things are more essential than others, and you must choose what you're going to dump. 
+
+<p><p>Press S to rotate between the different items in cargo, and then press Ctrl-S to dump the chosen item. There are five slots in a single cargo, which is why pressing S chooses between the different items the one that is in slot S, the slot that dumps the item in space when pressing ctrl-s. (Note that no mounting will be required here, you are merely selecting items, not mounting them for further use.)
+
+<p><p><Font|smallBoldFont>NOTE:<Font|helpFont> if you can deploy an item rather than dumping it, do it. Deploying a probe will allow you to use it as a sensor, while dumping it in space will leave it deactivated and useless.

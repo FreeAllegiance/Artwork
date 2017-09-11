@@ -1,0 +1,25 @@
+<Font|headerFont>CARGO: Missiles, Chaff, Shield<Font|helpFont><p><p>
+
+<Font|subheaderFont>MISSILES (5)<Font|helpFont>
+
+<p><p>Missiles are one of the items which you will manipulate the most. Only slot 5 serves missiles. Press Ctrl-5 to rotate between missiles, including to empty slot 5. You will do this most often to unmount your missiles in order to hide, because armed missiles raise a ship's signature. Note that unmounting missiles includes dearming them. Therefore, when remounting the missiles, they must also be rearmed.
+
+<p><p>The Inventory provides information about the missile's quantity / range / damage.
+
+<p><p>Pressing 5 will fire the missile.
+
+<p><p><Font|subheaderFont>CHAFF (6)<Font|helpFont>
+
+<p><p>The chaff contains the countermeasures, released in space to save you from missiles. You usually won't switch between countermeasures, because each ship can only mount one type of countermeasures. The chaff is in slot 6. However, if you absolutely wish to store your countermeasures in cargo, press Ctrl-6. The only possible reason to keep the chaff empty is if your enemy does not use missiles (Rixian Unity, Technoflux) and you want to get a tiny bit of extra speed. Also note that if your enemy is relying heavily on missile technology (such as using a Tactical Lab), it's not a bad idea to bring a second load of countermeasures in cargo.
+
+<p><p>The Inventory does not provide any information about countermeasures.
+
+<p><p>Pressing 6 will release a countermeasure.
+
+<p><p><Font|subheaderFont>SHIELD (7)<Font|helpFont>
+
+<p><p>Like for countermeasures, ships can only mount one type of shield, so no rotation other than mounting/unmounting will occur. The shield corresponds to slot 7. Press Ctrl-7 to mount/unmount it, an action you will perform solely for hiding purposes, because shields are a tremendous signature raiser. Note that unmounting your shield will completely decharge it. When remounted, a shield will be completely empty and will have to recharge, which can take over 1 minute.
+
+<p><p>The Inventory tells you the shield's current strength, as well how long before your shield is completely recharged.
+
+<p><p>Pressing 7 will have no effect.

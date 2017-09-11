@@ -1,0 +1,36 @@
+<Font|subheaderFont>A<p><Font|smallBoldFont>
+
+<Color|secondaryLinkColor>AA<Color|hyperlinkColor>Auto Accept <Color|white>(Player acceptance game setting)<p>
+<Color|secondaryLinkColor>ab<Color|hyperlinkColor>Anti-Base <Color|white>(missile/weapon type)<p>
+<Color|secondaryLinkColor>AC<Color|hyperlinkColor>PW AutoCan <Color|white>(weapon, turret)<p>
+<Color|secondaryLinkColor>adv<Color|hyperlinkColor>Advanced <Color|white>(ship adjective)<p>
+<p><Font|subheaderFont>B<p><Font|smallBoldFont>
+<Color|secondaryLinkColor>Belts<Color|hyperlinkColor>Belters <Color|white>(faction)<p>
+<Color|secondaryLinkColor>boost<Color|hyperlinkColor>Booster <Color|white>(equipment)<p>
+<p><Font|subheaderFont>C<p><Font|smallBoldFont>
+<Color|secondaryLinkColor>cap<Color|hyperlinkColor>Capital Ship <Color|white>(ship type)<p>
+<Color|secondaryLinkColor>cm<Color|hyperlinkColor>Countermeasure <Color|white>(equipment)<p>
+<Color|secondaryLinkColor>C Mine<Color|hyperlinkColor>Carbon Mine<p>
+<Color|secondaryLinkColor>con<Color|hyperlinkColor>Constructor<p>
+<Color|secondaryLinkColor>corv<Color|hyperlinkColor>Corvette<Color|white>(capital Ship)<p>
+<p><Font|subheaderFont>D<p><Font|smallBoldFont>
+<Color|secondaryLinkColor>dest<Main|hlpd5b|Destroyer> <Color|white>(capital Ship)<p>
+<Color|secondaryLinkColor>Dis<Color|hyperlinkColor>EW Disrupter <Color|white>(weapon)<p>
+<Color|secondaryLinkColor>Dreg<Color|hyperlinkColor>Dregklar Empire <Color|white>(faction)<p>
+<Color|secondaryLinkColor>dumb<Color|hyperlinkColor>SRM Dumbfire <Color|white>(missile)<p>
+<p><Font|subheaderFont>E<p><Font|smallBoldFont>
+<Color|secondaryLinkColor>EMP<Color|hyperlinkColor>EMP (Electro-Magnetic Pulse) Cannon <Color|white>(Weapon)<p>
+<Color|secondaryLinkColor>enh<Color|hyperlinkColor>Enhanced <Color|white>(ship adjective)<p>
+<Color|secondaryLinkColor>EW<Color|hyperlinkColor>Energy Weapon<Color|white>(weapon type)<p>
+<Color|secondaryLinkColor>Exp<Main|hlpd2|Expansion><Color|white>(station, tech path)<p>
+<p><Font|subheaderFont>F<p><Font|smallBoldFont>
+<Color|secondaryLinkColor>FAZ<Color|hyperlinkColor>Free Allegiance Zone<Color|white>(weapon type)<p>
+<Color|secondaryLinkColor>fig<Main|hlpd3a|Fighter><Color|white>(ship)<p>
+<p><Font|subheaderFont>G<p><Font|smallBoldFont>
+<Color|secondaryLinkColor>GA<Color|hyperlinkColor>Global Attributes <Color|white>(improves base values, ex: ship speed)<p>
+<Color|secondaryLinkColor>Galv<Color|hyperlinkColor><Main|hlpe7|EW Galvonic Blaster> <Color|white>(weapon)<p>
+<Color|secondaryLinkColor>Garr<Main|hlpd1|Garrison> <Color|white>(station)<p>
+<Color|secondaryLinkColor>Gatt<Color|hyperlinkColor>PW Gat Gun <Color|white>(weapon)<p>
+<Color|secondaryLinkColor>Giga<Color|hyperlinkColor>Gigacorp <Color|white>(faction)<p>
+<Color|secondaryLinkColor>GS<Main|hlpd1d|Gunship> <Color|white>(ship)<p>
+<Color|secondaryLinkColor>GT<Color|hyperlinkColor>Ga'Taraan Federation <Color|white>(faction)<p>

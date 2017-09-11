@@ -1,0 +1,36 @@
+<Font|headerFont>PILOT ROLES<Font|helpFont><p><p>
+
+The pilot is the foundation in Allegiance. At one point or another,
+everyone, including the commander, will have to pilot a ship
+and take the fight personally to the enemy.<p><p>
+
+The pilot needs to understand the different classes of ships
+he will fly as well as their inherit strengths and weaknesses.
+The pilot needs to be aware of his surroundings and the current situation
+as well as maintain constant contact with any wingmen around to deal
+swiftly with any hostile threats.<p><p>
+
+As the pilot flies about in a tech tree game with a commander, he will
+need to pay attention to the objectives set by his commander. When a
+commander orders an objective, it appears in the message stream at the
+top the Combat HUD, and the Objective Pending icon appears in the upper-left corner
+of the screen.<p><p>
+
+<Font|smallBoldFont>To accept a command<Font|helpFont><p><p>
+
+<Bullet|hlpbullet|Press INSERT.><p><p>
+
+<Bullet|hlpblank|The accepted command will be noted with the Objective
+Accepted icon in the upper-left corner of your screen, and your ship will
+automatically go into autopilot and proceed toward the command objective. You can
+turn off autopilot by pressing P.><p><p>
+
+<Font|smallBoldFont>To reject a pending or accomplished command<Font|helpFont><p><p>
+
+<Bullet|hlpbullet|Press DELETE.><p><p>
+
+<Bullet|hlpblank|The Objective Pending or Accepted icon will be removed
+from the upper-left corner of your screen.><p><p>
+
+
+

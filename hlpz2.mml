@@ -1,0 +1,29 @@
+<Font|subheaderFont>H<p><Font|smallBoldFont>
+<Color|secondaryLinkColor>HB <Main|hlpd1b|Heavy Bomber><Color|white>(ship)<p>
+<Color|secondaryLinkColor>HTT<Main|hlpd2b|Heavy Troop Transport><Color|white>(ship)<p>
+<Color|secondaryLinkColor>hvy<Color|hyperlinkColor>Heavy <Color|white>(ship/equipment adjective)<p>
+<p><Font|subheaderFont>I<p><Font|smallBoldFont>
+<Color|secondaryLinkColor>IC<Color|hyperlinkColor>Iron Coalition<Color|white>(faction)<p>
+<Color|secondaryLinkColor>Int<Main|hlpd2a|Interceptor><Color|white>(ship)<p>
+<p><Font|subheaderFont>L<p><Font|smallBoldFont>
+<Color|secondaryLinkColor>LB or ltboost<Color|hyperlinkColor>Light Booster<Color|white>(equipment)<p>
+<Color|secondaryLinkColor>LRM<Color|hyperlinkColor>Long Range Missile<Color|white>(missile type)<p>
+<Color|secondaryLinkColor>lux or lxy<Color|hyperlinkColor>Luxury<Color|white>(ship adjective)<p>
+<p><Font|subheaderFont>M<p><Font|smallBoldFont>
+<Color|secondaryLinkColor>mg or mini<Color|hyperlinkColor>PW Mini-Gun<Color|white>(weapon)<p>
+<Color|secondaryLinkColor>mp<Color|hyperlinkColor>Mine Pack<Color|white>(equipment)<p>
+<Color|secondaryLinkColor>MRM<Color|hyperlinkColor>Medium Range Missile<Color|white>(missile type)<p>
+<Color|secondaryLinkColor>ms<Color|hyperlinkColor>Medium Shield<Color|white>(equipment)<p>
+<p><Font|subheaderFont>N<p><Font|smallBoldFont>
+<Color|secondaryLinkColor>Nan<Color|hyperlinkColor><Main|hlpe3a|EW Nanite Repair System><Color|white>(weapon)<p>
+<Color|secondaryLinkColor>Nix<Color|hyperlinkColor>Pheonix<Color|white>(faction)<p>
+<Color|secondaryLinkColor>Nuke<Color|hyperlinkColor>SRM Tactical Nuke<Color|white>(missile)<p>
+<p><Font|subheaderFont>O<p><Font|smallBoldFont>
+<Color|secondaryLinkColor>Op<Color|hyperlinkColor>Outpost<Color|white>(station)<p>
+<p><Font|subheaderFont>P<p><Font|smallBoldFont>
+<Color|secondaryLinkColor>Pali<Color|hyperlinkColor>Palisade Station<p>
+<Color|secondaryLinkColor>Pat or Pattie<Main|hlpd1c|Patroller><Color|white>(ship)<p>
+<Color|secondaryLinkColor>pod<Color|hyperlinkColor><Main|hlpe2|Eject Pod><p>
+<Color|secondaryLinkColor>pp<Color|hyperlinkColor>Pulse Probe<Color|white>(equipment)<p>
+<Color|secondaryLinkColor>proxy<Color|hyperlinkColor>Proximity Mine<Color|white>(equipment)<p>
+<Color|secondaryLinkColor>PW<Color|hyperlinkColor>Particle Weapon<Color|white>(weapon type)<p>

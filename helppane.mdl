@@ -1,0 +1,323 @@
+use "effect";
+use "font";
+use "gamepanes";
+use "helpdata";
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// type Topic = (String, String, String, [Topic]);
+//
+// ("text", "main page", "secondary page", [sub topics])
+////////////////////////////////////////////////////////////////////////////
+
+topics =
+    [
+    (
+            "ABOUT", "hlpa0", "hlpblanksub",
+            [
+			
+            	("Allegiance", "hlpa1", "hlpasub", 
+			[
+		 		("Strategy Basics", "hlpa1a", "hlpasub", []),
+                     		("Your Role", "hlpa1b", "hlpasub", [])
+			]),
+                	("Learning", "hlpa2", "hlpblanksub",
+                 	[
+		 		("Training Missions", "hlpa2a", "hlpblanksub", [])
+                  	]),
+			("Rules of Conduct", "hlpa3", "hlpblanksub", []),
+			("FAZ Credits", "hlpa4", "hlpblanksub", [])
+		]
+
+       ),
+	(
+            "CONNECT & START", "hlpb0", "hlpblanksub",
+            [
+
+			("Games List", "hlpb1c", "hlpblanksub", []),
+			("Troubleshooting", "hlpb1d", "hlpblanksub", []),
+			("Team Lobby", "hlpb2", "hlpblanksub", 
+			[
+				("Teams Section", "hlpb2a", "hlpblanksub", []),
+				("Team Roster", "hlpb2b", "hlpblanksub", []),
+				("Commander Options", "hlpb2c", "hlpblanksub", []),
+				("Game Owner Options", "hlpb2d", "hlpblanksub", []),
+				("Chat", "hlpb2e", "hlpblanksub", [])
+			]),
+			("Cores", "hlpb3", "hlpblanksub", []),
+			("Settings", "hlpb4", "hlpblanksub", 
+			[
+            			("Win Conditions", "hlpb4a", "hlpblanksub", []),
+		 		("Game Options", "hlpb4b", "hlpblanksub", [])
+			]),
+                	("Options", "hlpb5", "hlpblanksub", [])
+            ]
+    	),
+	 (
+            "IN-GAME SCREENS", "hlps0", "hlpblanksub",
+            [
+                	("Hangar", "hlps1", "hlpblanksub", []),
+                	("Help Display", "hlps2", "hlpblanksub", []),
+                	("Loadout Screen", "hlps3", "hlpblanksub", 
+			[
+                  		("Ships", "hlps3a", "hlpblanksub", []),
+		 		("Weapons & Equipment", "hlps3b", "hlpblanksub", [])
+                  	]),
+	   		("Combat HUD", "hlps4", "hlps4def", 
+			[
+				("HUD Instruments", "hlps4a", "hlpblanksub", []),
+		 		("Target HUD", "hlps4b", "hlpblanksub", []),
+                        	("Peripheral Radar", "hlps4c", "hlpblanksub", [])
+			]),
+                	("Inventory Display", "hlps5", "hlpblanksub", []),
+                	("Command View", "hlps6", "hlps6def", []),
+                	("Map Display", "hlps7", "hlpblanksub", []),
+   			("Team Display", "hlps8", "hlpblanksub", []),
+                	("Investments Display", "hlps9", "hlpblanksub", []),
+                	("Game State Display", "hlps10", "hlpblanksub", []),
+                	("Teleport Display", "hlps11", "hlps11def", []),
+                	("Win Game Screen", "hlps12", "hlpblanksub", [])
+            ]
+    	),
+	(
+            "GAMEPLAY", "hlpc0", "hlpblanksub",
+            [
+            	("Game Progression", "hlpc1", "hlpc1def", 
+			[
+	            		("Beginning", "hlpc1a", "hlpc1def", []),
+	            		("Middle", "hlpc1b", "hlpc1def", []),
+	            		("End", "hlpc1c", "hlpc1def", [])
+			]),
+                	("Communication", "hlpc2", "hlpblanksub", 
+			[
+				("Chat", "hlpc2a", "hlpblanksub", []),
+	            		("Recipient", "hlpc2b", "hlpblanksub", []),
+	            		("Wings", "hlpc2c", "hlpblanksub", []),
+	            		("Voice Chats", "hlpc2d", "hlpblanksub", [])
+			]),
+                	("Financial System", "hlpc4", "hlpblanksub", 
+			[
+				("Mining", "hlpc4c0", "hlpblanksub", [])
+
+			]),
+			("Pilot Roles", "hlpc5", "hlpblanksub", []),
+			("Commander", "hlpc6", "hlpblanksub", []),
+                	("Controls", "hlpc7", "hlpblanksub", []),
+			("Common Mistakes", "hlpc8", "hlpblanksub", [])
+            ]
+    	),
+	("FACTIONS", "hlpF", "hlpFsub", 
+	[
+		("Belters", "hlpBelters", "hlpblanksub", []),
+		("Bios", "hlpBios", "hlpblanksub", []),
+		("Draconium", "hlpDrac", "hlpblanksub", []),
+		("Dreghklar", "hlpDreg", "hlpblanksub", []),
+		("Ga'Tarran", "hlpGT", "hlpblanksub", []),
+		("GigaCorp", "hlpGigaCorp", "hlpblanksub", []),
+		("Iron Coalition", "hlpIC", "hlpblanksub", []),
+		("Omicron Hive", "hlpOmicron", "hlpblanksub", []),
+		("Phoenix", "hlpPheonix", "hlpblanksub", []),
+		("Rixian Unity", "hlpRixian", "hlpblanksub", []),
+		("Technoflux", "hlpTechno", "hlpblanksub", [])
+	]),
+	(
+            "TECH PATHS", "hlpd0", "hlpblanksub",
+            [
+                	("Garrison", "hlpd1", "hlpblanksub", 
+			[
+				("Scout", "hlpd1a", "hlpblanksub", []),
+				("Bomber", "hlpd1b", "hlpblanksub", []),
+				("Patroller", "hlpd1c", "hlpblanksub", []),
+				("Gunship", "hlpd1d", "hlpblanksub", [])
+			]),
+			("Expansion", "hlpd2", "hlpblanksub", 
+			[
+		 		("Interceptor", "hlpd2a", "hlpblanksub", []),
+		 		("Troop Transport", "hlpd2b", "hlpblanksub", [])
+			]),
+                	("Supremacy", "hlpd3", "hlpblanksub", 
+			[
+            			("Fighter", "hlpd3a", "hlpblanksub", []),
+            			("Fig/Bomber", "hlpd3b", "hlpblanksub", [])
+			]),
+			("Tactical", "hlpd4", "hlpblanksub", 
+			[
+		 		("Stealth Fighter", "hlpd4a", "hlpblanksub", []),
+		 		("Stealth Bomber", "hlpd4b", "hlpblanksub", [])
+			]),
+			("Shipyard", "hlpd5", "hlpblanksub", 
+			[
+		 		("Assault Ship", "hlpd5a", "hlpblanksub", []),
+		 		("Destroyer", "hlpd5b", "hlpblanksub", []),
+		 		("Devastator", "hlpd5c", "hlpblanksub", []),
+		 		("Missile Frigate", "hlpd5d", "hlpblanksub", []),
+		 		("Cruiser", "hlpd5e", "hlpblanksub", []),
+		 		("Harbringer of Doom", "hlpd5f", "hlpblanksub", []),
+		 		("Flagship", "hlpd5g", "hlpblanksub", [])
+			])
+            ]
+    	),
+        (
+            "QUICK REFERENCE", "hlpe0", "hlpblanksub",
+         	[
+		("Crash Course", "hlpe0a", "hlpblanksub",
+		[
+			("Flying Around", "hlpe1", "hlpblanksub", []),
+			("Eject Pods", "hlpe2", "hlpblanksub", 
+			[
+				("Picking Up", "hlpe2a", "hlpblanksub", []),
+				("Killing", "hlpe2b", "hlpblanksub", [])
+			]),
+ 			("Cargo", "hlpe11", "hlpblanksub", 
+			[
+				("Weapons", "hlpe11a", "hlpblanksub", []),
+				("Turrets", "hlpe11b", "hlpblanksub", []),
+				("Missiles, Chaff, Shield", "hlpe11c", "hlpblanksub", []),
+				("Cloak, Booster, Dispensor", "hlpe11d", "hlpblanksub", []),
+				("Cargo Bays", "hlpe11e", "hlpblanksub", []),
+				("Reloading", "hlpe11f", "hlpblanksub", [])
+			]),
+ 			("Signature", "hlpe10", "hlpblanksub", 
+			[
+				("Items Influencing", "hlpe10a", "hlpblanksub", []),
+				("Actions Influencing", "hlpe10b", "hlpblanksub", []),
+				("Knowing Your Stuff", "hlpe10c", "hlpblanksub", []),
+				("Making a Difference", "hlpe10d", "hlpblanksub", []),
+				("Using Enemy Sensors", "hlpe10e", "hlpblanksub", [])
+			]),
+			("Miners", "hlpe8", "hlpblanksub", 
+			[
+				("Attacking", "hlpe8a", "hlpblanksub", []),
+				("Defending", "hlpe8b", "hlpblanksub", [])
+			]),
+			("Constructors", "hlpe9", "hlpblanksub", 
+			[
+				("Attacking", "hlpe9a", "hlpblanksub", []),
+				("Defending", "hlpe9b", "hlpblanksub", [])
+			])
+
+		]),
+		("Advanced", "hlpe0b", "hlpblanksub",
+		[
+                	("Scouting", "hlpe3", "hlpblanksub", 
+			[
+				("Nanning", "hlpe3a", "hlpblanksub", 
+				[
+					("Part 1", "hlpe3a1", "hlpblanksub", []),
+					("Part 2", "hlpe3a2", "hlpblanksub", []),
+					("Part 3", "hlpe3a3", "hlpblanksub", [])
+				]),
+				("More Nanning", "hlpe3b", "hlpblanksub", 
+				[
+					("Stealth", "hlpe3b1", "hlpblanksub", []),
+					("Emergency", "hlpe3b2", "hlpblanksub", []),
+					("Station Repair", "hlpe3b3", "hlpblanksub", [])
+				]),
+				("Probing", "hlpe3c", "hlpblanksub", []),
+				("Hidden Ships", "hlpe3d", "hlpblanksub", [])
+
+			]),
+			("Bombing", "hlpe4", "hlpblanksub", 
+			[
+				("Travel to Target", "hlpe4a", "hlpblanksub", []),
+				("Assault", "hlpe4b", "hlpblanksub", []),
+				("With Rix", "hlpe4c", "hlpblanksub", []),
+				("With Bios", "hlpe4d", "hlpblanksub", []),
+				("Managing Turret Gunners", "hlpe4e", "hlpblanksub", []),
+				("The Turret Gunner", "hlpe4f", "hlpblanksub", []),
+				("Defense", "hlpe4g", "hlpblanksub", [])
+			]),
+			("Stealth Bombing", "hlpe5", "hlpblanksub", 
+			[
+				("With Rix", "hlpe5a", "hlpblanksub", []),
+				("With Technoflux", "hlpe5b", "hlpblanksub", []),
+				("Defense", "hlpe5c", "hlpblanksub", [])
+			]),
+ 			("Capturing", "hlpe6", "hlpblanksub", 
+			[
+				("Planning", "hlpe6a", "hlpblanksub", []),
+				("Flying to the Target", "hlpe6b", "hlpblanksub", []),
+				("Assault", "hlpe6c", "hlpblanksub", []),
+				("Defending Against", "hlpe6d", "hlpblanksub", [])
+			]),
+			("Galving", "hlpe7", "hlpblanksub", 
+			[
+				("Offense", "hlpe7a", "hlpblanksub", []),
+				("Defense", "hlpe7b", "hlpblanksub", [])
+			])
+		])
+      ]),
+      (
+            "ABBREVIATIONS", "hlpz0", "hlpblanksub",
+         	[
+                	("A-G", "hlpz1", "hlpblanksub", []),
+			("H-P", "hlpz2", "hlpblanksub", []),
+			("Q-Z", "hlpz3", "hlpblanksub", [])
+          	]
+    	)
+
+    ];
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Colors
+//
+//////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Default values
+//
+//////////////////////////////////////////////////////////////////////////////
+
+helpFont           = smTahoma;
+headerFont         = titleFont;//lgBoldVerdana;
+subheaderFont      = smallBoldFont;
+helpColor          = white; //white
+mainLinkColor      = Color(1, 0.65, 0.10);   //red
+secondaryLinkColor = green;
+highlightColor     = red;//yellow
+hyperlinkColor     = Color(0,.4,1);
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// The pane
+//
+//////////////////////////////////////////////////////////////////////////////
+
+navPane                =
+    NavPane(
+        topics,
+        Point(130, 316), // 130, 316
+        Color(1, 0, 0.2), //Color(1, 0, 0.2),    //blue 0,0,1
+        Color(1, 1, 1), //Color(1, 1, 1),    //white 1,1,1
+        Color(1, 0.65, 0.10),    //red 1,0,0
+        smallBoldFont
+    );
+
+mainPageScrollBar      = ScrollBarPane(Point(16, 231));
+mainPage               = PagePane(Point(309, 231), mainPageScrollBar); 
+secondaryPageScrollBar = ScrollBarPane(Point(16, 62));
+secondaryPage          = PagePane(Point(309, 62), secondaryPageScrollBar);
+backButton             = SoundButtonPane(ImportImage("btnprevioustopicbmp",  true), ButtonNormal, false, negativeButtonClickSoundId);
+closeButton            = SoundButtonPane(ImportImage("btnclosepanebmp", true), ButtonNormal, false, negativeButtonClickSoundId);
+
+titlePane			= StringPane("Allegiance Help Menu", white,	Point(360, 35), JustifyLeft, largeBoldFont);
+//bottomPane			= StringPane("www.allegacademy.org", white,	Point(300, 30), JustifyLeft, largeBoldFont);
+//academyBar          = ImagePane( ImportImage("hlpacademybarbmp",true), [] );
+helpPane = 
+    ImagePane(
+        ImportImage("helppanebmp", false),
+        [
+            (navPane,                Point(  25,  23)),
+            (mainPageScrollBar,      Point( 504,  50)),
+            (mainPage,               Point( 196,  50)), // 196,  50
+            (secondaryPage,          Point( 196, 294)),
+            (secondaryPageScrollBar, Point( 504, 294)),
+            (backButton,             Point(  25, 360)),
+            (closeButton,            Point( 501,  12)),
+		(titlePane,				 Point( 270,  18))
+		//(academyBar,				 Point( 150,  362)),
+		//(bottomPane,			Point( 260,  370))
+        ]
+    );

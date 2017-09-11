@@ -1,0 +1,6 @@
+<Font|headerFont>GAME OWNER OPTIONS<Color|white><p><p>
+<Font|helpFont>The game owner has access to three options that no one else does:<p><p>
+
+    <Bullet|hlpbullet|<Color|yellow>Lock Lobby<Color|white> is an option to prevent new players from joining the game. Not recommended.>
+    <Bullet|hlpbullet|<Color|yellow>Lock Sides<Color|white> is an option to prevent team leaders from making changes to their team settings. Not recommended.>
+    <Bullet|hlpbullet|<Color|yellow>Randomize<Color|white> is now used to "flush", meaning it tranfers all players except for the commanders to NOT ON A TEAM  This is most helpful to get AFK players off teams.  Also is used to get rid of a stack.>

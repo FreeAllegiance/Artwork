@@ -1,0 +1,17 @@
+<Font|headerFont>GUNSHIPS<Color|white><Font|helpFont><p><p>
+The Gunship is extremely similar to the bomber and only differs in three aspects: it mounts skycap turrets rather than ac turrets, it cannot fire anti-base missiles, and it can deploy pulse probes. These differences make it serve a mostly defensive purpose of either station defense or ship escort and support.
+<p><p><Font|smallBoldFont>Global Properties<Font|helpFont><p><p>
+<Bullet|hlpbullet|Gunships mount medium shields and have a strong hull. They resemble bombers in many ways, but are free.><p>
+
+<Bullet|hlpbullet|They carry turret gunners, but no missiles. They serve as a turret platform, and serve mostly as a defensive or escort ship.><p>
+
+<Bullet|hlpbullet|Gunships mount LRM Hunters or MRM Seekers to support the turret gunners.><p>
+
+<Bullet|hlpbullet|Gunships can deploy pulse probes to assist them in finding targets both during defensive and offensive roles.><p>
+<p><Font|smallBoldFont>Exceptional Properties<Font|helpFont><p><p>
+<Bullet|hlpbullet|<Color|yellow>Rixian Unity<Color|white> The Rixian gunship has a different property concerning the pilot's guns. It can mount an AC turret among the gattling guns, a much more powerful weapon than gattling guns that other ships use, thus being able to support the turret gunners in a manner similar to mustangs.><p>
+<p><Font|smallBoldFont>Deploying Gunships<Font|helpFont><p><p>
+<Bullet|hlpbullet|Gunships serve mostly a defensive role. They are rarely deployed, but can be used to efficiently escort constructors and miners, as well as defend stations against bomber runs. This last task probably requires the use of nans to protect the gunship, or the use of many gunships.><p>
+
+<Bullet|hlpbullet|Gunships can also be deployed in offensive ways to escort bombers or hunt down enemy utility ships.>
+

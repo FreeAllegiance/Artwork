@@ -1,0 +1,23 @@
+<Font|headerFont>CARGO:<p>Cloak, Booster, Dispensor<Font|helpFont><p><p>
+
+<Font|subheaderFont>CLOAK (8)<Font|helpFont>
+
+<p><p>Cloaking devices are stored in slot 8. Two types of cloak exist (signature and heavy), and some ships can use both. Therefore, pressing Ctrl-8 will allow for a rotation between the different types of cloak and the empty slot. Why you would rotate your cloak will be covered later. No strategic justification exists for keeping slot 8 empty when it could contain a cloaking device, other than increased agility, speed and acceleration, mostly for Bios small class ships which do not necessarily always need to equip a heavy cloak.
+
+<p><p>The Inventory provides you with the amount of signature that is removed from your signature by the cloak, as well the amount of time, in seconds, that you can remain cloaked. Note that if your energy is depleted, your cloak remains active, but has a much decreased effect on your signature.
+
+<p><p>Pressing 8 has no effect. Press k to cloak.
+
+<p><p><Font|subheaderFont>BOOSTER (9)<Font|helpFont>
+
+<p><p>Occupying slot 9, all ships that can have boosters can use both types of booster (booster and light booster). You usually will only use the regular booster, but rotating between boosters is done the same way as usual: Ctrl-9 for a rotation. No strategic reason exists to justify unmounting of boosters. Always have at least one type of booster mounted when it is possible.
+
+<p><p>Pressing 9 or TAB will activate your booster. Note that while increasing your acceleration, this aso increases your signature greatly.
+
+<p><p><Font|subheaderFont>DISPENSOR (0)<Font|helpFont>
+
+<p><p>The dispensor allows you to deploy all kinds of equipment in space, including probes and minefields. You will probably often rotate between different items here, because if you need a minefield, but you were probing a minute ago, you'll want to change from probe to minefield, using Ctrl-0. Rotate like you would for other items. No strategic justification exists for keeping this slot empty when you could have something in it.
+
+<p><p>The Inventory provides you with different information depending on what type of item is placed in this slot.
+
+<p><p>Pressing 0 or D will deploy whatever is in slot 0.

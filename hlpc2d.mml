@@ -1,0 +1,23 @@
+<Font|headerFont>VOICE CHATS<Color|white><Font|helpFont><p><p>
+
+Allegiance allows players to send Voice Chats (VC), also known as Quick Chats (QC). 
+VCs are displayed in both text and message, and were produced by the game's developers, 
+although many were later added by the community. There are so many that you can practically 
+have a complete conversation using only VCs.
+<p><p>
+Pressing <Color|yellow>~<Color|white>(below the Esc key, left to the "1" key), the tilde key, brings up the VC menu. 
+Like textual messages, the box for choosing recipients will appear, and pressing TAB will 
+change the recipient. However, to use the TAB-Complete function, you'll have to select 
+the recipient prior to activating the VC menu, which does not allow you to type anything, 
+and therefore does not allow you to use the TAB-Complete function. <Color|yellow>Again, be sure to choose 
+the right recipient. Saying "I need turret gunners. NOW!" to All will alert the enemy that 
+you are preparing an attack.<Color|white>
+<p><p>
+Certain VCs will give orders to the recipients, rather than just a message. Saying 
+"Need repairs." will bring up<p><p><Color|hyperlinkColor>New orders from Shazbot. Need repairs.. Press Insert to accept.<Color|white><p><p> 
+Those are useful in giving automatic waypoints, which make coordination easier. You will in time 
+learn the VCs that you need most. All VCs need a maximum of three keys to be pressed. For example, 
+saying "Need repairs." only requires you to press `nx. It will bring up the order that you need repairs. 
+Pilots in space who press Insert will have their auto-pilots target you and fly toward you. Orders are 
+thus useful to increase team coordination. <p><p><Color|hyperlinkColor>Attack my target!<Color|white><p><p>...can allow squad members to synchronize 
+their assault on the same miner, or to all ram the same rock to get a quick pickup by a designated teammate.

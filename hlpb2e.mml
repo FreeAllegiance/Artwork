@@ -1,0 +1,11 @@
+<Font|headerFont>CHAT<p><p><Color|white>
+<Font|helpFont>The chat section gives you two main communications channels, and a third one if you are a team leader:<p><p>
+
+    <Bullet|hlpbullet|<Color|yellow>All Players<Color|white> is the channel to choose when you want to communicate to all players in the game. It is often used for all players to discuss what game styles they want to play and who will be on what team.>
+    <Bullet|hlpbullet|<Color|yellow>Team Only<Color|white> is the channel to choose when you want to communicate only to your team members. It is the best channel to use to decide among your team members your team's strategy and tactics, who will play exactly what roles, and so on.>
+    <Bullet|hlpbullet|<Color|yellow>Leaders Only<Color|white> is the channel that commanders can choose when they want to communicate only to the commanders of all teams in the game. This option only appears if you are a commander.> 
+<p><p>
+If the icon beside a communications channel flashes, it means that a new message has been entered into that channel. It will continue to flash until you access that communications channel.
+<p><p>
+<Font|smallBoldFont>Private Messaging<p>
+<Font|helpFont>You can private message people by using their nickname followed by a colon, then the message. 

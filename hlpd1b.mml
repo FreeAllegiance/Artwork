@@ -1,0 +1,24 @@
+<Font|headerFont>BOMBER<Color|white><Font|helpFont><p><p>
+The Bomber is a straightforward assault ship, using turrets for defense, nanites for escort, and flying to an enemy station, destroying it with anti-base missiles. It relies on its medium shields and strong hull to survive as long as possible. It can be used in other, varied assaults.
+<p><p><Font|smallBoldFont>Global Properties<Font|helpFont><p><p>
+<Bullet|hlpbullet|Bombers mount medium shields and have a strong hull.><p>
+
+<Bullet|hlpbullet|For defense, two turret gunners can board the ship. The pilot can use his weapons (PW Gatt or EW Dis) and missiles to attack enemy ships. LRM Hunters are mostly used here, when necessary.><p>
+
+<Bullet|hlpbullet|The pilot fires SRM Anti-Base missiles at stations to damage them.><p>
+
+<Bullet|hlpbullet|The Bomber must be researched in the Garrison, and can be upgraded to a Heavy Bomber in the Starbase. Once bombers or heavy bombers are researched, they can be used regardless of whether a garrison/starbase exists.><p>
+
+<Bullet|hlpbullet|Bombers cost credits per ship.><p>
+<p><Font|smallBoldFont>Exceptional Properties<Font|helpFont><p><p>
+
+<Bullet|hlpbullet|<Color|yellow>Rixian Unity and Technoflux<Color|white> The Rixians and Technoflux don't use missiles, and it serves them well in this particular case. The ballista uses the EW stinger, while the technoflux bomber uses the EW Anti-Base Cannon. They both are energy weapons, and therefore allow the bomber to go on for a very long time. They do not require reload unlike other bombers. They never run out of anti-base missiles, because they use an energy weapon. They run out of turret ammo much later, because their cargo bays are filled with ammo, since no missiles are needed. Finally, in the Rixians' case, nans can ripcord to each other, so if one needs reload, or has been destroyed, it can come back in a matter of seconds.><p>
+
+<Bullet|hlpbullet|<Color|yellow>Bios<Color|white> Since they can mount the heavy cloak, Bios bombers can be deployed as stealth bombers would be, hiding behind rocks, keeping shields and missiles in cargo, and most importantly holding turret fire if turrets are used. The bomber approaches the station as much as possible and then proceeds like a normal bomber run, only against a very unprepared enemy. This can be applied to different degrees, either behaving entirely like a sb, or only keeping missiles in cargo and simply going straight while remaining undetected for as long as possible. The bomber can also be used as regular bombers are, but using the cloak and lower signature to avoid being sighted right in the middle of the run. Because the heavy cloak is so powerful, the bomber can be surrounded by defenders, shields and missiles mounted, and turrets firing, and still remain invisible to enemy radar. It does not confuse anyone, but at least makes it more difficult to hit.><p>
+<p><Font|smallBoldFont>Deploying Bombers<Font|helpFont><p><p>
+<Bullet|hlpbullet|Bombers are obviously deployed when an enemy station must be destroyed. The bomber usually gets turret gunners and many nans, flies to the enemy station, and destroys it. A good idea is to try and remain unseen for as long as possible, since it gives less time for the enemy to prepare its defenses.><p>
+
+<Bullet|hlpbullet|Another way to attack using bombers is a tp run. A teleport probe is deployed in enemy territory, and many bombers ripcord to it, close to the enemy station. The point is to get as many anti-base missiles fired at the station as possible. Some nans and turret gunners may be used, but usually, the team tries to maximize the number of bombers used.><p>
+
+<Bullet|hlpbullet|Bombers can also serve in defense, since they mount turret gunners and powerful missiles. If a team has no fighting ship, a situation where GigaCorp often finds itself, or if two bomber runs cross paths, the bomber can hope to have more nans and better gunners than the other bomber. The defending pilot will try to face the other bomber, fire his main guns and anti-base missiles (or LRM Hunters if they were mounted in the ship), while the offensive bomber will try and avoid the defending bomber.>
+

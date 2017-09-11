@@ -1,0 +1,21 @@
+<Color|yellow>Pcore005 Faction Strategies<Color|white><p><p>
+<Font|headerFont>OMICRON HIVE
+<p><p><Font|subheaderFont>FACTION PERKS
+    <p><p>
+<Bullet|hlpbullet|Turnrate 1.2 torque 1.3>
+<Bullet|hlpbullet|Sensors 1.1, sig 1.05>
+<Bullet|hlpbullet|PW range 1.1, dmg 1.05>
+<Bullet|hlpbullet|Uses telerefs, a combination base of teleports and refineries instead.>
+<Bullet|hlpbullet|Bombers use PW - Hammer to destroy bases and turrets get EW Phaser.>
+<p><p><Font|subheaderFont>FACTION WEAKNESSES
+    <p><p><Bullet|hlpbullet|Ship & station shield, 0.95, repair 0.9>
+    <Bullet|hlpbullet|Ship energy 0.95>
+    <Bullet|hlpbullet|EW range 0.9>
+    <Bullet|hlpbullet|Miner cap 0.85>
+    <Bullet|hlpbullet|Techbase cons take 5 minutes to build>
+    <Bullet|hlpbullet|Research takes 5 minutes>
+<p><p><Font|subheaderFont>IDEAL SETTINGS
+    <p><p><Bullet|hlpbullet|High starting money helps getting your techbase started at game start. Otherwise OH does not really need lots of money, but their relatively fast mining speed lets them research more tech at the same time if the total money is higher.>
+<p><p><Font|subheaderFont>FACTION STRATEGIES
+    <p><p><Bullet|hlpbullet|<Font|smallBoldFont>Adv Tech Rush<Font|helpFont> - No matter your techbase choice, you can have adv tech in 13-14 minutes. Start partialling your techbase con as soon as you can. Plant initial tp between home and op next to techbase rock. Offload second home miner load on this tp instead (saves time spent docking). Mine the sector. As soon as techbase is up, start partialling adv techbase upgrade as well as 1-2 (depending on money settings) important techs, or get more bases instead (depending on techpath choice / map). Proceed to mining outpost sector.>
+    <p><p><Bullet|hlpbullet|<Font|smallBoldFont>Expansion<Font|helpFont> - OH ints are simply great. If you rush adv expansion, you can one of the best hvy ints 13 minutes into the game. Never forget to build more outposts, as even the best interceptors are useless if you cannot reach the enemy. OH sbs are really good with exp GAs, so they make for the best endgame if you go this path.>

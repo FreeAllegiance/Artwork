@@ -1,0 +1,5 @@
+<Font|headerFont>SIGNATURE:<p>Knowing Your Stuff<Font|helpFont><p><p>
+
+If you wish to know by how much does an item raise your signature, simply place your mouse over it in the ship's loadout window (F4 in stations only), and the signature will be indicated, among all the other properties of the item. The ship loadout window gives you all the information about everything.
+
+<p><p>Fox_Four made a program that allows you to calculate your signature and another object's scan range to determine the distance from the object at which a ship with a certain loadout can be detected. Tigereye later developed a much more complete program that allows you to calculate detection ranges, time to kills, and an enormous amount of other variables. Tigereye's Kneeboard: a must for anyone. Get it from the Gateway's Downloads page.

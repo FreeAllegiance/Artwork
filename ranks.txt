@@ -1,0 +1,33 @@
+31
+0,Newbie
+1,Novice 1
+2,Novice 2
+3,Novice 3
+4,Novice 4
+5,Novice 5
+6,Novice 6
+7,Novice 7
+8,Inter. 1
+9,Inter. 2
+10,Inter. 3
+11,Inter. 4
+12,Inter. 5
+13,Inter. 6
+14,Inter. 7
+15,Veteran 1
+16,Veteran 2
+17,Veteran 3
+18,Veteran 4
+19,Veteran 5
+20,Veteran 6
+21,Veteran 7
+22,Expert 1
+23,Expert 2
+24,Expert 3
+25,Expert 4
+26,Expert 5
+27,Expert 6
+28,Expert 7
+29,Expert 8
+30,Expert 9
+31,Expert 9

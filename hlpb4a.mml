@@ -1,0 +1,27 @@
+<Font|headerFont>WIN CONDITIONS<Color|white><Font|helpFont><p><p>
+
+<Font|subheaderFont>GAME TYPE:
+<p><p>
+<Bullet|hlpbullet|<Font|smallBoldFont>Conquest:<Font|helpFont> Conquest is the default and by far most widely used game type in Allegiance, 
+the others being seldom or never used, and the game being clearly designed and balanced around this game type. 
+Conquest is simple: destroy all your enemy's bases. In a two-team game, only all technology bases must be 
+destroyed to kill a team. In a three-team game or more, all stations that allow launching/docking must be destroyed 
+to kill a team. Note that the % represents the amount of technology bases.><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Deathmatch:<Font|helpFont> Teams simply play for the kills. The team getting a determined amount of kills first wins.><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Capture the Flag:<Font|helpFont> Capture the Flag is straightforward. Simply grab another team's flag and bring it 
+to your own flag platform while the flag is on it to gain a point.><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Artifacts:<Font|helpFont> Artifacts is a scouting game. It consists of finding as many artifacts as possible. You 
+can set the victory condition to a certain amount of artifacts. Once that limit is reached by a team, that team wins.><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Territorial:<Font|helpFont> Territorial victory conditions consist of occupying a certain % of the sectors on the map.><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Custom:<Font|helpFont> Custom simply lets you set whatever victory conditions you like. You can, for example, 
+set it so that a team must accumulate 10 flag points, 100 kills and 25 artifacts to win.><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Prosperity:<Font|helpFont> Used under the Custom game type, this option sets a certain amount of money as a victory condition.><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Countdown:<Font|helpFont> This option adds a countdown timer to the game. Whichever team has progressed the 
+most towards the victory condition of the game when the countdown is over wins.><p><p>

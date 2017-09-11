@@ -1,0 +1,25 @@
+<Font|headerFont>CONSTRUCTORS<Font|helpFont><p><p>
+
+<Font|subheaderFont>CONSTRUCTOR AI<Font|helpFont>
+<p><p>Since <Secondary|hlpdefconstructor|constructors> are AI flown ships it’s important to know how they react when not ordered by a player. Keep in mind that constructors are stupid and will do the most suicidal tasks without second thought. In the following situations the AI will react differently:
+
+<p><p><Font|smallBoldFont>Unoccupied sector<Font|helpFont>
+<p>The constructor was specifically ordered there by an friendly player or it wouldn’t have gone there to build. A constructor that builds on special rocks will automatically build there if it’s the right one when ordered to go to the sector. A constructor that builds on normal rocks still needs to be ordered on what rock to build. 
+
+<p><p><Font|smallBoldFont>Occupied sector<Font|helpFont>
+<p>The constructor was specifically ordered there by an friendly player or it wouldn’t have gone there to build. A constructor that builds on special rocks will automatically move and build in an occupied sector with the right rock right from the launch. A constructor that builds on normal rocks still needs to be ordered on what rock to build. 
+
+<p><p><Font|smallBoldFont>Constructor is 50% damaged<Font|helpFont>
+<p>When a constructor is 50% damaged it will move or ripcord to a base to get repairs. However it can still be ordered to build on a rock if needed.
+
+<p><p><Font|smallBoldFont>Enemy ships in the sector, no friendly ships or bases<Font|helpFont>
+<p>The constructor will return to base immediately when the team of the constructor detects an enemy if it has no specific build on rock order.
+
+<p><p><Font|smallBoldFont>Enemy ships in the sector, a friendly base in the sector, no friendly ships<Font|helpFont>
+<p>The constructor will return to base immediately when the team of the constructor detects an enemy if it has no specific build on rock order.
+
+<p><p><Font|smallBoldFont>Enemy ships in the sector, friendly ships in the same sector<Font|helpFont>
+<p>The constructor will continue moving fearlessly.
+
+<p><p><Font|smallBoldFont>Enemy base, no enemy ships<Font|helpFont>
+<p>The constructor will continue moving fearlessly.

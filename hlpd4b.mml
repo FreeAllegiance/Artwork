@@ -1,0 +1,15 @@
+<Font|headerFont>STEALTH BOMBERS<Color|white><Font|helpFont><p><p>
+The Stealth Bomber, like the stealth fighter, sneaks behind enemy lines. Once in position, it uses the anti-base missiles to destroy any kind of station. It is particularly lethal against smaller expansion stations, which are destroyed so quickly that defenders cannot react. They are generally deployed in groups against bigger stations.
+<p><p><Font|smallBoldFont>Global Properties<Font|helpFont><p><p>
+<Bullet|hlpbullet|The stealth bomber has similar properties as the stealth fighter, but is much slower.><p>
+
+<Bullet|hlpbullet|It is researched in the advanced tactical laboratory.><p>
+
+<Bullet|hlpbullet|It can carry anti-base missiles in order to destroy its target stations.><p>
+<p><Font|smallBoldFont>Exceptional Properties<Font|helpFont><p><p>
+<Bullet|hlpbullet|<Color|yellow>Rixian Unity<Color|white> The rixian stealth bomber uses station pods to destroy stations. Upon approach, it deploys the pods, which start firing. The pods are powerful, but explode after a short time, and can be shot down by defenders. Therefore, defending ships can trail the stealth bomber, destroying every pod it drops, and then attack the stealth bomber while he is reloading his pods.><p>
+<Bullet|hlpbullet|<Color|yellow>Technoflux<Color|white> Technoflux' stealth bomber use the EW Ion Blaster. As a result, no missiles ever need to be loaded, so you don't have to increase your signature as much when assaulting (only shields can be raised). Also, those weapons are ready to fire, so you can't forget to load your weapon, it's always equipped. Finally, it's an energy weapon, so you can never run out, and you can dedicate your cargo to more useful elements, such as countermeasures.><p>
+<p><Font|smallBoldFont>Deploying Stealth Bombers<Font|helpFont><p><p>
+<Bullet|hlpbullet|Stealth Bombers serve only one purpose, the destruction of enemy stations. They can be used alone to destroy small targets like refineries or teleport receivers, which are destroyed even before the defenders can react. They can be used in groups of two to attack outposts, and should be used in larger groups for technology stations, since these require more missiles, and will be heavily defended.>
+
+

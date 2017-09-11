@@ -1,0 +1,15 @@
+<Font|headerFont>CARGO<p><p>
+
+<Font|subheaderFont>CONTROL OVERVIEW<Font|helpFont><p><p>
+
+The controls for the F4 window are extremely simple. A number or letter corresponds to each slot. Generally, pressing Control+letter will toggle the ship part to be in cargo or equipped. Also, pressing the letter or number alone may have an action on that piece of equipment. Cargos contain everything that was displayed in the ship loadout window (F4 in stations). As a result, you have different items: weapons, missiles, turrets, shields, cloaks, boosters, etc. The action will differ according to the item you are playing with. No ship has every slot. Many ships have no booster slot, and/or no cloaker slot, and/or no missile slot, etc.
+
+<p><p><Font|smallBoldFont>The Rotation Principle:<Font|helpFont> When you have many items that can occupy the same slot, but only one slot on your ship, you can use Ctrl-number/letter to rotate between mounting your different items. The rotation includes the first item, the second item, the third item, etc. and the empty slot.
+
+<p><p><Font|smallBoldFont>Example of the principle:<Font|helpFont> I have my Gattling gun mounted, and my nan in cargo (a very common situation). Pressing Ctrl-1 will change my gatt for the nan. Pressing Ctrl-1 again will place my nan in cargo and keep my weapon slot empty (assuming there is room in cargo for both weapons to be placed there). Pressing ctrl-1 a third time will equip my gatt again.
+
+<p><p>NOTE: If you have no room in cargo, the rotation will NOT include the empty slot, because you have no room to store all items in cargo. Therefore, you can only rotate between items.
+
+<p><p>This principle is valid for everything you have in your inventory. Whenever you place a piece of equipment in cargo, it becomes deactivated entirely. This means that shields in cargo are entirely decharged, cloaks are deactivated, missiles must be rearmed.
+
+<p><p><Image|hlpcargo><p><Image|hlpcargodetail>

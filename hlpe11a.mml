@@ -1,0 +1,22 @@
+<Font|headerFont>CARGO: Weapons (1, 2, 3, 4)<Font|helpFont><p><p>
+
+
+All the weapons mounted on your ship are activated by default. This means that when you press the fire button, your weapons will fire.
+
+<p><p>To activate only one of your weapons, press a number from 1 to 4. The weapon corresponding to the number will be activated, all others will be deactivated. You can only have one or all weapons activated. If you wish to reactivate all weapons, re-press the same number you pressed earlier. If you activated only weapon 2, press 2 to reactivate all weapons. This is a toggle between activation of a single weapon and activation of all weapons. You cannot activate only two weapons while keeping another deactivated. If you really need to do this, place the third weapon in cargo, and activate the other two. 
+
+<p><p><Image|hlpweapons1>
+
+<p><p>In your F4 window, activated weapons are written in lighter text, deactivated weapons are written in darker text. Also, when firing, the activated weapons' numbers will turn yellow, but the numbers of the deactivated weapons will not turn yellow. This goes for turrets as well, so you can see which of your gunners is firing. Firing a weapon increases your signature greatly, so be sure not to fire if you don't want to be detected.
+
+<p><p><Image|hlpweapons2>
+
+<p><p>To send a weapon in cargo, press Ctrl-Weapon#. Make sure you have room in your cargo bays, indicated by "cargo mount". To mount a weapon from cargo, press Ctrl-WeaponSlot.
+
+<p><p>Example: Slot 1 is empty. Pressing Ctrl-1 will mount a weapon from your cargo. If you press Ctrl-1 again, it will mount another weapon from your cargo. If you don't have another weapon, it will make slot 1 empty, keeping all weapons in cargo. It rotates like that. Try it yourself, it's a simple process used mostly to switch between 2 specialized weapons, like between 'gattling gun' and 'nanite repair system'.
+
+<p><p>When there is no more ammo for a weapon, a red "A" appears, indicating that no more ammo is available. Of course, this never happens for energy-based weaponry.
+
+<p><p><Image|hlpweapons3>
+
+<p><p>The Inventory provides information about the weapon's range, and firing rate and damage.

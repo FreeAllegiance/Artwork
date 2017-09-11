@@ -1,0 +1,25 @@
+<Color|yellow>Pcore005 Faction Strategies<Color|white><p><p>
+<Font|headerFont>PHOENIX
+<p><p><Font|subheaderFont>FACTION PERKS
+    <p><p>    
+    <Bullet|hlpbullet|Strong Ship Shield(1.25)>
+    <Bullet|hlpbullet|Strong Station Shield(1.25)>
+    <Bullet|hlpbullet|Quick turning Y axis (1.5), augmented by (1.1) ship turn torque, (1.5) ship roll rate adn twice the roll torque.>
+    <Bullet|hlpbullet|Good Sensors(1.1)>
+    <Bullet|hlpbullet|Extra Missiles>
+    <Bullet|hlpbullet|Transceiver and Assault tech>
+
+<p><p><Font|subheaderFont>FACTION WEAKNESSES
+    <p><p>    
+    <Bullet|hlpbullet|Weaker Ship Hull(.9)>
+    <Bullet|hlpbullet|Weaker Station Hull(.9)>
+    <Bullet|hlpbullet|Weak Missiles(.95)>
+    <Bullet|hlpbullet|3min research time>
+<p><p><Font|subheaderFont>FACTION SPECIFIC TECH
+    <p><p>
+    <Bullet|hlpbullet|<Font|smallBoldFont>Transceiver<Font|helpFont> - The key to unlocking a great deal of special tech. A base that generates 180 credits per min, that you may launch from, rip to, but not dock at. Requires Garrison.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>Vanguard<Font|helpFont> - A powerful single pilot version of GT's Mustang. Comes with Dual Mini AC/LC, 15mrm class missiles, and regular booster. Requires Gunship, Transceiver, Tech base.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>Vulcan Cannon<Font|helpFont> - An extremely powerful weapon mountable on almost everything, including turrets. Uses massive amounts of both energy and ammo making it less than economical for long term whoring. Requires Gatt2, Sniper1, Transciever for Vulcan 1; Gatt3, Sniper2, Transceiver for Vulcan2.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>Laser Cannon<Font|helpFont> - A powerful energy turret. Laser cannon can rip apart almost any small, or medium class ship without problem. Ideal for both Heavy Bomber and HTT runs. Requires AC2, Sniper1, Transceiver for Laser Cannon 1; AC3, Sniper2, Transceiver for Laser Cannon2.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>Attack Drones<Font|helpFont> - Simple AI powered drones for each tech path, including heavy scouts. Requires Transceiver, Adv Tech base, the applicable Adv Ship for each drone.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>Laser Blossom<Font|helpFont> - Ideal for anti-capital ship. Laser blossoms shoot out huge streams of seemingly random lasers, doing damage dependent on how close and how large the enemy ship is(the more lasers hitting the more damage). Mountable on SF's, Scouts, Vanguards, Gunships, and a few other things. Requires Prox2, Sniper1, Transceiver for Laser Blossom 1; Prox3, Sniper2, Transceiver for Laser Blossom 2.>

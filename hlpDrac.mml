@@ -1,0 +1,24 @@
+<Color|yellow>Pcore005 Faction Strategies<Color|white><p><p>
+<Font|headerFont>DRACONIUM
+<p><p><Font|subheaderFont>FACTION PERKS
+    <p><p>
+<Bullet|hlpbullet|Ship speed 1.05, accel 1.1.Turn rate 1.05, torque 1.1. Ship hull 1.1>
+<Bullet|hlpbullet|Increased ammo on all ships>
+<Bullet|hlpbullet|Station Hull 1.2, repair 1.05>
+<Bullet|hlpbullet|Ship energy 1.2>
+<Bullet|hlpbullet|he3 speed 1.05>
+<Bullet|hlpbullet|Uses telerefs, a combination base of teleports and refineries instead>
+<Bullet|hlpbullet|Advanced constructors can be ripped to>
+<p><p><Font|subheaderFont>FACTION WEAKNESSES
+    <p><p><Bullet|hlpbullet|Ship & station shield + shield repair 0.95>
+    <Bullet|hlpbullet|Pw dmg 0.9. Missile dmg 0.9>
+    <Bullet|hlpbullet|0.8 capacity for miners. 1/6 payday reduction and 0.05 less starting money>
+    <Bullet|hlpbullet|0.95 ripcord modifier>
+    <Bullet|hlpbullet|3 minute research time>
+    <Bullet|hlpbullet|Basic constructors cannot rip>
+<p><p><Font|subheaderFont>IDEAL SETTINGS
+    <p><p><Bullet|hlpbullet|Enough money so that you can get enh cons for the second con wave. Other than that Draconium can work with anything.>
+<p><p><Font|subheaderFont>FACTION STRATEGIES
+    <p><p><Bullet|hlpbullet|<Font|smallBoldFont>Expansion<Font|helpFont> - Despite the low PW damage, Draconium expansion can be really good. The high accel and hull make Draconium interceptors very hard to kill. The additional ammo ensures that you can destroy targets even with less damage output. Htts have a ton of hitpoints and are very hard to spike.>
+    <p><p><Bullet|hlpbullet|<Font|smallBoldFont>Supremacy<Font|helpFont> - Looking at just the stats, Draconium sup is one of the worst in the game. However the fighter hitbox and gunmounts are amazing. Telerefs ensure that you can always rip and defend your miners - and that you can mine any sector you pushed a tp to. Fbs are fast and likely to get their missile off where other factions would fail.>
+    <p><p><Bullet|hlpbullet|<Font|smallBoldFont>Tacspansion<Font|helpFont> - The fast mining speed allows you to quickly mine your home and get a tac and sfs up. The good energy makes up for the low damage - but you will want to get ints ASAP both for defense and offense (kill nans on miners so sfs can kill them).>

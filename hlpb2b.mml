@@ -1,0 +1,9 @@
+<Font|headerFont>TEAM ROSTER<p><p><Color|white>
+<Font|helpFont>
+The team roster lists all the players on a specific team as well as their details:<p><p>
+
+    <Bullet|hlpbullet|<Color|yellow>Pilot<Color|white> shows the player's name.>
+    <Bullet|hlpbullet|<Color|yellow>Role<Color|white> indicates if the player is the game owner or the team leader.>
+    <Bullet|hlpbullet|<Color|yellow>Rank<Color|white> indicates the player's rank as a member of the Allegiance Zone (currently not implemented!).>
+    <Bullet|hlpbullet|<Color|yellow>State<Color|white> indicates whether the player is ready, away from the keyboard (AFK), or requesting to be added to the team. To change your own status to AFK, click the AFK check box directly above the chat section.>
+    <Bullet|hlpbullet|<Color|yellow>Wing<Color|white> indicates what wing the player is on. To change to a click Change Wing to the right of the team roster, and then click the wing you want to be on. It is best to be on the command wing unless asked otherwise, because then you are informed of the commander's actions without him telling you explicitly.>

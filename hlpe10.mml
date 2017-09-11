@@ -1,0 +1,7 @@
+<Font|headerFont>SIGNATURE<Font|helpFont><p><p>
+
+<Font|subheaderFont>WHAT IS SIGNATURE?<Font|helpFont>
+
+<p><p>The signature indicates how visible you are to enemy sensors, using a measure in percentage. A 100% signature means that you can be seen at 100% of the scan range of enemy sensors.
+
+<p><p>Example: My bomber has a 350% signature. A probe, with a scan range of 1000m (fictive value), is nearby. The probe will be able to detect me at 3.5*1000=3500 meters. So if I fly at 3500 meters or closer to the probe, I will be detected by the enemy.

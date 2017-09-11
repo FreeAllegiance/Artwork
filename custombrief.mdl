@@ -1,0 +1,205 @@
+use "customimage";
+
+//custombrief.mdl
+//Made by Andon for Zone Game and Event implementation
+//This was made so that the Zone Game team could implement custom briefing messages without
+//having to use the AutoUpdate feature for a ton of files each time. They would simply have
+//to update this file with the desired briefing and have the core directed towards the
+//appropriate briefing. Due to the nature of Allegiance, only six custom briefings will ever
+//be needed for a single event - therefore there are only six of them. This file also ensures
+//that players will not have their games broken by a well-meaning Events team.
+//
+//Please note that the additional custom briefing files (briefingimage.mdl, customXlobbybmp.mdl,
+//customXloadoutpanebmp.mdl, customXhullinfobmp.mdl, and iconcustomXbmp.mdl) are integral to
+//the functioning of this file, and they should not be tampered with.
+//
+//Briefing Images:
+//These are contained in the briefingimage.mdl file. While I could include them in here, it's 
+//simply easier to put them in there.
+//There are three image types: Lobby images, Loadout background images, and F6/Briefing images.
+//Lobby images are the background shown in the lobby
+//Loadout background images are shown in the ship loadout screen
+//F6/Briefing images are shown at the mission briefing and in the F6 pane.
+//
+//Each faction has a prefix. These are as follows:
+//Belters: belt
+//Bios: bios
+//Dreghklar: dreg
+//Ga'Taraan: gt
+//Gigacorp: giga
+//Iron Coalition: ic
+//Rixian: rix
+//Technoflux: tf
+//Faction X: fx //Please note that Faction X is not implemented yet and will cause most people to crash
+//IC Rookies: rook
+//Phoenix: pnx
+//Effix: effix
+//Omicron Hive: oh //Please note that Omicron Hive is not implemented yet and will cause most people to crash
+//Colonials: col
+//Earth: earth
+//Jupiter: jup
+//Mars: mars
+//Saturn: sat
+//Venus: ven
+//Galactic Empire: ge
+//Rebel Alliance: ra
+//
+//Please note that the prefix must be in all lowercase letters in order to function.
+//
+//To form an image reference, simply attach a prefix to the type of image.
+//For example, the Belter images are beltlobby beltloadout and belticon for the lobby, loadout,
+//and icon respectively.
+//
+//There are also these "default" or blank images:
+//deflobby: Blank lobby image
+//defloadout: Blank loadout image
+//yellowicon: Yellow F6 icon
+//blueicon: Blue F6 icon
+//purpleicon: Purple F6 icon
+//greenicon: Green F6 icon
+//redicon: Red F6 icon (really more like pink)
+//whiteicon: white F6 icon (really more like mint)
+//
+//And for when Squads are used, there are also these squad prefixes. Squads have lobby, loadout, and icon images.
+//Squad images are found in the artwork\squadimages folder, but they are defined in the brifingimage.mdl file
+//
+//Black Shadow: bs
+//German Borg: gb
+//Palidor's Knights: pk
+//Rolling Thunder: rt
+//Roman Legion: spqr
+//Slipshod Research and Mining: srm
+//Steel Fury: sf
+//System X: sysx
+//WildCards: ace
+//XenoTech: xt
+
+//Define the first custom briefing's images
+custom1lobbybmp = gigalobby; //Lobby
+custom1loadoutpanebmp = gigaloadout; //Loadout Background
+iconcustom1bmp = gigaicon; //F6/Briefing
+
+//Define the second custom briefing's images
+custom2lobbybmp = tflobby; //Lobby
+custom2loadoutpanebmp = tfloadout; //Loadout Background
+iconcustom2bmp = tficon; //F6/Briefing
+
+//Define the third custom briefing's images
+custom3lobbybmp = deflobby; //Lobby
+custom3loadoutpanebmp = defloadout; //Loadout Background
+iconcustom3bmp = purpleicon; //F6/Briefing
+
+//Define the fourth custom briefing's images
+custom4lobbybmp = deflobby; //Lobby
+custom4loadoutpanebmp = defloadout; //Loadout Background
+iconcustom4bmp = greenicon; //F6/Briefing
+
+//Define the fifth custom briefing's images
+custom5lobbybmp = deflobby; //Lobby
+custom5loadoutpanebmp = defloadout; //Loadout Background
+iconcustom5bmp = redicon; //F6/Briefing
+
+//Define the sixth custom briefing's images
+custom6lobbybmp = deflobby; //Lobby
+custom6loadoutpanebmp = defloadout; //Loadout Background
+iconcustom6bmp = whiteicon; //F6/Briefing
+
+//The briefing
+//The first line (Title) is the name of the faction. This can be changed to
+//things like a team name, a person, or whatever.
+//The second line (String) is the sub-set. It is usually a bit more descriptive
+//than the title.
+//The third line (NoWin) is the briefing given sometime... I really haven't been able to figure out when.
+//The fourth line (Default) is the normal briefing given.
+//Both these lines use %s to 'fill in' bits of data:
+//The first %s is the team name.
+//The second %s is the team's home sector
+//The third %s is the hostile faction.
+//Any more than three cause a crash upon launch.
+//The fifth line (SecondaryObjectives) is what is shown when there are other objectives.
+//The sixth line (Conquest) is what is shown if there are multiple objectives and one is conquest. %d is the percent, and %% creates a % mark
+//The seventh line (Countdown) is what is shown if there is a countdown. %d is the number of minutes
+//The eighth line (Artifacts) is what is shown if artifacts are required. %d is the number of artifacts
+//The ninth line (Flags) is what is shwon if flags are required. %d is the number of flags
+//the tenth line (Prosperity) is what is shown if prosperity is required. %d is the credits needed.
+//the eleventh line (DeathMatch) is what is shown if kills are required. %d is the number of kills.
+//To create a quotation, be sure to write it as \" so the MDL interpreter knows it is not the end of the string
+//To create a new line, simply type \n where the new line should be.
+
+//Create the first briefing
+custom1Title = "Escort Group Charlie";
+custom1String = "Emergency Briefing";
+custom1NoWin = "Team %s. Sector %s. Enemy %s.";
+custom1Default = "A recent Technoflux assault on our staging areas in this sector has forced us to evacuate. Everything coming out has been hit hard by Technoflux assault craft. This is the last group of freighters out - And they're carrying some important technology. Ensure that they reach the far side alive. We might be able to deal with the loss of some of them, but this is critical materials. Due to the nature of the force, we won't be able to reinforce you with other equipment - What you have is what you have.\nGood hunting!\n";
+custom1SecondaryObjectives = "\n\nOther objectives include:\n";
+custom1Conquest = "\n *  Control %d%% of the bases.";
+custom1Countdown = "\n *  Eliminate as many enemies as possible within %d minutes.";
+custom1Artifacts = "\n *  Capture and return %d of the artifacts.";
+custom1Flags = "\n *  Capture and return %d of the enemy flags.";
+custom1Prosperity = "\n *  Invest in \"Reinforcement\", costing %d credits, whereby reinforcements will be sent immediately to crush the opposition.";
+custom1Deathmatch = "\n *  Destroy %d enemy ships.";
+
+//Create the second briefing
+custom2Title = "Assault Unit 03-2115X";
+custom2String = "Critical Battle Update";
+custom2NoWin = "Team %s Sector %s. Enemy %s";
+custom2Default = "Alert! Faction \"Gigacorp\" has launched additional freighters from staging area designated G-1295-922\n\nAnalysis:\"Gigacorp\" units will deem cargo valuable.\nConclusion: \"Gigacorp\" must not retain this cargo.\nObjective: Destroy all freighters.\nAdditional Information: Refitted Gunships areto be used for destroying these freighters. Scouts have been refitted for speed and scan range. Interceptors and Scouts will be ineffective against these frieghters.\n\n";
+custom2SecondaryObjectives = "\n\nOther objectives include:\n";
+custom2Conquest = "\n *  Control %d%% of the bases.";
+custom2Countdown = "\n *  Eliminate as many enemies as possible within %d minutes.";
+custom2Artifacts = "\n *  Capture and return %d of the artifacts.";
+custom2Flags = "\n *  Capture and return %d of the enemy flags.";
+custom2Prosperity = "\n *  Invest in \"Reinforcement\", costing %d credits, whereby reinforcements will be sent immediately to crush the opposition.";
+custom2Deathmatch = "\n *  Destroy %d enemy ships.";
+
+//Create the third briefing
+custom3Title = "Team";
+custom3String = "String";
+custom3NoWin = "Team %s Sector %s. Enemy %s";
+custom3Default = "Team: %s. Sector: %s. Enemy: %s";
+custom3SecondaryObjectives = "\n\nOther objectives include:\n";
+custom3Conquest = "\n *  Control %d%% of the bases.";
+custom3Countdown = "\n *  Eliminate as many enemies as possible within %d minutes.";
+custom3Artifacts = "\n *  Capture and return %d of the artifacts.";
+custom3Flags = "\n *  Capture and return %d of the enemy flags.";
+custom3Prosperity = "\n *  Invest in \"Reinforcement\", costing %d credits, whereby reinforcements will be sent immediately to crush the opposition.";
+custom3Deathmatch = "\n *  Destroy %d enemy ships.";
+
+//Create the fourth briefing
+custom4Title = "Team";
+custom4String = "String";
+custom4NoWin = "Team %s Sector %s. Enemy %s";
+custom4Default = "Team: %s. Sector: %s. Enemy: %s";
+custom4SecondaryObjectives = "\n\nOther objectives include:\n";
+custom4Conquest = "\n *  Control %d%% of the bases.";
+custom4Countdown = "\n *  Eliminate as many enemies as possible within %d minutes.";
+custom4Artifacts = "\n *  Capture and return %d of the artifacts.";
+custom4Flags = "\n *  Capture and return %d of the enemy flags.";
+custom4Prosperity = "\n *  Invest in \"Reinforcement\", costing %d credits, whereby reinforcements will be sent immediately to crush the opposition.";
+custom4Deathmatch = "\n *  Destroy %d enemy ships.";
+
+//Create the fifth briefing
+custom5Title = "Team";
+custom5String = "String";
+custom5NoWin = "Team %s Sector %s. Enemy %s";
+custom5Default = "Team: %s. Sector: %s. Enemy: %s";
+custom5SecondaryObjectives = "\n\nOther objectives include:\n";
+custom5Conquest = "\n *  Control %d%% of the bases.";
+custom5Countdown = "\n *  Eliminate as many enemies as possible within %d minutes.";
+custom5Artifacts = "\n *  Capture and return %d of the artifacts.";
+custom5Flags = "\n *  Capture and return %d of the enemy flags.";
+custom5Prosperity = "\n *  Invest in \"Reinforcement\", costing %d credits, whereby reinforcements will be sent immediately to crush the opposition.";
+custom5Deathmatch = "\n *  Destroy %d enemy ships.";
+
+//Create the sixth briefing
+custom6Title = "Team";
+custom6String = "String";
+custom6NoWin = "Team %s Sector %s. Enemy %s";
+custom6Default = "Team: %s. Sector: %s. Enemy: %s";
+custom6SecondaryObjectives = "\n\nOther objectives include:\n";
+custom6Conquest = "\n *  Control %d%% of the bases.";
+custom6Countdown = "\n *  Eliminate as many enemies as possible within %d minutes.";
+custom6Artifacts = "\n *  Capture and return %d of the artifacts.";
+custom6Flags = "\n *  Capture and return %d of the enemy flags.";
+custom6Prosperity = "\n *  Invest in \"Reinforcement\", costing %d credits, whereby reinforcements will be sent immediately to crush the opposition.";
+custom6Deathmatch = "\n *  Destroy %d enemy ships.";

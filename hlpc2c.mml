@@ -1,0 +1,39 @@
+<Font|headerFont>WINGS<Color|white><Font|helpFont><p><p>
+
+
+
+A wing is a subgroup of pilots within the overall team. Each team can
+support up to 10 wings. The purpose of a wing is to
+provide a communications channel for a specific group of ships that wish to accomplish
+goals such as patrols, scouting missions, defensive missions, or attacks.
+Pilots themselves may decide which wings they wish to join.<p><p>
+It is  stongly encouraged and helpful for 
+everyone to join the <Color|yellow>Command Wing<Color|white>.  Commander's orders sent to utility 
+AI (miners and cons) can only be viewed in the command wing's chat, and so as a teammate, you 
+can use this rather than relying on the commander to tell you where miners/constructors are going.<p><p>
+All ships have a wing ID. The default wing for all players upon
+joining a team is Wing Alpha. You can change your wing either before
+the game starts or during the game.<p><p>
+
+<Font|smallBoldFont>To change your wing before the game starts<Font|helpFont><p><p>
+
+<Bullet|hlpimg1|In the Team Lobby, click <Font|smallBoldFont>Change Wing.<Font|helpFont>><p><p>
+
+<Bullet|hlpimg2|On the drop-down menu, click the name of the wing you wish to join.><p><p>
+
+<Bullet|hlpblank|The Wing column in the Team Lobby will be updated with the name of the new
+wing you are on.><p><p>
+
+<Font|smallBoldFont>To change your wing during the game<Font|helpFont><p><p>
+
+<Bullet|hlpimg1|To access the expanded Team display, press F6.><p><p>
+
+<Bullet|hlpimg2|Select your name in the list, and then click
+<Font|smallBoldFont>Change Wing.<Font|helpFont>><p><p>
+
+<Bullet|hlpimg3|On the drop-down menu, click the name of the wing you wish
+to join.><p><p>
+
+<Bullet|hlpblank|The Wing column in the Team display will be
+updated with the name of the new wing you are on.><p><p>
+

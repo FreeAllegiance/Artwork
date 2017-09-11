@@ -1,0 +1,34 @@
+<Font|headerFont>FLYING AROUND<Font|helpFont><p><p>
+
+<Font|subheaderFont>SIMPLE THRUSTERS<Font|helpFont><p><p>
+
+Indicated in your HUD by the top right bar, the level of thrust determines the percentage of maximum speed you're at. 100% of your thrusters means you'll be at 100% of your maximum speed...simple. Pressing \ (under the backspace) will engage your thrusters at 100% capacity. Pressing backspace will cut your thrusters to 0%. Pressing + and - (left of the backspace) will increase and decrease thrust power.
+
+<p><p><Font|subheaderFont>G-INDICATOR<Font|helpFont><p><p>
+
+As indicated in the HUD Description, your actual direction is indicated in the center of your screen by brackets (   ). If you wish to fly by obstacles, you have to make sure that your G-indicator, your real direction, does not point toward the obstacle, because that's where you're going. Similarly, when approaching a target, make sure your G-indicator is pointed properly, otherwise you may have momentum from previous movements taking you in the wrong direction.
+
+The G-indicator is the only hint given by your ship for you to know exactly where you're going. Pay close attention to it at all times. It is what you use to direct your ship toward targets and to keep your ship from colliding with objects.
+
+<p><p><Font|subheaderFont>BOOSTERS<Font|helpFont><p><p>
+
+Pressing TAB will engage your boosters. Not all ships have boosters, so watch for it when you prepare your ship. The booster consumes fuel, indicated in your HUD display. Be careful when boosting. It is a much greater strength than your thrusters, so not using it right may result in crashing in an asteroid. Good pilots use it to change direction tightly or to avoid enemy fire in all kinds of ways. However, the primary use is faster travel. Make sure you adjust the number of fuel refill you bring to the amount of fuel you'll need. Travelling extreme distances obviously requires a lot of fuel, while short-distance defenses require little booster, leaving more space for other, perhaps more useful items.
+
+<p><p><Font|subheaderFont>ROTATIONS<Font|helpFont><p><p>
+
+You can rotate your ship (clockwise and counter-clockwise). Pressing shift + left/right arrow keys will have your ship rotate. This is generally not useful, but comes in handy in very particular situations. Rixian ships are extremely agile on the horizontal axis, but not very agile on the vertical axis. As a result, a good pilot will rotate his ship so that he never has to turn on the vertical axis, and always on the horizontal axis, resulting in as much as twice the maneuverability. Also, ships with a thinner profile will try to make sure that only the thinnest side is exposed to enemy fire, exposing less surface to enemy weapons, and thus becoming more difficult to hit.
+
+<p><p><Font|subheaderFont>SIDE-THRUSTERS<Font|helpFont><p><p>
+
+Ships have side-thrusters that allow them to fly in any direction. This is widely used in dogfighting but serves pretty much at all times, which led many pilots, including myself, to remap their controls so that these buttons are closer to the rotation and boost keys, also both used widely in dogfighting. The default keys are on your NumPad. 8 sends you toward the top, 2 toward the bottom, 4 toward the left, 6 toward the right, and 5 toward the back, a straightforward system. Note that side-thrusters are not as powerful as main thrusters, having both lower accelerations and lower maximal velocities. However, if a ship has a strong acceleration, this goes for the sidethrusters as well. 
+
+<p><p><Font|subheaderFont>KILL BONUS<Font|helpFont><p><p>
+
+As we have already slightly covered, the kill bonus, indicated in the orange circle, represents a damage bonus in percentage. It is calculated by the following formula:
+
+<p><p>Kill Bonus = Kills / (Kills+4) * 50
+<p>ex.: You have 3 kills - KB = 3 / (3+4) * 50 = 21.4285 = 21 (rounded to nearest whole number)
+
+<p><p>A 10% kb will result in a 10% damage bonus. As you destroy more ships, the kill bonus slowly rises toward a maximum of 50 (396 kills). The kb cannot get any higher than 50 because it is a mathematical impossibility with the formula. Note that killing eject pods does not increase your kill bonus. Your kills bonus will apply to every weapon, missile and piece of equipment that can inflict damage.
+
+<p><p>When a pod is destroyed, the pilot dies and so does the kill bonus, which is reset to 0. This is why even though a pilot has 100 kills, s/he can still have a 0 kb. The kb is only higher with the number of consecutive kills, without the pilot dying. Note that getting podded has no effect on your kill bonus, you won't lose anything, but get yourself rescued or you might lose it.

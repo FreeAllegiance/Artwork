@@ -1,0 +1,47 @@
+<Color|yellow>Pcore005 Faction Strategies<Color|white><p><p>
+<Font|headerFont>GA'TARRAN
+<p><p><Font|subheaderFont>FACTION PERKS
+    <p><p><Bullet|hlpbullet|Strong hull(1.0) and sheild(1.1)>
+	<Bullet|hlpbullet|Strong station shield and hull(1.1)>
+    <Bullet|hlpbullet|Cheap tech cost(.8)>
+    <Bullet|hlpbullet|Scouts able to mount gatt and nan at the same time>
+    <Bullet|hlpbullet|Palisade provided for a cheap ungalvable base, also doubles as a Garrison>
+    <Bullet|hlpbullet|Extra tech provided by the Research(pulse laser, htt armor plating, guass gun ext.)>
+    <Bullet|hlpbullet|Miners offload at tech>
+    <Bullet|hlpbullet|Harbringer of Doom>
+
+<p><p><Font|subheaderFont>FACTION WEAKNESSES
+    <p><p><Bullet|hlpbullet|Lack of refineries may anger some people>
+    <Bullet|hlpbullet|Slow He speed(.8)>
+    <Bullet|hlpbullet|Missile track nerfed(.9)>
+    <Bullet|hlpbullet|Slower ripcord(.9)>
+<p><p><Font|subheaderFont>FACTION SPECIFIC TECH
+    <p><p><Bullet|hlpbullet|<Font|smallBoldFont>Guardian - A slow mobile manned turret(AC/SC/Lt). Requires Research, Palisade.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>Mustang<Font|helpFont> - Similar to a gunship, but with one turret (AC) and a front mounted Mini AC turret. Able to equip Hunters, Zeus, and Seeker missiles. Can load LB and ion booster. Requires Research, Palisade, and Starbase.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>PT Bomber<Font|helpFont> - Similar to a Figbomber, but instead of regular AB's it has a rocket targeting system able to fire Kinetic bombs, lightnings, thunders, and LRM AB's. The most successful method is the LRM AB's. Requires Research, Palisade.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>MRR Lightning<Font|helpFont> - A multi rocket gun, able to do large amounts of damage, but is highly lag dependant. Requires Research.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>LRR Thunder<Font|helpFont> - Similar to the Lightnings, but designed for capital ships and bombers. Requires Research.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>Rescue Drone<Font|helpFont> - A drone that is able to pick up pods, must be manually moved. Requires Research.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>EW Pulse Laser<Font|helpFont> - Does comparable damage as Gatt3, but is an EW weapon so it doesn't use ammo, and has excellent accuracy. Requires Research, Supremacy, Gatt2.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>MRM Zeus<Font|helpFont> - Has the damage of Dumbfire2 and the tracking of Seeker2. Requires Research, Supremacy, Dumbfire2>
+    <Bullet|hlpbullet|<Font|smallBoldFont>LRM Anti-Base<Font|helpFont> - A long range missile, doing little damage. Requires Research, Supremacy, AB2.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>EW Gauss Gun<Font|helpFont> - A long range, powerful weapon that shoots in short bursts, only equipable on SF's and SB's. Requires Research, Tactical, and Sniper 1.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>Lt Sig Cloak<Font|helpFont> - An endurance cloak, ideal for cruising through sectors without taking up much energy, not as effective as regular cloak, but lasts much longer. Requires Research, Tactical.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>Solar Inverter<Font|helpFont> - Works as opposite as a cloak does, it raises your sig and energy recharge rate. Requires Research, Tactical.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>HTT Armor Plating<Font|helpFont> - Increases the armor and mass of the HTT. Requires Research, Adv Expansion, Troop Transport, Heavy Troop Transport.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>PW Mini-Disruptor<Font|helpFont> - A cross between an Disruptor and a Mini Gun, ideal for anti-capship and Phoenix Bombers. Requires Research, Expansion, Minigun2.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>Ion Booster<Font|helpFont> - A booster with very slow accel, and limited top speed, however it does have the longest lifespan out of any booster. Requires Research, Expansion, Light Boost 1.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>Harbinger of Doom<Font|helpFont> - A large capital ship able to load the Doomsday missile, which, when shot at an aleph will destroy anything within the two sectors, including bases and asteroids. Requires, Research, Heavy Class Shipyard, Aleph Res 1.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>Assault Carrier Drone<Font|helpFont> - A massive carrier drone with more armor and shields than Enh or basic carriers. Requires Research, Medium Class Shipyard.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>EW SkyRipper LE<Font|helpFont> - Comparable damage to regular Skyrippers, only less energy drain.>
+    <Bullet|hlpbullet|<Font|smallBoldFont>PE Striker<Font|helpFont> - Mounted on Destroyers, a shorter range, burst fire Lancer, that uses both energy and ammo. Requires Research, DryDock>
+    <Bullet|hlpbullet|<Font|smallBoldFont>AS Hvy Nanite Mount<Font|helpFont> - A powerful Nan mountable on the turrets of the attack carrier. Requires Research, Drydock, Nanite 2.>
+<p><p><Font|subheaderFont>IDEAL SETTINGS
+    <p><p><Bullet|hlpbullet|GT can survive on anything and doesnt require a lot of starting money due to it's cheap research and ship costs.>
+<p><p><Font|subheaderFont>FACTION STRATEGIES
+    <p><p><Bullet|hlpbullet|<Font|smallBoldFont>Expansion<Font|helpFont> - GT currently has no real nerfs making any tech path a very viable alternative. Their expansion especially is powerful for a number of reasons. Their ints have better hull then IC with comparable gumounts and similar hitboxes, their htts can get armor plating which makes them incredibly hard to ram and also gives them a huge amount of hull. The he ga's already boost their incredibly strong economy.>
+    <p><p><Bullet|hlpbullet|<Font|smallBoldFont>Mustang/Tac<Font|helpFont> - Purchase a tac first for sfs to destroy the enemies econ while you plunk away into the pali and research, using these to expand you only need to spend money on one or two ops on a medium sized map like high higher. Proceed to upgrade the garrison and purchase mustangs, Med 2 and 3 make them very hard to kill, while hunt3 will make them able to combat heavy ints. Although this strat seems like it may cost a lot of money, GT's economy is strong enough that as long as it's miners arn't too troubled it shouldn't have problems getting mustangs by 15-20min. Enh miners with gt will make them almost invincible.>
+    <p><p><Bullet|hlpbullet|<Font|smallBoldFont>Mining<Font|helpFont> - Due to GT not having any refs the method of expansion is hindered slightly as the ops and techs have to be placed at a maximum of 2sectors away from your home. Most maps this isn't and issue, on larger maps your miners may have to backtrack to your garr to unload at or travel multiple sectors to unload at a forward op. To maximize your econ mine one sector and then send them to go to your op/tech base. This will get you your money a little slower, but it shouldn't matter much.>
+
+
+

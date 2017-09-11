@@ -1,0 +1,96 @@
+<Font|headerFont>GAME OPTIONS<Color|white><Font|helpFont><p><p>
+
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Number of Teams:<Font|helpFont> You can set the number of teams from two to six. 
+Note that the number of players on the server is determined by the administrator, and is divided by the number of teams 
+to determine the number of players per team.><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Players per Team:<Font|helpFont> Although the server administrator sets the player 
+limit, the game controller can set the number of players per team within that boundary, setting both a minimum and a maximum 
+using options like 1-32 or 5-10. This is important for the map type you wish to select, since maps may have team size 
+restrictions. More players will change the map, adding an extra home, for example.><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Skill Levels:<Font|helpFont> This option requires that statistics are available 
+(like on AZ). If set to a value other than "any", it can limit the kind of player that may join. "Nov. Only" prevents 
+intermediate and advanced players from joining. "No Adv." only prevents advanced players from joining.><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Team Lives:<Font|helpFont> Sets the number of lives that each player has. You lose
+ a life when your pod is destroyed. If the option to remove pods is selected, you lose a life when your ship is destroyed.><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Starting Money:<Font|helpFont> This sets the amount of money that each team starts with.><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Total Money:<Font|helpFont> This sets the amount of He3 that will be present on the
+ map. A higher setting means that the map will contain more He3. Note that He3 is divided into sectors, and will be distributed
+ so that a home sector contains half of the amount of a standard sector. In other words, there are twice as many He3 rocks in 
+standard sectors as compared to home sectors. However, because the number of sectors changes on every map, the amount of He3 
+per asteroid changes depending on the number of sectors.><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Resources:<Font|helpFont> This sets the amount of tech rocks and He3 rocks in each 
+sector. The numbers differ between home and standard sectors. ><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Map Type:<Font|helpFont> Maps in Allegiance consist of nothing more than a certain 
+arrangement of sectors. The position of rocks and alephs within those sectors is usually randomized, and as such only 
+becomes a strategic concern after the game has started. Allegiance offers a variety of maps, and the Community has designed 
+tools that allow for the creation of custom maps and give a lot of freedom to map designers, going much beyond the simple 
+relative positions of sectors.  A map choice is generally based on the number of players present and the kind of game that 
+people wish to play. Many maps are even restricted in the amount of players that they can accomodate.><p><p>
+
+
+Here are just 4 of the more commonly played maps in Allegiance
+
+<Bullet|hlphihigher|Higher><p><p>
+<Bullet|hlpinsideout|Inside Out><p><p>
+<Bullet|hlpstar|Star><p><p>
+<Bullet|hlpsnowflake|Snowflake><p><p>
+
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Map Connectivity:<Font|helpFont> This modifies the number of alephs in each sector, 
+thereby reducing the connectivity between them and changing the map considerably.><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Max Team Imbalance:<Font|helpFont> This sets the maximal imbalance that can occur 
+between any two teams. Setting it to N/A is generally reserved to special games.><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Stats Count:<Font|helpFont> When turned on, statistics from the game will be saved.><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Allow Defections:<Font|helpFont> This allows players to change teams. It is generally 
+turned off for a two-team game to keep players from joining the other team to see everything they have, and then join the 
+other team. In multi-team games, however, it is turned on to allow players from dead teams to join the remaining teams rather 
+than wait for the game to end.><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Allow Joiners:<Font|helpFont> This option is generally turned on to allow players to 
+join a game in progress.><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Eject Pods:<Font|helpFont> When turned on, players whose ship explodes end up in eject 
+pods rather than dead. If turned off, players die upon the destruction of their ships, and thus lose their kill bonus and one 
+life (if applicable). Turning this off also removes all balance issues that involve pods (rescue probes/drones, ripcording pods, etc.).><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Allow Friendly Fire:<Font|helpFont> Simply turns friendly fire on or off. Friendly 
+fire is useful to destroy probes placed in front of friendly red doors, or to place teammates in pods to rescue them and get 
+them home quickly. The option is usually turned off to keep players from destroying their own bases and to make the game a bit easier.><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Invulnerable Stations:<Font|helpFont> Makes all stations invulnerable. This option 
+is usually only turned on for command practice Conquest games, or for games where the stations are not really involved 
+(deathmatch with development turned on, for example). Note that stations can still be captured.><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Development:<Font|helpFont> When turned on, there is a tech tree and the whole RTS 
+aspect of Allegiance kicks in. If turned off, both teams start with a defined set of ships and upgrades and play with those 
+throughout the game. Development is generally turned off for games like deathmatches, where opponents want fairly equal weaponry.><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Reveal Map:<Font|helpFont> Although generally turned off during normal games, this option 
+is useful during comm practice games or games with very few players to avoid having to scout big maps. When turned on, all the 
+alephs are revealed, but all other objects are not (fog of war, rocks).><p><p>
+
+<Bullet|hlpbullet|<Font|smallBoldFont>Allow Shipyards:<Font|helpFont> This option is useful for small games where capital ships 
+could be overpowered. Turning it on or off simply makes the shipyard available or not in the tech tree.><p><p>
+
+
+
+
+
+
+
+
+
+
+
+

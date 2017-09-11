@@ -1,0 +1,21 @@
+<Font|headerFont>TROOP TRANSPORTS<Color|white><Font|helpFont><p><p>
+The Troop Transport captures enemy stations that have their shields down by docking in the green door, sending in soldiers specialized in taking over space spations.
+<p><p><Font|smallBoldFont>Global Properties<Font|helpFont><p><p>
+<Bullet|hlpbullet|The troop transport must be researched in the expansion complex, and can be upgraded to a heavy troop transport in the advanced expansion complex.><p>
+
+<Bullet|hlpbullet|The troop transport carries medium shields and a strong hull.><p>
+
+<Bullet|hlpbullet|It mounts no weapons, and only one type of missile, the EMP missile, which take down a station's shields.><p>
+
+<Bullet|hlpbullet|It can and must be upgraded to the heavy troop transport. Only a heavy can carry missiles, while the regular relies on other ships, usually bombers, to take down a station's shields, a complicated operation that rarely succeeds.><p>
+
+<p><Font|smallBoldFont>Exceptional Properties<Font|helpFont><p><p>
+<Bullet|hlpbullet|<Color|yellow>Rixian Unity<Color|white> The Rixians, in their forever exceptional ships, use the EW stinger for their troop transports, the same weapon as bombers. This allows a transport to destroy a station that cannot be captured, such as refineries and teleport receivers. The pilot can also take the decision to destroy a station if he sees that it will be too difficult to capture, or if it will be recaptured by the enemy. As always, because no missile is armed, the signature of the HTT is not raised even when it is operational.><p>
+<Bullet|hlpbullet|<Color|yellow>Technoflux<Color|white> The Technoflux, also without missiles, use the EW Anti-Shield Cannon to remove station shields in much the same manner as an EMP missile. Unlike the Rixian Unity, this weapon cannot damage station hulls. However, it has the advantage of not raising the ship's signature, unlike a missile, and can be recharged.><p>
+<p><Font|smallBoldFont>Deploying Troop Transports<Font|helpFont><p><p>
+<Bullet|hlpbullet|Troop transports are solely deployed to capture bases. They must remain hidden as much as possible, even when they are heavily escorted, hiding like a stealth bomber, placing itself toward a green door, and assaulting when the time seems appropriate.><p>
+
+<Bullet|hlpbullet|Troop transports also serve a defensive role. If your station is to be captured, you can launch the transport from that station, and recapture it after it has been captured. It will be difficult, since both teams will try to either recap the station or destroy it by alternately launching their ships from the station as it gets constantly recaptured. The commander often is the one who is to stand ready to recapture a station attacked by surprise, as the defenders attempt to block the enemy transport.><p>
+
+<Bullet|hlpbullet|Troop transports, cannot carry EMP missiles, and therefore cannot dock at enemy stations if no other ship can take down the shields. They require another ship to take down the station shields, making them useful in complex combinated assaults. On the other hand, they're free. Heavy troop transports, however, carry EMP missiles, and can therefore operate by themselves, generally like a stealth bomber, with nans, but cost credits.>
+

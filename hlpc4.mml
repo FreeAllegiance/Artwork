@@ -1,0 +1,20 @@
+<Font|headerFont>FINANCIAL SYSTEM<Color|white><Font|helpFont><p><p>
+
+The income for the team is quite simple and similar to that in other RTS games. 
+Credits come from various sources of income, and can be used to purchase various 
+technologies, ships and pieces of equipment. There are multiple sources of income 
+in Allegiance:
+<p><p>
+<Bullet|hlpbullet|The main income source is Helium-3, collected by miners (AI-controlled ships) that 
+fly to and from the He-3 asteroids, bringing the material to the proper station or 
+refinery and thus yielding a certain amount of credits.>
+
+<Bullet|hlpbullet|A source of income unique to GigaCorp and the Dreghklar Empire is through Special 
+Refineries: stations built on certain asteroids which passively produce a determined 
+amount of credits every minute.>
+
+<Bullet|hlpbullet|Cashboxes found in space by pilots also provide income. A pilot flying on a cashbox 
+sends the credits directly and immediately to the team. The pilot does not need to 
+bring the cashbox home, nor does he need to make room in cargo.>
+
+<Bullet|hlpbullet|The payday is a fund given to a team by the faction's government to assist them in times of war.>

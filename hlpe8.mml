@@ -1,0 +1,25 @@
+<Font|headerFont>MINERS<Font|helpFont><p><p>
+
+<Font|subheaderFont>MINER AI<Font|helpFont>
+<p><p>Since <Secondary|hlpdefminer|miners> are AI flown ships it’s important to know how they react when not ordered by a player. Keep in mind that miners are stupid and will do the most suicidal tasks without second thought. In the following situations the AI will react differently:
+
+<p><p><Font|smallBoldFont>Unoccupied sector<Font|helpFont>
+<p>The miner was specifically ordered there by an friendly player or it wouldn’t have gone there to mine. It will continue mining there until all He3 rocks are empty.
+
+<p><p><Font|smallBoldFont>Occupied sector<Font|helpFont>
+<p>The miner will mine in an occupied sector sooner or later depending on the order of occupying sectors by the team.
+
+<p><p><Font|smallBoldFont>Miner is 50% damaged<Font|helpFont>
+<p>When a miner is 50% damaged it will return to base to get repairs no matter what a player orders it to do. So clearly you don’t have to destroy it to hamper the enemy economy (though it is preferred). Harassing can be a powerful strategy if left unchecked.
+
+<p><p><Font|smallBoldFont>Enemy ships in the sector, no friendly ships or bases<Font|helpFont>
+<p>The miner will return to base immediately when the team of the miner detects you.
+
+<p><p><Font|smallBoldFont>Enemy ships in the sector, a friendly base in the sector, no friendly ships<Font|helpFont>
+<p>The miner will return to base immediately when the team of the miner detects you.
+
+<p><p><Font|smallBoldFont>Enemy ships in the sector, friendly ships in the same sector<Font|helpFont>
+<p>The miner will continue mining fearlessly.
+
+<p><p><Font|smallBoldFont>Enemy base, no enemy ships<Font|helpFont>
+<p>The miner will continue mining fearlessly.

@@ -1,32 +1,97 @@
 use "inventorypart";
+use "cortui_huds";
 
 StatsBar = StringPane(NumberString(GetCount(part, OnEveryFrame)), Color(1,1,1), Point(50, 12));
 
+GaugePaneClassic = 
+	GaugePane(
+		ImportImageFromFile("CortUI/classic/mountingbar.png", false),
+		GetMountedFraction(part, OnEveryFrame),
+		Color(0, 0, 0),
+		Color(0, 0, 0)
+	);
+	
+GaugePaneGreytones = 	
+	GaugePane(
+		ImportImageFromFile("CortUI/greytones/mountingbar.png", false),
+		GetMountedFraction(part, OnEveryFrame),
+		Color(0, 0, 0),
+		Color(0, 0, 0)
+	);	
+	
+GaugePaneGlassHUD = 
+	GaugePane(
+		ImportImageFromFile("CortUI/glasshud/mountingbar.png", false),
+		GetMountedFraction(part, OnEveryFrame),
+		Color(0, 0, 0),
+		Color(0, 0, 0)
+	);	
+	
+MountingBarGaugePane = 
+	SwitchPane(
+		StyleHUD,
+		[
+		(GaugePaneClassic, ClassicHUDSlot),
+		(GaugePaneClassic, RaveenHUDSlot),
+		(GaugePaneClassic, ParciHUDSlot),
+		(GaugePaneGreytones, LessHUDSlot),
+		(GaugePaneGreytones, JelloHUDSlot),
+		(GaugePaneGlassHUD, GlassHUDSlot)
+		]
+	);
+	
 MountingBar = 
     ImagePane(ImportImage("mountingbarbkgndbmp", true),
         [
             (
-                GaugePane(
-                    ImportImage("mountingbarbmp", false),
-                    GetMountedFraction(part, OnEveryFrame),
-                    Color(0, 0, 0),
-                    Color(0, 0, 0)
-                ),
+				MountingBarGaugePane,
                 Point(0,0)
             )
         ]
     );
 
+ArmingGaugePaneClassic = 
+	GaugePane(
+		ImportImageFromFile("CortUI/classic/armingbar.png", false),
+		GetArmedFraction(part, OnEveryFrame),
+		Color(0, 0, 0),
+		Color(0, 0, 0)
+	);
+	
+ArmingGaugePaneGreytones = 	
+	GaugePane(
+		ImportImageFromFile("CortUI/greytones/armingbar.png", false),
+		GetArmedFraction(part, OnEveryFrame),
+		Color(0, 0, 0),
+		Color(0, 0, 0)
+	);	
+	
+ArmingGaugePaneGlassHUD = 
+	GaugePane(
+		ImportImageFromFile("CortUI/glasshud/armingbar.png", false),
+		GetArmedFraction(part, OnEveryFrame),
+		Color(0, 0, 0),
+		Color(0, 0, 0)
+	);		
+
+ArmingGaugePane = 
+	SwitchPane(
+		StyleHUD,
+		[
+		(ArmingGaugePaneClassic, ClassicHUDSlot),
+		(ArmingGaugePaneClassic, RaveenHUDSlot),
+		(ArmingGaugePaneClassic, ParciHUDSlot),
+		(ArmingGaugePaneGreytones, LessHUDSlot),
+		(ArmingGaugePaneGreytones, JelloHUDSlot),
+		(ArmingGaugePaneGlassHUD, GlassHUDSlot)
+		]
+	);
+	
 ArmingBar = 
     ImagePane(ImportImage("armingbarbkgndbmp", true),
         [
             (
-                GaugePane(
-                    ImportImage("armingbarbmp", false),
-                    GetArmedFraction(part, OnEveryFrame),
-                    Color(0, 0, 0),
-                    Color(0, 0, 0)
-                ),
+                ArmingGaugePane,
                 Point(0,0)
             )
         ]

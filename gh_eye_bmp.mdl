@@ -1,0 +1,4 @@
+use "model";
+
+gh_eye_bmp = 
+	ImportImageFromFile("CortUI/glasshud/gh_eye.png", true);

@@ -1,5 +1,5 @@
 use "inventorypart";
-
+use "cortui_huds";
 
 CloakTimeLeft = SwitchString(
 					GetCloakTimeLeft(part, OnEveryFrame),
@@ -23,16 +23,48 @@ StatsBar =
         Point(83, 12)
     );
 
+GaugePaneClassic = 
+	GaugePane(
+		ImportImageFromFile("CortUI/classic/mountingbar.png", false),
+		GetMountedFraction(part, OnEveryFrame),
+		Color(0, 0, 0),
+		Color(0, 0, 0)
+	);
+	
+GaugePaneGreytones = 	
+	GaugePane(
+		ImportImageFromFile("CortUI/greytones/mountingbar.png", false),
+		GetMountedFraction(part, OnEveryFrame),
+		Color(0, 0, 0),
+		Color(0, 0, 0)
+	);	
+	
+GaugePaneGlassHUD = 
+	GaugePane(
+		ImportImageFromFile("CortUI/glasshud/mountingbar.png", false),
+		GetMountedFraction(part, OnEveryFrame),
+		Color(0, 0, 0),
+		Color(0, 0, 0)
+	);	
+	
+MountingBarGaugePane = 
+	SwitchPane(
+		StyleHUD,
+		[
+		(GaugePaneClassic, ClassicHUDSlot),
+		(GaugePaneClassic, RaveenHUDSlot),
+		(GaugePaneClassic, ParciHUDSlot),
+		(GaugePaneGreytones, LessHUDSlot),
+		(GaugePaneGreytones, JelloHUDSlot),
+		(GaugePaneGlassHUD, GlassHUDSlot)
+		]
+	);
+	
 MountingBar = 
     ImagePane(ImportImage("mountingbarbkgndbmp", true),
         [
             (
-                GaugePane(
-                    ImportImage("mountingbarbmp", false),
-                    GetMountedFraction(part, OnEveryFrame),
-                    Color(0, 0, 0),
-                    Color(0, 0, 0)
-                ),
+				MountingBarGaugePane,
                 Point(0,0)
             )
         ]

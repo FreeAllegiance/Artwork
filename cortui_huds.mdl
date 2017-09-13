@@ -1,0 +1,15 @@
+// HUD slots
+ClassicHUDSlot = 0;
+RaveenHUDSlot = 1;
+LessHUDSlot = 2;
+GlassHUDSlot = 3;
+ParciHUDSlot = 4;
+JelloHUDSlot = 5;   // not yet available in the Alleg client
+HUDs = [
+    (ClassicHUDSlot, "CortUI Classic"),
+    (RaveenHUDSlot, "Raveen's HUD"),
+    (LessHUDSlot, "lessHUD"),
+    (GlassHUDSlot, "GlassHUD"),
+    (ParciHUDSlot, "Parci's HUD"),
+    (JelloHUDSlot, "Jello Shot")
+];

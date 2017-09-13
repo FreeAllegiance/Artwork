@@ -1,0 +1,4 @@
+use "model";
+
+gh_cloakdrained_bmp = 
+	ImportImageFromFile("CortUI/glasshud/gh_cloakdrained.png", true);

@@ -1,0 +1,4 @@
+use "model";
+
+gh_autopilot_bmp = 
+	ImportImageFromFile("CortUI/glasshud/gh_Autopilot.png", true);

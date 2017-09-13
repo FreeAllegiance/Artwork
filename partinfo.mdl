@@ -180,7 +180,7 @@ slotChaff =
 //
 //////////////////////////////////////////////////////////////////////////////
 
-partDescriptionPosition = Point(176, 28);
+partDescriptionPosition = Point(176, 40);
 
 partDescriptionImage =
     SwitchImage(

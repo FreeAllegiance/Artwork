@@ -1,0 +1,4 @@
+use "model";
+
+gh_vectorlock_bmp = 
+	ImportImageFromFile("CortUI/glasshud/gh_vectorlock.png", true);

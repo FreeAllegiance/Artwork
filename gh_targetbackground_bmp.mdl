@@ -1,0 +1,4 @@
+use "model";
+
+gh_targetbackground_bmp = 
+	ImportImageFromFile("CortUI/glasshud/gh_targetbackground.png", true);

@@ -1,0 +1,76 @@
+/*****************************************************************************\
+| CortUI v3.0 - Release Notes                                                 |
+\*****************************************************************************/
+
+
+=== http://cortui.rtsquad.org/ ===
+
+
+CortUI is a modification package of the user interface of Allegiance
+(http://www.freeallegiance.org/). It is based on and inspired by Ksero's
+modification.
+
+
+More information:
+-----------------
+See http://cortui.rtsquad.org/wiki/Features
+  for a list of all features.
+See http://cortui.rtsquad.org/wiki/Screenshots
+  for screenshots of the features and the included HUDs.
+See http://cortui.rtsquad.org/wiki/DownloadAndInstallation
+  for instructions on how to install and uninstall CortUI.
+See http://cortui.rtsquad.org/wiki/InstallationOptions
+  for more detailed information about the options available during install.
+See http://cortui.rtsquad.org/milestone/3.0
+  for an overview of this release.
+
+
+Changes in 3.0 compared to 2.0:
+-------------------------------
+[Requires client in version R9+!]
+- Internal file restructuring to turn it from a modification to a core part of
+  the R9 release.
+
+
+Changes in 2.0 compared to 1.7x:
+--------------------------------
+[Requires client in version R7!]
+- Installer support for the latest Allegiance client, CSS and Windows 10.
+- HUDs are now selected and switched inside the Allegiance client, using the
+  'Graphics' -> 'Style' menu (or Esc, O, H).
+- Generally a more stable visual presentation: things are moving around
+  less, and UI elements have been unified across screens.
+- Various workarounds for low resolutions (1366x768 and below) have been
+  removed.
+
+
+History:
+--------
+See http://cortui.rtsquad.org/query?milestone=3.0
+  for a list of changes in this release
+See http://cortui.rtsquad.org/wiki/VersionHistory
+  for a list of changes in previous releases.
+See http://cortui.rtsquad.org/roadmap
+  for planned changes in future versions.
+
+
+Contributing:
+-------------
+See http://cortui.rtsquad.org/wiki#HowToContribute
+  for more information on how to report problems and suggest improvements.
+
+
+Contributors:
+-------------
+Based on Ksero's HUD modification, making use of his excellent documentation of
+the .mdl files.
+
+Original logo design by Newtype, logo modifications by Sp4wn, favicon by
+Loriana.
+
+HUD contributions by Parcival, Raveen, FlingPu and Bunnywabbit.
+
+Special thanks to all testers who have reported bugs. 
+
+
+-- Cort, 2017-09-14

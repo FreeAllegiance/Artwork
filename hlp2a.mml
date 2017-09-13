@@ -1,11 +1,10 @@
 <Font|largeFont><Font|promptFont>ALLEGIANCE MAIN MENU<Font|smallFont><Color|white><p><p>
 
 The Allegiance main menu is your portal to the Allegiance universe. From here, you can
-<Secondary|hlpd_ispconnect|connect> to all playable games of Allegiance through your Internet
- or LAN connection, reconfigure your input controls and adjust your game
+<Secondary|hlpd_ispconnect|connect> to all playable games of Allegiance through your Internet, reconfigure your input controls and adjust your game
 options, and even play the
 extensive offline training missions before putting your life on the line. You can also visit
-the MSN Gaming Zone Allegiance Web page for the latest information on Allegiance.<p><p>
+the Steam community hub for the latest information on Allegiance.<p><p>
 
 <Font|promptFont>Training<Font|smallFont><p><p>
 
@@ -15,14 +14,7 @@ that all new recruits play each and every mission. You do not need to be connect
 the Internet or your LAN to play these missions. For detailed
 information, access Overview: <Main|hlp1c|Training Missions.><p><p>
 
-<Font|promptFont>Allegiance Zone<Font|smallFont><p><p>
 
-Click <Font|smallBoldFont>Allegiance Zone<Font|smallFont> to play Allegiance as an
-Allegiance Zone member on the <Secondary|hlpd_zoneurl|MSN Gaming Zone.> The MSN Gaming Zone
-is an online gaming service that offers free and subscription-based gameplay for Allegiance.
-To play in the subscription-based Allegiance Zone, you need to have your free Zone ID as
-well as your <Secondary|hlpd_subsc|subscription> enabled. For detailed information, access
-Connect & Start: <Main|hlp2b|Allegiance Zone Games.><p><p>
 
 <Font|promptFont>Free Games<Font|smallFont><p><p>
 
@@ -33,12 +25,6 @@ Zone. The Zone provides this free matchmaking service for people who host their 
 servers. All you need is your Internet connection and a free MSN Gaming Zone ID. For
 detailed information, access Connect & Start: <Main|hlp2d|Free Games.><p><p>
 
-<Font|promptFont>LAN Games<Font|smallFont><p><p>
-
-Click <Font|smallBoldFont>LAN Games<Font|smallFont> to play at
-<Secondary|hlpd_nochargeexcept|no charge> on your
-<Secondary|hlpd_LAN|LAN.> For detailed
-information, access Connect & Start: <Main|hlp2c|LAN Games.><p><p>
 
 <Font|promptFont>Intro<Font|smallFont><p><p>
 
@@ -47,10 +33,6 @@ often as you wish. Press ESC to stop viewing it and return to the Allegiance mai
 
 <Font|promptFont>Web<Font|smallFont><p><p>
 
-Click <Font|smallBoldFont>Web<Font|smallFont> to connect to the MSN Gaming Zone
-Allegiance Web page through your Web browser. The Allegiance Web page offers not only
-unique events, rankings, and faction information for Allegiance Zone members
-but also extensive online Help, strategies, tips, news, and articles.<p><p>
 
 <Font|promptFont>Credits<Font|smallFont><p><p>
 

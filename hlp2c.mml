@@ -1,9 +1,8 @@
 <Font|promptFont>LAN GAMES<Font|smallFont><p><p>
 
 A LAN game is played on a server created on a <Secondary|hlpd_lan|LAN>
-that your machine is connected to. To play a LAN game, you are not required to be a
-member of the Allegiance Zone or have a <Secondary|hlpd_zoneid|Zone ID.><p><p>
-
+that your machine is connected to.><p><p>
+Please be aware that LAN functionality is currently unavailable
 <Font|smallBoldFont>To connect to and join a LAN game<Font|smallFont><p><p>
 
 <Bullet|hlpimg1|On the Allegiance main menu, click

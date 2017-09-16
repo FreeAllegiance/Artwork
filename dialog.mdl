@@ -1943,7 +1943,7 @@ GHEjectPodDisplayOn =
                     180,
                     Win32Font("Verdana", 14, true, 0),
                     hudColor,
-                    "You have Ejected."
+                    "You have ejected."
                 ),
             Point(-10,79)
             ),
@@ -4542,7 +4542,7 @@ TargetDisplay =
             (ClassicHUDSlot, DefaultNormalTargetDisplay),   // Classic targeting
             (RaveenHUDSlot, RaveenTargetDisplay),           // Raveen-style modified targeting
             (LessHUDSlot, fpTargetDisplay),                 // lessHUD targeting
-            (GlassHUDSlot, DefaultNormalTargetDisplay),     // GlassHUD is using the default targeting
+            (GlassHUDSlot, emptyImage),                     // GlassHUD hat its own (external) targeting display
             (ParciHUDSlot, RaveenTargetDisplay),            // ParciHUD is using Raveen-style targeting
             (JelloHUDSlot, RaveenTargetDisplay)             // JelloHUD is using Raveen-style targeting
         ]
@@ -5183,11 +5183,7 @@ VoteTextImageYOffset        = Subtract(-95, Multiply(12, NumChatLinesGlobal));
 CriticalTipImageTranslated = TranslateImage(CriticalTipImage, Point(0, CriticalTipImageYOffset));
 VoteTextImageTranslated = TranslateImage(VoteTextImage, Point(0, VoteTextImageYOffset));
 
-CommandPaneImage			      = SwitchImage(
-                                        StyleHUD,
-                                        PaneImage(CommandPane, false, true),
-                                        [(GlassHUDSlot, emptyImage)]            // Bunny is convinced nobody is using this command pane and has decided to hide it on GlassHUD
-                                    );
+CommandPaneImage			      = PaneImage(CommandPane, false, true);
 TeamPaneImage				      = PaneImage(TeamPanePane, false, true);
 TeleportPaneImage			      = PaneImage(TeleportPane, false, true);
 MoneyPaneImage				      = PaneImage(moneyPane, false, true);
@@ -5253,6 +5249,8 @@ ofSectorPane        = 0x008000;
 // the camera is overridden (launch sequence, training missions)
 ofGloatCam          = 0x010000;
 
+// helper flag constant that represents elements to be shown on all screens
+ofAlways = ofInHangar | ofInStationCommand | ofInFlight | ofInLoadout | ofGloatCam;
 
 
 //////////////////////////////////////////////////////////////
@@ -5347,18 +5345,18 @@ dialogs =
         // **********************************
 
         // CriticalTipImage: the four red lines in the middle of the screen
-        (CriticalTipImageTranslated, SideTop, Point(-310, 0), Point(-310, 0), .5, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInFlight, true),
+        (CriticalTipImageTranslated, SideTop, Point(-310, 0), Point(-310, 0), .5, ofAlways, true),
 
         // LoadoutCriticalTipImage: the four red lines in the middle of the screen, when you're in the loadout-screen
-        (LoadoutCriticalTipImage, SideCenter, Point(-310, 0), Point(-310, 0), .5, ofInLoadout, true),
+        //(LoadoutCriticalTipImage, SideCenter, Point(-310, 0), Point(-310, 0), .5, ofInLoadout, true),
 
         // TipTextImage: the line with joiners/leavers/money, etc at the bottom of the screen (two additional lines added by YP's patch from 2006-08-02)
-        (TipTextImage2, SideBottom, Point(-300, -180), Point(-300, 34), .5, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInFlight | ofInCockpit | ofInChase | ofInLoadout | ofTeleportPane | ofInvestment | ofGameState | ofTeam | ofExpandedTeam | ofInventory | ofCommandPane | ofSectorPane, true),
-        (TipTextImage1, SideBottom, Point(-300, -190), Point(-300, 25), .5, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInFlight | ofInCockpit | ofInChase | ofInLoadout | ofTeleportPane | ofInvestment | ofGameState | ofTeam | ofExpandedTeam | ofInventory | ofCommandPane | ofSectorPane, true),
-        (TipTextImage, SideBottom, Point(-300, -200), Point(-300, 14), .5, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInFlight | ofInCockpit | ofInChase | ofInLoadout | ofTeleportPane | ofInvestment | ofGameState | ofTeam | ofExpandedTeam | ofInventory | ofCommandPane | ofSectorPane, true),
+        (TipTextImage2, SideBottom, Point(-300, -180), Point(-300, 34), .5, ofAlways, true),
+        (TipTextImage1, SideBottom, Point(-300, -190), Point(-300, 25), .5, ofAlways, true),
+        (TipTextImage, SideBottom, Point(-300, -200), Point(-300, 14), .5, ofAlways, true),
 
         // VoteTextImage: the line that is displayed when a vote is called
-        (VoteTextImageTranslated, SideTop, Point(-310, 0), Point(-310, 0), .5, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInFlight | ofInCockpit | ofInChase | ofInLoadout | ofTeleportPane | ofInvestment | ofGameState | ofTeam | ofExpandedTeam | ofInventory | ofCommandPane | ofSectorPane, true),
+        (VoteTextImageTranslated, SideTop, Point(-310, 0), Point(-310, 0), .5, ofAlways, true),
 
         // ChatCompositionImage: the chat window (where you enter your messages)
         (ChatCompositionImage, SideBottom, Point(-170, -78), Point(-150, 148), .5, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInFlight | ofInCockpit | ofInChase | ofInLoadout | ofGloatCam, false),
@@ -5368,7 +5366,7 @@ dialogs =
         // **********************************
 
         // gameStateImage: the gamestate, your kills, etc.
-        (gameStateImage, SideLeft, Point(-500, 33), Point(10, 33), .5, ofGameState, false),
+        (gameStateImage, SideLeft, Point(-500, 33), Point(36, 33), .5, ofGameState, false),
 
         // TeamPaneImage: the information window about the teams (F6)
         (TeamPaneImage, SideRight, Point(10, -150), Point(-750, -150), .5, ofTeam | ofExpandedTeam, false),
@@ -5377,14 +5375,14 @@ dialogs =
         (MergedInvestmentsPaneImage, SideCenter, Point(-192, 2000), Point(-192, -265), .5, ofInvestment, false),
 
         // TeleportPane: the teleport selection window (F8)
-        (TeleportPaneImage, SideLeft, Point(-620, -100), Point(16, -100), .5, ofTeleportPane, false),
+        (TeleportPaneImage, SideLeft, Point(-620, -100), Point(36, -100), .5, ofTeleportPane, false),
 
         // **********************************
         // * Level 3
         // **********************************
 
         // SectorImage: the minimap
-        (SectorImage, SideBottomLeft, Point(0, -187), Point(36, 28), 0, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInCockpit | ofInChase | ofInLoadout | ofTeleportPane | ofGloatCam, false),
+        (SectorImage, SideBottomLeft, Point(0, -187), Point(36, 28), 0, ofAlways, false),
 
         // **********************************
         // * Level 4
@@ -5406,7 +5404,7 @@ dialogs =
         (SoftCenterHudDisplayParciStyleImage, SideBottomLeft, Point(0, -187), Point(36, 180), .5, ofInCockpit | ofInChase, true),
 
         // TargetDisplay: the targeting system
-        (TargetDisplayImage, SideBottom, Point(-320, -183), Point(-320, 12), .5, ofInCockpit | ofInChase, true),
+        (TargetDisplayImage, SideBottom, Point(-320, -183), Point(-320, 25), .5, ofInCockpit | ofInChase | ofGloatCam, true),
 
         // GHLargeTargetView: GlassHUD large target display
         (GHLargeTargetView, SideTopRight, Point(-230, 50), Point(-230, -330), .75, ofInFlightCommand | ofInStationCommand | ofInCockpit | ofInChase | ofGloatCam, true),
@@ -5415,52 +5413,52 @@ dialogs =
         (GHMsgDetectedView, SideCenter, Point(-125, 300), Point(-125, 300), .5, ofInFlightCommand, true),
 
         // cortCommandModeInfo: additional ship status information at the upper left corner of the map
-        (CommandModeIcons, SideTopLeft, Point(-200, -175), Point(34, -175), .5, ofInFlightCommand, true),
-        (cortCommandModeInfo, SideTopLeft, Point(-200, -190), Point(36, -190), .5, ofInFlightCommand, true),
+        (CommandModeIcons, SideLeft, Point(-200, 135), Point(34, 135), .5, ofInFlightCommand, true),
+        (cortCommandModeInfo, SideLeft, Point(-200, 120), Point(36, 120), .5, ofInFlightCommand, true),
         (cortCommandModeInfoBase, SideTopLeft, Point(36, -200), Point(36, -200), 0, ofInHangar | ofInStationCommand | ofInLoadout, true),
 
         // CommandPane: the command bar at the F3-map
         (CommandPaneImage, SideBottom, Point(-135, -190), Point(-135, 40), .5, ofInFlightCommand | ofInStationCommand, false),
 
         // LocationInCockpitImage: "current location" in cockpit mode
-        (LocationInCockpitImage, SideTopRight, Point(-180, 185), Point(-180, -15), 0, ofInFlight, true),
+        (LocationInCockpitImage, SideTopRight, Point(-180, -37), Point(-180, -37), 0, ofInFlight, true),
         // LocationInHangarImage: "current location" in hangar (SectorName is not set correctly, so it has to be retrieved via GetSectorName(MyStation, OnEveryFrame))
-        (LocationInHangarImage, SideTopRight, Point(-180, 185), Point(-180, -15), 0, ofInHangar | ofInLoadout, true),
+        (LocationInHangarImage, SideTopRight, Point(-180, -37), Point(-180, -37), 0, ofInHangar | ofInLoadout, true),
         // LookingAtImage: "currently viewing" in map mode when in base
-        (LookingAtImage, SideTopRight, Point(-180, 185), Point(-180, -15), 0, ofInStationCommand, true),
+        (LookingAtImage, SideTopRight, Point(-180, -37), Point(-180, -37), 0, ofInStationCommand, true),
+
+        // TurretOfImage: whose turret I'm in, for launch anim, map (both), hangar, cockpit, chase
+        (TurretOfImage, SideTopRight, Point(-180, 185), Point(-180, -75), 0, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInCockpit | ofInChase | ofGloatCam, true),
 
         // RipcordCountdownImage: the ripcord countdown
         (RipcordCountdownImage, SideCenter, Point(-75, 15), Point(-75, 15), .5, ofInFlightCommand | ofInFlight | ofInCockpit | ofInChase, true),
-
-        // TurretOfImage: whose turret I'm in, for launch anim, map (both), hangar, cockpit, chase
-        (TurretOfImage, SideTopRight, Point(-180, 185), Point(-180, -50), .5, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInCockpit | ofInChase | ofGloatCam, true),
 
         // BoardTextImage: who's turret I'm in, on the loadout screen
         (InTurretPaneImage, SideCenter, Point(-150, 25), Point(-150, 25), 0, ofInLoadout, true),
         (BoardTextImage, SideCenter, Point(-362, 20), Point(-362, 20), 0, ofInLoadout, true),
 
         // EjectPodImage: the eject pod display
-        (EjectPodImage, SideCenter, Point(-86, -87), Point(-86, -87), .5, ofInCockpit | ofInChase, true),
+        (EjectPodImage, SideCenter, Point(-86, -87), Point(-86, -87), .5, ofInFlight, true),
 
         // DeathBannerPane: when you're dead
-        (DeathBannerPaneImage, SideCenter, Point(-105, 15), Point(-105, 15), .5, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInFlight | ofInCockpit | ofInChase | ofInLoadout | ofTeleportPane | ofInvestment | ofGameState | ofTeam | ofExpandedTeam | ofInventory | ofCommandPane | ofSectorPane, true),
+        (DeathBannerPaneImage, SideCenter, Point(-105, 15), Point(-105, 15), .5, ofAlways, true),
 
         // LivesImage: your lives
-        (LivesImage, SideTopLeft, Point(45, -97), Point(40, -97), .5, ofInCockpit | ofInChase, true),
+        (LivesImage, SideTopLeft, Point(45, -97), Point(40, -97), .5, ofInFlight, true),
 
         // KillsImage: your kills
-        (KillsImage, SideTopLeft, Point(45, -177), Point(40, -177), .5, ofInCockpit | ofInChase, true),
+        (KillsImage, SideTopLeft, Point(45, -177), Point(40, -177), .5, ofInFlight, true),
 
         // CountdownImage: limited time game
-        (CountdownImage, SideTopLeft, Point(45, -137), Point(40, -137), .5, ofInCockpit | ofInChase, true),
+        (CountdownImage, SideTopLeft, Point(45, -137), Point(40, -137), .5, ofInFlight, true),
 
         // LastOrderImage: the last two commands you received
-        (LastOrderImage, SideTopLeft, Point(50, -37), Point(50, -37), 0, ofAllScreens, true),
+        (LastOrderImage, SideTopLeft, Point(50, -37), Point(50, -37), 0, ofAlways, true),
 
         // cortVersionInformation: the current version display of CortUI in the map-mode
         (cortVersionInformation, SideBottomRight, Point(-400, 24), Point(-400, 24), 0, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInLoadout, true),
         (cortHudInformation, SideBottomRight, Point(-400, 12), Point(-400, 12), 0, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInLoadout, true),
 
         // backButtonPane: the back button, that allows to switch from map to hangar when in base
-        (PaneImage(BlackPane(backButtonPane), false, true), SideBottomLeft, Point(-200, 17), Point(20, 0), .5, ofInFlightCommand | ofInStationCommand, false)
+        (PaneImage(BlackPane(backButtonPane), false, true), SideBottomLeft, Point(3, 3), Point(3, 3), 0, ofInStationCommand, false)
     ];

@@ -1591,56 +1591,22 @@ InTurretPaneImage =
 //////
 /////////////////////////////////	
 
-DefaultAcceptedOrderImage = 
-    GroupImage([
-        TranslateImage(
-            BlendImage(
-                ImportImage3D("comacceptbmp", yellowText, true),
-                hudBlendMode),
-            Point(-16, -13)),
-        BlendImage(        
-            StringImage(
-                JustifyLeft,
-                240,
-                promptFont,
-                yellowText,
-                AcceptedOrder
-            ),
-        hudBlendMode)
-    ]);
-
-GHAcceptedOrderImage = 
-    GroupImage([
-        TranslateImage(
-            BlendImage(
-                ImportImage3D("comacceptbmp", hudColor, true),
-                hudBlendMode),
-            Point(-16, -13)),
-        BlendImage(        
-            StringImage(
-                JustifyLeft,
-                240,
-                Win32Font("Verdana", 14, true, 0),
-                hudColor,
-                AcceptedOrder
-            ),
-        hudBlendMode)
-    ]);
-
-AcceptedOrderImage =
-    SwitchImage(
-        StyleHUD,
-        DefaultAcceptedOrderImage,
-        [(GlassHUDSlot,GHAcceptedOrderImage)]
+OrdersLabelImage =
+    StringImage(
+        JustifyLeft,
+        100,
+        promptFont,
+        yellowText,
+        "Current orders:"
     );
 
-DefaultQueuedOrderImage =
+QueuedOrderImage =
     GroupImage([
         TranslateImage(
             BlendImage(
                 ImportImage3D("comqueuedbmp", Color(1,0,0), true),
                 hudBlendMode),
-            Point(-16, -13)),
+            Point(-21, -13)),
         BlendImage(
             StringImage(
                 JustifyLeft,
@@ -1652,29 +1618,34 @@ DefaultQueuedOrderImage =
         hudBlendMode)
     ]);
 
-GHQueuedOrderImage =
+AcceptedOrderImage =
     GroupImage([
         TranslateImage(
             BlendImage(
-                ImportImage3D("comqueuedbmp", hudColor, true),
+                ImportImage3D("comacceptbmp", yellowText, true),
                 hudBlendMode),
-            Point(-16, -13)),
+            Point(-21, -13)),
         BlendImage(
             StringImage(
                 JustifyLeft,
                 240,
-                Win32Font("Verdana", 14, true, 0),
-                hudColor,
-                QueuedOrder
+                medVerdana,
+                cortText,
+                AcceptedOrder
             ),
         hudBlendMode)
     ]);
 
-QueuedOrderImage  =
-    SwitchImage(
-        StyleHUD,
-        DefaultQueuedOrderImage,
-        [(GlassHUDSlot,GHQueuedOrderImage)]
+LastOrderImage = SwitchImage(
+                    ShowLastOrders,
+                    emptyImage,
+                    [(1,
+                        GroupImage([
+                            TranslateImage(OrdersLabelImage,    Point( -13, 0)),
+                            TranslateImage(QueuedOrderImage,	Point(  7, -20)),
+                            TranslateImage(AcceptedOrderImage,	Point(  7, -40))
+                        ])
+                    )]
               );
 
 //////////////////////////////////
@@ -5241,16 +5212,6 @@ MergedInvestmentsPaneImage  = GroupImage([
                                     TranslateImage(InvestmentsInfoPaneImage,	Point(  17, 122)),
                                     TranslateImage(InvestmentsPaneImage,		Point(   0, 0))
                               ]);
-LastOrderImage				= SwitchImage(
-                                    ShowLastOrders,
-                                    emptyImage,
-                                    [(1,
-                                        GroupImage([
-                                            TranslateImage(AcceptedOrderImage,			Point(   0, 0)),
-                                            TranslateImage(QueuedOrderImage,			Point(   0, -20))
-                                        ])
-                                    )]
-                              );
 
 
 //////////////////////////////////////////////////////////////
@@ -5494,7 +5455,7 @@ dialogs =
         (CountdownImage, SideTopLeft, Point(45, -137), Point(40, -137), .5, ofInCockpit | ofInChase, true),
 
         // LastOrderImage: the last two commands you received
-        (LastOrderImage, SideTopLeft, Point(50, -7), Point(50, -37), .5, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInCockpit | ofInChase | ofInLoadout, true),
+        (LastOrderImage, SideTopLeft, Point(50, -37), Point(50, -37), 0, ofAllScreens, true),
 
         // cortVersionInformation: the current version display of CortUI in the map-mode
         (cortVersionInformation, SideBottomRight, Point(-400, 24), Point(-400, 24), 0, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInLoadout, true),

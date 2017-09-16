@@ -4619,7 +4619,7 @@ cortTargetExperienceOff =
         200,
         medBoldVerdana,
         GetSideColor(Target, OnEveryFrame),
-        GetName(Target, OnEveryFrame)
+        ConcatinatedString("Target: ", GetName(Target, OnEveryFrame))
     );
 
 cortTargetExperienceOn =
@@ -4628,7 +4628,7 @@ cortTargetExperienceOn =
         200,
         medBoldVerdana,
         GetSideColor(Target, OnEveryFrame),
-        ConcatinatedString(ConcatinatedString(ConcatinatedString(GetName(Target, OnEveryFrame), " ("), NumberString(TargetExperience)), "%)")
+        ConcatinatedString("Target: ", ConcatinatedString(ConcatinatedString(ConcatinatedString(GetName(Target, OnEveryFrame), " ("), NumberString(TargetExperience)), "%)"))
     );
 
 cortTargetName =
@@ -4727,7 +4727,7 @@ cortTargetGroup =
     VisibleImage(
         GroupImage(
             [
-            TranslateImage(cortTargetName,  Point(0, 26)),
+            TranslateImage(cortTargetName,  Point(0, 28)),
             TranslateImage(cortTargetShieldsLabel, Point(0,  11)),
             TranslateImage(cortTargetShieldsGauge, Point(80, 3)),
             TranslateImage(cortTargetHullLabel,    Point(0,  0)),
@@ -4741,48 +4741,23 @@ cortTargetGroup =
         IsNotNull(Target, OnEveryFrame)
     );
 
-CommandModeTargetGroup =
-    SwitchImage(
-        StyleHUD,
-        cortTargetGroup,
-        [(GlassHUDSlot, emptyImage)]
-    );
-
-cortShipLabel =
-    StringImage(
-        JustifyLeft, 
-        130,
-        medVerdana,
-        cortText,
-        "Ship:"
-    );
-
-cortShipValuePilot = 
-    StringImage(
-        JustifyLeft,
-        300,
-        medVerdana,
-        cortText,
-        GetModelTypeDesc(Me, OnEveryFrame)
-    );
-
-cortShipValueTurret =
-    StringImage(
-        JustifyLeft,
-        300,
-        medVerdana,
-        cortText,
-        ConcatinatedString(GetModelTypeDesc(Me, OnEveryFrame), " (turret)")
-    );
-
-cortShipValue = 
-    SwitchImage(
+cortShipTypeString =
+    SwitchString(
         BoardState,
-        emptyImage,
+        "",
         [
-            (0, cortShipValuePilot),
-            (2, cortShipValueTurret)
+            (0, GetModelTypeDesc(Me, OnEveryFrame)),
+            (2, ConcatinatedString(GetModelTypeDesc(Me, OnEveryFrame), " (turret)"))
         ]
+    );
+
+cortShipType =
+    StringImage(
+        JustifyLeft,
+        250,
+        medBoldVerdana,
+        GetSideColor(Me, OnEveryFrame),
+        ConcatinatedString("Ship: ", cortShipTypeString)
     );
 
 cortShieldsLabel =
@@ -5058,13 +5033,11 @@ cortStationName =
 
 cortCommandModeInfo =
     GroupImage([
-        TranslateImage(CommandModeIcons, Point(0,-5)),
-        TranslateImage(cortShipLabel,        Point(0,  -10)),
-        TranslateImage(cortShipValue,        Point(49, -10)),
-        TranslateImage(cortShieldsLabel,     Point(0,  -22)),
-        TranslateImage(cortShieldsGauge,     Point(50, -30)),
-        TranslateImage(cortHullLabel,        Point(0,  -34)),
-        TranslateImage(cortHullGauge,        Point(50, -42)),
+        TranslateImage(cortShipType,         Point(0,  -3)),
+        TranslateImage(cortShieldsLabel,     Point(0,  -20)),
+        TranslateImage(cortShieldsGauge,     Point(50, -28)),
+        TranslateImage(cortHullLabel,        Point(0,  -32)),
+        TranslateImage(cortHullGauge,        Point(50, -40)),
         TranslateImage(
             SwitchImage(
                 IsEjectPod(Me, OnEveryFrame),
@@ -5074,33 +5047,33 @@ cortCommandModeInfo =
                     (1, TranslateImage(cortPodDisplays, Point(0, -12)))
                 ]
             ),
-            Point(0, -46)
+            Point(0, -44)
         ),
-        TranslateImage(cortThrustLabel,      Point(0,  -82)),
-        TranslateImage(cortThrustGauge,      Point(50, -90)),
-        TranslateImage(cortSpeedLabel,       Point(0,  -94)),
-        TranslateImage(cortSpeedValue,       Point(5,  -94)),
-        TranslateImage(cortSpeedPostfix,     Point(82, -94)),
-        TranslateImage(cortSigLabel,         Point(0,  -106)),
-        TranslateImage(cortSigValue,         Point(5,  -106)),
-        TranslateImage(cortSigPostfix,       Point(82, -106)),
-        TranslateImage(cortKillbonusLabel,   Point(0,  -118)),
-        TranslateImage(cortKillbonusValue,   Point(5,  -118)),
-        TranslateImage(cortKillbonusPostfix, Point(82, -118)),
-        TranslateImage(CommandModeTargetGroup, 	 Point(0, -180))
+        TranslateImage(cortThrustLabel,      Point(0,  -80)),
+        TranslateImage(cortThrustGauge,      Point(50, -88)),
+        TranslateImage(cortSpeedLabel,       Point(0,  -92)),
+        TranslateImage(cortSpeedValue,       Point(5,  -92)),
+        TranslateImage(cortSpeedPostfix,     Point(82, -92)),
+        TranslateImage(cortSigLabel,         Point(0,  -104)),
+        TranslateImage(cortSigValue,         Point(5,  -104)),
+        TranslateImage(cortSigPostfix,       Point(82, -104)),
+        TranslateImage(cortKillbonusLabel,   Point(0,  -116)),
+        TranslateImage(cortKillbonusValue,   Point(5,  -116)),
+        TranslateImage(cortKillbonusPostfix, Point(82, -116)),
+        TranslateImage(cortTargetGroup, 	 Point(0,  -178))
     ]);
 
-cortCommandModeInfoBase = 
+cortCommandModeInfoBase =
     GroupImage([
-        TranslateImage(cortStationName,							  Point(0,-45)),
-        TranslateImage(cortStationShieldsLabel,					  Point(0,-62)),
-        TranslateImage(cortStationShieldsGauge,					  Point(100,-70)),
-        TranslateImage(cortStationHullLabel,					  Point(0,-74)),
-        TranslateImage(cortStationHullGauge,					  Point(100,-82)),
-        TranslateImage(cortShipLabel,                             Point(0,  -90)),
-        TranslateImage(cortShipValue,                             Point(49, -90)),
-        TranslateImage(cortKillbonusLabel,                        Point(0,  -102)),
-        TranslateImage(cortKillbonusValueAndPostfixLeftAligned,   Point(49, -102))
+        TranslateImage(cortShipType,                              Point(0,  0)),
+        TranslateImage(cortKillbonusLabel,                        Point(0,  -17)),
+        TranslateImage(cortKillbonusValueAndPostfixLeftAligned,   Point(49, -17)),
+
+        TranslateImage(cortStationName,							  Point(0, -45)),
+        TranslateImage(cortStationShieldsLabel,					  Point(0, -62)),
+        TranslateImage(cortStationShieldsGauge,					  Point(100, -70)),
+        TranslateImage(cortStationHullLabel,					  Point(0, -74)),
+        TranslateImage(cortStationHullGauge,					  Point(100, -82))
     ]);
 
 /////////////////////////////////////////////////////////////
@@ -5481,8 +5454,9 @@ dialogs =
         (GHMsgDetectedView, SideCenter, Point(-125, 300), Point(-125, 300), .5, ofInFlightCommand, true),
 
         // cortCommandModeInfo: additional ship status information at the upper left corner of the map
-        (cortCommandModeInfo, SideTopLeft, Point(20, 185), Point(36, -105), .5, ofInFlightCommand, true),
-        (cortCommandModeInfoBase, SideTopLeft, Point(20, 185), Point(36, -100), .5, ofInHangar | ofInStationCommand | ofInLoadout, true),
+        (CommandModeIcons, SideTopLeft, Point(-200, -175), Point(34, -175), .5, ofInFlightCommand, true),
+        (cortCommandModeInfo, SideTopLeft, Point(-200, -190), Point(36, -190), .5, ofInFlightCommand, true),
+        (cortCommandModeInfoBase, SideTopLeft, Point(36, -200), Point(36, -200), 0, ofInHangar | ofInStationCommand | ofInLoadout, true),
 
         // CommandPane: the command bar at the F3-map
         (CommandPaneImage, SideBottom, Point(-135, -190), Point(-135, 40), .5, ofInFlightCommand | ofInStationCommand, false),

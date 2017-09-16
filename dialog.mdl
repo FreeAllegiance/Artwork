@@ -1634,7 +1634,7 @@ AcceptedOrderImage =
         [(GlassHUDSlot,GHAcceptedOrderImage)]
     );
 
-DefaultQueuedOrderImage = 
+DefaultQueuedOrderImage =
     GroupImage([
         TranslateImage(
             BlendImage(
@@ -1650,9 +1650,9 @@ DefaultQueuedOrderImage =
                 QueuedOrder
             ),
         hudBlendMode)
-    ]);	
+    ]);
 
-GHQueuedOrderImage = 
+GHQueuedOrderImage =
     GroupImage([
         TranslateImage(
             BlendImage(
@@ -1668,24 +1668,24 @@ GHQueuedOrderImage =
                 QueuedOrder
             ),
         hudBlendMode)
-    ]);	
+    ]);
 
 QueuedOrderImage  =
     SwitchImage(
         StyleHUD,
         DefaultQueuedOrderImage,
         [(GlassHUDSlot,GHQueuedOrderImage)]
-    );
+              );
 
 //////////////////////////////////
 //////
 //////	MINIMAP
 //////
-/////////////////////////////////	
+//////////////////////////////////
 
 SectorInfoPaneX = SectorInfoPane([]); // these are the icons and data.
 SectorOverviewFlag = 33536;
-SectorPane = SectorMapPane(SectorInfoPaneX, OverlayFlags, SectorOverviewFlag, []); //this is the actual map. 
+SectorPane = SectorMapPane(SectorInfoPaneX, OverlayFlags, SectorOverviewFlag, []); //this is the actual map.
 
 SectorImagePre =
     PaneImage(
@@ -1693,25 +1693,25 @@ SectorImagePre =
             AnimatedImagePane(
                 GroupImage([
                     TranslateImage(
-                        SectorPane, 
+                        SectorPane,
                         Point(9, 20)
                     ),
                     SectorInfoPaneX
                 ])
             )
         ),
-        false, 
+        false,
         true
     );
 
-SectorImageWidth = 
+SectorImageWidth =
     PointX(
         ImageSize(
             SectorImagePre
         )
     );
 
-SectorMapBG =	
+SectorMapBG =
     SwitchImage(
             StyleHUD,
             ImportImageFromFile("CortUI/classic/sectormapbg.png", false),
@@ -1722,7 +1722,7 @@ SectorMapBG =
             ]
         );
 
-minimapexpandbtn = 
+minimapexpandbtn =
     SwitchImage(
             StyleHUD,
             ImportImageFromFile("CortUI/classic/minimapexpandbtn.png", false),
@@ -1733,7 +1733,7 @@ minimapexpandbtn =
             ]
         );
 
-MinimapPanelCollapsed = 
+MinimapPanelCollapsed =
     GroupImage([
         TranslateImage(minimapexpandbtn, Point(110,120)),
         SwitchImage(
@@ -1747,7 +1747,7 @@ MinimapPanelCollapsed =
         )
     ]);
 
-MinimapPanelExpanded = 
+MinimapPanelExpanded =
     GroupImage([
         TranslateImage(minimapexpandbtn, Point(170,120)),
         SwitchImage(
@@ -1761,14 +1761,14 @@ MinimapPanelExpanded =
         )
     ]);
 
-MinimapPanel = 
+MinimapPanel =
     SwitchImage(
         SectorImageWidth,
         MinimapPanelCollapsed,
         [(PointX(ImageSize(MinimapPanelExpanded)),MinimapPanelExpanded)]
     );
 
-SectorImage = 
+SectorImage =
     GroupImage([
         SectorImagePre,
         TranslateImage(SectorMapBG,Point(9,20)),
@@ -1781,9 +1781,9 @@ SectorImage =
 //
 //          Inventory Pane
 //
-///////////////////////////////////////////////	
+///////////////////////////////////////////////
 
-InvTopImage = 
+InvTopImage =
     SwitchImage(
         StyleHUD,
         ImportImageFromFile("CortUI/classic/inventorytop.png", false),
@@ -1794,7 +1794,7 @@ InvTopImage =
         ]
     );
 
-InvLineImage = 
+InvLineImage =
     SwitchImage(
         StyleHUD,
         ImportImageFromFile("CortUI/classic/inventorylinebkgnd.png", false),
@@ -1805,7 +1805,7 @@ InvLineImage =
         ]
     );
 
-InvBottomImage = 
+InvBottomImage =
     SwitchImage(
         StyleHUD,
         ImportImageFromFile("CortUI/classic/inventorybottom.png", false),
@@ -1816,7 +1816,7 @@ InvBottomImage =
         ]
     );
 
-InventoryTabImage = 	
+InventoryTabImage =
     SwitchImage(
         StyleHUD,
         ImportImageFromFile("CortUI/classic/inventorytab.png", false),
@@ -1830,14 +1830,14 @@ InventoryTabImage =
 ShipNameImage = StringImage(
                     JustifyCenter,
                     214,
-                    smallBoldFont, 
+                    smallBoldFont,
                     Color(1, 1, 1),
                     GetModelTypeDesc(Me, OnEveryFrame)
                 );
 
 
-// the height of the complete inventory image, as collected by the game engine thingymagoo.	
-InventoryHeight = 
+// the height of the complete inventory image, as collected by the game engine thingymagoo.
+InventoryHeight =
     PointY(
         ImageSize(
             InventoryImage()
@@ -1865,7 +1865,7 @@ LN15 = SwitchImage(Min(IL,15),emptyImage,[(14, InvTopImage),(15, InvLineImage)])
 LN16 = SwitchImage(Min(IL,16),emptyImage,[(15, InvTopImage),(16, InvLineImage)]);
 LN17 = SwitchImage(Min(IL,17),emptyImage,[(16, InvTopImage)]);
 
-InvBackgroundLines = 
+InvBackgroundLines =
     GroupImage([
         //InventoryHeightStringImage,
         TranslateImage(InvBottomImage, Point(0,Subtract(ILH,PointY(ImageSize(InvBottomImage))))),
@@ -1888,7 +1888,7 @@ InvBackgroundLines =
         TranslateImage(LN17, Point(0,Multiply(17,ILH)))
     ]);
 
-MergedInventoryPaneImage    = 
+MergedInventoryPaneImage    =
     JustifyImage(
         GroupImage([
             TranslateImage(ShipNameImage,		Point(-5, Add(14,Subtract(ILH,PointY(ImageSize(InvBottomImage)))))),
@@ -1910,31 +1910,31 @@ InvestmentsInfoPane = PartInfoPane();
 InvestmentsPane = PurchasesPane(InvestmentsInfoPane);
 
 moneyPane = ImagePane(ImportImage("creditboxbmp", false),
-                          [ 
+                          [
                             (
-                                StringPane( ConcatinatedString(NumberString(Money)," cr"), 
-                                            White, 
-                                            Point(90, 13), 
-                                            JustifyCenter, 
-                                            smallFont, 
+                                StringPane( ConcatinatedString(NumberString(Money)," cr"),
+                                            White,
+                                            Point(90, 13),
+                                            JustifyCenter,
+                                            smallFont,
                                             true),
                                 Point(58, 0)
                             ),
                             (
-                                StringPane("CURRENT CREDITS", 
-                                            White, 
-                                            Point(160, 13), 
-                                            JustifyCenter, 
-                                            smallBoldFont, 
+                                StringPane("CURRENT CREDITS",
+                                            White,
+                                            Point(160, 13),
+                                            JustifyCenter,
+                                            smallBoldFont,
                                             true),
                                 Point(31, 13)
                             ),
                             (
-                                StringPane( "", 
-                                            White, 
-                                            Point(100, 13), 
-                                            JustifyCenter, 
-                                            smallFont, 
+                                StringPane( "",
+                                            White,
+                                            Point(100, 13),
+                                            JustifyCenter,
+                                            smallFont,
                                             true),
                                 Point(43, 26)
                             )
@@ -1950,7 +1950,7 @@ moneyPane = ImagePane(ImportImage("creditboxbmp", false),
 //
 ///////////////////////////////////////////////
 
-DefaultEjectPodDisplayOn = 
+DefaultEjectPodDisplayOn =
         GroupImage([
             TranslateImage(
                 GaugeImage(
@@ -1963,7 +1963,7 @@ DefaultEjectPodDisplayOn =
             ImportImage("conejectpoddisplaybmp", false)
         ]);
 
-GHEjectPodDisplayOn = 
+GHEjectPodDisplayOn =
     TranslateImage(
         GroupImage([
         TranslateImage(
@@ -2033,9 +2033,9 @@ DeathBannerPane =
 TipTextImage =
     StringImage(
         JustifyCenter,
-        600, 
-        medBoldVerdana, 
-        mySideColor, 
+        600,
+        medBoldVerdana,
+        mySideColor,
         TipText
     );
 
@@ -2045,18 +2045,18 @@ TipTextImage =
 TipTextImage1 =
     StringImage(
         JustifyCenter,
-        600, 
-        medVerdana, 
-        mySideColor, 
+        600,
+        medVerdana,
+        mySideColor,
         TipText1
     );
 
 TipTextImage2 =
     StringImage(
         JustifyCenter,
-        600, 
-        smVerdana, 
-        mySideColor, 
+        600,
+        smVerdana,
+        mySideColor,
         TipText2
     );
 //
@@ -2066,33 +2066,33 @@ TipTextImage2 =
 CriticalTip0Image =
     StringImage(
         JustifyCenter,
-        620, 
-        medBoldVerdana, 
-        Color(1, 0, 0), 
+        620,
+        medBoldVerdana,
+        Color(1, 0, 0),
         CriticalTipText0
     );
 CriticalTip1Image =
     StringImage(
         JustifyCenter,
-        620, 
-        medBoldVerdana, 
-        Color(1, 0, 0), 
+        620,
+        medBoldVerdana,
+        Color(1, 0, 0),
         CriticalTipText1
     );
 CriticalTip2Image =
     StringImage(
         JustifyCenter,
-        620, 
-        medBoldVerdana, 
-        Color(1, 0, 0), 
+        620,
+        medBoldVerdana,
+        Color(1, 0, 0),
         CriticalTipText2
     );
 CriticalTip3Image =
     StringImage(
         JustifyCenter,
-        620, 
-        medBoldVerdana, 
-        Color(1, 0, 0), 
+        620,
+        medBoldVerdana,
+        Color(1, 0, 0),
         CriticalTipText3
     );
 
@@ -2113,8 +2113,8 @@ LoadoutCriticalTipImage =
 ObserverTextImage =
     StringImage(
         JustifyCenter,
-        600, 
-        medVerdana, 
+        600,
+        medVerdana,
         mySideColor,
         ConcatinatedString("Observer of ", GetName(Me, OnEveryFrame))
     );
@@ -2122,9 +2122,9 @@ ObserverTextImage =
 TurretTextImage =
     StringImage(
         JustifyCenter,
-        600, 
-        medVerdana, 
-        mySideColor, 
+        600,
+        medVerdana,
+        mySideColor,
         ConcatinatedString("Turret of ", GetName(Me, OnEveryFrame))
     );
 
@@ -2141,17 +2141,17 @@ BoardTextImage =
 VoteTextImage =
     StringImage(
         JustifyCenter,
-        620, 
-        medBoldVerdana, 
-        Color(1, 1, 1), 
+        620,
+        medBoldVerdana,
+        Color(1, 1, 1),
         CurrentVote
     );
 
-backButtonPane = 
+backButtonPane =
     SoundButtonPane(
-        ImportImage("btnbackbmp", true), 
-        ButtonNormal, 
-        false, 
+        ImportImage("btnbackbmp", true),
+        ButtonNormal,
+        false,
         negativeButtonClickSoundId
     );
 
@@ -2162,16 +2162,11 @@ backButtonPane =
 //
 // NEW AUTOPILOT- AND VECTORLOCK-INDICATORS
 //
-// Cortex 2005-04-17:
-// + added imports for the new icons
-// (created a new block because they are used in the normal
-//  HUD and the map-mode)
-//
 //////////////////////////////////////////////////////////////////////////////
 
 cortVectorLockNormal = ImportImageFromFile("CortUI/common/convectorlock.png", true);
 
-cortVectorLockOn = 
+cortVectorLockOn =
     SwitchImage(
         GetVectorLock(Me, OnEveryFrame),
         emptyImage,
@@ -2185,7 +2180,7 @@ cortAutopilotNormal = ImportImageFromFile("CortUI/common/conautopilot.png", true
 cortAutopilotOnImage =
     SwitchImage(
         AutopilotOn,
-        emptyImage, 
+        emptyImage,
         [
             (1, cortAutopilotNormal)
         ]
@@ -2202,7 +2197,7 @@ cortAutopilotOnImage =
 
 
 
-thrustGaugeBack = 
+thrustGaugeBack =
     BlendImage(
         GaugeImageRect(
             JustifyTop,
@@ -2227,13 +2222,13 @@ thrustGauge =
             hudBlendMode
         );
 
-thrustSpine = 
+thrustSpine =
     BlendImage(
         ImportImage3D("thrustspinebmp", white, true),
         hudBlendMode
     );
-    
-thrustString = 
+
+thrustString =
     BlendImage(
         StringImage(
                 JustifyRight,
@@ -2245,7 +2240,7 @@ thrustString =
         hudBlendMode
     );
 
-ThrustImage = 
+ThrustImage =
 GroupImage(
     [
         TranslateImage(thrustGaugeBack, Point(15, 10)),
@@ -2255,7 +2250,7 @@ GroupImage(
     ]
 );
 
-fuelGaugeBack = 
+fuelGaugeBack =
    BlendImage(
         GaugeImageRect(
             JustifyTop,
@@ -2265,9 +2260,9 @@ fuelGaugeBack =
             1
         ),
         hudBlendMode
-    );              
+    );
 
-fuelGauge = 
+fuelGauge =
        BlendImage(
             GaugeImageRect(
                 JustifyTop,
@@ -2279,13 +2274,13 @@ fuelGauge =
             hudBlendMode
         );
 
-fuelSpine = 
+fuelSpine =
     BlendImage(
         ImportImage3D("fuelspinebmp", white, true),
         hudBlendMode
     );
 
-fuelString = 
+fuelString =
     BlendImage(
         StringImage(
                 JustifyLeft,
@@ -2297,7 +2292,7 @@ fuelString =
         hudBlendMode
     );
 
-FuelImage = 
+FuelImage =
 GroupImage(
     [
         TranslateImage(fuelGaugeBack, Point(17, 10)),
@@ -2327,18 +2322,18 @@ ammoGauge =
                 Rect(29, 18, 98, 110),
                 true,
                 GetAmmo(Me, OnEveryFrame)
-                
+
             ),
             hudBlendMode
         );
 
-ammoSpine = 
+ammoSpine =
     BlendImage(
         ImportImage3D("ammospinebmp", white, true),
         hudBlendMode
     );
 
-ammoString = 
+ammoString =
     BlendImage(
         StringImage(
                 JustifyRight,
@@ -2350,7 +2345,7 @@ ammoString =
         hudBlendMode
     );
 
-AmmoImage = 
+AmmoImage =
 GroupImage(
     [
         TranslateImage(ammoGaugeBack, Point(29, 18)),
@@ -2360,7 +2355,7 @@ GroupImage(
     ]
 );
 
-energyGaugeBack = 
+energyGaugeBack =
      BlendImage(
         GaugeImageRect(
             JustifyTop,
@@ -2372,7 +2367,7 @@ energyGaugeBack =
         hudBlendMode
     );
 
-energyGauge = 
+energyGauge =
         BlendImage(
             GaugeImageRect(
                 JustifyBottom,
@@ -2383,15 +2378,15 @@ energyGauge =
             ),
             hudBlendMode
         );
-        
 
-energySpine = 
+
+energySpine =
     BlendImage(
         ImportImage3D("energyspinebmp", white, true),
         hudBlendMode
-    ); 
+    );
 
-energyString = 
+energyString =
     BlendImage(
         StringImage(
                 JustifyLeft,
@@ -2402,8 +2397,8 @@ energyString =
         ),
         hudBlendMode
     );
-    
-EnergyImage = 
+
+EnergyImage =
 GroupImage(
     [
         TranslateImage(energyGaugeBack, Point(30, 18)),
@@ -2411,7 +2406,7 @@ GroupImage(
         TranslateImage(energySpine, Point(-5, -4)),
         TranslateImage(energyString, Point(24, 3))
     ]
-);      
+);
 
 CenterHudLeft =
     BlendImage(
@@ -2419,7 +2414,7 @@ CenterHudLeft =
         hudBlendMode
     );
 
-armorString = 
+armorString =
     BlendImage(
         StringImage(
                 JustifyLeft,
@@ -2429,13 +2424,13 @@ armorString =
                 "ARMOR"
         ),
         hudBlendMode
-    );      
+    );
 
 
 
 HullGreen =
-        BlendImage(     
-            GaugeImageRect(         
+        BlendImage(
+            GaugeImageRect(
                 JustifyBottom,
                 ImportImage("hullgaugebmp", true),
                 Rect(40, 23, 88, 105),
@@ -2444,11 +2439,11 @@ HullGreen =
             ),
             hudBlendMode
         );
-     
+
 
 HullRed =
-    BlendImage( 
-        GaugeImageRect(         
+    BlendImage(
+        GaugeImageRect(
             JustifyBottom,
             ImportImage("hullgaugeredbmp", true),
             Rect(40, 23, 88, 105),
@@ -2458,7 +2453,7 @@ HullRed =
         hudBlendMode
     );
 
-hullGauge = 
+hullGauge =
     SwitchImage(
         Flash,
         HullGreen,
@@ -2468,13 +2463,13 @@ hullGauge =
         ]
     );
 
-hullGaugeBack = 
+hullGaugeBack =
     BlendImage(
         ImportImage3D("hullgauge2bmp", hudColorshadows, true),
         hudBlendMode
     );
 
-ArmorImage = 
+ArmorImage =
 GroupImage(
     [
         CenterHudLeft,
@@ -2484,14 +2479,14 @@ GroupImage(
     ]
 );
 
-    
+
 CenterHudRight =
     BlendImage(
         ImportImage3D("centerhudrightbmp", white, true),
         hudBlendMode
     );
-    
-shieldString = 
+
+shieldString =
     BlendImage(
         StringImage(
                 JustifyRight,
@@ -2501,9 +2496,9 @@ shieldString =
                 "SHIELD"
         ),
         hudBlendMode
-    );      
+    );
 
-ShieldGreen =   
+ShieldGreen =
         BlendImage(
             GaugeImageRect(
                 JustifyBottom,
@@ -2516,7 +2511,7 @@ ShieldGreen =
     );
 
 ShieldRed =
-    BlendImage( 
+    BlendImage(
         GaugeImageRect(
             JustifyBottom,
             ImportImage("shieldgaugeredbmp", true),
@@ -2538,14 +2533,14 @@ shieldGauge =
         ]
     );
 
-shieldGaugeBack = 
+shieldGaugeBack =
     BlendImage(
         ImportImage3D("shieldgauge2bmp", hudColorshadows, true),
         hudBlendMode
     );
 
-    
-ShieldImage = 
+
+ShieldImage =
 GroupImage(
     [
         CenterHudRight,
@@ -2555,10 +2550,10 @@ GroupImage(
     ]
 );
 
-RadOn = 
+RadOn =
     ImagePane(ImportImage("radonbmp", false), []);
 
-RadarDetectPane = 
+RadarDetectPane =
     SwitchPane(
                 Detected,
                 [
@@ -2566,17 +2561,17 @@ RadarDetectPane =
                 ]
                );
 
-CloakOn = 
+CloakOn =
     SwitchImage(
         IsCloaked(Me, OnEveryFrame),
         emptyImage,
         [
             (1, ImportImage("concloakbmp", true))
         ]
-    );			   
+    );
 
-SpeedImage = 
-    
+SpeedImage =
+
         StringImage(
                     JustifyCenter,
                     80,
@@ -2585,7 +2580,7 @@ SpeedImage =
                     ConcatinatedString(NumberString(GetSpeed(Me, OnEveryFrame)), " mps")
 );
 
-ExperienceImage = 
+ExperienceImage =
     GroupImage([
         TranslateImage(StringImage(
                     JustifyCenter,
@@ -2597,9 +2592,9 @@ ExperienceImage =
             BlendImage(ImportImage3D("killcounterbmp", white, true),  hudBlendMode), Point(-23, -65))
         ]);
 
-ArtifactImage   = 
+ArtifactImage   =
         BlendImage(ImportImage3D("captureflaglbmp", white, true), hudBlendMode);
- 
+
 
 Artifact =
     SwitchImage(
@@ -2615,7 +2610,7 @@ CaptureFlagImage =
                 ImportImage3D("captureflagrbmp", white, true), hudBlendMode);
 
 
-CaptureFlag = 
+CaptureFlag =
     SwitchImage(
         GotFlag,
         emptyImage,
@@ -2624,7 +2619,7 @@ CaptureFlag =
         ]
     );
 
-SignatureImage = 
+SignatureImage =
     StringImage(
         JustifyCenter,
         80,
@@ -2632,15 +2627,10 @@ SignatureImage =
         hudColor,
         ConcatinatedString(ConcatinatedString("SIG: ", NumberString(Signature)), "%")
         );
-    
 
-// Cortex 2005-04-17
-// * changed autopilot- and vector-lock-icons to the smaller ones
-// * changed their position
-
-DefaultCenterHudOn = 
+DefaultCenterHudOn =
         GroupImage(
-        [   
+        [
             TranslateImage(cortVectorLockOn, Point(442, 337)),							// (230, 287)
             TranslateImage(cortAutopilotOnImage, Point(177, 342)),						// (277, 377)
             TranslateImage(CloakOn, Point(120, 80)),
@@ -2667,7 +2657,7 @@ DefaultCenterHudOn =
 
 fpVectorLockNormal = ImportImageFromFile("CortUI/lesshud/cortui_lesshud_con_vector_lock.png", true);
 
-fpVectorLockOn = 
+fpVectorLockOn =
     SwitchImage(
         GetVectorLock(Me, OnEveryFrame),
         emptyImage,
@@ -2687,7 +2677,7 @@ fpAutopilotOnImage =
         ]
     );
 
-fpThrustGaugeBack = 
+fpThrustGaugeBack =
     BlendImage(
         GaugeImageRect(
             JustifyRight,
@@ -2711,7 +2701,7 @@ fpThrustGauge =
         hudBlendMode
     );
 
-fpThrustImage = 
+fpThrustImage =
     GroupImage(
         [
             TranslateImage(fpThrustGaugeBack, Point(0, 0)),
@@ -2719,7 +2709,7 @@ fpThrustImage =
         ]
     );
 
-fpFuelGaugeBack = 
+fpFuelGaugeBack =
    BlendImage(
         GaugeImageRect(
             JustifyLeft,
@@ -2729,9 +2719,9 @@ fpFuelGaugeBack =
             1
         ),
         hudBlendMode
-    );              
+    );
 
-fpFuelGauge = 
+fpFuelGauge =
    BlendImage(
         GaugeImageRect(
             JustifyLeft,
@@ -2743,7 +2733,7 @@ fpFuelGauge =
         hudBlendMode
     );
 
-fpFuelImage = 
+fpFuelImage =
     GroupImage(
         [
             TranslateImage(fpFuelGaugeBack, Point(0, 0)),
@@ -2776,7 +2766,7 @@ fpAmmoGauge =
         hudBlendMode
     );
 
-fpAmmoImage = 
+fpAmmoImage =
     GroupImage(
         [
             TranslateImage(fpAmmoGaugeBack, Point(0, 0)),
@@ -2784,7 +2774,7 @@ fpAmmoImage =
         ]
     );
 
-fpEnergyGaugeBack = 
+fpEnergyGaugeBack =
      BlendImage(
         GaugeImageRect(
             JustifyLeft,
@@ -2796,7 +2786,7 @@ fpEnergyGaugeBack =
         hudBlendMode
     );
 
-fpEnergyGauge = 
+fpEnergyGauge =
     BlendImage(
         GaugeImageRect(
             JustifyLeft,
@@ -2808,7 +2798,7 @@ fpEnergyGauge =
         hudBlendMode
     );
 
-fpEnergyImage = 
+fpEnergyImage =
     GroupImage(
         [
             TranslateImage(fpEnergyGaugeBack, Point(0, 0)),
@@ -2817,8 +2807,8 @@ fpEnergyImage =
     );
 
 fpHullGreen =
-        BlendImage(     
-            GaugeImageRect(         
+        BlendImage(
+            GaugeImageRect(
                 JustifyBottom,
                 ImportImageFromFile("CortUI/lesshud/cortui_lesshud_hull_gauge.png", true),
                 Rect(0, 0, 36, 174),
@@ -2827,11 +2817,11 @@ fpHullGreen =
             ),
             hudBlendMode
         );
-     
+
 
 fpHullRed =
-    BlendImage( 
-        GaugeImageRect(         
+    BlendImage(
+        GaugeImageRect(
             JustifyBottom,
             ImportImageFromFile("CortUI/lesshud/cortui_lesshud_hull_gauge_red.png", true),
             Rect(0, 0, 36, 174),
@@ -2841,7 +2831,7 @@ fpHullRed =
         hudBlendMode
     );
 
-fpHullGauge = 
+fpHullGauge =
     SwitchImage(
         Flash,
         fpHullGreen,
@@ -2851,7 +2841,7 @@ fpHullGauge =
         ]
     );
 
-fpHullGaugeBack = 
+fpHullGaugeBack =
     BlendImage(
         GaugeImageRect(
             JustifyBottom,
@@ -2863,7 +2853,7 @@ fpHullGaugeBack =
         hudBlendMode
     );
 
-fpArmorImage = 
+fpArmorImage =
     GroupImage(
         [
             TranslateImage(fpHullGaugeBack, Point(0, 0)),
@@ -2871,7 +2861,7 @@ fpArmorImage =
         ]
     );
 
-fpShieldGreen =   
+fpShieldGreen =
         BlendImage(
             GaugeImageRect(
                 JustifyBottom,
@@ -2884,7 +2874,7 @@ fpShieldGreen =
     );
 
 fpShieldRed =
-    BlendImage( 
+    BlendImage(
         GaugeImageRect(
             JustifyBottom,
             ImportImageFromFile("CortUI/lesshud/cortui_lesshud_shield_gauge_red.png", true),
@@ -2905,7 +2895,7 @@ fpShieldGauge =
         ]
     );
 
-fpShieldGaugeBack = 
+fpShieldGaugeBack =
     BlendImage(
         GaugeImageRect(
             JustifyBottom,
@@ -2917,7 +2907,7 @@ fpShieldGaugeBack =
         hudBlendMode
     );
 
-fpShieldImage = 
+fpShieldImage =
     GroupImage(
         [
             TranslateImage(fpShieldGaugeBack, Point(0, 0)),
@@ -2925,12 +2915,12 @@ fpShieldImage =
         ]
     );
 
-fpRadOn = 
+fpRadOn =
     ImagePane(ImportImageFromFile("CortUI/lesshud/cortui_lesshud_rad_on.png", false), []);
-// fpRadOff = 
+// fpRadOff =
     // ImagePane(ImportImageFromFile("CortUI/lesshud/cortui_lesshud_rad_on.png", false), []);
 
-fpRadarDetectPane = 
+fpRadarDetectPane =
     SwitchPane(
                 Detected,
                 [
@@ -2939,7 +2929,7 @@ fpRadarDetectPane =
                 ]
                );
 
-fpExperienceImage = 
+fpExperienceImage =
     GroupImage([
         TranslateImage(StringImage(
                     JustifyCenter,
@@ -2950,7 +2940,7 @@ fpExperienceImage =
                     emptyImage
         ]);
 
-fpArtifactImage   = 
+fpArtifactImage   =
         BlendImage(ImportImage3D("captureflaglbmp", white, true), hudBlendMode);
 
 fpArtifact =
@@ -2966,7 +2956,7 @@ fpCaptureFlagImage =
         BlendImage(
                 ImportImage3D("captureflagrbmp", white, true), hudBlendMode);
 
-fpCaptureFlag = 
+fpCaptureFlag =
     SwitchImage(
         GotFlag,
         emptyImage,
@@ -2977,7 +2967,7 @@ fpCaptureFlag =
 
 fpCloakNormal = ImportImageFromFile("CortUI/lesshud/cortui_lesshud_con_cloak.png", true);
 
-fpCloakOn = 
+fpCloakOn =
     SwitchImage(
         IsCloaked(Me, OnEveryFrame),
         emptyImage,
@@ -3038,7 +3028,7 @@ fp2ShieldImage = GroupImage([
         TranslateImage(fp2ShieldGauge, Point(5, 2))
 ]);
 
-fp2HullGauge = BlendImage(     
+fp2HullGauge = BlendImage(
     GaugeImageRect(
         JustifyBottom,
         ImportImageFromFile("CortUI/jelloshot/cortui_jelloshot_hull_gauge.png", true),
@@ -3048,9 +3038,9 @@ fp2HullGauge = BlendImage(
     ),
     hudBlendMode
 );
-     
 
-fp2HullGaugeBack = BlendImage( 
+
+fp2HullGaugeBack = BlendImage(
     GaugeImageRect(
         JustifyTop,
         ImportImageFromFile("CortUI/jelloshot/cortui_jelloshot_hull_gauge_back.png", true),
@@ -3088,7 +3078,7 @@ fp2ThrustGauge = BlendImage(
     hudBlendMode
 );
 
-fp2ThrustImage = 
+fp2ThrustImage =
 GroupImage(
     [
         TranslateImage(fp2ThrustGaugeBack, Point(10, 48)),
@@ -3105,7 +3095,7 @@ fp2FuelGaugeBack = BlendImage(
         Subtract(1, GetFuel(Me, OnEveryFrame))
     ),
     hudBlendMode
-);              
+);
 
 fp2FuelGauge = BlendImage(
     GaugeImageRect(
@@ -3176,7 +3166,7 @@ fp2EnergyGauge = BlendImage(
 fp2EnergyImage = GroupImage([
     TranslateImage(fp2EnergyGaugeBack, Point(2, 10)),
     TranslateImage(fp2EnergyGauge, Point(2, 10))
-]);      
+]);
 
 fp2AutopilotOn = BlendImage(
     ImportImageFromFile("CortUI/jelloshot/cortui_jelloshot_autopilot_on.png", true),
@@ -3429,14 +3419,14 @@ fp2TargetRange5 = StringImage(
     fp2FontNormal,
     targetHudColor,
     GetSectorName(Target, OnEveryFrame)
-); 
+);
 fp2TargetRange6 = StringImage(
     JustifyRight,
     20,
     fp2FontNormal,
     fp2DarkGrey,
     "..."
-); 
+);
 fp2TargetRange1 = GroupImage([
     TranslateImage(fp2TargetRange3, Point(214, 42)),
     TranslateImage(fp2TargetRange4, Point(359, 42))
@@ -3460,7 +3450,7 @@ fp2TargetSpeed = StringImage(
     fp2FontNormal,
     targetHudColor,
     NumberString(GetSpeed(Target, OnEveryFrame))
-);  
+);
 
 fp2TargetInRange1 = BlendImage(
     ImportImageFromFile("CortUI/jelloshot/cortui_jelloshot_target_in_range1.png", true),
@@ -3553,7 +3543,7 @@ fp2CenterHudOn = GroupImage([
 
 softText = Color(0.586, 0.578, 0.680);
 softTeamColor = ImportImage3D("softteamcolorbmp", hudColor, true);
-softExperience = 
+softExperience =
         StringImage(
             JustifyCenter,
             80,
@@ -3568,7 +3558,7 @@ softThrustGaugeHit =
     GaugeImage(JustifyLeft, ImportImage("softgaugehitbmp", true), playerThrottle);
 
 
-softThrust = 
+softThrust =
     SwitchImage(
         0, //Flash,
         softThrustGauge,
@@ -3578,13 +3568,13 @@ softThrust =
         ]
     );
 
-softFuelGauge = 
+softFuelGauge =
     GaugeImage(JustifyLeft, ImportImage("softgaugebmp", true), GetFuel(Me, OnEveryFrame));
-    
-softFuelGaugeHit = 
+
+softFuelGaugeHit =
     GaugeImage(JustifyLeft, ImportImage("softgaugehitbmp", true), GetFuel(Me, OnEveryFrame));
-    
-softFuel = 
+
+softFuel =
     SwitchImage(
         0, //Flash,
         softFuelGauge,
@@ -3600,7 +3590,7 @@ softAmmoGauge =
 softAmmoGaugeHit =
     GaugeImage(JustifyLeft, ImportImage("softgaugehitbmp", true), GetAmmo(Me, OnEveryFrame));
 
-softAmmo = 
+softAmmo =
     SwitchImage(
         0, //Flash,
         softAmmoGauge,
@@ -3610,13 +3600,13 @@ softAmmo =
         ]
     );
 
-softEnergyGauge = 
-    GaugeImage(JustifyLeft, ImportImage("softgaugebmp", true), GetPercentEnergy(Me, OnEveryFrame));    
+softEnergyGauge =
+    GaugeImage(JustifyLeft, ImportImage("softgaugebmp", true), GetPercentEnergy(Me, OnEveryFrame));
 
-softEnergyGaugeHit = 
-    GaugeImage(JustifyLeft, ImportImage("softgaugehitbmp", true), GetPercentEnergy(Me, OnEveryFrame));    
+softEnergyGaugeHit =
+    GaugeImage(JustifyLeft, ImportImage("softgaugehitbmp", true), GetPercentEnergy(Me, OnEveryFrame));
 
-softEnergy = 
+softEnergy =
     SwitchImage(
         0, //Flash,
         softEnergyGauge,
@@ -3627,12 +3617,12 @@ softEnergy =
     );
 
 softHullGauge =
-    GaugeImage(JustifyLeft, ImportImage("softgaugebmp", true), GetPercentHitPoints(Me, OnEveryFrame));    
+    GaugeImage(JustifyLeft, ImportImage("softgaugebmp", true), GetPercentHitPoints(Me, OnEveryFrame));
 
 softHullGaugeHit =
     GaugeImage(JustifyLeft, ImportImage("softgaugehitbmp", true), GetPercentHitPoints(Me, OnEveryFrame));
 
-softHull = 
+softHull =
     SwitchImage(
         Flash,
         softHullGauge,
@@ -3648,7 +3638,7 @@ softShieldGauge =
 softShieldGaugeHit =
     GaugeImage(JustifyLeft, ImportImage("softgaugehitbmp", true), GetPercentShields(Me, OnEveryFrame));
 
-softShield = 
+softShield =
     SwitchImage(
         Flash,
         softShieldGauge,
@@ -3658,7 +3648,7 @@ softShield =
         ]
     );
 
-softSpeed = 
+softSpeed =
     StringImage(
         JustifyCenter,
         55,
@@ -3669,11 +3659,11 @@ softSpeed =
 
 
 
-softRadOn = 
+softRadOn =
     ImagePane(ImportImage("softrangedbmp", false), []);
 
 
-softRadarDetectPane = 
+softRadarDetectPane =
     SwitchPane(
                 Detected,
                 [
@@ -3683,7 +3673,7 @@ softRadarDetectPane =
 
 VectorLockSoft   = ImportImage("softvectorbmp", false);
 
-softVectorLockOn = 
+softVectorLockOn =
     SwitchImage(
         GetVectorLock(Me, OnEveryFrame),
         emptyImage,
@@ -3697,7 +3687,7 @@ AutopilotSoft   = ImportImage("softautopilotbmp", false);
 softAutopilotOnImage =
     SwitchImage(
         AutopilotOn,
-        emptyImage, 
+        emptyImage,
         [
             (1, AutopilotSoft)
         ]
@@ -3705,7 +3695,7 @@ softAutopilotOnImage =
 
 CloakSoft   = ImportImage("softcloakbmp", false);
 
-softCloakOn = 
+softCloakOn =
     SwitchImage(
         IsCloaked(Me, OnEveryFrame),
         emptyImage,
@@ -3714,7 +3704,7 @@ softCloakOn =
         ]
     );
 
-softArtifactImage   = 
+softArtifactImage   =
         ImportImage("captureflaglbmp", true);
 
 softArtifact =
@@ -3730,7 +3720,7 @@ softCaptureFlagImage =
         ImportImage("captureflagrbmp", true);
 
 
-softCaptureFlag = 
+softCaptureFlag =
     SwitchImage(
         GotFlag,
         emptyImage,
@@ -3739,7 +3729,7 @@ softCaptureFlag =
         ]
     );
 
-softSignatureImage = 
+softSignatureImage =
     StringImage(
         JustifyLeft,
         75,
@@ -3748,8 +3738,8 @@ softSignatureImage =
         ConcatinatedString("Sig ", NumberString(Signature))
     );
 
-CenterHudSoftware = 
-    GroupImage([    
+CenterHudSoftware =
+    GroupImage([
         TranslateImage(softVectorLockOn, Point(150, 0)),
         TranslateImage(softAutopilotOnImage, Point(49, 0)),
         TranslateImage(softCloakOn, Point(235, 0)),
@@ -3778,13 +3768,13 @@ CenterHudSoftware =
 parciAutopilotOnImage =
     SwitchImage(
         AutopilotOn,
-        emptyImage, 
+        emptyImage,
         [
             (1, ImportImageFromFile("CortUI/parci/cortui_parci_autopilot.png", true))
         ]
     );
 
-parciRadarDetectImage = 
+parciRadarDetectImage =
     SwitchImage(
         Detected,
         emptyImage,
@@ -3793,7 +3783,7 @@ parciRadarDetectImage =
         ]
     );
 
-parciCloakOn = 
+parciCloakOn =
     SwitchImage(
         IsCloaked(Me, OnEveryFrame),
         emptyImage,
@@ -3802,7 +3792,7 @@ parciCloakOn =
         ]
     );
 
-parciVectorLockOn = 
+parciVectorLockOn =
     SwitchImage(
         GetVectorLock(Me, OnEveryFrame),
         emptyImage,
@@ -3827,7 +3817,7 @@ parciThrustGauge =
 parciThrustGaugeHit =
     GaugeImage(JustifyBottom, ImportImageFromFile("CortUI/parci/cortui_parci_thrusthit.png", true), playerThrottle);
 
-parciThrust = 
+parciThrust =
     SwitchImage(
         0, //Flash,
         parciThrustGauge,
@@ -3849,11 +3839,11 @@ parciFuelGauge =
         ),
     BlendModeSource //hudBlendMode
     );
-    
-parciFuelGaugeHit = 
+
+parciFuelGaugeHit =
     GaugeImage(JustifyBottom, ImportImageFromFile("CortUI/parci/cortui_parci_fuelhit.png", true), GetFuel(Me, OnEveryFrame));
-    
-parciFuel = 
+
+parciFuel =
     SwitchImage(
         0, //Flash,
         parciFuelGauge,
@@ -3879,7 +3869,7 @@ parciAmmoGauge =
 parciAmmoGaugeHit =
     GaugeImage(JustifyBottom, ImportImageFromFile("CortUI/parci/cortui_parci_ammohit.png", true), GetAmmo(Me, OnEveryFrame));
 
-parciAmmo = 
+parciAmmo =
     SwitchImage(
         0, //Flash,
         parciAmmoGauge,
@@ -3902,10 +3892,10 @@ parciEnergyGauge =
     BlendModeSource //hudBlendMode
     );
 
-parciEnergyGaugeHit = 
-    GaugeImage(JustifyBottom, ImportImageFromFile("CortUI/parci/cortui_parci_energyhit.png", true), GetPercentEnergy(Me, OnEveryFrame));    
+parciEnergyGaugeHit =
+    GaugeImage(JustifyBottom, ImportImageFromFile("CortUI/parci/cortui_parci_energyhit.png", true), GetPercentEnergy(Me, OnEveryFrame));
 
-parciEnergy = 
+parciEnergy =
     SwitchImage(
         0, //Flash,
         parciEnergyGauge,
@@ -3940,7 +3930,7 @@ parciHullGaugeHit =
     BlendModeSource //hudBlendMode
     );
 
-parciHull = 
+parciHull =
     SwitchImage(
         Flash,
         parciHullGauge,
@@ -3975,7 +3965,7 @@ parciShieldGaugeHit =
     BlendModeSource //hudBlendMode
     );
 
-parciShield = 
+parciShield =
     SwitchImage(
         Flash,
         parciShieldGauge,
@@ -3986,7 +3976,7 @@ parciShield =
     );
 
 
-ParciSoftSpeed = 
+ParciSoftSpeed =
     StringImage(
         JustifyRight,
         75,
@@ -3995,7 +3985,7 @@ ParciSoftSpeed =
         ConcatinatedString(NumberString(GetSpeed(Me, OnEveryFrame)), " mps")
 );
 
-ParciSoftSignatureImage = 
+ParciSoftSignatureImage =
     StringImage(
         JustifyRight,
         75,
@@ -4004,7 +3994,7 @@ ParciSoftSignatureImage =
         ConcatinatedString("Sig ", NumberString(Signature))
     );
 
-ModifiedCenterHudParciStyle = 
+ModifiedCenterHudParciStyle =
         GroupImage([
             TranslateImage(parciAutopilotOnImage, Point(91, 77)),
             TranslateImage(parciRadarDetectImage, Point(156, 105)),
@@ -4054,7 +4044,7 @@ softCenterHudDisplay =
     SwitchImage(
         StyleHUD,
         emptyImage,
-        [   
+        [
             (RaveenHUDSlot, CenterHudSoftware)
         ]
     );
@@ -4063,7 +4053,7 @@ softCenterHudDisplayParciStyle =
     SwitchImage(
         StyleHUD,
         emptyImage,
-        [   
+        [
             (ParciHUDSlot, ModifiedCenterHudParciStyle)
         ]
     );
@@ -4079,7 +4069,7 @@ softCenterHudDisplayParciStyle =
 
 TargetName =
         StringImage(
-            JustifyCenter, 
+            JustifyCenter,
             160,
             medVerdana,
             targetHudColor,
@@ -4087,7 +4077,7 @@ TargetName =
         );
 
 
-TargetRangeString = 
+TargetRangeString =
     SwitchString(
         GetRange(Target, OnEveryFrame),
         ConcatinatedString("RANGE: ", NumberString(GetRange(Target, OnEveryFrame))),
@@ -4096,7 +4086,7 @@ TargetRangeString =
         ]
     );
 
-        
+
 
 TargetRange =
     StringImage(
@@ -4105,12 +4095,12 @@ TargetRange =
         smVerdana,
         targetHudColor,
         TargetRangeString
-    ); 
+    );
 
-TargetInRangeImage = 
+TargetInRangeImage =
         ImportImage("turretrangebmp", true);
 
-TargetInRange =     
+TargetInRange =
     SwitchImage(
         TargetInRangeFlag,
         emptyImage,
@@ -4119,7 +4109,7 @@ TargetInRange =
         ]
     );
 
-//TargetDesc = 
+//TargetDesc =
 //    StringImage(
 //      JustifyRight,
 //      80,
@@ -4136,9 +4126,9 @@ TargetSpeed =
         smVerdana,
         targetHudColor,
         ConcatinatedString("SPEED: ", NumberString(GetSpeed(Target, OnEveryFrame)))
-    );  
+    );
 
-TargetArmor = 
+TargetArmor =
     StringImage(
         JustifyRight,
         60,
@@ -4147,7 +4137,7 @@ TargetArmor =
         "ARMOR"
     );
 
-TargetShield = 
+TargetShield =
     StringImage(
         JustifyLeft,
         60,
@@ -4182,12 +4172,12 @@ TargetHullGauge =
 );
 
 
-//TargetHud = 
-//        BlendImage(   
+//TargetHud =
+//        BlendImage(
 //          ImportImage3D("targethudbmp", targetHudColor, true),
 //          hudBlendMode
 //        );
-    
+
 TargetOval =
         BlendImage(
             ImportImage3D("targetovalbmp", white, true),
@@ -4196,14 +4186,14 @@ TargetOval =
 
 
 TargetOvalColor = ImportImage3D("targetovalcolorbmp", targetHudColor, true);
-        
-TargetOvalWord1 = 
+
+TargetOvalWord1 =
   BlendImage(
             ImportImage3D("targetovalword1bmp", white, true),
             hudBlendMode
         );
 
-TargetOvalWord2 = 
+TargetOvalWord2 =
         BlendImage(
             ImportImage3D("targetovalword2bmp", white, true),
             hudBlendMode
@@ -4212,21 +4202,21 @@ TargetOvalWord2 =
 //cortTargetOvalColor = ImportImageFromFile3D("CortUI/common/targetovalcolor.png", true);
 cortTargetOvalColor = ImportImage3D("targetovalcolorbmp", targetHudColor, true);
 
-cortTargetOvalWord1 = 
+cortTargetOvalWord1 =
   BlendImage(
 //            ImportImageFromFile3D("CortUI/common/targetovalword1.png", true),
             ImportImage3D("targetovalword1bmp", white, true),
             hudBlendMode
         );
 
-cortTargetOvalWord2 = 
+cortTargetOvalWord2 =
         BlendImage(
 //            ImportImageFromFile3D("CortUI/common/targetovalword2.png", true),
             ImportImage3D("targetovalword2bmp", white, true),
             hudBlendMode
         );
 
-TargetExperienceOnImage = 
+TargetExperienceOnImage =
     GroupImage([
             StringImage(
                 JustifyCenter,
@@ -4251,10 +4241,10 @@ TargetExperienceImage =
         ]
     );
 
-DefaultNormalTargetDisplay = 
+DefaultNormalTargetDisplay =
     VisibleImage(GroupImage(
         [
-            
+
             TranslateImage(TargetShieldGauge, Point(367, 33)),
             TranslateImage(TargetHullGauge, Point(235, 33)),
             TranslateImage(
@@ -4263,7 +4253,7 @@ DefaultNormalTargetDisplay =
                     Rect(0, 0, 96, 96),
                     targetCamera,
                     true
-                ), 
+                ),
                 Point(270, 9)
             ),
             TranslateImage(TargetExperienceImage, Point(280, 110)),
@@ -4278,7 +4268,7 @@ DefaultNormalTargetDisplay =
             TranslateImage(TargetShield, Point(410, 73)),
             TranslateImage(TargetInRange, Point(200, 90))
             ]
-    
+
     ), IsNotNull(Target, OnEveryFrame));
 
 
@@ -4300,7 +4290,7 @@ fpTargetOvalColor =
         hudBlendMode
     );
 
-fpTargetRangeString = 
+fpTargetRangeString =
     SwitchString(
         GetRange(Target, OnEveryFrame),
         ConcatinatedString(NumberString(GetRange(Target, OnEveryFrame)), " m"),
@@ -4316,12 +4306,12 @@ fpTargetRange =
         medVerdana,
         targetHudColor,
         fpTargetRangeString
-    ); 
+    );
 
-fpTargetInRangeImage = 
+fpTargetInRangeImage =
         ImportImageFromFile("CortUI/lesshud/cortui_lesshud_turret_range.png", true);
 
-fpTargetInRange =     
+fpTargetInRange =
     SwitchImage(
         TargetInRangeFlag,
         emptyImage,
@@ -4337,9 +4327,9 @@ fpTargetSpeed =
         medVerdana,
         targetHudColor,
         ConcatinatedString(NumberString(GetSpeed(Target, OnEveryFrame)), " mps")
-    );  
+    );
 
-fpTargetExperienceOnImage = 
+fpTargetExperienceOnImage =
     GroupImage([
         StringImage(
             JustifyCenter,
@@ -4359,7 +4349,7 @@ fpTargetExperienceImage =
         ]
     );
 
-fpTargetHullGaugeBack = 
+fpTargetHullGaugeBack =
     BlendImage(
         GaugeImageRect(
             JustifyBottom,
@@ -4383,7 +4373,7 @@ fpTargetHullGauge =
         hudBlendMode
 );
 
-fpTargetHullImage = 
+fpTargetHullImage =
 GroupImage(
     [
         TranslateImage(fpTargetHullGaugeBack, Point(0, 0)),
@@ -4391,7 +4381,7 @@ GroupImage(
     ]
 );
 
-fpTargetShieldGaugeBack = 
+fpTargetShieldGaugeBack =
     BlendImage(
         GaugeImageRect(
                 JustifyBottom,
@@ -4415,7 +4405,7 @@ fpTargetShieldGauge =
         hudBlendMode
 );
 
-fpTargetShieldImage = 
+fpTargetShieldImage =
 GroupImage(
     [
         TranslateImage(fpTargetShieldGaugeBack, Point(0, 0)),
@@ -4456,7 +4446,7 @@ fpTargetDisplay = VisibleImage(
 
 softTargetTeamColor = ImportImage3D("softtargetteamcolorbmp", targetHudColor, true);
 
-softTargetExperienceOn = 
+softTargetExperienceOn =
         StringImage(
                 JustifyCenter,
                 80,
@@ -4475,14 +4465,14 @@ softTargetExperience =
 
 softTargetName =
         StringImage(
-            JustifyLeft, 
+            JustifyLeft,
             130,
             medVerdana,
             softText,
             GetName(Target, OnEveryFrame)
         );
 
-softTargetRangeString = 
+softTargetRangeString =
     SwitchString(
         GetRange(Target, OnEveryFrame),
         NumberString(GetRange(Target, OnEveryFrame)),
@@ -4498,9 +4488,9 @@ softTargetRange =
         medVerdana,
         softText,
         softTargetRangeString
-    );      
-    
-softTargetDesc = 
+    );
+
+softTargetDesc =
     StringImage(
         JustifyLeft,
         130,
@@ -4516,7 +4506,7 @@ softTargetSpeed =
         medVerdana,
         softText,
         ConcatinatedString(NumberString(GetSpeed(Target, OnEveryFrame)), " mps" )
-    );  
+    );
 
 softTargetShield =
     GaugeImage(JustifyLeft, ImportImage("softgaugebmp", true), GetPercentShields(Target, OnEveryFrame));
@@ -4532,7 +4522,7 @@ softTargetHull =
 //
 ////////////////////////////////////////////////////////////
 
-RaveenTargetDisplay = 
+RaveenTargetDisplay =
     VisibleImage(
         TranslateImage(
             GroupImage(
@@ -4551,7 +4541,7 @@ RaveenTargetDisplay =
                         Rect(0, 0, 96, 96),
                         targetCamera,
                         true
-                    ), 
+                    ),
                     Point(107, 4)
                 ),
                 TranslateImage(cortTargetOvalWord1, Point(28, -6)),
@@ -4621,27 +4611,11 @@ cortVersionInformation =
 //
 // ADDITIONAL DISPLAYS FOR MAP-MODE
 //
-// Ksero 14:22 2005-03-04:
-// + added Autopilot-indicator in in-flight command mode
-//
-// Cortex 2005#04#17:
-// + added various additional displays
-//
-// Cortex 2005#05#05:
-// + appended "(turret)" to the ship type when you're turreting
-//
-// Cortex 2005#07#08:
-// + added speed gauge for current target
-//
-// Cortex 2005#08#16:
-// - removed speed for non-moving targets
-// + added experience display for players 
-//
 //////////////////////////////////////////////////////////////////////////////
 
 cortTargetExperienceOff =
     StringImage(
-        JustifyLeft, 
+        JustifyLeft,
         200,
         medBoldVerdana,
         GetSideColor(Target, OnEveryFrame),
@@ -4650,7 +4624,7 @@ cortTargetExperienceOff =
 
 cortTargetExperienceOn =
     StringImage(
-        JustifyLeft, 
+        JustifyLeft,
         200,
         medBoldVerdana,
         GetSideColor(Target, OnEveryFrame),
@@ -4666,16 +4640,16 @@ cortTargetName =
         ]
     );
 
-cortTargetRangeLabel = 
+cortTargetRangeLabel =
     StringImage(
-        JustifyLeft, 
+        JustifyLeft,
         130,
         medVerdana,
         cortText,
         "Target range:"
     );
 
-cortTargetRangeString = 
+cortTargetRangeString =
     SwitchString(
         GetRange(Target, OnEveryFrame),
         ConcatinatedString(NumberString(GetRange(Target, OnEveryFrame)), "m"),
@@ -4691,9 +4665,9 @@ cortTargetRange =
         medVerdana,
         cortText,
         cortTargetRangeString
-    );      
+    );
 
-cortTargetSpeedLabel = 
+cortTargetSpeedLabel =
      SwitchImage(
         GetModelType(Target, OnEveryFrame),
         emptyImage,
@@ -4727,29 +4701,29 @@ cortTargetSpeed =
 
 cortTargetShieldsLabel =
     StringImage(
-        JustifyLeft, 
+        JustifyLeft,
         130,
         medVerdana,
         cortText,
         "Target shields:"
     );
 
-cortTargetShieldsGauge = 
+cortTargetShieldsGauge =
     GaugeImage(JustifyLeft, ImportImage("softgaugebmp", true), GetPercentShields(Target, OnEveryFrame));
 
 cortTargetHullLabel =
     StringImage(
-        JustifyLeft, 
+        JustifyLeft,
         130,
         medVerdana,
         cortText,
         "Target hull:"
     );
 
-cortTargetHullGauge = 
+cortTargetHullGauge =
     GaugeImage(JustifyLeft, ImportImage("softgaugebmp", true), GetPercentHitPoints(Target, OnEveryFrame));
 
-cortTargetGroup = 	
+cortTargetGroup =
     VisibleImage(
         GroupImage(
             [
@@ -4767,7 +4741,7 @@ cortTargetGroup =
         IsNotNull(Target, OnEveryFrame)
     );
 
-CommandModeTargetGroup = 
+CommandModeTargetGroup =
     SwitchImage(
         StyleHUD,
         cortTargetGroup,
@@ -4813,26 +4787,26 @@ cortShipValue =
 
 cortShieldsLabel =
     StringImage(
-        JustifyLeft, 
+        JustifyLeft,
         130,
         medVerdana,
         cortText,
         "Shields:"
     );
 
-cortShieldsGauge = 
+cortShieldsGauge =
     GaugeImage(JustifyLeft, ImportImage("softgaugebmp", true), GetPercentShields(Me, OnEveryFrame));
 
 cortHullLabel =
     StringImage(
-        JustifyLeft, 
+        JustifyLeft,
         130,
         medVerdana,
         cortText,
         "Hull:"
     );
 
-cortHullGauge = 
+cortHullGauge =
     GaugeImage(JustifyLeft, ImportImage("softgaugebmp", true), GetPercentHitPoints(Me, OnEveryFrame));
 
 cortEnduranceLabel =
@@ -4859,48 +4833,48 @@ cortEnduranceLabel =
         )
     ]);
 
-cortEnduranceGauge = 
+cortEnduranceGauge =
     GaugeImage(JustifyLeft, ImportImage("softgaugebmp", true), GetEndurance(Me, OnEveryFrame));
 
 cortEnergyLabel =
     StringImage(
-        JustifyLeft, 
+        JustifyLeft,
         130,
         medVerdana,
         cortText,
         "Energy:"
     );
 
-cortEnergyGauge = 
+cortEnergyGauge =
     GaugeImage(JustifyLeft, ImportImage("softgaugebmp", true), GetPercentEnergy(Me, OnEveryFrame));
 
 cortAmmoLabel =
     StringImage(
-        JustifyLeft, 
+        JustifyLeft,
         130,
         medVerdana,
         cortText,
         "Ammo:"
     );
 
-cortAmmoGauge = 
+cortAmmoGauge =
     GaugeImage(JustifyLeft, ImportImage("softgaugebmp", true), GetAmmo(Me, OnEveryFrame));
 
 cortFuelLabel =
     StringImage(
-        JustifyLeft, 
+        JustifyLeft,
         130,
         medVerdana,
         cortText,
         "Fuel:"
     );
 
-cortFuelGauge = 
+cortFuelGauge =
     GaugeImage(JustifyLeft, ImportImage("softgaugebmp", true), GetFuel(Me, OnEveryFrame));
 
 cortThrustLabel =
     StringImage(
-        JustifyLeft, 
+        JustifyLeft,
         130,
         medVerdana,
         cortText,
@@ -4912,14 +4886,14 @@ cortThrustGauge =
 
 cortSpeedLabel =
     StringImage(
-        JustifyLeft, 
+        JustifyLeft,
         130,
         medVerdana,
         cortText,
         "Speed:"
     );
 
-cortSpeedValue = 
+cortSpeedValue =
     StringImage(
         JustifyRight,
         75,
@@ -4928,7 +4902,7 @@ cortSpeedValue =
         NumberString(GetSpeed(Me, OnEveryFrame))
     );
 
-cortSpeedPostfix = 
+cortSpeedPostfix =
     StringImage(
         JustifyLeft,
         30,
@@ -4939,14 +4913,14 @@ cortSpeedPostfix =
 
 cortSigLabel =
     StringImage(
-        JustifyLeft, 
+        JustifyLeft,
         130,
         medVerdana,
         cortText,
         "Sig:"
     );
 
-cortSigValue = 
+cortSigValue =
     StringImage(
         JustifyRight,
         75,
@@ -4955,7 +4929,7 @@ cortSigValue =
         NumberString(Signature)
     );
 
-cortSigPostfix = 
+cortSigPostfix =
     StringImage(
         JustifyLeft,
         30,
@@ -4966,14 +4940,14 @@ cortSigPostfix =
 
 cortKillbonusLabel =
     StringImage(
-        JustifyLeft, 
+        JustifyLeft,
         130,
         medVerdana,
         cortText,
         "KB:"
     );
 
-cortKillbonusValue = 
+cortKillbonusValue =
     StringImage(
         JustifyRight,
         75,
@@ -4982,7 +4956,7 @@ cortKillbonusValue =
         NumberString(Experience)
     );
 
-cortKillbonusPostfix = 
+cortKillbonusPostfix =
     StringImage(
         JustifyLeft,
         30,
@@ -4991,7 +4965,7 @@ cortKillbonusPostfix =
         "%"
     );
 
-cortKillbonusValueAndPostfixLeftAligned = 
+cortKillbonusValueAndPostfixLeftAligned =
     StringImage(
         JustifyLeft,
         75,
@@ -5000,7 +4974,7 @@ cortKillbonusValueAndPostfixLeftAligned =
         ConcatinatedString(NumberString(Experience), " %")
     );
 
-cortShipDisplays = 
+cortShipDisplays =
     GroupImage([
         TranslateImage(cortEnergyLabel,      Point(0,  0)),
         TranslateImage(cortEnergyGauge,      Point(50, -8)),
@@ -5016,7 +4990,7 @@ cortPodDisplays =
         TranslateImage(cortEnduranceGauge,      Point(50, -8))
     ]);
 
-cortCommandModeEyeImage = 
+cortCommandModeEyeImage =
     SwitchImage(
             Detected,
             emptyImage,
@@ -5025,7 +4999,7 @@ cortCommandModeEyeImage =
             ]
         );
 
-cortCommandModeCloakImage = 
+cortCommandModeCloakImage =
     SwitchImage(
         IsCloaked(Me, OnEveryFrame),
         emptyImage,
@@ -5034,7 +5008,7 @@ cortCommandModeCloakImage =
         ]
     );
 
-cortCommandModeIcons =	
+cortCommandModeIcons =
     GroupImage([
         TranslateImage(cortAutopilotOnImage, Point(2, 2)), // 32x28
         TranslateImage(cortVectorLockOn, Point(0, 0)), //32x32
@@ -5042,7 +5016,7 @@ cortCommandModeIcons =
         TranslateImage(cortCommandModeCloakImage, Point(10, -34)) //96x96
     ]);
 
-CommandModeIcons = 
+CommandModeIcons =
     SwitchImage(
         StyleHUD,
         cortCommandModeIcons,
@@ -5051,29 +5025,29 @@ CommandModeIcons =
 
 cortStationShieldsLabel =
     StringImage(
-        JustifyLeft, 
+        JustifyLeft,
         130,
         medVerdana,
         cortText,
         "Station Shields:"
     );
 
-cortStationShieldsGauge = 
+cortStationShieldsGauge =
     GaugeImage(JustifyLeft, ImportImage("softgaugebmp", true), GetPercentShields(MyStation, OnEveryFrame));
 
 cortStationHullLabel =
     StringImage(
-        JustifyLeft, 
+        JustifyLeft,
         130,
         medVerdana,
         cortText,
         "Station Hull:"
     );
 
-cortStationHullGauge = 
+cortStationHullGauge =
     GaugeImage(JustifyLeft, ImportImage("softgaugebmp", true), GetPercentHitPoints(MyStation, OnEveryFrame));
 
-cortStationName =	
+cortStationName =
     StringImage(
         JustifyLeft,
         250,
@@ -5082,7 +5056,7 @@ cortStationName =
         ConcatinatedString(GetName(MyStation, OnEveryFrame), (ConcatinatedString(" in ", GetSectorName(MyStation, OnEveryFrame))))
     );
 
-cortCommandModeInfo = 
+cortCommandModeInfo =
     GroupImage([
         TranslateImage(CommandModeIcons, Point(0,-5)),
         TranslateImage(cortShipLabel,        Point(0,  -10)),
@@ -5157,7 +5131,7 @@ RecipientsVisibleOM = 6;
 //
 //////////////////////////////////////////////////////////////
 
-LivesOnImage = 
+LivesOnImage =
     GroupImage(
         [
             TranslateImage(StringImage(
@@ -5169,7 +5143,7 @@ LivesOnImage =
             ImportImage("livesbmp", true)
         ]);
 
-LivesImage = 
+LivesImage =
     SwitchImage(
         LivesOn,
         emptyImage,
@@ -5180,12 +5154,12 @@ LivesImage =
 
 CountdownOn = ModifiableNumber(0);
 
-CountdownOnImage = 
+CountdownOnImage =
                 ImportImage("timebmp", true);
 
 
 
-CountdownImage = 
+CountdownImage =
     SwitchImage(
         CountdownOn,
         emptyImage,
@@ -5194,7 +5168,7 @@ CountdownImage =
         ]
     );
 
-KillsOnImage = 
+KillsOnImage =
     GroupImage(
         [
             TranslateImage(
@@ -5210,7 +5184,7 @@ KillsOnImage =
 
 
 
-KillsImage = 
+KillsImage =
     SwitchImage(
         KillsOn,
         emptyImage,
@@ -5226,12 +5200,12 @@ KillsImage =
 //
 //////////////////////////////////////////////////////////////
 
-RipcordCountdownImage = 
+RipcordCountdownImage =
     SwitchImage(
         IsRipcording(Me, OnEveryFrame),
         emptyImage,
         [
-            (1, 
+            (1,
                 StringImage(
                     JustifyCenter,
                     150,
@@ -5262,8 +5236,8 @@ SoftCenterHudDisplayYOffset	= Subtract(-35, Multiply(12, NumChatLinesGlobal));
 CriticalTipImageYOffset     = Subtract(-80, Multiply(12, NumChatLinesGlobal));
 VoteTextImageYOffset        = Subtract(-95, Multiply(12, NumChatLinesGlobal));
 
-CriticalTipImage_Adjusted = TranslateImage(CriticalTipImage, Point(0, CriticalTipImageYOffset));
-VoteTextImage_Adjusted = TranslateImage(VoteTextImage, Point(0, VoteTextImageYOffset));
+CriticalTipImageTranslated = TranslateImage(CriticalTipImage, Point(0, CriticalTipImageYOffset));
+VoteTextImageTranslated = TranslateImage(VoteTextImage, Point(0, VoteTextImageYOffset));
 
 CommandPaneImage			      = SwitchImage(
                                         StyleHUD,
@@ -5360,7 +5334,7 @@ dialogs =
         // coordinate origin is at lower left of screen. Positive axii going right and upward.
         // In the end, when the image is visible, the lower left of the image is located at (sidePoint + OnPoint)
         // image: the image to display ;)
-        // side: one of the Side* constants. This is an offset to the off and on-points, 
+        // side: one of the Side* constants. This is an offset to the off and on-points,
         // they are defined relative to this point. Possible values:
         // NOTE: as mentioned, origin is at lower left of screen
         //      SideLeftOffset = (xmin,  yhalf)
@@ -5439,7 +5413,7 @@ dialogs =
         // **********************************
 
         // CriticalTipImage: the four red lines in the middle of the screen
-        (CriticalTipImage_Adjusted, SideTop, Point(-310, 0), Point(-310, 0), .5, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInFlight, true),
+        (CriticalTipImageTranslated, SideTop, Point(-310, 0), Point(-310, 0), .5, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInFlight, true),
 
         // LoadoutCriticalTipImage: the four red lines in the middle of the screen, when you're in the loadout-screen
         (LoadoutCriticalTipImage, SideCenter, Point(-310, 0), Point(-310, 0), .5, ofInLoadout, true),
@@ -5450,7 +5424,7 @@ dialogs =
         (TipTextImage, SideBottom, Point(-300, -200), Point(-300, 14), .5, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInFlight | ofInCockpit | ofInChase | ofInLoadout | ofTeleportPane | ofInvestment | ofGameState | ofTeam | ofExpandedTeam | ofInventory | ofCommandPane | ofSectorPane, true),
 
         // VoteTextImage: the line that is displayed when a vote is called
-        (VoteTextImage_Adjusted, SideTop, Point(-310, 0), Point(-310, 0), .5, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInFlight | ofInCockpit | ofInChase | ofInLoadout | ofTeleportPane | ofInvestment | ofGameState | ofTeam | ofExpandedTeam | ofInventory | ofCommandPane | ofSectorPane, true),
+        (VoteTextImageTranslated, SideTop, Point(-310, 0), Point(-310, 0), .5, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInFlight | ofInCockpit | ofInChase | ofInLoadout | ofTeleportPane | ofInvestment | ofGameState | ofTeam | ofExpandedTeam | ofInventory | ofCommandPane | ofSectorPane, true),
 
         // ChatCompositionImage: the chat window (where you enter your messages)
         (ChatCompositionImage, SideBottom, Point(-170, -78), Point(-150, 148), .5, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInFlight | ofInCockpit | ofInChase | ofInLoadout | ofGloatCam, false),
@@ -5482,21 +5456,12 @@ dialogs =
         // * Level 4
         // **********************************
 
-        //MergedInventoryImage: the inventory pane
+        // MergedInventoryImage: the inventory pane
         (MergedInventoryPaneImage, SideBottomRight, Point(-36, -150), Point(-36, 40), 0, ofInFlightCommand | ofInCockpit | ofInChase | ofGloatCam, true),
 
         // **********************************
         // * Level 5 (below everything else)
         // **********************************
-
-        // cortWeaponRangeIndicator: new feature
-//        (cortWeaponRangeIndicator,        SideCenter,         Point(    0,    0), Point( -53,  100), 0,    48,              true),
-//        (StringImage(JustifyRight, 75, medVerdana, cortText, NumberString(SoftwareHudCriticalTipYOffset)), SideCenter, Point(    0,    0), Point(   0,  -20), .5,    48, true),
-//        (StringImage(JustifyRight, 75, medVerdana, cortText, NumberString(SoftwareHudVoteTextImageYOffset)), SideCenter, Point(    0,    0), Point(   0,  -40), .5,    48, true),
-//        (StringImage(JustifyRight, 75, medVerdana, cortText, NumberString(SoftCenterHudDisplayYOffset)), SideCenter, Point(    0,    0), Point(   0,  -60), .5,    48, true),
-//        (testImage, SideCenter, Point(    0,    0), Point( 0,  -80), .5,    48, true),
-//        (testImage2, SideCenter, Point(    0,    0), Point( 0,  -100), .5,    48, true),
-//        (StringImage(JustifyRight, 75, medVerdana, cortText, NumberString(VoteTextImageYOffset)), SideCenter, Point(    0,    0), Point(   0,  -100), .5,    48, true),
 
         // CommPane: the chat display
         (cortCommPaneImage,             SideTop,            Point(-160, -126), Point(-160, -126), 0, ofInLoadout | ofInChase | ofInCockpit | ofInFlight | ofInStationCommand | ofInFlightCommand | ofInHangar, true),
@@ -5515,7 +5480,7 @@ dialogs =
         // GHMsgDetected: GlassHUD command mode eye indicator
         (GHMsgDetectedView, SideCenter, Point(-125, 300), Point(-125, 300), .5, ofInFlightCommand, true),
 
-        // cortCommandModeInfo: the additional ship status information at the upper left corner of the map
+        // cortCommandModeInfo: additional ship status information at the upper left corner of the map
         (cortCommandModeInfo, SideTopLeft, Point(20, 185), Point(36, -105), .5, ofInFlightCommand, true),
         (cortCommandModeInfoBase, SideTopLeft, Point(20, 185), Point(36, -100), .5, ofInHangar | ofInStationCommand | ofInLoadout, true),
 
@@ -5529,20 +5494,20 @@ dialogs =
         // LookingAtImage: "currently viewing" in map mode when in base
         (LookingAtImage, SideTopRight, Point(-180, 185), Point(-180, -15), 0, ofInStationCommand, true),
 
-        // TurretOfImage: who's turret I'm in, for launch anim, map (both), hangar, cockpit, chase
-        (TurretOfImage, SideTopRight, Point(-180, 185), Point(-180, -50), .5, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInCockpit | ofInChase | ofGloatCam, true),
-
         // RipcordCountdownImage: the ripcord countdown
         (RipcordCountdownImage, SideCenter, Point(-75, 15), Point(-75, 15), .5, ofInFlightCommand | ofInFlight | ofInCockpit | ofInChase, true),
+
+        // TurretOfImage: whose turret I'm in, for launch anim, map (both), hangar, cockpit, chase
+        (TurretOfImage, SideTopRight, Point(-180, 185), Point(-180, -50), .5, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInCockpit | ofInChase | ofGloatCam, true),
 
         // BoardTextImage: who's turret I'm in, on the loadout screen
         (InTurretPaneImage, SideCenter, Point(-150, 25), Point(-150, 25), 0, ofInLoadout, true),
         (BoardTextImage, SideCenter, Point(-362, 20), Point(-362, 20), 0, ofInLoadout, true),
 
-        // EjectPodImage: the eject pod display;
+        // EjectPodImage: the eject pod display
         (EjectPodImage, SideCenter, Point(-86, -87), Point(-86, -87), .5, ofInCockpit | ofInChase, true),
 
-        // DeathBannerPane: when you're dead???
+        // DeathBannerPane: when you're dead
         (DeathBannerPaneImage, SideCenter, Point(-105, 15), Point(-105, 15), .5, ofInHangar | ofInFlightCommand | ofInStationCommand | ofInFlight | ofInCockpit | ofInChase | ofInLoadout | ofTeleportPane | ofInvestment | ofGameState | ofTeam | ofExpandedTeam | ofInventory | ofCommandPane | ofSectorPane, true),
 
         // LivesImage: your lives
@@ -5551,7 +5516,7 @@ dialogs =
         // KillsImage: your kills
         (KillsImage, SideTopLeft, Point(45, -177), Point(40, -177), .5, ofInCockpit | ofInChase, true),
 
-        // CountdownImage: ?????????????
+        // CountdownImage: limited time game
         (CountdownImage, SideTopLeft, Point(45, -137), Point(40, -137), .5, ofInCockpit | ofInChase, true),
 
         // LastOrderImage: the last two commands you received

@@ -28,6 +28,9 @@ See http://cortui.rtsquad.org/milestone/3.0
 Changes in 3.0 compared to 2.0:
 -------------------------------
 [Requires client in version R9+!]
+- Improved map screen status/target display.
+- Improved orders display.
+- Various minor cleanups around animation and window positioning.
 - Internal file restructuring to turn it from a modification to a core part of
   the R9 release.
 

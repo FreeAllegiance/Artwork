@@ -3,11 +3,10 @@
 The Games List displays all games on Allegiance servers found based on the type of connection
 you made.<p><p>
 
-<Bullet|hlpbullet|If you are playing in the Allegiance Zone, then the games shown are
-Allegiance Zone events and games for Allegiance Zone subscribers.><p><p>
+
 
 <Bullet|hlpbullet|If you are playing a free game, then the games shown are free games played
-across the Internet on servers registered with the MSN Gaming Zone.><p><p>
+across the Internet on public servers><p><p>
 
 <Bullet|hlpbullet|If you are playing a LAN game, then the games shown are
 games found on your LAN, but not that the LAN games list does not
@@ -37,8 +36,7 @@ has been running.<p><p>
 
 <Font|smallBoldFont>Skill Levels --<Font|smallFont>Shows the desired skill
 levels wanted in the game. This provides a more equal game balance among the
-players. In Allegiance Zone games skill levels are enforced, whereas
-in non-Allegiance Zone games they're not. Skill levels settings
+players. Skill levels settings
 range from Novice Only and Expert Only to No Novice to Any.<p><p>
 
 <Font|smallBoldFont>Teams --<Font|smallFont>Shows the number of teams allowed in the game. The

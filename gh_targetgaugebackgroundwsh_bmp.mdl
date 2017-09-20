@@ -1,0 +1,4 @@
+use "model";
+
+gh_targetgaugebackgroundwsh_bmp = 
+	ImportImageFromFile("CortUI/glasshud/gh_targetgauge_bg_w_sh.png", true);

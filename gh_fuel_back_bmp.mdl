@@ -1,0 +1,4 @@
+use "model";
+
+gh_fuel_back_bmp =	
+	ImportImageFromFile("CortUI/glasshud/gh_fuel_back.png", true);

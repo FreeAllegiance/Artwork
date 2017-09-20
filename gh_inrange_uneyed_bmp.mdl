@@ -1,0 +1,4 @@
+use "model";
+
+gh_inrange_uneyed_bmp =	
+	ImportImageFromFile("CortUI/glasshud/gh_inrange_uneyed.png", true);

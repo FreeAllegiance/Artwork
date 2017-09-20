@@ -45,18 +45,18 @@ hoverImage = StringImage(JustifyLeft, 150, medBoldVerdana, white, hoverString);
 hoverPane  = AnimatedImagePaneRect(hoverImage, Rect(0, -30, 150, 0));
 
 
-stateString = 
-    SwitchString(
-        loadoutShipState,
-        "This is your current loadout.",
-        [
-            (1, "Press 'confirm change' to select this loadout."),
-            (2, "Press 'buy' to purchase this loadout."),
-            (3, "You can't afford this loadout.")
-        ]
-    );
-stateImage = StringImage(JustifyLeft, 300, medBoldVerdana, white, stateString);
-statePane  = AnimatedImagePaneRect(stateImage, Rect(0, -25, 300, 0));
+//stateString = 
+//    SwitchString(
+//        loadoutShipState,
+//        "This is your current loadout.",
+//        [
+//            (1, "Press 'confirm change' to select this loadout."),
+//            (2, "Press 'buy' to purchase this loadout."),
+//            (3, "You can't afford this loadout.")
+//        ]
+//    );
+//stateImage = StringImage(JustifyLeft, 300, medBoldVerdana, white, stateString);
+//statePane  = AnimatedImagePaneRect(stateImage, Rect(0, -25, 300, 0));
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -73,7 +73,7 @@ confirmButtonPane  = ButtonPane(ImportImage("btnconfirmchangebmp",true), ButtonN
 hullListButtonPane = SoundButtonPane(ImportImage("btndrop2bmp",        false), ButtonFaceUp,    false, mouseclickSoundId);
 backButtonPane     = SoundButtonPane(ImportImage("btnbackbmp",    true), ButtonNormal,         false, negativeButtonClickSoundId);
 
-defaultBtnPosition  = Point(482, 158);
+defaultBtnPosition  = Point(482, 318); // original Y-position: 158
 previousBtnPosition = Point(200,  75);
 nextBtnPosition     = Point(500,  75);
 launchBtnPosition   = Point(480, 118); // -22
@@ -118,10 +118,10 @@ loadoutPane =
     ScreenPane(
         civImage,
         [
+            (HoverPane(hoverSite,  4, defaultButtonPane),   defaultBtnPosition     ),
             (HoverPane(hoverSite,  2, partInfoPane),        partInfoPosition       ),
             (HoverPane(hoverSite,  3, hullInfoPane),        hullInfoPosition       ),
             (HoverPane(hoverSite,  3, hullDescriptionPane), hullDescriptionPosition),
-            (HoverPane(hoverSite,  4, defaultButtonPane),   defaultBtnPosition     ),
             (HoverPane(hoverSite,  5, previousButtonPane),  previousBtnPosition    ),
             (HoverPane(hoverSite,  6, nextButtonPane),      nextBtnPosition        ),
             (HoverPane(hoverSite,  7, launchButtonPane),    launchBtnPosition      ),
@@ -131,8 +131,8 @@ loadoutPane =
             (creditsPane,                                   creditsPosition        ),
             
             (HoverPane(hoverSite,  8, backButtonPane),      Point(5, 565)          ),
-            (hoverPane, Point(540, 565)),
-            (statePane, Point(150, 565))
+            (hoverPane, Point(540, 565))
+            //(statePane, Point(150, 565))
         ]
     );
 

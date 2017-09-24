@@ -1,8 +1,8 @@
 <Font|headerFont>CORES<Color|white><Font|helpFont><p><p>
 The game core file defines what factions will be in that game, what the values of the variables that determine the strengths/weaknesses for each 
 faction are, what the layout of the technology tree for that game will be, the models and skins that faction objects use, and so on.
-<p><p>Pcore, created by Phantom 032 and maintained by Phoenix1, is currently the only actively developed core.  Almost all games are now played on Pcore which aims to make all factions and techpaths equally viable on medium money settings.  It is the first core to host the faction Draconium and generally has the most factions available.
+<p><p>Pcore, created by Phantom032 and maintained by Phoenix1, is currently the only actively developed core.  Almost all games are now played on Pcore which aims to make all factions and techpaths equally viable on medium money settings.  It is the first core to host the faction Draconium and generally has the most factions available.
 <p><p>Pcore Factions: Belters, Bios, Draconium, Dregkhlar, Ga'Taraan, GigaCorp, Iron Coalition, Omicron Hive, Phoenix, Rixian, Technoflux
 
 
- <a href="https://www.freeallegiance.org/forums/index.php?showforum=180>"For the latest changelog click here/a> 
+ <a href="https://www.freeallegiance.org/forums/index.php?showforum=180">For the latest changelog click here</a> 

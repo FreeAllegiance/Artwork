@@ -174,7 +174,7 @@ ChatCompositionImage = PaneImage(ComposingPane, false, true);
 //
 //////////////////////////////////////////////////////
 
-chatListPane = ChatListPane(Point(355, 128));
+chatListPane = ChatListPane(Point(355, 128), false);
 
 CommPane =
     ImagePane(

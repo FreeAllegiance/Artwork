@@ -53,7 +53,7 @@ statsSideListPane   = ListPane(Point(571, 86));
 
 chatEditPane   = EditPane(Point(530, 23), largeFont);
 sendButtonPane = ButtonPane(ImportImage("btnsend2bmp", false), ButtonNormal, false);
-chatText       = ChatListPane(Point(591, 78));
+chatText       = ChatListPane(Point(591, 78), true);
 chatPane       = 
     ImagePane(
         ImportImage("gameoverchatbmp", true),

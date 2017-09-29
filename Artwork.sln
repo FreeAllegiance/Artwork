@@ -2896,6 +2896,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		imis406bmp.mdl = imis406bmp.mdl
 		imustangbmp.mdl = imustangbmp.mdl
 		inputmap1.mdl = inputmap1.mdl
+		inputmap_training.mdl = inputmap_training.mdl
 		inputmappane.mdl = inputmappane.mdl
 		inputmappingbkbmp.mdl = inputmappingbkbmp.mdl
 		inrangebmp.mdl = inrangebmp.mdl

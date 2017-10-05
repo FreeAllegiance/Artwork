@@ -5372,9 +5372,8 @@ dialogs =
         (TeamPaneImage, SideRight, Point(10, -150), Point(-750, -150), .5, ofTeam | ofExpandedTeam, false),
 
         // MergedInvestmentsPaneImage: the investments pane (F5)
-        //Change from Bunnywabbit to make investor pane placement make more sense
         //(MergedInvestmentsPaneImage, SideCenter, Point(-192, 2000), Point(-192, -265), .5, ofInvestment, false),
-        (MergedInvestmentsPaneImage, SideRight, Point(10, -265), Point(-490, -265), .2, ofInvestment, false),
+        (MergedInvestmentsPaneImage, SideRight, Point(10, -265), Point(-490, -265), .5, ofInvestment, false),
 
         // TeleportPane: the teleport selection window (F8)
         (TeleportPaneImage, SideLeft, Point(-620, -100), Point(36, -100), .5, ofTeleportPane, false),

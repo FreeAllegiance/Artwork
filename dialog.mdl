@@ -4249,17 +4249,7 @@ DefaultNormalTargetDisplay =
 //
 //////////////////////////////////////////////////////////////////////////////
 
-fpTargetOvalColor =
-    BlendImage(
-        GaugeImageRect(
-            JustifyBottom,
-            ImportImageFromFile("CortUI/lesshud/cortui_lesshud_target_oval_color.png", true),
-            Rect(0, 0, 164, 67),
-            true,
-            1
-        ),
-        hudBlendMode
-    );
+fpTargetOvalColor = ImportImageFromFile("CortUI/lesshud/cortui_lesshud_target_oval_color.png", true);
 
 fpTargetRangeString =
     SwitchString(

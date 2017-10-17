@@ -1,0 +1,2 @@
+use "model";
+fig03bmp = ImportImageFromFile("Textures/fig03.png", false);

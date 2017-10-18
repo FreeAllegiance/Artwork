@@ -5170,8 +5170,8 @@ RipcordCountdownImage =
 
 // #294 - Turkey
 SoftCenterHudDisplayYOffset	= Subtract(-35, Multiply(12, NumChatLines));
-CriticalTipImageYOffset     = Subtract(-80, Multiply(12, NumChatLines));
-VoteTextImageYOffset        = Subtract(-95, Multiply(12, NumChatLines));
+CriticalTipImageYOffset     = Subtract(-50, Multiply(12, NumChatLines));
+VoteTextImageYOffset        = Subtract(-85, Multiply(12, NumChatLines));
 
 CriticalTipImageTranslated = TranslateImage(CriticalTipImage, Point(0, CriticalTipImageYOffset));
 VoteTextImageTranslated = TranslateImage(VoteTextImage, Point(0, VoteTextImageYOffset));

@@ -1004,6 +1004,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		conteambarbmp.mdl = conteambarbmp.mdl
 		convectorlockbmp.mdl = convectorlockbmp.mdl
 		copperrockbmp.mdl = copperrockbmp.mdl
+		cores.txt = cores.txt
 		countdown0.ogg = countdown0.ogg
 		countdown0.wav = countdown0.wav
 		countdown1.ogg = countdown1.ogg

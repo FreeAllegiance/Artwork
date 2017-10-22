@@ -6829,6 +6829,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		wc_01.igc = wc_01.igc
 		wc_02.igc = wc_02.igc
 		wc_03.igc = wc_03.igc
+		wc_04.igc = wc_04.igc
 		wc_beomni.cvh = wc_beomni.cvh
 		wc_beomni.mdl = wc_beomni.mdl
 		wc_bifig.cvh = wc_bifig.cvh

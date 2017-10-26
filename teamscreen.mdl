@@ -107,6 +107,8 @@ lockSidesButtonPane = ButtonPane(ImportImage("btnlocksidesbmp", true), ButtonNor
 
 
 wingComboPane        = ImageComboPane(ImportImage("btnchangewingbmp", true), largeFont);
+discordButtonPane	 = ButtonPane(ImportImageFromFile("btnjoindiscordskinny.png",  true), ButtonNormal, false);
+
 
 //
 // Status text
@@ -196,9 +198,10 @@ hoverString =
             ( 31, "Select to prevent new players from joining the game."),
             ( 32, "Return to the statistics for the last game."),
             ( 33, "Select to disallow changes to the teams."),
-	    ( 34, "Select to indicate that your team is ready for the game to launch.")	,
+			( 34, "Select to indicate that your team is ready for the game to launch.")	,
             ( 35, "Assign everyone except the team leaders to random teams and then lock the sides."),
-            ( 36, "Deactivate or activate this team.")
+            ( 36, "Deactivate or activate this team."),
+			( 37, "Join your team Discord Voice Channel.")
         ]
     );
 
@@ -240,6 +243,8 @@ screen =
             (HoverPane(hoverSite,  24,  backButtonPane),            Point( 20, 560)),
             (HoverPane(hoverSite,  32,  gameOverButtonPane),        Point(465, 560)),
 
+			
+			
             (HoverPane(hoverSite,  27,  wingComboPane),             Point(695, 193)),
             (HoverPane(hoverSite,  34,  sideReadyButtonPane),       Point(695, 219)),
             (HoverPane(hoverSite,  22,  autoAcceptButtonPane),      Point(695, 245)),
@@ -251,6 +256,8 @@ screen =
             (HoverPane(hoverSite,  35,  randomizeButtonPane),       Point(695, 401)),
             
             (HoverPane(hoverSite,  28,  joinButtonPane),            Point(694, 92)),
+			
+			
             
 
             //(readyButtonPane,      Point( 80, 410)),
@@ -259,12 +266,17 @@ screen =
             
             //(HoverPane(hoverSite,  17,  detailsButtonPane),       Point( 80, 470)),
             //(HoverPane(hoverSite,  17,  settingsButtonPane),      Point( 80, 470)),
+
+			//(HoverPane(hoverSite,  37,  discordButtonPane),         Point(5, 370)),
+
             (detailsButtonPane,                                     Point( 5, 420)),
             (settingsButtonPane,                                    Point( 5, 420)), // moved
             (teamSettingsButtonPane,                                Point( 5, 470)), // moved to left
             (mapPreviewPane,                                        Point( 144, 419)), // new in R4
             
             (HoverPane(hoverSite,  21,  startButtonPane),           Point(693, 434)),
+
+			(HoverPane(hoverSite,  37,  discordButtonPane),         Point(698, 520)),
 
             (HoverPane(hoverSite,  23,  textStatus),                Point(0, 530)),
             (HoverPane(hoverSite,  23,  textStatus2),               Point(0, 542)),

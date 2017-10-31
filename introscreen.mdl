@@ -41,7 +41,7 @@ hoverInfoString =
         emptyString,
         [
             ( hoverPlayLan   , "Play a free game on a private server located on a LAN."  ),
-            ( hoverPlayInt   , "Play a free game on a public server." ),
+            ( hoverPlayInt   , "Play a game on a public server." ),
             //( hoverZoneClub  , "Play a game as a member of the Allegiance Zone."),
             ( hoverTrain     , "Play a training mission."         ),
             ( hoverZoneWeb   , "Connect to the Allegiance Web page for the latest Allegiance information, including event schedules, strategies, and help."        ),
@@ -51,7 +51,10 @@ hoverInfoString =
             ( hoverQuickstart, "Immediately connect to a game."   ),
             ( hoverHelp      , "View the in-game Help display."                  ),
             ( hoverExit      , "Quit Allegiance."                 )
-        ]
+            (hoverDiscord    , "Join our community's discord server"     )
+	
+	
+	]
     );
 
 hoverTextColor = Color(0.75, 0.75, 0.75);

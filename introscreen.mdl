@@ -51,7 +51,7 @@ hoverInfoString =
             ( hoverQuickstart, "Immediately connect to a game."   ),
             ( hoverHelp      , "View the in-game Help display."                  ),
             ( hoverExit      , "Quit Allegiance."                 ),
-            ( hoverDiscord    , "Join our community's discord server"     )
+            ( hoverDiscord    , "Join our community's discord server"     ),
 	
 	
 	]

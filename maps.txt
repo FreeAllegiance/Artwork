@@ -1,0 +1,31 @@
+30
+2,Agate,m2x3agate
+2,Amber,m2x3amber
+2,Ammolite,m2x3ammolite
+2,Blender,m2xibblender
+2,Boron,m2xibboron
+2,Brass,m2x3brass
+2,Bronze,m2x3bronze
+2,Constellation,m2x3const
+2,Glass,m2x3glass
+2,Granite,m2xibgran
+2,Iron,m2xibiron
+2,Lead,m2xiblead
+2,Limited,m2xiblimited
+2,Marble,m2x3marble
+2,Nexus,m2x3nexus
+2,Peridot,m2x3peridot
+2,Pewter,m2x3pewter
+2,Polished,m2xibpolishe
+2,Limited Pyrite,m2x3pyritel
+2,Pyrite,m2x3pyrite
+2,Polished Pyrite,m2x3pyritep
+2,Schist,m2x3schist
+2,Serpentine,m2x3serp
+2,Slate,m2x3slate
+2,Silver,m2xibsilver
+2,Starflake,m2x3starfl
+2,Topaz,m2xibtopaz
+2,Veil,m2x3veil
+2,Highway,m2xhighway
+4,AW5Lead,m2v2lead

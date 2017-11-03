@@ -2,6 +2,13 @@ use "effect";
 use "font";
 use "gamepanes";
 use "helpdata";
+use "model";
+
+
+use "effect";
+use "font";
+use "gamepanes";
+use "helpdata";
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -300,24 +307,31 @@ mainPage               = PagePane(Point(309, 231), mainPageScrollBar);
 secondaryPageScrollBar = ScrollBarPane(Point(16, 62));
 secondaryPage          = PagePane(Point(309, 62), secondaryPageScrollBar);
 backButton             = SoundButtonPane(ImportImage("btnprevioustopicbmp",  true), ButtonNormal, false, negativeButtonClickSoundId);
-closeButton            = SoundButtonPane(ImportImage("btnclosepanebmp", true), ButtonNormal, false, negativeButtonClickSoundId);
+
+closeButton            = SoundButtonPane(ImportImageFromFile("menuhelp/btnclose.png", true), ButtonNormal, false, negativeButtonClickSoundId);
+
+DiscordButton	  	   = ButtonPane(ImportImageFromFile("menuhelp/btndiscord.png",  true), ButtonNormal, false);
+WikiButton 			   = ButtonPane(ImportImageFromFile("menuhelp/btnwiki.png",  true), ButtonNormal, false);
+
 
 titlePane			= StringPane("Allegiance Help Menu", white,	Point(360, 35), JustifyLeft, largeBoldFont);
-//bottomPane			= StringPane("www.allegacademy.org", white,	Point(300, 30), JustifyLeft, largeBoldFont);
-//academyBar          = ImagePane( ImportImage("hlpacademybarbmp",true), [] );
+//TabHintText			= StringImage(JustifyLeft, 120, helpFont, white, "Press Tab if you don't see a mouse pointer");
+//TabHint 			= StringPane("Press Tab if you don't see a mouse pointer", white, Point(120, 130), JustifyLeft, helpFont);
+
+KeyboardImageUI = ImagePane(
+		ImportImageFromFile("menuhelp/keyboardLayoutUIbg.png", true),
+		[
+		(WikiButton,       Point( 20, 24)),
+		(DiscordButton,    Point( 20, 56)),
+		(closeButton,      Point( 20, 88)) /*,
+		(TabHint, 		   Point( 13, 125)) */
+		]
+	);
+
 helpPane = 
     ImagePane(
-        ImportImage("helppanebmp", false),
+        ImportImageFromFile("menuhelp/keyboardLayout.png", true),
         [
-            (navPane,                Point(  25,  23)),
-            (mainPageScrollBar,      Point( 504,  50)),
-            (mainPage,               Point( 196,  50)), // 196,  50
-            (secondaryPage,          Point( 196, 294)),
-            (secondaryPageScrollBar, Point( 504, 294)),
-            (backButton,             Point(  25, 360)),
-            (closeButton,            Point( 501,  12)),
-		(titlePane,				 Point( 270,  18))
-		//(academyBar,				 Point( 150,  362)),
-		//(bottomPane,			Point( 260,  370))
+		(KeyboardImageUI, Point(1123, 19))
         ]
     );

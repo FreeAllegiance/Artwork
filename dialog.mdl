@@ -8,9 +8,8 @@ use "cortui_huds";
 // Version information
 cortUIVersionString = "CortUI v3.0";
 
-// #294 - Turkey - This is now defined in code.
 // Parameter: Number of chat lines. Keep between 1 and 10.
-//NumChatLines = 5;
+NumChatLinesGlobal = 10;
 
 // Parameter: 1 if the last accepted and last queued order should be shown, 0 if not
 ShowLastOrders = 1;
@@ -175,8 +174,7 @@ ChatCompositionImage = PaneImage(ComposingPane, false, true);
 //
 //////////////////////////////////////////////////////
 
-// #294 - Turkey - make number of chat lines dynamic. // BT - 10/17 - Make scrollbar truely hidden.
-chatListPane = ChatListPane(Point(355,  Add(8,Multiply(12,NumChatLines))  ), false );
+chatListPane = ChatListPane(Point(355, 128), false);
 
 CommPane =
     ImagePane(
@@ -4251,7 +4249,17 @@ DefaultNormalTargetDisplay =
 //
 //////////////////////////////////////////////////////////////////////////////
 
-fpTargetOvalColor = ImportImageFromFile("CortUI/lesshud/cortui_lesshud_target_oval_color.png", true);
+fpTargetOvalColor =
+    BlendImage(
+        GaugeImageRect(
+            JustifyBottom,
+            ImportImageFromFile("CortUI/lesshud/cortui_lesshud_target_oval_color.png", true),
+            Rect(0, 0, 164, 67),
+            true,
+            1
+        ),
+        hudBlendMode
+    );
 
 fpTargetRangeString =
     SwitchString(
@@ -5164,14 +5172,13 @@ RipcordCountdownImage =
 //    * height(criticaltipimage) = 56
 
 // Position calculations:
-// 	  * SoftCenterHudDisplayOffset = -35 * 12*NumChatLines
-//    * CriticalTipImageYOffset    = -80 * 12*NumChatLines
-//    * VoteTextImageYOffset       = -95 * 12*NumChatLines
+// 	  * SoftCenterHudDisplayOffset = -35 * 12*NumChatLinesGlobal
+//    * CriticalTipImageYOffset    = -80 * 12*NumChatLinesGlobal
+//    * VoteTextImageYOffset       = -95 * 12*NumChatLinesGlobal
 
-// #294 - Turkey
-SoftCenterHudDisplayYOffset	= Subtract(-35, Multiply(12, NumChatLines));
-CriticalTipImageYOffset     = Subtract(-50, Multiply(12, NumChatLines));
-VoteTextImageYOffset        = Subtract(-85, Multiply(12, NumChatLines));
+SoftCenterHudDisplayYOffset	= Subtract(-35, Multiply(12, NumChatLinesGlobal));
+CriticalTipImageYOffset     = Subtract(-80, Multiply(12, NumChatLinesGlobal));
+VoteTextImageYOffset        = Subtract(-95, Multiply(12, NumChatLinesGlobal));
 
 CriticalTipImageTranslated = TranslateImage(CriticalTipImage, Point(0, CriticalTipImageYOffset));
 VoteTextImageTranslated = TranslateImage(VoteTextImage, Point(0, VoteTextImageYOffset));
@@ -5365,7 +5372,7 @@ dialogs =
         (TeamPaneImage, SideRight, Point(10, -150), Point(-750, -150), .5, ofTeam | ofExpandedTeam, false),
 
         // MergedInvestmentsPaneImage: the investments pane (F5)
-        (MergedInvestmentsPaneImage, SideRight, Point(10, -265), Point(-490, -265), .5, ofInvestment, false),
+        (MergedInvestmentsPaneImage, SideCenter, Point(-192, 2000), Point(-192, -265), .5, ofInvestment, false),
 
         // TeleportPane: the teleport selection window (F8)
         (TeleportPaneImage, SideLeft, Point(-620, -100), Point(36, -100), .5, ofTeleportPane, false),
@@ -5375,17 +5382,15 @@ dialogs =
         // **********************************
 
         // SectorImage: the minimap
-        // BT - 10/17 - Make SectorMap controllable with F7.
-		(SectorImage,                                       SideBottomLeft, Point(   49, -187), Point(  49,   36), .5, SectorOverviewFlag, false),
+        (SectorImage, SideBottomLeft, Point(0, -187), Point(36, 28), 0, ofAlways, false),
 
         // **********************************
         // * Level 4
         // **********************************
 
         // MergedInventoryImage: the inventory pane
-		// BT - 10/17 - Make inventory pane image controllable with F4.
-        (MergedInventoryPaneImage, SideBottomRight, Point(-36, -150), Point(-36, 40), .5, 8192, true),
-     
+        (MergedInventoryPaneImage, SideBottomRight, Point(-36, -150), Point(-36, 40), 0, ofInFlightCommand | ofInCockpit | ofInChase | ofGloatCam, true),
+
         // **********************************
         // * Level 5 (below everything else)
         // **********************************

@@ -2896,7 +2896,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		imis405bmp.mdl = imis405bmp.mdl
 		imis406bmp.mdl = imis406bmp.mdl
 		imustangbmp.mdl = imustangbmp.mdl
-		inputmap1.mdl = inputmap1.mdl
 		inputmap_training.mdl = inputmap_training.mdl
 		inputmappane.mdl = inputmappane.mdl
 		inputmappingbkbmp.mdl = inputmappingbkbmp.mdl
@@ -7152,11 +7151,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Textures", "Textures", "{D9
 		Textures\utl20abmp.mdl = Textures\utl20abmp.mdl
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Menuhelp", "Menuhelp", "{6FED3AA4-4538-4799-AA6D-F6C25FF9F848}"
+	ProjectSection(SolutionItems) = preProject
+		menuhelp\btnclose.png = menuhelp\btnclose.png
+		menuhelp\btndiscord.png = menuhelp\btndiscord.png
+		menuhelp\btnwiki.png = menuhelp\btnwiki.png
+		menuhelp\dirmaker = menuhelp\dirmaker
+		menuhelp\helppanebg.png = menuhelp\helppanebg.png
+		menuhelp\keyboardLayout.png = menuhelp\keyboardLayout.png
+		menuhelp\keyboardLayoutUIbg.png = menuhelp\keyboardLayoutUIbg.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D9E7705D-BEFE-4791-A59C-A465CE92480A} = {8297237D-3F03-4748-A5BC-5D1BF4201451}
+		{6FED3AA4-4538-4799-AA6D-F6C25FF9F848} = {8297237D-3F03-4748-A5BC-5D1BF4201451}
 	EndGlobalSection
 EndGlobal

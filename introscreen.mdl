@@ -14,18 +14,18 @@ use "font";
 
 //gamesButtonPane     = ButtonPane(ImportImage("btnmaingamesbmp", false), ButtonFaceDown, false);
 
-trainBigButtonPane      = ButtonPane(ImportImage("btnmaintrainbigbmp", true),   ButtonNormal, false);
+//trainButtonPane       = ButtonPane(ImportImage("btnmaintrainbmp", true),      ButtonNormal, false);
+trainBigButtonPane      = ButtonPane(ImportImageFromFile("btnmaintrainbig.png",  true), ButtonNormal, false);
 
-playLanButtonPane       = ButtonPane(ImportImage("btnmainplaylanbmp", true),    ButtonNormal, false);
-playIntButtonPane       = ButtonPane(ImportImage("btnmainplayintbmp", true),    ButtonNormal, false);
+playLanButtonPane       = ButtonPane(ImportImageFromFile("btnmainplaylansmall.png",  true), ButtonNormal, false); //big button: btnmainplaylanbmp.mdl
+playIntButtonPane		= ButtonPane(ImportImageFromFile("btnmainplayint.png",  true), ButtonNormal, false);
 //zoneClubButtonPane    = ButtonPane(ImportImage("btnmainplayzonebmp", true),   ButtonNormal, false);
 discordButtonPane		= ButtonPane(ImportImageFromFile("btnmaindiscord.png",  true), ButtonNormal, false);
 
-//trainButtonPane       = ButtonPane(ImportImage("btnmaintrainbmp", true),      ButtonNormal, false);
 zoneWebButtonPane       = ButtonPane(ImportImage("btnmainzonewebbmp", true),    ButtonNormal, false);
 optionsButtonPane       = ButtonPane(ImportImage("btnmainkeyconbmp", true),     ButtonNormal, false);
 introButtonPane         = ButtonPane(ImportImage("btnmainintrobmp", true),      ButtonNormal, false);
-creditsButtonPane       = ButtonPane(ImportImage("btnmaincreditsbmp", true),    ButtonNormal, false);
+creditsButtonPane       = ButtonPane(ImportImageFromFile("btnmaincreditshidden.png",  true), ButtonNormal, false); //unhidden button: btnmaincreditsbmp.mdl
 //quickstartButtonPane  = ButtonPane(ImportImage("btnmainquickstartbmp", true), ButtonNormal, false);
 
 exitButtonPane          = ButtonPane(ImportImage("btnmainexitbmp",  true),      ButtonNormal, false);
@@ -41,7 +41,7 @@ hoverInfoString =
         emptyString,
         [
             ( hoverPlayLan   , "Play a free game on a private server located on a LAN."  ),
-            ( hoverPlayInt   , "Play a game on a public server." ),
+            ( hoverPlayInt   , "Play a free game on a public server." ),
             //( hoverZoneClub  , "Play a game as a member of the Allegiance Zone."),
             ( hoverTrain     , "Play a training mission."         ),
             ( hoverZoneWeb   , "Connect to the Allegiance Web page for the latest Allegiance information, including event schedules, strategies, and help."        ),
@@ -50,11 +50,8 @@ hoverInfoString =
             ( hoverCredits   , "View the names of those who created Allegiance."  ),
             ( hoverQuickstart, "Immediately connect to a game."   ),
             ( hoverHelp      , "View the in-game Help display."                  ),
-            ( hoverExit      , "Quit Allegiance."                 ),
-            ( hoverDiscord    , "Join our community's discord server"     )
-	
-	
-	]
+            ( hoverExit      , "Quit Allegiance."                 )
+        ]
     );
 
 hoverTextColor = Color(0.75, 0.75, 0.75);
@@ -95,7 +92,9 @@ screen =
             (introButtonPane,       Point(290, 553)),
             (zoneWebButtonPane,     Point(290, 568)),
             
-            (creditsButtonPane,     Point(355, 553)),
+            //(creditsButtonPane,     Point(355, 553)),
+            (creditsButtonPane,     Point(485, 568)),
+            (playLanButtonPane,     Point(355, 553)),
             (optionsButtonPane,     Point(355, 568)),
             
             (exitButtonPane,        Point(420, 553)),

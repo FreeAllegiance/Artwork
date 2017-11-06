@@ -50,7 +50,8 @@ hoverInfoString =
             ( hoverCredits   , "View the names of those who created Allegiance."  ),
             ( hoverQuickstart, "Immediately connect to a game."   ),
             ( hoverHelp      , "View the in-game Help display."                  ),
-            ( hoverExit      , "Quit Allegiance."                 )
+            ( hoverExit      , "Quit Allegiance."                 ),
+	    ( hoverDiscord   , "Join the community on Discord, opens in a webbrowser!"   )
         ]
     );
 

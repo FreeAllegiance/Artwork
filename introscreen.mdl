@@ -12,27 +12,27 @@ use "font";
 // Normal buttons
 //
 
-//gamesButtonPane     = ButtonPane(ImportImage("btnmaingamesbmp", false), ButtonFaceDown, false);
-
+//gamesButtonPane       = ButtonPane(ImportImage("btnmaingamesbmp", false), ButtonFaceDown, false);
 //trainButtonPane       = ButtonPane(ImportImage("btnmaintrainbmp", true),      ButtonNormal, false);
-trainBigButtonPane      = ButtonPane(ImportImageFromFile("btnmaintrainbig.png",  true), ButtonNormal, false);
-
-playLanButtonPane       = ButtonPane(ImportImageFromFile("btnmainplaylansmall.png",  true), ButtonNormal, false); //big button: btnmainplaylanbmp.mdl
-playIntButtonPane		= ButtonPane(ImportImageFromFile("btnmainplayint.png",  true), ButtonNormal, false);
 //zoneClubButtonPane    = ButtonPane(ImportImage("btnmainplayzonebmp", true),   ButtonNormal, false);
-discordButtonPane		= ButtonPane(ImportImageFromFile("btnmaindiscord.png",  true), ButtonNormal, false);
-
-zoneWebButtonPane       = ButtonPane(ImportImage("btnmainzonewebbmp", true),    ButtonNormal, false);
-optionsButtonPane       = ButtonPane(ImportImage("btnmainkeyconbmp", true),     ButtonNormal, false);
-introButtonPane         = ButtonPane(ImportImage("btnmainintrobmp", true),      ButtonNormal, false);
-creditsButtonPane       = ButtonPane(ImportImageFromFile("btnmaincreditshidden.png",  true), ButtonNormal, false); //unhidden button: btnmaincreditsbmp.mdl
 //quickstartButtonPane  = ButtonPane(ImportImage("btnmainquickstartbmp", true), ButtonNormal, false);
 
+trainBigButtonPane      = ButtonPane(ImportImageFromFile("btnmaintrainbig.png", true), ButtonNormal, false);
+discordButtonPane       = ButtonPane(ImportImageFromFile("btnmaindiscord.png", true), ButtonNormal, false);
+playIntButtonPane       = ButtonPane(ImportImageFromFile("btnmainplayint.png", true), ButtonNormal, false);
+
+introButtonPane         = ButtonPane(ImportImage("btnmainintrobmp", true),      ButtonNormal, false);
+playLanButtonPane       = ButtonPane(ImportImageFromFile("btnmainplaylansmall.png", true), ButtonNormal, false); //big button: btnmainplaylanbmp.mdl
 exitButtonPane          = ButtonPane(ImportImage("btnmainexitbmp",  true),      ButtonNormal, false);
-helpButtonPane           = ButtonPane(ImportImage("btnhelpbmp",      true),     ButtonNormal,   false);
+zoneWebButtonPane       = ButtonPane(ImportImage("btnmainzonewebbmp", true),    ButtonNormal, false);
+optionsButtonPane       = ButtonPane(ImportImage("btnmainkeyconbmp", true),     ButtonNormal, false);
+helpButtonPane          = ButtonPane(ImportImage("btnhelpbmp", true),           ButtonNormal, false);
+
+creditsButtonPane       = ButtonPane(ImportImageFromFile("btnmaincreditshidden.png", true), ButtonNormal, false); //unhidden button: btnmaincreditsbmp.mdl
+
 
 //
-//  Mouseoer Help Text
+//  Mouseover Help Text
 //
 
 hoverInfoString =
@@ -40,13 +40,15 @@ hoverInfoString =
         CurrentHover,
         emptyString,
         [
-            ( hoverPlayLan   , "Play a free game on a private server located on a LAN."  ),
-            ( hoverPlayInt   , "Play a free game on a public server." ),
-            //( hoverZoneClub  , "Play a game as a member of the Allegiance Zone."),
+             //( hoverZoneClub  , "Play a game as a member of the Allegiance Zone."),
             ( hoverTrain     , "Play a training mission."         ),
+            ( hoverPlayInt   , "Play a game on a public server." ),
+            ( hoverDiscord    , "Join the community on Discord - opens in a webbrowser!"     ),
+            
+            ( hoverPlayLan   , "Play a game on a private server located on a LAN."  ),
             ( hoverZoneWeb   , "Connect to the Allegiance Web page for the latest Allegiance information, including event schedules, strategies, and help."        ),
             ( hoverOptions   , "Customize the graphics, sound, and controls in Allegiance." ),
-            ( hoverIntro     , "Replay the Allegiance introductory video."),
+            ( hoverIntro     , "Play the Allegiance introductory video."),
             ( hoverCredits   , "View the names of those who created Allegiance."  ),
             ( hoverQuickstart, "Immediately connect to a game."   ),
             ( hoverHelp      , "View the in-game Help display."                  ),
@@ -79,24 +81,17 @@ screen =
         bgImage, // use bgImage if 3D introscreen enable
         [
             //(gamesButtonPane,     Point(251, 506)),
-            
+            //(zoneClubButtonPane,    Point( 86, 535)),
+            //(creditsButtonPane,     Point(355, 553)),
             (trainBigButtonPane,    Point( 9, 535)),
-
-			//(zoneClubButtonPane,    Point( 86, 535)),
-			(discordButtonPane,		Point(86, 535)),            
-          
-            
-            (playLanButtonPane,     Point(151, 535)),
-			(playIntButtonPane,     Point(217, 535)),
+            (discordButtonPane,		Point(86, 535)),
+            (playIntButtonPane,     Point(217, 535)),
             
             (introButtonPane,       Point(290, 553)),
             (zoneWebButtonPane,     Point(290, 568)),
-            
-            //(creditsButtonPane,     Point(355, 553)),
             (creditsButtonPane,     Point(485, 568)),
             (playLanButtonPane,     Point(355, 553)),
             (optionsButtonPane,     Point(355, 568)),
-            
             (exitButtonPane,        Point(420, 553)),
             (helpButtonPane,        Point(420, 568)),
 

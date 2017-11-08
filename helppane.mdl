@@ -19,6 +19,7 @@ use "helpdata";
 
 topics =
     [
+    /*
     (
             "ABOUT", "hlpa0", "hlpblanksub",
             [
@@ -254,6 +255,7 @@ topics =
 			])
 		])
       ]),
+      */
       (
             "ABBREVIATIONS", "hlpz0", "hlpblanksub",
          	[
@@ -315,16 +317,28 @@ WikiButton 			   = ButtonPane(ImportImageFromFile("menuhelp/btnwiki.png",  true)
 
 
 titlePane			= StringPane("Allegiance Help Menu", white,	Point(360, 35), JustifyLeft, largeBoldFont);
-//TabHintText			= StringImage(JustifyLeft, 120, helpFont, white, "Press Tab if you don't see a mouse pointer");
-//TabHint 			= StringPane("Press Tab if you don't see a mouse pointer", white, Point(120, 130), JustifyLeft, helpFont);
+hoverSite = HoverSite(0);
+HintText = 
+	SwitchString(
+		HoverSiteGetID(hoverSite),
+		"If you don't see a mouse pointer, press TAB to disable mouse flight.",
+		[
+		(1, "Go to the Allegiance Wiki page."),
+		(2, "Join the community discord channels."),
+		(3, "Close this screen. (You can also press F1 again)")
+		]
+	);
+
+HintImage			= StringImage(JustifyLeft, 120, helpFont, white, HintText);
+HintPane 			= AnimatedImagePaneRect(HintImage, Rect(0, -200, 120, 0));
 
 KeyboardImageUI = ImagePane(
 		ImportImageFromFile("menuhelp/keyboardLayoutUIbg.png", true),
 		[
-		(WikiButton,       Point( 20, 24)),
-		(DiscordButton,    Point( 20, 56)),
-		(closeButton,      Point( 20, 88)) /*,
-		(TabHint, 		   Point( 13, 125)) */
+		(HoverPane(hoverSite,   1, WikiButton),  Point( 20,  24)),		
+		(HoverPane(hoverSite,   2, DiscordButton), Point( 20,  56)),		
+		(HoverPane(hoverSite,   3, closeButton), Point( 20,  88)),				
+		(HintPane, 		   Point( 13, 155))
 		]
 	);
 

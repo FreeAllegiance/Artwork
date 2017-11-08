@@ -43,7 +43,7 @@ hoverInfoString =
              //( hoverZoneClub  , "Play a game as a member of the Allegiance Zone."),
             ( hoverTrain     , "Play a training mission."         ),
             ( hoverPlayInt   , "Play a game on a public server." ),
-            ( hoverDiscord    , "Join our community's Discord server"     ),
+            ( hoverDiscord    , "Join the community on Discord - opens in a webbrowser!"     ),
             
             ( hoverPlayLan   , "Play a game on a private server located on a LAN."  ),
             ( hoverZoneWeb   , "Connect to the Allegiance Web page for the latest Allegiance information, including event schedules, strategies, and help."        ),

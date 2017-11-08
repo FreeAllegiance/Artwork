@@ -331,7 +331,7 @@ HintText =
 
 HintImage			= StringImage(JustifyLeft, 120, helpFont, white, HintText);
 HintPane 			= AnimatedImagePaneRect(HintImage, Rect(0, -200, 120, 0));
-
+//Keyboard Layout image created and maintained by Spinoza and Bunnywabbit. 
 KeyboardImageUI = ImagePane(
 		ImportImageFromFile("menuhelp/keyboardLayoutUIbg.png", true),
 		[

@@ -15,7 +15,7 @@ slide_text_position = Point(150, 450);
 // all the slides in a list
 //----------------------------------------------------------
 
-slide_text_1 = "The term 'nanning' refers to the process of repairing a ship or station using the Nanite Repair System, which is typically mounted on a scout just as a gattling gun would be.";
+slide_text_1 = "The term 'nanning' refers to the process of repairing a ship or station using the Nanite Repair System, which is typically mounted on a scout just as a gattling gun would be.\n\n(Tip: You can skip these slides with your movement keys.)";
 slide_text_2 = "You will pilot a Rixian Unity scout in this simulation and be asked to nan in many of the same situations you will encounter in real missions.\n\nOne unique property of the Rixian Unity faction is their ships turn quickly on the horizontal x axis (yaw), but slowly on the vertical y axis (pitch).  Rolling your ship so that you make turns along the horizontal axis will give you an advantage.";
 slide_text_3 = "Nans fill many important roles.\n\nThey help keep miners and constructors alive when they come under attack. They are able to bring a station's hull back to full strength after a failed attack by your enemy.  Finally, nans are a key support component during bomb runs. Without support, a bomber is an easy target for defenders.";
 slide_text_4 = "'Nanning' is effective because while a ship is being repaired it is difficult for defenders to damage its hull.\n\nThis forces defenders to attack the nans first, extending the life of their target significantly.";

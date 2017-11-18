@@ -1,86 +1,128 @@
-
-
 button_script = File.LoadLua("button/button.lua")
 Button = button_script()
+--[[
+still to do:
 
-function training_button()
-	button = Button.create_textbutton("Training", Point.Create(200, 60))
+3) add hover text/ tooltip support
 
-	Event.OnEvent(Screen.GetExternalEventSink("open.training"), button.events.click)
+DONE 
+1) support 800x600 res by shrinking button bar below that size
+2) add justification to the string images when it is implemented in the api
+4) check if the button pick area / button are aligned sensibly.
+]]
 
-	return button.image
-end
+-- declare recurring variables used by multiple functions
+	button_width = 144  -- used below and in Render_list()
+	button_normal_color 	= Color.Create(1, 1, 1, 0.7)
+	button_hover_color 	= Color.Create(1, 1, 1, 0.9)
+	button_selected_color = Color.Create(1,1,1)
+	button_shadow_color = Color.Create(0.4,0.4,0.4,0.5)	
 
-function create_default_button(event_sink, label)
-	button = Button.create_textbutton(label, Point.Create(200, 60))
+ -- declare recurring variables outside of function
+	introscreenfont = Font.Create("Trebuchet MS", 25, {Bold=true})
+	label_justification 	= Justify.Center
+	function create_stringimages(label)
+		-- STILL NEEDS A JUSTIFICATION APPLIED TO STRINGIMAGE
+		return {
+			normal = Image.String(introscreenfont, button_normal_color, button_width, label, Justify.Center),
+			shadow = Image.String(introscreenfont, button_shadow_color, button_width, label, Justify.Center),
+			hover = Image.String(introscreenfont, button_hover_color, button_width, label, Justify.Center),
+			selected = Image.String(introscreenfont, button_selected_color, button_width, label, Justify.Center),
+		}
+	end
 
+-- declare recurring variables outside of function
+mainbtn_bg1 = Image.File("menuintroscreen/images/introBtn_border.png")
+btnimage_position = Point.Create(0,0)
+btntxt_pt = Point.Create(0,72)
+btntxtshadow_pt = Point.Create(0,73)
+hovertext = "" -- this will hold the eventual text for other functions to use
+function create_mainbutton(event_sink, argimage, arglabel, arghovertext)
+	label = create_stringimages(arglabel)
+	image_n = Image.Group({
+		Image.Translate(Image.Multiply(argimage, button_normal_color),btnimage_position),
+		Image.Translate(label.shadow, btntxtshadow_pt),
+		Image.Translate(label.normal, btntxt_pt), 
+		})	
+	image_h = Image.Group({
+			Image.Translate(Image.Multiply(mainbtn_bg1, button_hover_color),btnimage_position),
+			Image.Translate(Image.Multiply(argimage, button_hover_color),btnimage_position),
+			Image.Translate(label.shadow, btntxtshadow_pt),
+			Image.Translate(label.hover, btntxt_pt),
+		})
+	-- selected doesnt need color multiply. 
+	image_s = Image.Group({
+			Image.Translate(mainbtn_bg1,btnimage_position),
+			Image.Translate(argimage,btnimage_position),
+			Image.Translate(label.shadow, btntxtshadow_pt),
+			Image.Translate(label.hover, btntxt_pt),		
+		})
+	button = Button.create_image_button(image_n, image_h, image_s, arghovertext)
+	hovertext = String.Concat(hovertext, button.btnhovertext) --[[ concatenates the hoverstring with the contents of the toplevel one. Since there's only one
+	non-empty string we should wind up with only the text for the button currently hovered over... ]]
 	Event.OnEvent(event_sink, button.events.click)
-
-	return button.image
-end
-
-function create_mainbutton(event_sink, image_n, image_h, image_c, image_d)
-	imgnormal = image_n
-	imghover = image_h or imgnormal
-	imgclick = image_c or imgnormal
-	imgdisabld = image_d or imgnormal
-	button = Button.create_image_button(imgnormal, imghover, imgclick, imgdisabld)
-
-	Event.OnEvent(event_sink, button.events.click)
-
-	return button.image
-end
-
-function create_oldstyle_button(event_sink, image_path)
-	button = Button.create_old_button(image_path)
-
-	Event.OnEvent(event_sink, button.events.click)
-
 	return button.image
 end
 
 function create_button_list()
 	list = {}
-	list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.exit"), "menuintroscreen/images/introBtnExit.png")
-	list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.options"), "menuintroscreen/images/introBtnSettings.png")
-	list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.training"), "menuintroscreen/images/introBtnHelp.png")
-	-- list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.motd"), "MOTD")
-
+	list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.exit"), Image.File("menuintroscreen/images/introBtnExit.png"), "EXIT", "This is the hovertext")
+	list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.options"), Image.File("menuintroscreen/images/introBtnSettings.png"), "OPTIONS", "Change your graphics, audio and game settings")
+	list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.training"), Image.File("menuintroscreen/images/introBtnHelp.png"), "TRAINING", "Learn how to play the game")
 --	list[#list+1] = create_mainbutton(Screen.CreateOpenWebsiteSink("https://www.freeallegiance.org/forums/"), "Website")
---	list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.intro"), "Intro")
-
---	list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.credits"), "Credits")
-	list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.help"), "menuintroscreen/images/introBtnHelp.png")
-	list[#list+1] = create_mainbutton(Screen.CreateOpenWebsiteSink("https://discord.gg/WcEJ9VH"),"menuintroscreen/images/introBtnDiscord.png")
-	list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.lan"), "menuintroscreen/images/introBtnLan.png")
-	list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.lobby"), "menuintroscreen/images/introBtnOnline.png")
+--	list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.help"), "menuintroscreen/images/introBtnHelp.png", "HELP")
+	list[#list+1] = create_mainbutton(Screen.CreateOpenWebsiteSink("https://discord.gg/WcEJ9VH"), Image.File("menuintroscreen/images/introBtnDiscord.png"), "DISCORD", "Join the community Discord server.")
+	list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.lan"), Image.File("menuintroscreen/images/introBtnLan.png"), "LAN", "Play on a Local Area Network")
+	list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.lobby"), Image.File("menuintroscreen/images/introBtnOnline.png"), "PLAY ONLINE", "Play Allegiance.")
 	return list
 end
 
-buttonimgwidth = 150
-
 function render_list(list)
 	translated_list = {}
-	offset_x = #list * buttonimgwidth
+	offset = button_width+56 -- this number indicates the spaces between buttons
+	offset_x = #list * offset
 	for i, item in pairs(list) do
-		offset_x = offset_x - buttonimgwidth
+		offset_x = offset_x - offset
 		translated_list[#translated_list+1] = Image.Translate(item, Point.Create(offset_x, 0))
 	end
 
 	return Image.Group(translated_list)
 end
 
-buttonpane = render_list(create_button_list())
 resolution = Screen.GetResolution()
--- this is a stupid way to do it because there is a justify thing that would handle this great. 
-buttonpane_x = Number.Subtract(Number.Divide(Point.X(resolution),2), Number.Divide(Point.X(Image.Size(buttonpane)),2))
+-- combine background image and logo
+bgimageuncut = Image.Group({
+	Image.File("menuintroscreen/images/menuintroscreen_bg.jpg"),
+	Image.Translate(Image.Multiply(Image.File("menuintroscreen/images/menuintroscreen_logo.png"),Color.Create(1,1,1,0.7)),Point.Create(910,510)),
+	})
+-- calculate how much of the edges need to be trimmed to fit the resolution
+xres = Point.X(resolution)
+yres = Point.Y(resolution)
+xbgcutout = Number.Min(xres,1920) -- less than or equal to 1920
+ybgcutout = Number.Min(yres,1080) -- less than or equal to 1080
+xbgoffset = Number.Divide(Number.Subtract(1920, xbgcutout),2)
+ybgoffset = Number.Divide(Number.Subtract(1080, ybgcutout),2)
+bgimagefileRect = Rect.Create(xbgoffset,ybgoffset, Number.Add(xbgoffset, xbgcutout), Number.Add(ybgoffset, ybgcutout))
+-- trim the background image to size
+bgimage = Image.Cut(bgimageuncut, bgimagefileRect)
 
--- this needs a condition: crop if resolution is smaller than 1920x1080, scale if it is bigger.
+function create_hovertextimg(str)
+	strimg = Image.String(Font.Create("Trebuchet MS", 25, {Italic=true, Bold=true}), button_normal_color, Number.Divide(xres,2), hovertext, Justify.Center)
+	return Image.Translate(Image.Justify(strimg, resolution, Justify.Bottom),Point.Create(0, -200))
+end
+function create_buttonbar()
+	bbimg = render_list(create_button_list())  -- compile the Button Bar (BB) image
+	bbs = Image.Size(bbimg) -- get BB size as a point value
+	bbx = Point.X(bbs) -- get BB width as a point val x coordinate
+	bby = Point.Y(bbs) -- get BB height as a point val y coordinate
+	fctr = Number.Min(1, Number.Divide(Number.Multiply(0.95,xres),bbx)) -- if smaller than 1, return ratio of the horizontal resolution and the Button Bar width.
+	bbres = Point.Create(Number.Multiply(bbx, fctr), Number.Multiply(bby, fctr)) -- 
+	return Image.ScaleFill(bbimg, bbres, Justify.Center)
+end
+
 return Image.Group({
-	Image.ScaleFit(Image.LoadFile("menuintroscreen/images/menuintroscreen_bg.jpg"), resolution, Image.Justification.Center),
-	Image.Translate(buttonpane, Point.Create(buttonpane_x, 50)),
+	Image.ScaleFill(bgimage, resolution, Justify.Center),
+--	Image.Justify(Image.Extent(Point.Create(960,540), Color.Create(1,1,1,0.1)), resolution, Justify.Bottomright),
+	Image.Translate(Image.Justify(create_buttonbar(), resolution, Justify.Bottom), Point.Create(0,-50)),
+	create_hovertextimg(hovertext),
 })
-
-
--- cheatsheet :)
--- Image.CreateExtent(Rect.Create(0, 0, 300, Point.Y(resolution)), Color.Create(0.1, 0.1, 0.3)),

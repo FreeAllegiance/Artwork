@@ -5,89 +5,15 @@ return (function()
 	sound_mouseover = Screen.CreatePlaySoundSink("button/sound/mouseover.ogg")
 	sound_click = Screen.CreatePlaySoundSink("button/sound/cancel.ogg")
 
-	function create_textbutton(label, size, font, txtcolor, bgcolor, hovercolor, clickcolor, txtdisabledcolor)
-
-		-- optional arguments processing
-		button_caption_font = font or Font.Create("Verdana", 16)
-		button_caption_color = txtcolor or Color.Create(1, 1, 1)
-		button_caption = Image.String(button_caption_font, button_caption_color, 100, label)
-		button_bgcolor = bgcolor or Color.Create(1, 1, 1, 0.0)
-		button_hovercolor = hovercolor or Color.Create(1, 1, 1, 0.2)
-		button_disabled_caption_color = txtdisabledcolor or Color.Create(0.8,0.8,0.8,0.8)
-
-		font_height = Font.Height(button_caption_font) -- while we wait until we can retrieve this directly from the fontobject
-
-		function create_button_layer(color)
-			-- All the different layers have the same size, so we can reduce the duplication
-			return Image.CreateExtent(size, color)
-		end
-
-		-- Create a transparant layer, and wrap it inside an image that registers events
-		button_pick = Image.CreateMouseEvent(create_button_layer(Color.Create(0, 0, 0, 0)));
-
-		-- Grab the event streams we are interested in
-		button_enter = Event.Get(button_pick, "mouse.enter")
-		button_leave = Event.Get(button_pick, "mouse.leave")
-		button_click = Event.Get(button_pick, "mouse.left.click")
-
-		-- We can attach global listeners ("Sinks") to the event sources
-		Event.OnEvent(sound_mouseover, button_enter);
-		Event.OnEvent(sound_click, button_click);
-
-		-- We can calculate if we are hovering by comparing two event sources
-		is_hovering = Event.ToBoolean(false, {
-			[button_enter]=true,
-			[button_leave]=false,
-		})
-
-		-- Create a font and a caption with that font
-		
-
-		-- Return the button. The button has three layers: 
-		-- - Background which is dependent on the value in "is_hovering"
-		-- - The button caption, somewhat centered
-		-- - The mouse event layer, which needs to be on top
-		export_button = Image.Group({
-			Image.Switch(is_hovering, {
-				-- we need to wrap false and true in brackets because otherwise they would be interpreted as strings by lua
-				[false]=create_button_layer(button_bgcolor),
-				[true]=create_button_layer(button_hovercolor),
-			}),
-			Image.Translate(button_caption, 
-				Point.Create(
-					50,
-					Number.Add(
-						Number.Divide(Point.Y(size), 2), 
-						Number.Multiply(font_height,2)
-					)
-				)
-			),
-			button_pick,
-		})
-
-		export_events = {
-			click=button_click
-		}
-
-		return {
-			image=export_button,
-			events=export_events,
-		}
-	end
-
-	function create_image_button(image_path, hover_image_path, click_image_path, disabled_image_path)
-		button_image = Image.LoadFile(image_path)
-		button_image_hover = Image.LoadFile(hover_image_path) or button_image
-		button_image_click = Image.LoadFile(click_image_path) or button_image
-		button_image_disabled = Image.LoadFile(disabled_image_path) or button_image
-
-		button_image_size = Image.Size(button_image)
+function create_image_button(image_n, image_h, image_s, hovertext)
+		button_image_size = Image.Size(image_n)
 		button_x = Point.X(button_image_size)
 		button_y = Point.Y(button_image_size)
+		h_text = hovertext or "" 
 
 		-- Create a transparant layer, and wrap it inside an image that registers events
-		button_pick = Image.CreateMouseEvent(Image.CreateExtent(Point.Create(button_x, button_y), Color.Create(0, 0, 0, 0)));
-
+		button_pick = Image.MouseEvent(Image.Extent(Point.Create(button_x, button_y), Color.Create(0, 0, 0, 0)));
+		-- testrect = Image.Extent(Point.Create(button_x, button_y), Color.Create(1, 0, 0, 0.5))
 		-- Grab the event streams we are interested in
 		button_enter = Event.Get(button_pick, "mouse.enter")
 		button_leave = Event.Get(button_pick, "mouse.leave")
@@ -98,16 +24,27 @@ return (function()
 		Event.OnEvent(sound_click, button_click);
 
 		-- We can calculate if we are hovering by comparing two event sources
-		is_hovering = Event.ToBoolean(false, {
-			[button_enter]=true,
-			[button_leave]=false,
-		}, false)
+		btnstatus = Event.ToNumber({
+			[button_leave]=0,
+			[button_enter]=1,
+			[button_click]=2,
+		}, 0 )
+
+		-- we return the hovertext based on the hover status.
+		export_text = Event.ToString({
+			[button_leave]="",
+			[button_enter]=h_text,
+		}, "")
+
+		button_image_switched = Image.Switch(btnstatus, {
+				[0]=image_n,
+				[1]=image_h,
+				[2]=image_s
+			})
 
 		export_button = Image.Group({
-			Image.Switch(is_hovering, {
-				[false]=button_image,
-				[true]=button_image_hover,
-			}),
+			button_image_switched,
+			--testrect, 
 			button_pick,
 		})
 
@@ -118,6 +55,7 @@ return (function()
 		return {
 			image=export_button,
 			events=export_events,
+			btnhovertext = export_text, 
 		}
 	end
 
@@ -131,7 +69,7 @@ return (function()
 		button_y = Number.Divide(button_full_y, 4)
 
 		-- Create a transparant layer, and wrap it inside an image that registers events
-		button_pick = Image.CreateMouseEvent(Image.CreateExtent(Point.Create(button_x, button_y), Color.Create(0, 0, 0, 0)));
+		button_pick = Image.CreateMouseEvent(Image.Extent(Point.Create(button_x, button_y), Color.Create(0, 0, 0, 0)))
 
 		-- Grab the event streams we are interested in
 		button_enter = Event.Get(button_pick, "mouse.enter")
@@ -143,7 +81,7 @@ return (function()
 		Event.OnEvent(sound_click, button_click);
 
 		-- We can calculate if we are hovering by comparing two event sources
-		is_hovering = Event.ToBoolean(false, {
+		is_hovering = Event.ToBoolean({
 			[button_enter]=true,
 			[button_leave]=false,
 		}, false)
@@ -175,7 +113,6 @@ return (function()
 
 
 	return {
-		create_textbutton=create_textbutton,
 		create_old_button=create_old_button,
 		create_image_button=create_image_button
 	}

@@ -1,15 +1,9 @@
 button_script = File.LoadLua("button/button.lua")
+global_script = File.LoadLua("global/global.lua")
 Button = button_script()
---[[
-still to do:
+Global = global_script()
 
-3) add hover text/ tooltip support
-
-DONE 
-1) support 800x600 res by shrinking button bar below that size
-2) add justification to the string images when it is implemented in the api
-4) check if the button pick area / button are aligned sensibly.
-]]
+introscreenversion = "introscreen alpha v0.03 "
 
 -- declare recurring variables used by multiple functions
 	button_width = 144  -- used below and in Render_list()
@@ -22,7 +16,6 @@ DONE
 	introscreenfont = Font.Create("Trebuchet MS", 25, {Bold=true})
 	label_justification 	= Justify.Center
 	function create_stringimages(label)
-		-- STILL NEEDS A JUSTIFICATION APPLIED TO STRINGIMAGE
 		return {
 			normal = Image.String(introscreenfont, button_normal_color, button_width, label, Justify.Center),
 			shadow = Image.String(introscreenfont, button_shadow_color, button_width, label, Justify.Center),
@@ -37,6 +30,7 @@ btnimage_position = Point.Create(0,0)
 btntxt_pt = Point.Create(0,72)
 btntxtshadow_pt = Point.Create(0,73)
 hovertext = "" -- this will hold the eventual text for other functions to use
+buttonversion = "" -- this will hold the version of the button function
 function create_mainbutton(event_sink, argimage, arglabel, arghovertext)
 	label = create_stringimages(arglabel)
 	image_n = Image.Group({
@@ -58,8 +52,8 @@ function create_mainbutton(event_sink, argimage, arglabel, arghovertext)
 			Image.Translate(label.hover, btntxt_pt),		
 		})
 	button = Button.create_image_button(image_n, image_h, image_s, arghovertext)
-	hovertext = String.Concat(hovertext, button.btnhovertext) --[[ concatenates the hoverstring with the contents of the toplevel one. Since there's only one
-	non-empty string we should wind up with only the text for the button currently hovered over... ]]
+	hovertext = String.Concat(hovertext, button.btnhovertext) --[[ concatenates the hoverstring with the contents of the toplevel one. Since there's only one 	non-empty string we should wind up with only the text for the button currently hovered over... ]]
+	buttonversion = button.version
 	Event.OnEvent(event_sink, button.events.click)
 	return button.image
 end
@@ -110,6 +104,7 @@ function create_hovertextimg(str)
 	strimg = Image.String(Font.Create("Trebuchet MS", 25, {Italic=true, Bold=true}), button_normal_color, Number.Divide(xres,2), hovertext, Justify.Center)
 	return Image.Translate(Image.Justify(strimg, resolution, Justify.Bottom),Point.Create(0, -200))
 end
+
 function create_buttonbar()
 	bbimg = render_list(create_button_list())  -- compile the Button Bar (BB) image
 	bbs = Image.Size(bbimg) -- get BB size as a point value
@@ -122,7 +117,10 @@ end
 
 return Image.Group({
 	Image.ScaleFill(bgimage, resolution, Justify.Center),
+	Global.create_backgroundpane(800,600,Image.File("/global/images/backgroundpane.png"),50, button_normal_color),
 --	Image.Justify(Image.Extent(Point.Create(960,540), Color.Create(1,1,1,0.1)), resolution, Justify.Bottomright),
 	Image.Translate(Image.Justify(create_buttonbar(), resolution, Justify.Bottom), Point.Create(0,-50)),
 	create_hovertextimg(hovertext),
+	Image.Justify(Image.String(Font.Create("Verdana",12), button_normal_color, 300, String.Concat(buttonversion, introscreenversion), Justify.Right), resolution, Justify.Topright),
+	-- Image.Justify(Image.String(Font.Create("Verdana",12), button_normal_color, 300, Screen.GetNumber("time"), Justify.Right), resolution, Justify.TopLeft),
 })

@@ -10,12 +10,13 @@ h3 = Font.Create("Trebuchet MS", 25, {Bold=true})
 -- example: Global.create_backgroundpane(800,600,{src=Image.File("/global/images/backgroundpane.png"), partsize=50, color=button_normal_color})
 -- example: Global.create_backgroundpane(300,150) 
 function create_backgroundpane(width, height, opt)
+	opt = opt or {}
 	imagesrc = opt.src or Image.File("/global/images/backgroundpane.png") --the image must be at least 3x partsize in height and width.
 	paintcolor = opt.color or white
 	imagesrc = Image.Multiply(imagesrc,paintcolor)
 	srcimgw = Point.X(Image.Size(imagesrc))
 	srcimgh = Point.Y(Image.Size(imagesrc))
-	partsize = opt.partsize --or 50 --the partsize is one number. parts must be square.
+	partsize = opt.partsize or 50 --the partsize is one number. parts must be square.
 	dblsize = Number.Multiply(partsize,2) -- just convenient because it's used a lot
 	stretchfactorw = Number.Divide(Number.Subtract(width,dblsize),partsize) -- calculate how much we need to stretch the parts 
 	stretchfactorh = Number.Divide(Number.Subtract(height,dblsize),partsize)
@@ -66,6 +67,7 @@ end
 function create_box(w, h, opt)
 	--example create_box(300,700,{border_width=5, border_color=Color.Create(1,1,0), background_color=Color.Create(1,0,0)})
 	-- or create_box(300,700)
+	opt= opt or {}
 	borderwidth = opt.border_width or 1
 	bordercolor = opt.border_color or white
 	backgroundcolor = opt.background_color or transparent

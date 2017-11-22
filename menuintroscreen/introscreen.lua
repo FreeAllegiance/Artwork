@@ -116,10 +116,6 @@ end
 
 return Image.Group({
 	Image.ScaleFill(bgimage, resolution, Justify.Center),
-	Global.create_backgroundpane(800,600),
-	Global.create_box(500,300),
-	-- Global.create_box(500,300,{border_width=5, border_color=Color.Create(0,1,0,0.5), background_color=Color.Create(1,0,0,0.5)}),
-
 	Image.Translate(Image.Justify(create_buttonbar(), resolution, Justify.Bottom), Point.Create(0,-50)),
 	create_hovertextimg(hovertext),
 	Image.Justify(Image.String(Font.Create("Verdana",12), button_normal_color, 300, String.Concat(buttonversion, introscreenversion), Justify.Right), resolution, Justify.Topright),

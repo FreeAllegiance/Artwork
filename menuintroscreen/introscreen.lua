@@ -1,13 +1,12 @@
 button_script = File.LoadLua("button/button.lua")
-global_script = File.LoadLua("global/global.lua")
 Button = button_script()
-Global = global_script()
+Global = File.LoadLua("global/global.lua")()
 
 introscreenversion = "introscreen alpha v0.03 "
 
 -- declare recurring variables used by multiple functions
 	button_width = 144  -- used below and in Render_list()
-	button_normal_color 	= Color.Create(1, 1, 1, 0.7)
+	button_normal_color 	= Global.white
 	button_hover_color 	= Color.Create(1, 1, 1, 0.9)
 	button_selected_color = Color.Create(1,1,1)
 	button_shadow_color = Color.Create(0.4,0.4,0.4,0.5)	
@@ -87,7 +86,7 @@ resolution = Screen.GetResolution()
 -- combine background image and logo
 bgimageuncut = Image.Group({
 	Image.File("menuintroscreen/images/menuintroscreen_bg.jpg"),
-	Image.Translate(Image.Multiply(Image.File("menuintroscreen/images/menuintroscreen_logo.png"),Color.Create(1,1,1,0.7)),Point.Create(910,510)),
+	Image.Translate(Image.Multiply(Image.File("menuintroscreen/images/menuintroscreen_logo.png"),Global.white),Point.Create(910,510)),
 	})
 -- calculate how much of the edges need to be trimmed to fit the resolution
 xres = Point.X(resolution)
@@ -117,10 +116,11 @@ end
 
 return Image.Group({
 	Image.ScaleFill(bgimage, resolution, Justify.Center),
-	Global.create_backgroundpane(800,600,Image.File("/global/images/backgroundpane.png"),50, button_normal_color),
---	Image.Justify(Image.Extent(Point.Create(960,540), Color.Create(1,1,1,0.1)), resolution, Justify.Bottomright),
+	Global.create_backgroundpane(800,600),
+	Global.create_box(500,300),
+	-- Global.create_box(500,300,{border_width=5, border_color=Color.Create(0,1,0,0.5), background_color=Color.Create(1,0,0,0.5)}),
+
 	Image.Translate(Image.Justify(create_buttonbar(), resolution, Justify.Bottom), Point.Create(0,-50)),
 	create_hovertextimg(hovertext),
 	Image.Justify(Image.String(Font.Create("Verdana",12), button_normal_color, 300, String.Concat(buttonversion, introscreenversion), Justify.Right), resolution, Justify.Topright),
-	-- Image.Justify(Image.String(Font.Create("Verdana",12), button_normal_color, 300, Screen.GetNumber("time"), Justify.Right), resolution, Justify.TopLeft),
 })

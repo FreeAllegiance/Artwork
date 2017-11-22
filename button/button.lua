@@ -1,9 +1,6 @@
--- We have to wrap the entire script in a so called Immediately-Invoked Function Expression (IIFE)
--- otherwise variables would be pulled into the global scope
-return (function()
-
-	sound_mouseover = Screen.CreatePlaySoundSink("button/sound/mouseover.ogg")
-	sound_click = Screen.CreatePlaySoundSink("button/sound/cancel.ogg")
+-- declare recurring variables
+sound_mouseover = Screen.CreatePlaySoundSink("button/sound/mouseover.ogg")
+sound_click = Screen.CreatePlaySoundSink("button/sound/cancel.ogg")
 
 function create_image_button(image_n, image_h, image_s, hovertext)
 		button_image_size = Image.Size(image_n)
@@ -56,9 +53,12 @@ function create_image_button(image_n, image_h, image_s, hovertext)
 			image=export_button,
 			events=export_events,
 			btnhovertext = export_text, 
+			version = "button alpha v0.03 " -- the version of this function 
 		}
 	end
 
+--[[
+	Old buttons? Where we're going we don't need old buttons.
 
 	function create_old_button(image_path)
 		button_image_full = Image.LoadFile(image_path)
@@ -110,11 +110,8 @@ function create_image_button(image_n, image_h, image_s, hovertext)
 			events=export_events,
 		}
 	end
-
-
+	]]
 	return {
-		create_old_button=create_old_button,
-		create_image_button=create_image_button
+		create_image_button=create_image_button,
 	}
 
-end)()

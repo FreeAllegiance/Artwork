@@ -196,8 +196,11 @@ CommPane =
 GHSideColor = GetSideColor(Me, OnMeChange);
 GHTargetSideColor = GetSideColor(Target, OnTargetChange);
 GHTextColor	= Color(0.7,0.7,0.7);
-GHVerdana13 = Win32Font("Verdana", 13, false, 0);
 GHVerdana12 = Win32Font("Verdana", 12, false, 0);
+GHVerdana13 = Win32Font("Verdana", 13, false, 0);
+GHVerdana13B = Win32Font("Verdana", 13, true, 0);
+GHVerdana14 = Win32Font("Verdana", 14, false, 0);
+GHVerdana16B = Win32Font("Verdana", 16, true, 0);
 
 // since 'Detected' = 0 when eyed: 
 GHHidden = Detected;
@@ -756,7 +759,7 @@ KBnoTarget =
     StringImage(
         JustifyCenter,
         60,
-        Win32Font("Verdana", 14, true, 0),
+        GHVerdana14,
         GHSideColor,
         NumberString(Experience)
     );
@@ -766,7 +769,7 @@ KBwithTarget =
         StringImage(
             JustifyRight,
             20,
-            Win32Font("Verdana", 14, true, 0),
+            GHVerdana14,
             GHSideColor,
             NumberString(Experience)
         ),
@@ -784,7 +787,7 @@ KBwithTarget =
             StringImage(
                 JustifyLeft,
                 20,
-                Win32Font("Verdana", 14, true, 0),
+                GHVerdana14,
                 targetHudColor,
                 NumberString(TargetExperience)
             ),
@@ -794,7 +797,7 @@ KBwithTarget =
             StringImage(
                 JustifyCenter,
                 150,
-                Win32Font("Verdana", 13, true, 0),
+                GHVerdana13B,
                 targetHudColor,
                 GetName(Target, OnTargetChange)
             ),
@@ -879,7 +882,7 @@ GHMsgDetected =
             StringImage(
                 JustifyCenter,
                 250,
-                Win32Font("Verdana", 14, true, 0),
+                GHVerdana14,
                 GHSideColor,
                 "you have been detected."
             ),
@@ -1168,19 +1171,18 @@ GHLargeTargetCallsign =
         StringImage(
         JustifyCenter,
         250,
-        Win32Font("Verdana", 16, true, 0),
+        GHVerdana16B,
         targetHudColor,
         GetName(Target, OnTargetChange)
     );
 
 GHLargeTargetKBImage =
-    BlendImage(
         GroupImage([
             TranslateImage(
                 StringImage(
                     JustifyCenter,
                     70,
-                    Win32Font("Verdana", 13, true, 0),
+                    GHVerdana13B,
                     GHTargetSideColor,
                     NumberString(TargetExperience)
                 ),
@@ -1190,9 +1192,7 @@ GHLargeTargetKBImage =
                 ImportImage3D("gh_kbbg_bmp", GHTargetSideColor, true),
                 Point(15,15)
             )
-        ]),
-        hudBlendMode
-    );
+        ]);
 
 GHLargeTargetKB = 
     SwitchImage(
@@ -1942,7 +1942,7 @@ GHEjectPodDisplayOn =
                 StringImage(
                     JustifyCenter,
                     180,
-                    Win32Font("Verdana", 14, true, 0),
+                    GHVerdana14,
                     hudColor,
                     "You have ejected."
                 ),

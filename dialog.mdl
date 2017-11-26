@@ -196,6 +196,8 @@ CommPane =
 GHSideColor = GetSideColor(Me, OnMeChange);
 GHTargetSideColor = GetSideColor(Target, OnTargetChange);
 GHTextColor	= Color(0.7,0.7,0.7);
+GHVerdana13 = Win32Font("Verdana", 13, false, 0);
+GHVerdana12 = Win32Font("Verdana", 12, false, 0);
 
 // since 'Detected' = 0 when eyed: 
 GHHidden = Detected;
@@ -686,7 +688,7 @@ GHSpeednoTarget =
         StringImage(
             JustifyRight,
             30,
-            Win32Font("Verdana", 13, false, 0),
+            GHVerdana13,
             GHSideColor,
             NumberString(GetSpeed(Me, OnEveryFrame))
         ),
@@ -694,7 +696,7 @@ GHSpeednoTarget =
             StringImage(
                 JustifyLeft,
                 30,
-                Win32Font("Verdana", 13, false, 0),
+                GHVerdana13,
                 GHTextColor,
                 "mps"
             ),
@@ -708,7 +710,7 @@ GHSpeedwithTarget =
             StringImage(
                 JustifyRight,
                 30,
-                Win32Font("Verdana", 13, false, 0),
+                GHVerdana13,
                 GHSideColor,
                 NumberString(GetSpeed(Me, OnEveryFrame))
             ),
@@ -718,7 +720,7 @@ GHSpeedwithTarget =
             StringImage(
                 JustifyRight,
                 30,
-                Win32Font("Verdana", 13, false, 0),
+                GHVerdana13,
                 targetHudColor,
                 NumberString(GetSpeed(Target, OnEveryFrame))
             ),
@@ -728,7 +730,7 @@ GHSpeedwithTarget =
             StringImage(
                 JustifyLeft,
                 30,
-                Win32Font("Verdana", 13, false, 0),
+                GHVerdana13,
                 GHTextColor,
                 "mps"
             ),
@@ -772,7 +774,7 @@ KBwithTarget =
             StringImage(
                 JustifyCenter,
                 20,
-                Win32Font("Verdana", 12, false, 0),
+                GHVerdana12,
                 GHTextColor,
                 "vs"
             ),
@@ -812,7 +814,7 @@ GHTargetRangePre =
         StringImage(
             JustifyCenter,
             80,
-            Win32Font("Verdana", 13, false, 0),
+            GHVerdana13,
             targetHudColor,
             SwitchString(
                 GetRange(Target, OnEveryFrame),
@@ -838,31 +840,28 @@ GHTargetRange =
 
 
 GHSigString =
-    BlendImage(
-        GroupImage([
-            TranslateImage(
-                StringImage(
-                    JustifyRight,
-                    30,
-                    Win32Font("Verdana", 13, false, 0),
-                    GHTextColor,
-                    "sig"
-                ),
-                Point(0,0)
+    GroupImage([
+        TranslateImage(
+            StringImage(
+                JustifyRight,
+                30,
+                GHVerdana13,
+                GHTextColor,
+                "sig"
             ),
-            TranslateImage(
-                StringImage(
-                    JustifyLeft,
-                    30,
-                    Win32Font("Verdana", 13, false, 0),
-                    GHSideColor,
-                    NumberString(Signature)
-                ),
-                Point(32,0)
-            )
-        ]),
-        hudBlendMode
-    );
+            Point(0,0)
+        ),
+        TranslateImage(
+            StringImage(
+                JustifyLeft,
+                30,
+                GHVerdana13,
+                GHSideColor,
+                NumberString(Signature)
+            ),
+            Point(32,0)
+        )
+    ]);
 
 GHStrings = 
     GroupImage([
@@ -1206,7 +1205,7 @@ GHLargeTargetDescription =
     StringImage(
         JustifyCenter,
         250,
-        Win32Font("Verdana", 12, false, 0),
+        GHVerdana12,
         GHTextColor,
         GetModelTypeDesc(Target, OnTargetChange)
     );
@@ -1214,7 +1213,7 @@ GHLargeTargetRangeLabel =
     StringImage(
         JustifyLeft,
         100,
-        Win32Font("Verdana", 12, false, 0),
+        GHVerdana12,
         GHTextColor,
         SwitchString(
             GetPercentHitPoints(MyStation, OnEveryFrame),
@@ -1233,7 +1232,7 @@ GHLargeTargetRange =
     StringImage(
         JustifyLeft,
         100,
-        Win32Font("Verdana", 12, false, 0),
+        GHVerdana12,
         GHTextColor,
         ConcatinatedString(": ",
             SwitchString(
@@ -1259,7 +1258,7 @@ GHLargeTargetSpeed =
             StringImage(
                 JustifyLeft,
                 100,
-                Win32Font("Verdana", 12, false, 0),
+                GHVerdana12,
                 GHTextColor,
                 "speed"
             ),
@@ -1269,7 +1268,7 @@ GHLargeTargetSpeed =
             StringImage(
                 JustifyLeft,
                 100,
-                Win32Font("Verdana", 12, false, 0),
+                GHVerdana12,
                 GHTextColor,
                 ConcatinatedString(": ", NumberString(GetSpeed(Target, OnEveryFrame)))
             ),
@@ -1334,7 +1333,7 @@ GHLargeTargetTTI =
                     StringImage(
                         JustifyLeft,
                         100,
-                        Win32Font("Verdana", 12, false, 0),
+                        GHVerdana12,
                         GHTextColor,
                         "TTI"
                     ),
@@ -1344,7 +1343,7 @@ GHLargeTargetTTI =
                     StringImage(
                         JustifyLeft,
                         100,
-                        Win32Font("Verdana", 12, false, 0),
+                        GHVerdana12,
                         GHTextColor,
                         ConcatinatedString(": ", GHTTI)
                     ),
@@ -1953,7 +1952,7 @@ GHEjectPodDisplayOn =
                 StringImage(
                     JustifyLeft,
                     160,
-                    Win32Font("Verdana", 13, false, 0),
+                    GHVerdana13,
                     Color(0.6,0.6,0.6),
                     "O :"
                 ),

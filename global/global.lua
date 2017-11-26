@@ -5,7 +5,7 @@ transparent = Color.Create(0,0,0,0)
 p = Font.Create("Trebuchet MS", 18)
 h1 = Font.Create("Trebuchet MS", 25, {Bold=true})
 h2 = Font.Create("Trebuchet MS", 25, {Italic=true, Bold=true})
-h3 = Font.Create("Trebuchet MS", 25, {Bold=true})
+h3 = Font.Create("Trebuchet MS", 20, {Bold=true})
 
 -- example: Global.create_backgroundpane(800,600,{src=Image.File("/global/images/backgroundpane.png"), partsize=50, color=button_normal_color})
 -- example: Global.create_backgroundpane(300,150) 
@@ -97,9 +97,11 @@ end
 return {
 	--global variables
 	white = white,
+	transparent = transparent,
 	p = p,
 	h1 = h1,
 	h2 = h2,
+	h3 = h3,
 	create_box = create_box,
 	create_backgroundpane = create_backgroundpane,
 	rotateImage = rotateImage,

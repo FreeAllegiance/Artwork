@@ -3728,7 +3728,7 @@ CenterHudSoftware =
         TranslateImage(softArtifact, Point(432, 5)),
         TranslateImage(softCaptureFlag, Point(467, 5)),
         TranslateImage(softSignatureImage, Point(406, 14)),
-        ImportImage("softhudbgbmp", true)
+        ImportImageFromFile("CortUI/common/softhudbg.png", true)
     ]);
 
 //////////////////////////////////////////////////////////////////

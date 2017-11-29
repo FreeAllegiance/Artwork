@@ -173,7 +173,7 @@ function make_gamescreen(stageset)
 	xmargin = 10
 	xcardsarea = Number.Subtract(xres,Number.Multiply(xmargin,2))
 	cardsinnermargin = 15
-	cardsoutermargin = 15
+	cardsoutermargin = 10
 	--calculate the number of cards that fit into a horizontal row on the screen
 	cardsrowlen = Number.Divide(xcardsarea, G.list_sum({cardwidth,cardsoutermargin,cardsoutermargin}))
 	-- and round down by subtracting the Modulo.
@@ -217,8 +217,8 @@ function make_gamescreen(stageset)
 		row = Number.Divide(i,Number.Add(cardsrowlen,0.00001))
 		row = Number.Subtract(row, Number.Mod(row,1))
 		col = Number.Subtract(Number.Subtract(i, Number.Multiply(row, cardsrowlen)), 1)
-		posx = Number.Multiply(col,cardwidth)
-		posy = Number.Multiply(row,cardheight)
+		posx = Number.Multiply(col,G.list_sum({cardwidth, cardsoutermargin, cardsoutermargin}))
+		posy = Number.Multiply(row,G.list_sum({cardheight, cardsoutermargin, cardsoutermargin}))
 	-- broke this up into separate vars so it's easier to edit later
 		gamename = game["Name"] --game:GetString("Name"),
 		gamestyle = game["Style"]
@@ -262,7 +262,7 @@ function make_gamescreen(stageset)
 	end
 
 	gamescreen = Image.Group({
-			gamecards,
+			Image.Justify(gamecards, resolution, Justify.Center),
 			--Image.Justify(pos(write(callback, G.p),20,-20),resolution,Justify.Bottom),
 			Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -200)),
 			Image.Translate(Image.Justify(create_buttonbar(create_button_list()), resolution, Justify.Bottom), Point.Create(0,-50)),

@@ -12,8 +12,8 @@ yres = Point.Y(resolution)
 -- declare recurring variables used by multiple functions
 	button_width = 144  -- used below and in Render_list()
 	button_normal_color 	= G.white
-	button_hover_color 	= Color.Create(1, 1, 1, 0.9)
-	button_selected_color = Color.Create(1,1,1)
+	button_hover_color 	= Color.Create(0.9, 0.9, 1, 0.9)
+	button_selected_color = Color.Create(1,1,0.9, 0.95)
 	button_shadow_color = Color.Create(0.4,0.4,0.4,0.6)	
 	stageset = stageset
 
@@ -67,8 +67,20 @@ yres = Point.Y(resolution)
 		return Image.String(G.h2, G.white, Number.Divide(xres,2), hovertext, Justify.Center)
 	end
 
-	function create_buttonbar()
-		bbimg = render_list(create_button_list())  -- compile the Button Bar (BB) image
+	function render_list(list)
+		translated_list = {}
+		offset = button_width+56 -- this number indicates the spaces between buttons
+		offset_x = #list * offset
+		for i, item in pairs(list) do
+			offset_x = offset_x - offset
+			translated_list[#translated_list+1] = Image.Translate(item, Point.Create(offset_x, 0))
+		end
+
+		return Image.Group(translated_list)
+	end
+
+	function create_buttonbar(btnlist)
+		bbimg = render_list(btnlist)  -- compile the Button Bar (BB) image
 		bbs = Image.Size(bbimg) -- get BB size as a point value
 		bbx = Point.X(bbs) -- get BB width as a point val x coordinate
 		bby = Point.Y(bbs) -- get BB height as a point val y coordinate
@@ -99,19 +111,8 @@ function make_introscreen(stageset)
 		list[#list+1] = create_mainbutton(Screen.CreateOpenWebsiteSink("https://discord.gg/WcEJ9VH"), Image.File("menuintroscreen/images/introBtnDiscord.png"), "DISCORD", "Join the community Discord server.")
 		list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.lan"), Image.File("menuintroscreen/images/introBtnLan.png"), "LAN", "Play on a Local Area Network.")
 		list[#list+1] = create_mainbutton(stageset:GetEventSink("Login sink"), Image.File("menuintroscreen/images/introBtnOnline.png"), "PLAY ONLINE", "Play Allegiance.")
+	--	list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.lobby"), Image.File("menuintroscreen/images/introBtnOnline.png"), "PLAY ONLINE", "Play Allegiance.")
 		return list
-	end
-
-	function render_list(list)
-		translated_list = {}
-		offset = button_width+56 -- this number indicates the spaces between buttons
-		offset_x = #list * offset
-		for i, item in pairs(list) do
-			offset_x = offset_x - offset
-			translated_list[#translated_list+1] = Image.Translate(item, Point.Create(offset_x, 0))
-		end
-
-		return Image.Group(translated_list)
 	end
 
 	logo = Image.Group({ 
@@ -134,7 +135,7 @@ function make_introscreen(stageset)
 			})
 	end
 	return Image.Group({
-		Image.Translate(Image.Justify(create_buttonbar(), resolution, Justify.Bottom), Point.Create(0,-50)),
+		Image.Translate(Image.Justify(create_buttonbar(create_button_list()), resolution, Justify.Bottom), Point.Create(0,-50)),
 		Image.Justify(logo, resolution,Justify.Center),
 		Image.Translate(Image.Justify(errortextImg(), resolution, Justify.Bottom),Point.Create(0, -300)),
 		Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -200)),
@@ -169,50 +170,103 @@ end
 function make_gamescreen(stageset)
 	cardwidth = 330
 	cardheight = 360
-	gamecard_bg = G.create_backgroundpane(cardwidth, cardheight)
-	margin = 50
-	cardsarea = Number.Subtract(xres,Number.Multiply(margin,2))
+	xmargin = 10
+	xcardsarea = Number.Subtract(xres,Number.Multiply(xmargin,2))
+	cardsinnermargin = 15
+	cardsoutermargin = 15
 	--calculate the number of cards that fit into a horizontal row on the screen
-	cardsrowlen = Number.Divide(cardsarea,cardwidth)
+	cardsrowlen = Number.Divide(xcardsarea, G.list_sum({cardwidth,cardsoutermargin,cardsoutermargin}))
 	-- and round down by subtracting the Modulo.
 	cardsrowlen = Number.Subtract(cardsrowlen,Number.Mod(cardsrowlen,1))
+	hovertext = "" 
+	callback = ""
+	-------- temp bogus data
 
+	function write(str,fnt,c)
+		font = G.p or fnt
+		color = c or G.white
+		return Image.String(font, color, Number.Subtract(cardwidth, Number.Multiply(cardsinnermargin,2)), str, Justify.Center)
+	end 
 
-	image_serverlist = Image.Group(
-		List.MapToImages(
-			stageset:GetList("Server list"),
-			function (server, index) -- index is 0 based
-				gamecard = Image.Group({
-					gamecard_bg,	
-					Image.String(
-						G.h1, 
-						G.white, 
-						Number.Subtract(cardwidth, 30), 
-						server:GetString("Name"), 
-						Justify.Center
-					),
-					Image.String(
-						G.h2, 
-						G.white, 
-						Number.Subtract(cardwidth, 30), 
-						Number.ToString(server:GetNumber("Player count")), 
-						Justify.Center
-					),
+	function pos(img, x,y)
+		return Image.Translate(img, Point.Create(x,y))
+	end	
+		-- bogus game data we can remove after real connection
+	function gamedata()
+		gamedata = {}
+		gamedata[#gamedata+1] = {["Name"]="Wabbawabbit's Game", ["Player count"]=12, ["NoatWarriors"]=6, ["Server"]="Mach3", ["Style"]="CONQUEST", ["Status"]="In Progress", ["Time"]="0:35"}
+		gamedata[#gamedata+1] = {["Name"]="MAIN US East Game", ["Player count"]=35, ["NoatWarriors"]=52, ["Server"]="AEast1", ["Style"]="CONQUEST", ["Status"]="Forging Teams", ["Time"]=""}
+		gamedata[#gamedata+1] = {["Name"]="MAIN US WEST Game", ["Player count"]=102, ["NoatWarriors"]=0, ["Server"]="AWest1", ["Style"]="DEATHMATCH", ["Status"]="In Progress", ["Time"]="0:10"}
+		gamedata[#gamedata+1] = {["Name"]="Wabbawabbit's Game", ["Player count"]=12, ["NoatWarriors"]=6, ["Server"]="Mach3", ["Style"]="CONQUEST", ["Status"]="In Progress", ["Time"]="0:35"}
+		gamedata[#gamedata+1] = {["Name"]="MAIN US East Game", ["Player count"]=35, ["NoatWarriors"]=52, ["Server"]="AEast1", ["Style"]="CONQUEST", ["Status"]="Forging Teams", ["Time"]=""}
+		gamedata[#gamedata+1] = {["Name"]="Wabbawabbit's Game", ["Player count"]=12, ["NoatWarriors"]=6, ["Server"]="Mach3", ["Style"]="CONQUEST", ["Status"]="In Progress", ["Time"]="0:35"}
+		gamedata[#gamedata+1] = {["Name"]="MAIN US East Game", ["Player count"]=35, ["NoatWarriors"]=52, ["Server"]="AEast1", ["Style"]="CONQUEST", ["Status"]="Forging Teams", ["Time"]=""}
+		gamedata[#gamedata+1] = {["Name"]="MAIN US WEST Game", ["Player count"]=102, ["NoatWarriors"]=0, ["Server"]="AWest1", ["Style"]="DEATHMATCH", ["Status"]="In Progress", ["Time"]="0:10"}
+		gamedata[#gamedata+1] = {["Name"]="Wabbawabbit's Game", ["Player count"]=12, ["NoatWarriors"]=6, ["Server"]="Mach3", ["Style"]="CONQUEST", ["Status"]="In Progress", ["Time"]="0:35"}
+		gamedata[#gamedata+1] = {["Name"]="MAIN US East Game", ["Player count"]=35, ["NoatWarriors"]=52, ["Server"]="AEast1", ["Style"]="CONQUEST", ["Status"]="Forging Teams", ["Time"]=""}
+		return gamedata
+	end
+	-- games = stageset:GetList("Server list")
+	games = gamedata()
+	gamesn = 0
+	for i in pairs(games) do gamesn = gamesn+1 end
+	callback =""
 
-				})
-				return Image.Translate(
-					gamecard, 
-					Point.Create(
-						Number.Multiply(index, 375), 
-						0
-					)
-				)
-			end
-		)
-	)
-	
+	cardslist = {}
+	for i, game in ipairs(games) do 
+		row = Number.Divide(i,Number.Add(cardsrowlen,0.00001))
+		row = Number.Subtract(row, Number.Mod(row,1))
+		col = Number.Subtract(Number.Subtract(i, Number.Multiply(row, cardsrowlen)), 1)
+		posx = Number.Multiply(col,cardwidth)
+		posy = Number.Multiply(row,cardheight)
+	-- broke this up into separate vars so it's easier to edit later
+		gamename = game["Name"]
+		gamestyle = game["Style"]
+		gameplayercount = Number.ToString(game["Player count"])
+		gamenoat =  Number.ToString(game["NoatWarriors"])
+		gamestatus = game["Status"]
+		gametime = game["Time"]
+		gameserver = game["Server"]
+		gamestate = G.list_concat({gamestatus, "-", gametime, " ", gameplayercount,"/", gamenoat})
+
+		function makegamecardface(cardcolor) 
+			gamecardface = Image.Group({
+				G.create_backgroundpane(cardwidth, cardheight, {color=cardcolor}),	
+				pos(write(gamestyle, G.h1, cardcolor),0,10),
+				pos(write(gamestate, G.h4, cardcolor),0,35), 
+				pos(write(gamename, G.h3, cardcolor),0,60),--game:GetString("Name"),
+			})
+			return gamecardface
+		end
+
+		joinbtn_n = makegamecardface(button_normal_color)
+		joinbtn_h = makegamecardface(button_hover_color)
+		joinbtn_s = makegamecardface(button_selected_color)
+
+		card = Button.create_image_button(joinbtn_n, joinbtn_h, joinbtn_s, "Connect To This Game Lobby And Join This Game")
+
+		hovertext = String.Concat(hovertext, card.btnhovertext) --concatenates the hoverstring with the contents of the toplevel one.
+		Event.OnEvent(Screen.GetExternalEventSink("open.lobby"), card.events.click)
+		cardslist[#cardslist+1] = pos(card.image,posx,posy) 
+	end
+	gamecards = Image.Group(cardslist)
+
+	function create_button_list()
+		list = {}
+		list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.exit"), Image.File("menuintroscreen/images/introBtnExit.png"), "EXIT", "Exit the game.")
+		list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.options"), Image.File("menuintroscreen/images/introBtnSettings.png"), "OPTIONS", "Change your graphics, audio and game settings.")
+		list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.training"), Image.File("menuintroscreen/images/introBtnHelp.png"), "TRAINING", "Learn how to play the game.")
+		list[#list+1] = create_mainbutton(Screen.CreateOpenWebsiteSink("https://discord.gg/WcEJ9VH"), Image.File("menuintroscreen/images/introBtnDiscord.png"), "DISCORD", "Join the community Discord server.")
+		list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.lobby"), Image.File("menuintroscreen/images/introBtnOnline.png"), "PLAY ONLINE", "Play Allegiance.")
+		--list[#list+1] = create_mainbutton(stageset:GetEventSink("Login sink"), Image.File("menuintroscreen/images/introBtnOnline.png"), "PLAY ONLINE", "Play Allegiance.")
+		return list
+	end
+
 	gamescreen = Image.Group({
-			image_serverlist,
+			gamecards,
+			Image.Justify(pos(write(callback, G.p),20,-20),resolution,Justify.Bottom),
+			Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -200)),
+			Image.Translate(Image.Justify(create_buttonbar(create_button_list()), resolution, Justify.Bottom), Point.Create(0,-50)),
 		})
 
 	return gamescreen
@@ -224,7 +278,7 @@ end
 function make_background()
 	bgimageuncut = Image.Group({
 		Image.File("menuintroscreen/images/menuintroscreen_bg.jpg"),
-		--Image.File("menuintroscreen/images/tempalignmentbg.png"),
+	--	Image.File("menuintroscreen/images/tempalignmentbg.png"),
 	 })
 	-- calculate how much of the edges need to be trimmed to fit the resolution
 	xbgcutout = Number.Min(xres,1920) -- less than or equal to 1920
@@ -249,3 +303,33 @@ return Image.Group({
 	Image.ScaleFill(make_background(), resolution, Justify.Center), -- we use the same background image for all of them.
 	stagescreen,
 	})
+
+
+
+-----
+	---
+	--[[	
+	image_gamelist = Image.Group(
+		List.MapToImages(
+			stageset:GetList("Server list"),
+			function (game, index) -- index is 0 based	
+				button = Button.create_image_button(joinbtn_n, joinbtn_h, joinbtn_s, "Connect To This Game Lobby And Join This Game")
+				hovertext = String.Concat(hovertext, button.btnhovertext) --concatenates the hoverstring with the contents of the toplevel one.
+				Event.OnEvent(Screen.GetExternalEventSink("open.lobby"), button.events.click)
+				
+				gamestatus = G.list_concat({"Forging Teams - ", Number.ToString(5),"/", Number.ToString(10)}) -- Number.ToString(game:GetNumber("Playercount"))
+				--gamestatus = String.Concat("Forging Teams - ", String.Concat(Number.ToString(5),"/")) -- Number.ToString(game:GetNumber("Playercount"))
+				--gamestatus = String.Concat(gamestatus, ) Number.ToString(game:GetNumber("NoatWarriors"))
+				gamecard = Image.Group({
+					gamecard_bg,	
+					pos(write("DEATHMATCH", G.h1),0,10), --game:GetString("Style"), 
+					pos(write(gamestatus, G.h4),0,35), --game:GetString("Status"),
+					pos(write("Bunnywabbit@DEV's Game", G.h3),0,60),--game:GetString("Name"),
+					--Image.String(G.h2, G.white, Number.Subtract(cardwidth, 30), , Justify.Center),
+					pos(Image.Justify(button.image,Point.Create(cardwidth,cardheight),Justify.Bottom),0,-30),
+				})
+				return pos(gamecard, Number.Multiply(index, 375), 0)
+			end
+		)
+	)
+]]

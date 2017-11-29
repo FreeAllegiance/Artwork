@@ -1,12 +1,13 @@
 -- global variables. Must also be returned at the end of this file.
-white = Color.Create(1,1,1,0.8)
+white = Color.Create(1,1,1,0.75)
 dark = Color.Create(0,0,0,0.5)
 transparent = Color.Create(0,0,0,0)
 p = Font.Create("Trebuchet MS", 18)
+pbold = Font.Create("Trebuchet MS", 18, {Bold=true})
 h1 = Font.Create("Trebuchet MS", 25, {Bold=true})
-h2 = Font.Create("Trebuchet MS", 25, {Italic=true, Bold=true})
-h3 = Font.Create("Trebuchet MS", 20, {Bold=true})
-
+h2 = Font.Create("Trebuchet MS", 23, {Italic=true, Bold=true})
+h3 = Font.Create("Trebuchet MS", 21, {Bold=true})
+h4 = Font.Create("Trebuchet MS", 19, {Bold=true})
 -- example: Global.create_backgroundpane(800,600,{src=Image.File("/global/images/backgroundpane.png"), partsize=50, color=button_normal_color})
 -- example: Global.create_backgroundpane(300,150) 
 function create_backgroundpane(width, height, opt)
@@ -87,22 +88,48 @@ function create_box(w, h, opt)
 end
 
 -- this function allows you to use degrees rather than radials to rotate images.
-function rotateImage(image, degree)
+function rotate_image_degree(image, degree)
 	fraction = Number.Divide(degree,360)
 	tau = 6.283185307179586476925286766559
 	radialrotation = Number.Multiply(fraction,tau)
 	return Image.Rotate(image,radialrotation)
 end	
 
+function list_sum(lst)
+	sum = 0
+	lst = lst
+	for i,val in ipairs(lst) do
+		sum = Number.Add(sum,val)
+	end	
+	return sum
+end
+
+function list_concat(lst, separator)
+--	n = 0
+--	for i in pairs(lst) do n=n+1 end
+	sp = separator or ""
+	ln = ""
+	if space == true then sp = " " end
+	for i,val in ipairs(lst) do
+		if i>1 then ln=String.Concat(ln,sp) end
+		ln = String.Concat(ln,val)
+	end	
+	return ln
+end
+
 return {
 	--global variables
 	white = white,
 	transparent = transparent,
 	p = p,
+	pbold = pbold,
 	h1 = h1,
 	h2 = h2,
 	h3 = h3,
+	h4 = h4,
+	list_sum = list_sum,
+	list_concat = list_concat,
 	create_box = create_box,
 	create_backgroundpane = create_backgroundpane,
-	rotateImage = rotateImage,
+	rotate_image_degree = rotate_image_degree,
 }

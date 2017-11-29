@@ -206,8 +206,8 @@ function make_gamescreen(stageset)
 		gamedata[#gamedata+1] = {["Name"]="MAIN US East Game", ["Player count"]=35, ["NoatWarriors"]=52, ["Server"]="AEast1", ["Style"]="CONQUEST", ["Status"]="Forging Teams", ["Time"]=""}
 		return gamedata
 	end
-	-- games = stageset:GetList("Server list")
-	games = gamedata()
+	
+	games = gamedata() -- stageset:GetList("Server list")
 	gamesn = 0
 	for i in pairs(games) do gamesn = gamesn+1 end
 	callback =""
@@ -220,9 +220,9 @@ function make_gamescreen(stageset)
 		posx = Number.Multiply(col,cardwidth)
 		posy = Number.Multiply(row,cardheight)
 	-- broke this up into separate vars so it's easier to edit later
-		gamename = game["Name"]
+		gamename = game["Name"] --game:GetString("Name"),
 		gamestyle = game["Style"]
-		gameplayercount = Number.ToString(game["Player count"])
+		gameplayercount = Number.ToString(game["Player count"]) --game:GetString("Player count"),
 		gamenoat =  Number.ToString(game["NoatWarriors"])
 		gamestatus = game["Status"]
 		gametime = game["Time"]
@@ -234,7 +234,7 @@ function make_gamescreen(stageset)
 				G.create_backgroundpane(cardwidth, cardheight, {color=cardcolor}),	
 				pos(write(gamestyle, G.h1, cardcolor),0,10),
 				pos(write(gamestate, G.h4, cardcolor),0,35), 
-				pos(write(gamename, G.h3, cardcolor),0,60),--game:GetString("Name"),
+				pos(write(gamename, G.h3, cardcolor),0,60),
 			})
 			return gamecardface
 		end
@@ -244,7 +244,6 @@ function make_gamescreen(stageset)
 		joinbtn_s = makegamecardface(button_selected_color)
 
 		card = Button.create_image_button(joinbtn_n, joinbtn_h, joinbtn_s, "Connect To This Game Lobby And Join This Game")
-
 		hovertext = String.Concat(hovertext, card.btnhovertext) --concatenates the hoverstring with the contents of the toplevel one.
 		Event.OnEvent(Screen.GetExternalEventSink("open.lobby"), card.events.click)
 		cardslist[#cardslist+1] = pos(card.image,posx,posy) 
@@ -264,7 +263,7 @@ function make_gamescreen(stageset)
 
 	gamescreen = Image.Group({
 			gamecards,
-			Image.Justify(pos(write(callback, G.p),20,-20),resolution,Justify.Bottom),
+			--Image.Justify(pos(write(callback, G.p),20,-20),resolution,Justify.Bottom),
 			Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -200)),
 			Image.Translate(Image.Justify(create_buttonbar(create_button_list()), resolution, Justify.Bottom), Point.Create(0,-50)),
 		})

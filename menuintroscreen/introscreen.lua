@@ -170,8 +170,9 @@ end
 function make_gamescreen(stageset)
 	cardwidth = 330
 	cardheight = 360
-	xmargin = 10
+	xmargin = 75
 	xcardsarea = Number.Subtract(xres,Number.Multiply(xmargin,2))
+	ycardsarea = Number.Subtract(yres,Number.Add(150,170))
 	cardsinnermargin = 15
 	cardsoutermargin = 10
 	--calculate the number of cards that fit into a horizontal row on the screen
@@ -248,7 +249,10 @@ function make_gamescreen(stageset)
 		Event.OnEvent(Screen.GetExternalEventSink("open.lobby"), card.events.click)
 		cardslist[#cardslist+1] = pos(card.image,posx,posy) 
 	end
-	gamecards = Image.Group(cardslist)
+	gamecards = G.create_vertical_scrolling_container(
+			Image.Group(cardslist),
+			Point.Create(xcardsarea, ycardsarea)
+			)
 
 	function create_button_list()
 		list = {}
@@ -262,6 +266,7 @@ function make_gamescreen(stageset)
 	end
 
 	gamescreen = Image.Group({
+			Image.Justify(G.create_backgroundpane(Number.Add(xcardsarea, 40), Number.Add(ycardsarea,40)), resolution, Justify.Center),
 			Image.Justify(gamecards, resolution, Justify.Center),
 			--Image.Justify(pos(write(callback, G.p),20,-20),resolution,Justify.Bottom),
 			Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -200)),
@@ -303,32 +308,3 @@ return Image.Group({
 	stagescreen,
 	})
 
-
-
------
-	---
-	--[[	
-	image_gamelist = Image.Group(
-		List.MapToImages(
-			stageset:GetList("Server list"),
-			function (game, index) -- index is 0 based	
-				button = Button.create_image_button(joinbtn_n, joinbtn_h, joinbtn_s, "Connect To This Game Lobby And Join This Game")
-				hovertext = String.Concat(hovertext, button.btnhovertext) --concatenates the hoverstring with the contents of the toplevel one.
-				Event.OnEvent(Screen.GetExternalEventSink("open.lobby"), button.events.click)
-				
-				gamestatus = G.list_concat({"Forging Teams - ", Number.ToString(5),"/", Number.ToString(10)}) -- Number.ToString(game:GetNumber("Playercount"))
-				--gamestatus = String.Concat("Forging Teams - ", String.Concat(Number.ToString(5),"/")) -- Number.ToString(game:GetNumber("Playercount"))
-				--gamestatus = String.Concat(gamestatus, ) Number.ToString(game:GetNumber("NoatWarriors"))
-				gamecard = Image.Group({
-					gamecard_bg,	
-					pos(write("DEATHMATCH", G.h1),0,10), --game:GetString("Style"), 
-					pos(write(gamestatus, G.h4),0,35), --game:GetString("Status"),
-					pos(write("Bunnywabbit@DEV's Game", G.h3),0,60),--game:GetString("Name"),
-					--Image.String(G.h2, G.white, Number.Subtract(cardwidth, 30), , Justify.Center),
-					pos(Image.Justify(button.image,Point.Create(cardwidth,cardheight),Justify.Bottom),0,-30),
-				})
-				return pos(gamecard, Number.Multiply(index, 375), 0)
-			end
-		)
-	)
-]]

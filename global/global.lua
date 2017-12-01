@@ -19,7 +19,13 @@ function create_backgroundpane(width, height, opt)
 	srcimgh = Point.Y(Image.Size(imagesrc))
 	partsize = opt.partsize or 50 --the partsize is one number. parts must be square.
 	dblsize = Number.Multiply(partsize,2) -- just convenient because it's used a lot
-	stretchfactorw = Number.Divide(Number.Subtract(width,dblsize),partsize) -- calculate how much we need to stretch the parts 
+	stretchfactorw = Number.Divide(
+		Number.Subtract(
+			width,
+			dblsize
+			),
+		partsize
+		) -- calculate how much we need to stretch the parts 
 	stretchfactorh = Number.Divide(Number.Subtract(height,dblsize),partsize)
 	--[[
 	we're cutting the image up in 9 sections as follows
@@ -117,19 +123,140 @@ function list_concat(lst, separator)
 	return ln
 end
 
+----------- scrollbar code -----------------
+
+
+-- this function is dimension-agnostic:
+-- feed it an image and it will figure out wether the scrollbar is supposed to be horizontal or vertical
+-- scale_scrollbarpart([image file], [integer, desired length or width], [integer, ends of the bar that should not be scaled])
+-- example: scale_scrollbarpart(Image.File("path/image.png"), 800, 10)
+
+function scale_scrollbarpart(image, i_dimension, i_partsize)
+	origwidth = Point.X(Image.Size(image))
+	origheight = Point.Y(Image.Size(image))
+	scalefactor = (i_dimension-(2*i_partsize))/i_partsize --Number.Divide(Number.Subtract(i_dimension,2*i_partsize),i_partsize) -- calculate how much we need to stretch the middle part
+
+	function horizontal_scrollbar()
+			leftpart = Image.Cut(image, Rect.Create(0,0,i_partsize,origheight))
+			midpart = Image.Scale(Image.Cut(image, Rect.Create(i_partsize,0, i_partsize*2, origheight)),Point.Create(scalefactor,1))
+			rightpart = Image.Cut(image, Rect.Create(origwidth-i_partsize,0,origwidth,origheight))
+		return Image.Group({
+				leftpart,
+				Image.Translate(midpart,Point.Create(i_partsize,0)),
+				Image.Translate(rightpart, Point.Create(i_dimension-i_partsize,0))
+			})
+	end
+	function vertical_scrollbar()
+		toppart = Image.Cut(image, Rect.Create(0,0, origwidth, i_partsize))
+		midpart = Image.Scale(Image.Cut(image, Rect.Create(0, i_partsize, origwidth, i_partsize*2)),Point.Create(1, scalefactor))
+		bottompart = Image.Cut(image, Rect.Create(0, origheight-i_partsize,origwidth, origheight))
+		return Image.Group({
+			toppart,
+			Image.Translate(midpart,Point.Create(0, i_partsize)),
+			Image.Translate(bottompart, Point.Create(0, i_dimension-i_partsize))
+			})
+	end
+
+	scrollbarpart = Image.Switch(
+		Number.Max(0,origwidth-origheight),
+		{
+		[0]=vertical_scrollbar()
+		},
+		horizontal_scrollbar()
+		)
+
+	return scrollbarpart
+--[[
+	return create_backgroundpane(origwidth, i_dimension, {
+		src=image,
+		partsize=i_partsize
+	})
+	]]
+end
+
+
+function create_vertical_scrollbar(position_fraction, height, grip_height)
+
+	grip_original = Image.File("global/images/scrollbargrip_opaquecenter.png")
+	staticEndSize = 14 -- in px
+	grip = scale_scrollbarpart(grip_original, grip_height, staticEndSize)
+	
+	scrollbarbg_original = Image.File("global/images/scrollbar_opaquecenter.png")
+	scrollbarbg = scale_scrollbarpart(scrollbarbg_original, height, staticEndSize)
+	scrollbar_width = Point.X(Image.Size(scrollbarbg))
+	
+ 	scrollbar_translation_per_fraction = Number.Subtract(height, grip_height)
+	fraction_per_scrollbar_translation = Number.Divide(1, scrollbar_translation_per_fraction)
+
+	grip_translation = Point.Create(0, Number.Add(0, Number.Multiply(position_fraction, scrollbar_translation_per_fraction)))
+
+	grip_translated = Image.MouseEvent(Image.Translate(grip, grip_translation))
+
+	Event.OnEvent(position_fraction, Event.GetPoint(grip_translated, "drag"), function (dragged)
+		return Number.Clamp(0, 1, Number.Add(position_fraction, Number.Multiply(fraction_per_scrollbar_translation, Point.Y(dragged))))
+	end)
+
+	return {
+		width=scrollbar_width,
+		image=Image.Group({
+			scrollbarbg,
+			grip_translated,
+		})
+	}
+end
+
+function create_vertical_scrolling_container(target_image, container_size)
+	container_width = Point.X(container_size)
+	container_height = Point.Y(container_size)
+
+	target_size = Image.Size(target_image)
+	target_height = Point.Y(target_size)
+
+	position_fraction = Number.CreateEventSink(0)
+
+	grip_height = Number.Max(
+		30, 
+		Number.Multiply(Number.Divide(container_height, target_height), container_height)
+	)
+
+	scrollbar = create_vertical_scrollbar(
+		position_fraction, 
+		container_height, 
+		grip_height
+	)
+	
+	cut_width = Number.Subtract(container_width, scrollbar.width)
+
+	offset_x = 0
+
+	offset_y = Number.Multiply(position_fraction, Number.Subtract(target_height, container_height))
+
+	scroll_window = Image.Group({
+		Image.Cut(target_image, Rect.Create(offset_x, offset_y, cut_width, Number.Add(offset_y, container_height))),
+		Image.Translate(scrollbar.image, Point.Create(cut_width, 0))
+	})
+	return scroll_window
+
+end
+
 return {
-	--global variables
+	-- other
+	testingstring = testingstring,
+	--global colors
 	white = white,
 	transparent = transparent,
+	-- global fonts
 	p = p,
 	pbold = pbold,
 	h1 = h1,
 	h2 = h2,
 	h3 = h3,
 	h4 = h4,
+	-- global functions
 	list_sum = list_sum,
 	list_concat = list_concat,
 	create_box = create_box,
 	create_backgroundpane = create_backgroundpane,
+	create_vertical_scrolling_container=create_vertical_scrolling_container,
 	rotate_image_degree = rotate_image_degree,
 }

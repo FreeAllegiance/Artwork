@@ -1,6 +1,6 @@
 button_script = File.LoadLua("button/button.lua")
 Button = button_script()
-G = File.LoadLua("global/global.lua")()
+Global = File.LoadLua("global/global.lua")()
 
 stage= Screen.GetState("Login state")
 
@@ -11,14 +11,14 @@ yres = Point.Y(resolution)
 
 -- declare recurring variables used by multiple functions
 	button_width = 144  -- used below and in Render_list()
-	button_normal_color 	= G.white
+	button_normal_color 	= Global.color.white
 	button_hover_color 	= Color.Create(0.9, 0.9, 1, 0.9)
 	button_selected_color = Color.Create(1,1,0.9, 0.95)
 	button_shadow_color = Color.Create(0.4,0.4,0.4,0.6)	
 	stageset = stageset
 
  -- declare recurring variables outside of function
-	introscreenfont = G.h1
+	introscreenfont = Global.font.h1
 	label_justification 	= Justify.Center
 	function create_stringimages(label)
 		return {
@@ -64,7 +64,7 @@ yres = Point.Y(resolution)
 	end
 
 	function create_hovertextimg(str)
-		return Image.String(G.h2, G.white, Number.Divide(xres,2), hovertext, Justify.Center)
+		return Image.String(Global.font.h2, Global.color.white, Number.Divide(xres,2), hovertext, Justify.Center)
 	end
 
 	function render_list(list)
@@ -117,7 +117,7 @@ function make_introscreen(stageset)
 
 	logo = Image.Group({ 
 			Image.Justify(
-				Image.Multiply(Image.File("menuintroscreen/images/menuintroscreen_logo.png"),G.white),
+				Image.Multiply(Image.File("menuintroscreen/images/menuintroscreen_logo.png"),Global.color.white),
 				Point.Create(278,78), 
 				Justify.Topright
 				),
@@ -129,7 +129,7 @@ function make_introscreen(stageset)
 				["No"] = function(stageset) return Image.Empty() end,
 				["Yes"] = function (stageset)
 						errMsg = stageset:GetString("Message") 
-						errimg = Image.String(G.h2, G.white, Number.Divide(xres,2), errMsg, Justify.Center)
+						errimg = Image.String(Global.font.h2, Global.color.white, Number.Divide(xres,2), errMsg, Justify.Center)
 						return errimg
 					end,
 			})
@@ -150,13 +150,13 @@ end
 function make_spinner(stageset)
 	spinnerpoint = Point.Create(136,136) -- roughly the size of the diagonal of the spinner image. 
 	spinner = Image.Group({
-		Image.Extent(spinnerpoint, G.transparent),
-		Image.Justify(Image.Multiply(Image.File("menuintroscreen/images/spinner_aleph.png"),G.white), spinnerpoint, Justify.Center),
-		Image.Justify(Image.Rotate(Image.Multiply(Image.File("menuintroscreen/images/spinner.png"),G.white), Number.Multiply(Screen.GetNumber("time"), 3.14)), spinnerpoint, Justify.Center),
+		Image.Extent(spinnerpoint, Global.color.transparent),
+		Image.Justify(Image.Multiply(Image.File("menuintroscreen/images/spinner_aleph.png"),Global.color.white), spinnerpoint, Justify.Center),
+		Image.Justify(Image.Rotate(Image.Multiply(Image.File("menuintroscreen/images/spinner.png"),Global.color.white), Number.Multiply(Screen.GetNumber("time"), 3.14)), spinnerpoint, Justify.Center),
 		})
 
 stepMsg = stageset:GetString("Step message")
-stepMsgImg = Image.String(G.h2, G.white, Number.Divide(xres,2), stepMsg, Justify.Center)
+stepMsgImg = Image.String(Global.font.h2, Global.color.white, Number.Divide(xres,2), stepMsg, Justify.Center)
 
 	return Image.Group({
 		Image.Justify(spinner, resolution,Justify.Center),
@@ -173,10 +173,11 @@ function make_gamescreen(stageset)
 	xmargin = 75
 	xcardsarea = Number.Subtract(xres,Number.Multiply(xmargin,2))
 	ycardsarea = Number.Subtract(yres,Number.Add(150,170))
+	cardsarea = Point.Create(xcardsarea,ycardsarea)
 	cardsinnermargin = 15
 	cardsoutermargin = 10
 	--calculate the number of cards that fit into a horizontal row on the screen
-	cardsrowlen = Number.Divide(xcardsarea, G.list_sum({cardwidth,cardsoutermargin,cardsoutermargin}))
+	cardsrowlen = Number.Divide(xcardsarea, Global.list_sum({cardwidth,cardsoutermargin,cardsoutermargin}))
 	-- and round down by subtracting the Modulo.
 	cardsrowlen = Number.Subtract(cardsrowlen,Number.Mod(cardsrowlen,1))
 	hovertext = "" 
@@ -184,8 +185,8 @@ function make_gamescreen(stageset)
 	-------- temp bogus data
 
 	function write(str,fnt,c)
-		font = G.p or fnt
-		color = c or G.white
+		font = Global.font.p or fnt
+		color = c or Global.color.white
 		return Image.String(font, color, Number.Subtract(cardwidth, Number.Multiply(cardsinnermargin,2)), str, Justify.Center)
 	end 
 
@@ -218,8 +219,8 @@ function make_gamescreen(stageset)
 		row = Number.Divide(i,Number.Add(cardsrowlen,0.00001))
 		row = Number.Subtract(row, Number.Mod(row,1))
 		col = Number.Subtract(Number.Subtract(i, Number.Multiply(row, cardsrowlen)), 1)
-		posx = Number.Multiply(col,G.list_sum({cardwidth, cardsoutermargin, cardsoutermargin}))
-		posy = Number.Multiply(row,G.list_sum({cardheight, cardsoutermargin, cardsoutermargin}))
+		posx = Number.Multiply(col,Global.list_sum({cardwidth, cardsoutermargin, cardsoutermargin}))
+		posy = Number.Multiply(row,Global.list_sum({cardheight, cardsoutermargin, cardsoutermargin}))
 	-- broke this up into separate vars so it's easier to edit later
 		gamename = game["Name"] --game:GetString("Name"),
 		gamestyle = game["Style"]
@@ -228,14 +229,14 @@ function make_gamescreen(stageset)
 		gamestatus = game["Status"]
 		gametime = game["Time"]
 		gameserver = game["Server"]
-		gamestate = G.list_concat({gamestatus, "-", gametime, " ", gameplayercount,"/", gamenoat})
+		gamestate = Global.list_concat({gamestatus, "-", gametime, " ", gameplayercount,"/", gamenoat})
 
 		function makegamecardface(cardcolor) 
 			gamecardface = Image.Group({
-				G.create_backgroundpane(cardwidth, cardheight, {color=cardcolor}),	
-				pos(write(gamestyle, G.h1, cardcolor),0,10),
-				pos(write(gamestate, G.h4, cardcolor),0,35), 
-				pos(write(gamename, G.h3, cardcolor),0,60),
+				Global.create_backgroundpane(cardwidth, cardheight, {color=cardcolor}),	
+				pos(write(gamestyle, Global.font.h1, cardcolor),0,10),
+				pos(write(gamestate, Global.font.h4, cardcolor),0,35), 
+				pos(write(gamename, Global.font.h3, cardcolor),0,60),
 			})
 			return gamecardface
 		end
@@ -249,9 +250,9 @@ function make_gamescreen(stageset)
 		Event.OnEvent(Screen.GetExternalEventSink("open.lobby"), card.events.click)
 		cardslist[#cardslist+1] = pos(card.image,posx,posy) 
 	end
-	gamecards = G.create_vertical_scrolling_container(
-			Image.Group(cardslist),
-			Point.Create(xcardsarea, ycardsarea)
+	gamecards = Global.create_vertical_scrolling_container(
+			Image.Justify(Image.Group(cardslist),cardsarea, Justify.Top),
+			cardsarea
 			)
 
 	function create_button_list()
@@ -266,9 +267,9 @@ function make_gamescreen(stageset)
 	end
 
 	gamescreen = Image.Group({
-			Image.Justify(G.create_backgroundpane(Number.Add(xcardsarea, 40), Number.Add(ycardsarea,40)), resolution, Justify.Center),
+			Image.Justify(Global.create_backgroundpane(Number.Add(xcardsarea, 40), Number.Add(ycardsarea,40), {color=Global.color.white}), resolution, Justify.Center),
 			Image.Justify(gamecards, resolution, Justify.Center),
-			--Image.Justify(pos(write(callback, G.p),20,-20),resolution,Justify.Bottom),
+			--Image.Justify(pos(write(callback, Global.font.p),20,-20),resolution,Justify.Bottom),
 			Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -200)),
 			Image.Translate(Image.Justify(create_buttonbar(create_button_list()), resolution, Justify.Bottom), Point.Create(0,-50)),
 		})

@@ -1,13 +1,21 @@
--- global variables. Must also be returned at the end of this file.
-white = Color.Create(1,1,1,0.75)
-dark = Color.Create(0,0,0,0.5)
-transparent = Color.Create(0,0,0,0)
-p = Font.Create("Trebuchet MS", 18)
-pbold = Font.Create("Trebuchet MS", 18, {Bold=true})
-h1 = Font.Create("Trebuchet MS", 25, {Bold=true})
-h2 = Font.Create("Trebuchet MS", 23, {Italic=true, Bold=true})
-h3 = Font.Create("Trebuchet MS", 21, {Bold=true})
-h4 = Font.Create("Trebuchet MS", 19, {Bold=true})
+-- NOTE: In order to be called from elsewhere, functions and variables must be returned at the end of this file.
+
+-- VARIABLES. 
+--colors
+color = {}
+color.white = Color.Create(1,1,1,0.75)
+color.dark = Color.Create(0,0,0,0.5)
+color.transparent = Color.Create(0,0,0,0)
+--fonts
+font = {}
+font.p = Font.Create("Trebuchet MS", 18)
+font.pbold = Font.Create("Trebuchet MS", 18, {Bold=true})
+font.h1 = Font.Create("Trebuchet MS", 25, {Bold=true})
+font.h2 = Font.Create("Trebuchet MS", 23, {Italic=true, Bold=true})
+font.h3 = Font.Create("Trebuchet MS", 21, {Bold=true})
+font.h4 = Font.Create("Trebuchet MS", 19, {Bold=true})
+
+-- FUNCTIONS
 -- example: Global.create_backgroundpane(800,600,{src=Image.File("/global/images/backgroundpane.png"), partsize=50, color=button_normal_color})
 -- example: Global.create_backgroundpane(300,150) 
 function create_backgroundpane(width, height, opt)
@@ -134,7 +142,7 @@ end
 function scale_scrollbarpart(image, i_dimension, i_partsize)
 	origwidth = Point.X(Image.Size(image))
 	origheight = Point.Y(Image.Size(image))
-	scalefactor = (i_dimension-(2*i_partsize))/i_partsize --Number.Divide(Number.Subtract(i_dimension,2*i_partsize),i_partsize) -- calculate how much we need to stretch the middle part
+	scalefactor = Number.Round((i_dimension-(2*i_partsize)+2)/i_partsize,2) --Number.Divide(Number.Subtract(i_dimension,2*i_partsize),i_partsize) -- calculate how much we need to stretch the middle part
 
 	function horizontal_scrollbar()
 			leftpart = Image.Cut(image, Rect.Create(0,0,i_partsize,origheight))
@@ -147,13 +155,13 @@ function scale_scrollbarpart(image, i_dimension, i_partsize)
 			})
 	end
 	function vertical_scrollbar()
-		toppart = Image.Cut(image, Rect.Create(0,0, origwidth, i_partsize))
+		toppart = Image.Cut(image, Rect.Create(0,0, origwidth, i_partsize+1))
 		midpart = Image.Scale(Image.Cut(image, Rect.Create(0, i_partsize, origwidth, i_partsize*2)),Point.Create(1, scalefactor))
-		bottompart = Image.Cut(image, Rect.Create(0, origheight-i_partsize,origwidth, origheight))
+		bottompart = Image.Cut(image, Rect.Create(0, origheight-i_partsize-1,origwidth, origheight))
 		return Image.Group({
 			toppart,
-			Image.Translate(midpart,Point.Create(0, i_partsize)),
-			Image.Translate(bottompart, Point.Create(0, i_dimension-i_partsize))
+			Image.Translate(midpart,Point.Create(0, i_partsize-1)),
+			Image.Translate(bottompart, Point.Create(0, i_dimension-i_partsize-1))
 			})
 	end
 
@@ -176,12 +184,11 @@ end
 
 
 function create_vertical_scrollbar(position_fraction, height, grip_height)
-
-	grip_original = Image.File("global/images/scrollbargrip_opaquecenter.png")
+	grip_original = Image.File("global/images/scrollbargrip_roundedline.png")
 	staticEndSize = 14 -- in px
 	grip = scale_scrollbarpart(grip_original, grip_height, staticEndSize)
 	
-	scrollbarbg_original = Image.File("global/images/scrollbar_opaquecenter.png")
+	scrollbarbg_original = Image.File("global/images/scrollbar_bg_thin.png")
 	scrollbarbg = scale_scrollbarpart(scrollbarbg_original, height, staticEndSize)
 	scrollbar_width = Point.X(Image.Size(scrollbarbg))
 	
@@ -206,17 +213,21 @@ function create_vertical_scrollbar(position_fraction, height, grip_height)
 end
 
 function create_vertical_scrolling_container(target_image, container_size)
+	-- retrieve the dimensions of the scrolling window
 	container_width = Point.X(container_size)
 	container_height = Point.Y(container_size)
-
+	-- retrieve dimensions of the image to be placed inside
 	target_size = Image.Size(target_image)
 	target_height = Point.Y(target_size)
 
 	position_fraction = Number.CreateEventSink(0)
 
 	grip_height = Number.Max(
-		30, 
-		Number.Multiply(Number.Divide(container_height, target_height), container_height)
+		30,
+		Number.Min( 
+			Number.Multiply(Number.Divide(container_height, target_height), container_height),
+			container_height
+			)
 	)
 
 	scrollbar = create_vertical_scrollbar(
@@ -243,15 +254,9 @@ return {
 	-- other
 	testingstring = testingstring,
 	--global colors
-	white = white,
-	transparent = transparent,
+	color = color,
 	-- global fonts
-	p = p,
-	pbold = pbold,
-	h1 = h1,
-	h2 = h2,
-	h3 = h3,
-	h4 = h4,
+	font = font,
 	-- global functions
 	list_sum = list_sum,
 	list_concat = list_concat,

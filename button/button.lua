@@ -61,4 +61,3 @@ end
 return {
 	create_image_button=create_image_button,
 }
-

@@ -27,14 +27,8 @@ function create_backgroundpane(width, height, opt)
 	srcimgh = Point.Y(Image.Size(imagesrc))
 	partsize = opt.partsize or 50 --the partsize is one number. parts must be square.
 	dblsize = Number.Multiply(partsize,2) -- just convenient because it's used a lot
-	stretchfactorw = Number.Divide(
-		Number.Subtract(
-			width,
-			dblsize
-			),
-		partsize
-		) -- calculate how much we need to stretch the parts 
-	stretchfactorh = Number.Divide(Number.Subtract(height,dblsize),partsize)
+	stretchfactorw = Number.Round(Number.Divide(Number.Subtract(width,dblsize),partsize),2) -- calculate how much we need to stretch the parts 
+	stretchfactorh = Number.Round(Number.Divide(Number.Subtract(height,dblsize),partsize),2)
 	--[[
 	we're cutting the image up in 9 sections as follows
 	tlc		tb		trc   
@@ -142,7 +136,7 @@ end
 function scale_scrollbarpart(image, i_dimension, i_partsize)
 	origwidth = Point.X(Image.Size(image))
 	origheight = Point.Y(Image.Size(image))
-	scalefactor = Number.Round((i_dimension-(2*i_partsize)+2)/i_partsize,2) --Number.Divide(Number.Subtract(i_dimension,2*i_partsize),i_partsize) -- calculate how much we need to stretch the middle part
+	scalefactor = Number.Round((i_dimension-(2*i_partsize)+2)/i_partsize,2) -- calculate how much we need to stretch the middle part, the 2's are for 1px overlaps on both ends
 
 	function horizontal_scrollbar()
 			leftpart = Image.Cut(image, Rect.Create(0,0,i_partsize,origheight))
@@ -166,20 +160,13 @@ function scale_scrollbarpart(image, i_dimension, i_partsize)
 	end
 
 	scrollbarpart = Image.Switch(
-		Number.Max(0,origwidth-origheight),
+		Number.Min(Number.Max(0,origwidth-origheight),1),
 		{
-		[0]=vertical_scrollbar()
-		},
-		horizontal_scrollbar()
-		)
+		[0]=vertical_scrollbar(),
+		[1]=horizontal_scrollbar()
+		})
 
 	return scrollbarpart
---[[
-	return create_backgroundpane(origwidth, i_dimension, {
-		src=image,
-		partsize=i_partsize
-	})
-	]]
 end
 
 

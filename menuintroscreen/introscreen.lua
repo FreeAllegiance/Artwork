@@ -1,21 +1,39 @@
-button_script = File.LoadLua("button/button.lua")
-Button = button_script()
+Button = File.LoadLua("button/button.lua")()
 Global = File.LoadLua("global/global.lua")()
-
+introscreenversion = "introscreen alpha v0.04 "
 stage= Screen.GetState("Login state")
 
-introscreenversion = "introscreen alpha v0.04 "
+-------------------------------------------------------
+--[[ SUPER IMPORTANT OBJECT --- 
+Loginstate_container will hold the data associated with the current login stage
+from it you can get data that is only available when you are in that state.
+The "Logged out" state currently has two values: An event sink to start the login process and whether or not there was an error (set to "Yes" if a previous login failed)
+The "Logging in" state contains data about the current step in the login process
+and "Logged in" contains the serverlist - used in the gamescreen function. 
+
+]]
+Loginstate_container = Loginstate_container
+------------------------------------------------------------------
+
 resolution = Screen.GetResolution()
 xres = Point.X(resolution)
 yres = Point.Y(resolution)
 
 -- declare recurring variables used by multiple functions
-	button_width = 144  -- used below and in Render_list()
-	button_normal_color 	= Global.color.white
+	button_width = 144  -- used below and in render_list()
+	button_normal_color = Global.color.white
 	button_hover_color 	= Color.Create(0.9, 0.9, 1, 0.9)
 	button_selected_color = Color.Create(1,1,0.9, 0.95)
 	button_shadow_color = Color.Create(0.4,0.4,0.4,0.6)	
 	stageset = stageset
+
+	logo = Image.Group({ 
+	Image.Justify(
+		Image.Multiply(Image.File("menuintroscreen/images/menuintroscreen_logo.png"),Global.color.white),
+		Point.Create(278,78), 
+		Justify.Topright
+		),
+	})
 
  -- declare recurring variables outside of function
 	introscreenfont = Global.font.h1
@@ -91,15 +109,9 @@ yres = Point.Y(resolution)
 
 -------     INTROSCREEN --------
 ----------------------------------------------
---[[
-Stageset is the data associated with the current login stage
-from it you can get data that is only available when you are in that state.
-The "Logged out" state currently has two values: An event sink to start the login process and whether or not there was an error (set to "Yes" if a previous login failed)
-The "Logging in" state contains data about the current step in the login process
-and "Logged in" contains the serverlist - used in the gamescreen function.
-]]
 
-function make_introscreen(stageset)
+
+function make_introscreen(Loginstate_container)
 
 	function create_button_list()
 		list = {}
@@ -110,60 +122,32 @@ function make_introscreen(stageset)
 	--	list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.help"), "menuintroscreen/images/introBtnHelp.png", "HELP")
 		list[#list+1] = create_mainbutton(Screen.CreateOpenWebsiteSink("https://discord.gg/WcEJ9VH"), Image.File("menuintroscreen/images/introBtnDiscord.png"), "DISCORD", "Join the community Discord server.")
 		list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.lan"), Image.File("menuintroscreen/images/introBtnLan.png"), "LAN", "Play on a Local Area Network.")
-		list[#list+1] = create_mainbutton(stageset:GetEventSink("Login sink"), Image.File("menuintroscreen/images/introBtnOnline.png"), "PLAY ONLINE", "Play Allegiance.")
+		list[#list+1] = create_mainbutton(Loginstate_container:GetEventSink("Login sink"), Image.File("menuintroscreen/images/introBtnOnline.png"), "PLAY ONLINE", "Play Allegiance.")
 	--	list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.lobby"), Image.File("menuintroscreen/images/introBtnOnline.png"), "PLAY ONLINE", "Play Allegiance.")
 		return list
 	end
 
-	logo = Image.Group({ 
-			Image.Justify(
-				Image.Multiply(Image.File("menuintroscreen/images/menuintroscreen_logo.png"),Global.color.white),
-				Point.Create(278,78), 
-				Justify.Topright
-				),
-			})
-	
 	function errortextImg() 
 		return Image.Switch(
-			stageset:GetState("Has error"), {
-				["No"] = function(stageset) return Image.Empty() end,
-				["Yes"] = function (stageset)
-						errMsg = stageset:GetString("Message") 
+			Loginstate_container:GetState("Has error"), {
+				["No"] = function(Loginstate_container) return Image.Empty() end,
+				["Yes"] = function (Loginstate_container)
+						errMsg = Loginstate_container:GetString("Message") 
 						errimg = Image.String(Global.font.h2, Global.color.white, Number.Divide(xres,2), errMsg, Justify.Center)
 						return errimg
 					end,
 			})
 	end
+	
 	return Image.Group({
-		Image.Translate(Image.Justify(create_buttonbar(create_button_list()), resolution, Justify.Bottom), Point.Create(0,-50)),
+		Image.Translate(Image.Justify(create_buttonbar(create_button_list()), resolution, Justify.Bottom), Point.Create(0,-30)),
 		Image.Justify(logo, resolution,Justify.Center),
 		Image.Translate(Image.Justify(errortextImg(), resolution, Justify.Bottom),Point.Create(0, -300)),
-		Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -200)),
+		Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -150)),
 		Image.Justify(Image.String(Font.Create("Verdana",12), button_normal_color, 300, String.Concat(buttonversion, introscreenversion), Justify.Right), resolution, Justify.Topright),
 	})
 end
 
-
-
----------------------- Connecting   ----------------
-----------------------------------------------------------------------------------------------------------------------------------
-function make_spinner(stageset)
-	spinnerpoint = Point.Create(136,136) -- roughly the size of the diagonal of the spinner image. 
-	spinner = Image.Group({
-		Image.Extent(spinnerpoint, Global.color.transparent),
-		Image.Justify(Image.Multiply(Image.File("menuintroscreen/images/spinner_aleph.png"),Global.color.white), spinnerpoint, Justify.Center),
-		Image.Justify(Image.Rotate(Image.Multiply(Image.File("menuintroscreen/images/spinner.png"),Global.color.white), Number.Multiply(Screen.GetNumber("time"), 3.14)), spinnerpoint, Justify.Center),
-		})
-
-stepMsg = stageset:GetString("Step message")
-stepMsgImg = Image.String(Global.font.h2, Global.color.white, Number.Divide(xres,2), stepMsg, Justify.Center)
-
-	return Image.Group({
-		Image.Justify(spinner, resolution,Justify.Center),
-		--spinner,
-		Image.Translate(Image.Justify(stepMsgImg, resolution, Justify.Bottom),Point.Create(0, -300)),
-		})
-end
 
 --------------- GAME SCREEN --------------------------
 ------------------------------------------------------
@@ -184,6 +168,47 @@ function make_gamescreen(stageset)
 	callback = ""
 	-------- temp bogus data
 
+---------------------- Connecting   ----------------
+----------------------------------------------------------------------------------------------------------------------------------
+function make_spinner(Loginstate_container)
+	spinnerpoint = Point.Create(136,136) -- roughly the size of the diagonal of the spinner image. 
+	spinner = Image.Group({
+		Image.Extent(spinnerpoint, Global.color.transparent),
+		Image.Justify(Image.Multiply(Image.File("menuintroscreen/images/spinner_aleph.png"),Global.color.white), spinnerpoint, Justify.Center),
+		Image.Justify(Image.Rotate(Image.Multiply(Image.File("menuintroscreen/images/spinner.png"),Global.color.white), Number.Multiply(Screen.GetNumber("time"), 3.14)), spinnerpoint, Justify.Center),
+		})
+
+stepMsg = Loginstate_container:GetString("Step message")
+stepMsgImg = Image.String(Global.font.h2, Global.color.white, Number.Divide(xres,2), stepMsg, Justify.Center)
+
+	return Image.Group({
+		Image.Justify(spinner, resolution,Justify.Center),
+		--spinner,
+		Image.Translate(Image.Justify(stepMsgImg, resolution, Justify.Bottom),Point.Create(0, -150)),
+		})
+end
+
+--------------- GAME SCREEN --------------------------
+------------------------------------------------------
+function make_gamescreen(Loginstate_container)
+	cardwidth = 250
+	cardheight = 280
+	xmargin = Number.Round(Number.Multiply(xres,0.04), 0)
+	ytopmargin = 100 --Number.Round(Number.Multiply(yres,0.10),0)
+	ybottommargin = 180
+	xcardsarea = xres-(2*xmargin) -- Number.Subtract(xres,Global.list_sum({xmargin, xmargin}))
+	ycardsarea = yres-(ybottommargin+ytopmargin) -- Number.Subtract(yres,Number.Add(ybottommargin,ytopmargin))
+	cardsarea = Point.Create(xcardsarea,ycardsarea)
+	cardsinnermargin = 15
+	cardsoutermargin = 10
+	--calculate the number of cards that fit into a horizontal row on the screen
+	cardsrowlen = xcardsarea/(cardwidth+cardsoutermargin+cardsoutermargin)
+	-- and round down by subtracting the Modulo.
+	cardsrowlen = Number.Subtract(cardsrowlen,Number.Mod(cardsrowlen,1))
+	hovertext = "" 
+	callback = ""
+	-------- temp bogus data
+
 	function write(str,fnt,c)
 		font = Global.font.p or fnt
 		color = c or Global.color.white
@@ -193,67 +218,86 @@ function make_gamescreen(stageset)
 	function pos(img, x,y)
 		return Image.Translate(img, Point.Create(x,y))
 	end	
-		-- bogus game data we can remove after real connection
-	function gamedata()
-		gamedata = {}
-		gamedata[#gamedata+1] = {["Name"]="Wabbawabbit's Game", ["Player count"]=12, ["NoatWarriors"]=6, ["Server"]="Mach3", ["Style"]="CONQUEST", ["Status"]="In Progress", ["Time"]="0:35"}
-		gamedata[#gamedata+1] = {["Name"]="MAIN US East Game", ["Player count"]=35, ["NoatWarriors"]=52, ["Server"]="AEast1", ["Style"]="CONQUEST", ["Status"]="Forging Teams", ["Time"]=""}
-		gamedata[#gamedata+1] = {["Name"]="MAIN US WEST Game", ["Player count"]=102, ["NoatWarriors"]=0, ["Server"]="AWest1", ["Style"]="DEATHMATCH", ["Status"]="In Progress", ["Time"]="0:10"}
-		gamedata[#gamedata+1] = {["Name"]="Wabbawabbit's Game", ["Player count"]=12, ["NoatWarriors"]=6, ["Server"]="Mach3", ["Style"]="CONQUEST", ["Status"]="In Progress", ["Time"]="0:35"}
-		gamedata[#gamedata+1] = {["Name"]="MAIN US East Game", ["Player count"]=35, ["NoatWarriors"]=52, ["Server"]="AEast1", ["Style"]="CONQUEST", ["Status"]="Forging Teams", ["Time"]=""}
-		gamedata[#gamedata+1] = {["Name"]="Wabbawabbit's Game", ["Player count"]=12, ["NoatWarriors"]=6, ["Server"]="Mach3", ["Style"]="CONQUEST", ["Status"]="In Progress", ["Time"]="0:35"}
-		gamedata[#gamedata+1] = {["Name"]="MAIN US East Game", ["Player count"]=35, ["NoatWarriors"]=52, ["Server"]="AEast1", ["Style"]="CONQUEST", ["Status"]="Forging Teams", ["Time"]=""}
-		gamedata[#gamedata+1] = {["Name"]="MAIN US WEST Game", ["Player count"]=102, ["NoatWarriors"]=0, ["Server"]="AWest1", ["Style"]="DEATHMATCH", ["Status"]="In Progress", ["Time"]="0:10"}
-		gamedata[#gamedata+1] = {["Name"]="Wabbawabbit's Game", ["Player count"]=12, ["NoatWarriors"]=6, ["Server"]="Mach3", ["Style"]="CONQUEST", ["Status"]="In Progress", ["Time"]="0:35"}
-		gamedata[#gamedata+1] = {["Name"]="MAIN US East Game", ["Player count"]=35, ["NoatWarriors"]=52, ["Server"]="AEast1", ["Style"]="CONQUEST", ["Status"]="Forging Teams", ["Time"]=""}
-		return gamedata
-	end
-	
-	games = gamedata() -- stageset:GetList("Server list")
-	gamesn = 0
-	for i in pairs(games) do gamesn = gamesn+1 end
-	callback =""
+	games_container = Loginstate_container:GetList("Server list")
+	cardslistImg = Image.Group(
+		List.MapToImages(
+			games_container,
+			function (game, i)
+				row = Number.Divide(i,Number.Add(cardsrowlen,0.00001))
+				row = Number.Subtract(row, Number.Mod(row,1))
+				col = Number.Subtract(Number.Subtract(i, Number.Multiply(row, cardsrowlen)), 1)
+				posx = Number.Multiply(col,Global.list_sum({cardwidth, cardsoutermargin, cardsoutermargin}))
+				posy = Number.Multiply(row,Global.list_sum({cardheight, cardsoutermargin, cardsoutermargin}))
 
-	cardslist = {}
-	for i, game in ipairs(games) do 
-		row = Number.Divide(i,Number.Add(cardsrowlen,0.00001))
-		row = Number.Subtract(row, Number.Mod(row,1))
-		col = Number.Subtract(Number.Subtract(i, Number.Multiply(row, cardsrowlen)), 1)
-		posx = Number.Multiply(col,Global.list_sum({cardwidth, cardsoutermargin, cardsoutermargin}))
-		posy = Number.Multiply(row,Global.list_sum({cardheight, cardsoutermargin, cardsoutermargin}))
-	-- broke this up into separate vars so it's easier to edit later
-		gamename = game["Name"] --game:GetString("Name"),
-		gamestyle = game["Style"]
-		gameplayercount = Number.ToString(game["Player count"]) --game:GetString("Player count"),
-		gamenoat =  Number.ToString(game["NoatWarriors"])
-		gamestatus = game["Status"]
-		gametime = game["Time"]
-		gameserver = game["Server"]
-		gamestate = Global.list_concat({gamestatus, "-", gametime, " ", gameplayercount,"/", gamenoat})
+				gamename = game:GetString("Name")
+				gameplayercount = Number.ToString(game:GetNumber("Player count"))
+				gamenoat =  Number.ToString(game:GetNumber("Player noat count"))			
+				gametime = Number.ToString(game:GetNumber("Time in progress"))
+				gameserver = game:GetString("Server name")
+				gamestatus = String.Switch(
+					game:GetBool("Is in progress"),{
+					[true]="In Progress", 
+					[false]="Building Teams",
+				})
+				gamestate = Global.list_concat({gamestatus, "-", gametime, " ", gameplayercount,"/", gamenoat})
+				
+				lst = {}
+				lst["CONQUEST"] = game:GetBool("Has goal conquest")
+				lst["TERRITORY"] = game:GetBool("Has goal territory")
+				lst["PROSPERITY"] = game:GetBool("Has goal prosperity")
+				lst["ARTIFACTS"] = game:GetBool("Has goal artifacts")
+				lst["FLAGS"] = game:GetBool("Has goal flags")
+				lst["DEATHMATCH"] = game:GetBool("Has goal deathmatch")
+				lst["COUNTDOWN"] = game:GetBool("Has goal countdown")
+				function findtruegamestyle()
+					bools = {}
+					for stylename, bool in ipairs(lst) do
+						bools[bool] = stylename -- we don't care about the false values, just the one true value
+					end 
+					return bools[true] 
+				end
+				
+				gamestyle = String.Switch(
+					Number.Min(Boolean.Count(lst),2),{
+					[0] = "UNKNOWN", 
+					[1] = findtruegamestyle(),
+					[2] = "CUSTOM GAME",
+					}
+				)
 
-		function makegamecardface(cardcolor) 
-			gamecardface = Image.Group({
-				Global.create_backgroundpane(cardwidth, cardheight, {color=cardcolor}),	
-				pos(write(gamestyle, Global.font.h1, cardcolor),0,10),
-				pos(write(gamestate, Global.font.h4, cardcolor),0,35), 
-				pos(write(gamename, Global.font.h3, cardcolor),0,60),
-			})
-			return gamecardface
-		end
+				function makegamecardface(cardcolor) 
+					return Image.Group({
+					Global.create_backgroundpane(cardwidth, cardheight, {color=cardcolor}),	
+					pos(write(gamestyle, Global.font.h1, cardcolor),0,10),
+					pos(write(gamestate, Global.font.h4, cardcolor),0,35), 
+					pos(write(gamename, Global.font.h3, cardcolor),0,60),
+					})
+				end
 
-		joinbtn_n = makegamecardface(button_normal_color)
-		joinbtn_h = makegamecardface(button_hover_color)
-		joinbtn_s = makegamecardface(button_selected_color)
+				joinbtn_n = makegamecardface(button_normal_color)
+				joinbtn_h = makegamecardface(button_hover_color)
+				joinbtn_s = makegamecardface(button_selected_color)
 
-		card = Button.create_image_button(joinbtn_n, joinbtn_h, joinbtn_s, "Connect To This Game Lobby And Join This Game")
-		hovertext = String.Concat(hovertext, card.btnhovertext) --concatenates the hoverstring with the contents of the toplevel one.
-		Event.OnEvent(Screen.GetExternalEventSink("open.lobby"), card.events.click)
-		cardslist[#cardslist+1] = pos(card.image,posx,posy) 
-	end
-	gamecards = Global.create_vertical_scrolling_container(
-			Image.Justify(Image.Group(cardslist),cardsarea, Justify.Top),
-			cardsarea
-			)
+				card = Button.create_image_button(joinbtn_n, joinbtn_h, joinbtn_s, "Connect To This Game Lobby And Join This Game")
+				hovertext = String.Concat(hovertext, card.btnhovertext) --concatenates the hoverstring with the contents of the toplevel one.
+				Event.OnEvent(game:GetEventSink("Join sink"), card.events.click)
+				return  pos(card.image,posx,posy) 
+			end	
+		)
+	)
+	doWeNeedaScrollbar = Number.Min(Number.Max(0,Number.Subtract(Point.Y(Image.Size(cardslistImg)),ycardsarea)),1)
+	gamecards = Image.Group({
+		Image.Extent(cardsarea, Global.color.transparent),
+		Image.Switch(
+			doWeNeedaScrollbar, --if the vertical size of the cardimage < cardsarea (if it fits) return 0, otherwise return 1,
+			{
+			[0] = Image.Justify(cardslistImg,cardsarea, Justify.Top), -- then just show the cardsimage, else 
+			[1] = Global.create_vertical_scrolling_container(
+					Image.Justify(cardslistImg,cardsarea, Justify.Top),
+					cardsarea
+				)
+			}), -- make a scrolling pane image
+		})
 
 	function create_button_list()
 		list = {}
@@ -262,16 +306,16 @@ function make_gamescreen(stageset)
 		list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.training"), Image.File("menuintroscreen/images/introBtnHelp.png"), "TRAINING", "Learn how to play the game.")
 		list[#list+1] = create_mainbutton(Screen.CreateOpenWebsiteSink("https://discord.gg/WcEJ9VH"), Image.File("menuintroscreen/images/introBtnDiscord.png"), "DISCORD", "Join the community Discord server.")
 		list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.lobby"), Image.File("menuintroscreen/images/introBtnOnline.png"), "PLAY ONLINE", "Play Allegiance.")
-		--list[#list+1] = create_mainbutton(stageset:GetEventSink("Login sink"), Image.File("menuintroscreen/images/introBtnOnline.png"), "PLAY ONLINE", "Play Allegiance.")
+		--list[#list+1] = create_mainbutton(Loginstate_container:GetEventSink("Login sink"), Image.File("menuintroscreen/images/introBtnOnline.png"), "PLAY ONLINE", "Play Allegiance.")
 		return list
 	end
 
 	gamescreen = Image.Group({
-			Image.Justify(Global.create_backgroundpane(Number.Add(xcardsarea, 40), Number.Add(ycardsarea,40), {color=Global.color.white}), resolution, Justify.Center),
-			Image.Justify(gamecards, resolution, Justify.Center),
+			Image.Translate(Global.create_backgroundpane(Number.Add(xcardsarea, 40), Number.Add(ycardsarea,40), {color=Global.color.white}), Point.Create(xmargin-20, ytopmargin-20)),
+			Image.Translate(gamecards, Point.Create(xmargin, ytopmargin)),
 			--Image.Justify(pos(write(callback, Global.font.p),20,-20),resolution,Justify.Bottom),
-			Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -200)),
-			Image.Translate(Image.Justify(create_buttonbar(create_button_list()), resolution, Justify.Bottom), Point.Create(0,-50)),
+			Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -150)),
+			Image.Translate(Image.Justify(create_buttonbar(create_button_list()), resolution, Justify.Bottom), Point.Create(0,-30)),
 		})
 
 	return gamescreen
@@ -281,10 +325,7 @@ end
 ---- background image --------
 -- combine background image and logo
 function make_background()
-	bgimageuncut = Image.Group({
-		Image.File("menuintroscreen/images/menuintroscreen_bg.jpg"),
-	--	Image.File("menuintroscreen/images/tempalignmentbg.png"),
-	 })
+	bgimageuncut = Image.File("menuintroscreen/images/menuintroscreen_bg.jpg")
 	-- calculate how much of the edges need to be trimmed to fit the resolution
 	xbgcutout = Number.Min(xres,1920) -- less than or equal to 1920
 	ybgcutout = Number.Min(yres,1080) -- less than or equal to 1080

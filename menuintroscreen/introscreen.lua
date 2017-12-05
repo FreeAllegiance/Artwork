@@ -21,10 +21,10 @@ yres = Point.Y(resolution)
 
 -- declare recurring variables used by multiple functions
 	button_width = 144  -- used below and in render_list()
-	button_normal_color = Global.color.white
-	button_hover_color 	= Color.Create(0.9, 0.9, 1, 0.9)
+	button_normal_color = Color.Create(1, 0.9, 0.8, 0.8)
+	button_hover_color 	= Color.Create(0.9, 0.9, 1, 0.8)
 	button_selected_color = Color.Create(1,1,0.9, 0.95)
-	button_shadow_color = Color.Create(0.4,0.4,0.4,0.6)	
+	button_shadow_color = Color.Create(0.4,0.4,0.4,0.7)	
 
 	logo = Image.Group({ 
 	Image.Justify(
@@ -174,18 +174,19 @@ end
 function make_gamescreen(Loginstate_container)
 	cardwidth = 250
 	cardheight = 280
-	xmargin = Number.Round(Number.Multiply(xres,0.04), 0)
+	xmargin = Number.Round(Number.Multiply(xres,0.1), 1)
 	ytopmargin = 100 --Number.Round(Number.Multiply(yres,0.10),0)
 	ybottommargin = 180
-	xcardsarea = xres-(2*xmargin) -- Number.Subtract(xres,Global.list_sum({xmargin, xmargin}))
+	scrollbarwidth = 26
+	xcardsarea = (xres-scrollbarwidth)-(2*xmargin) -- Number.Subtract(xres,Global.list_sum({xmargin, xmargin}))
 	ycardsarea = yres-(ybottommargin+ytopmargin) -- Number.Subtract(yres,Number.Add(ybottommargin,ytopmargin))
-	cardsarea = Point.Create(xcardsarea,ycardsarea)
+	cardsarea = Point.Create(xcardsarea+scrollbarwidth,ycardsarea)
 	cardsinnermargin = 15
 	cardsoutermargin = 10
 	--calculate the number of cards that fit into a horizontal row on the screen
-	cardsrowlen = xcardsarea/(cardwidth+cardsoutermargin+cardsoutermargin)
+	cardsrowlen = xcardsarea/(cardwidth+(2*cardsoutermargin))
 	-- and round down by subtracting the Modulo.
-	cardsrowlen = Number.Subtract(cardsrowlen,Number.Mod(cardsrowlen,1))
+	cardsrowlen = cardsrowlen-Number.Mod(cardsrowlen,1)
 	hovertext = "" 
 	callback = ""
 	-------- temp bogus data
@@ -204,11 +205,11 @@ function make_gamescreen(Loginstate_container)
 		List.MapToImages(
 			games_container,
 			function (game, i)
-				row = Number.Divide(i,Number.Add(cardsrowlen,0.00001))
-				row = Number.Subtract(row, Number.Mod(row,1))
-				col = Number.Subtract(Number.Subtract(i, Number.Multiply(row, cardsrowlen)), 1)
-				posx = Number.Multiply(col,Global.list_sum({cardwidth, cardsoutermargin, cardsoutermargin}))
-				posy = Number.Multiply(row,Global.list_sum({cardheight, cardsoutermargin, cardsoutermargin}))
+				row = i/(cardsrowlen)
+				row = row-Number.Mod(row,1)
+				col = i - (row*cardsrowlen)
+				posx = col*(cardwidth+cardsoutermargin+cardsoutermargin)
+				posy = row*(cardheight+cardsoutermargin+cardsoutermargin)
 
 				gamename = game:GetString("Name")
 				gameplayercount = Number.ToString(game:GetNumber("Player count"))
@@ -221,7 +222,7 @@ function make_gamescreen(Loginstate_container)
 					[false]="Building Teams",
 				})
 				gamestate = Global.list_concat({gamestatus, "-", gametime, " ", gameplayercount,"/", gamenoat})
-				
+			
 				lst = {}
 				lst["CONQUEST"] = game:GetBool("Has goal conquest")
 				lst["TERRITORY"] = game:GetBool("Has goal territory")
@@ -245,13 +246,17 @@ function make_gamescreen(Loginstate_container)
 					[2] = "CUSTOM GAME",
 					}
 				)
-
+			
 				function makegamecardface(cardcolor) 
 					return Image.Group({
 					Global.create_backgroundpane(cardwidth, cardheight, {color=cardcolor}),	
 					pos(write(gamestyle, Global.font.h1, cardcolor),0,10),
 					pos(write(gamestate, Global.font.h4, cardcolor),0,35), 
 					pos(write(gamename, Global.font.h3, cardcolor),0,60),
+				--	pos(write("row: " .. Number.ToString(row), Global.font.h4, cardcolor),0,75), 
+				--	pos(write("col: " .. Number.ToString(col), Global.font.h4, cardcolor),0,90),
+				--	pos(write("rowlen: " .. Number.ToString(cardsrowlen), Global.font.h4, cardcolor),0,105),
+				--	pos(write("i: " .. Number.ToString(i), Global.font.h4, cardcolor),0,120),
 					})
 				end
 
@@ -272,9 +277,9 @@ function make_gamescreen(Loginstate_container)
 		Image.Switch(
 			doWeNeedaScrollbar, --if the vertical size of the cardimage < cardsarea (if it fits) return 0, otherwise return 1,
 			{
-			[0] = Image.Justify(cardslistImg,cardsarea, Justify.Top), -- then just show the cardsimage, else 
+			[0] = Image.Justify(cardslistImg,cardsarea, Justify.Center), -- then just show the cardsimage, else 
 			[1] = Global.create_vertical_scrolling_container(
-					Image.Justify(cardslistImg,cardsarea, Justify.Top),
+					Image.Justify(cardslistImg,Point.Create(xcardsarea+scrollbarwidth,ycardsarea), Justify.Top),
 					cardsarea
 				)
 			}), -- make a scrolling pane image
@@ -286,13 +291,12 @@ function make_gamescreen(Loginstate_container)
 		list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.options"), Image.File("menuintroscreen/images/introBtnSettings.png"), "OPTIONS", "Change your graphics, audio and game settings.")
 		list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.training"), Image.File("menuintroscreen/images/introBtnHelp.png"), "TRAINING", "Learn how to play the game.")
 		list[#list+1] = create_mainbutton(Screen.CreateOpenWebsiteSink("https://discord.gg/WcEJ9VH"), Image.File("menuintroscreen/images/introBtnDiscord.png"), "DISCORD", "Join the community Discord server.")
-		list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.lobby"), Image.File("menuintroscreen/images/introBtnOnline.png"), "PLAY ONLINE", "Play Allegiance.")
-		--list[#list+1] = create_mainbutton(Loginstate_container:GetEventSink("Login sink"), Image.File("menuintroscreen/images/introBtnOnline.png"), "PLAY ONLINE", "Play Allegiance.")
+		-- list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.lobby"), Image.File("menuintroscreen/images/introBtnOnline.png"), "PLAY ONLINE", "Play Allegiance.")
 		return list
 	end
 
 	gamescreen = Image.Group({
-			Image.Translate(Global.create_backgroundpane(Number.Add(xcardsarea, 40), Number.Add(ycardsarea,40), {color=Global.color.white}), Point.Create(xmargin-20, ytopmargin-20)),
+			--Image.Translate(Global.create_backgroundpane(Number.Add(xcardsarea, 40), Number.Add(ycardsarea,40), {color=Global.color.white}), Point.Create(xmargin-20, ytopmargin-20)),
 			Image.Translate(gamecards, Point.Create(xmargin, ytopmargin)),
 			--Image.Justify(pos(write(callback, Global.font.p),20,-20),resolution,Justify.Bottom),
 			Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -150)),

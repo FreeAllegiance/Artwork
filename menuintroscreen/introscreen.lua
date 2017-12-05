@@ -25,7 +25,6 @@ yres = Point.Y(resolution)
 	button_hover_color 	= Color.Create(0.9, 0.9, 1, 0.9)
 	button_selected_color = Color.Create(1,1,0.9, 0.95)
 	button_shadow_color = Color.Create(0.4,0.4,0.4,0.6)	
-	stageset = stageset
 
 	logo = Image.Group({ 
 	Image.Justify(
@@ -149,24 +148,6 @@ function make_introscreen(Loginstate_container)
 end
 
 
---------------- GAME SCREEN --------------------------
-------------------------------------------------------
-function make_gamescreen(stageset)
-	cardwidth = 330
-	cardheight = 360
-	xmargin = 75
-	xcardsarea = Number.Subtract(xres,Number.Multiply(xmargin,2))
-	ycardsarea = Number.Subtract(yres,Number.Add(150,170))
-	cardsarea = Point.Create(xcardsarea,ycardsarea)
-	cardsinnermargin = 15
-	cardsoutermargin = 10
-	--calculate the number of cards that fit into a horizontal row on the screen
-	cardsrowlen = Number.Divide(xcardsarea, Global.list_sum({cardwidth,cardsoutermargin,cardsoutermargin}))
-	-- and round down by subtracting the Modulo.
-	cardsrowlen = Number.Subtract(cardsrowlen,Number.Mod(cardsrowlen,1))
-	hovertext = "" 
-	callback = ""
-	-------- temp bogus data
 
 ---------------------- Connecting   ----------------
 ----------------------------------------------------------------------------------------------------------------------------------

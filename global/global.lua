@@ -27,8 +27,8 @@ function create_backgroundpane(width, height, opt)
 	srcimgh = Point.Y(Image.Size(imagesrc))
 	partsize = opt.partsize or 50 --the partsize is one number. parts must be square.
 	dblsize = Number.Multiply(partsize,2) -- just convenient because it's used a lot
-	stretchfactorw = Number.Round(Number.Divide(Number.Subtract(width,dblsize),partsize),2) -- calculate how much we need to stretch the parts 
-	stretchfactorh = Number.Round(Number.Divide(Number.Subtract(height,dblsize),partsize),2)
+	stretchfactorw = (width-dblsize)/partsize+0.001 -- calculate how much we need to stretch the parts 
+	stretchfactorh = (height-dblsize)/partsize+0.001
 	--[[
 	we're cutting the image up in 9 sections as follows
 	tlc		tb		trc   
@@ -136,7 +136,7 @@ end
 function scale_scrollbarpart(image, i_dimension, i_partsize)
 	origwidth = Point.X(Image.Size(image))
 	origheight = Point.Y(Image.Size(image))
-	scalefactor = Number.Round((i_dimension-(2*i_partsize)+2)/i_partsize,2) -- calculate how much we need to stretch the middle part, the 2's are for 1px overlaps on both ends
+	scalefactor = (i_dimension-(2*i_partsize))/i_partsize-0.001 -- calculate how much we need to stretch the middle part, the 2's are for 1px overlaps on both ends
 
 	function horizontal_scrollbar()
 			leftpart = Image.Cut(image, Rect.Create(0,0,i_partsize,origheight))
@@ -149,13 +149,13 @@ function scale_scrollbarpart(image, i_dimension, i_partsize)
 			})
 	end
 	function vertical_scrollbar()
-		toppart = Image.Cut(image, Rect.Create(0,0, origwidth, i_partsize+1))
+		toppart = Image.Cut(image, Rect.Create(0,0, origwidth, i_partsize))
 		midpart = Image.Scale(Image.Cut(image, Rect.Create(0, i_partsize, origwidth, i_partsize*2)),Point.Create(1, scalefactor))
-		bottompart = Image.Cut(image, Rect.Create(0, origheight-i_partsize-1,origwidth, origheight))
+		bottompart = Image.Cut(image, Rect.Create(0, origheight-i_partsize,origwidth, origheight))
 		return Image.Group({
 			toppart,
-			Image.Translate(midpart,Point.Create(0, i_partsize-1)),
-			Image.Translate(bottompart, Point.Create(0, i_dimension-i_partsize-1))
+			Image.Translate(midpart,Point.Create(0, i_partsize)),
+			Image.Translate(bottompart, Point.Create(0, Point.Y(Image.Size(midpart))+i_partsize))
 			})
 	end
 
@@ -170,12 +170,12 @@ function scale_scrollbarpart(image, i_dimension, i_partsize)
 end
 
 
-function create_vertical_scrollbar(position_fraction, height, grip_height)
-	grip_original = Image.File("global/images/scrollbargrip_roundedline.png")
+function create_vertical_scrollbar(position_fraction, height, grip_height, paint)
+	grip_original = Image.Multiply(Image.File("global/images/scrollbargrip_roundedline.png"), paint)
 	staticEndSize = 14 -- in px
 	grip = scale_scrollbarpart(grip_original, grip_height, staticEndSize)
 	
-	scrollbarbg_original = Image.File("global/images/scrollbar_bg_thin.png")
+	scrollbarbg_original = Image.Multiply(Image.File("global/images/scrollbar_bg_thin.png"), paint)
 	scrollbarbg = scale_scrollbarpart(scrollbarbg_original, height, staticEndSize)
 	scrollbar_width = Point.X(Image.Size(scrollbarbg))
 	
@@ -199,7 +199,7 @@ function create_vertical_scrollbar(position_fraction, height, grip_height)
 	}
 end
 
-function create_vertical_scrolling_container(target_image, container_size)
+function create_vertical_scrolling_container(target_image, container_size, paint)
 	-- retrieve the dimensions of the scrolling window
 	container_width = Point.X(container_size)
 	container_height = Point.Y(container_size)
@@ -210,17 +210,18 @@ function create_vertical_scrolling_container(target_image, container_size)
 	position_fraction = Number.CreateEventSink(0)
 
 	grip_height = Number.Max(
-		30,
+		50,
 		Number.Min( 
-			Number.Multiply(Number.Divide(container_height, target_height), container_height),
+			(container_height/target_height)*container_height,
 			container_height
-			)
+		)
 	)
 
 	scrollbar = create_vertical_scrollbar(
 		position_fraction, 
 		container_height, 
-		grip_height
+		grip_height,
+		paint
 	)
 	
 	cut_width = Number.Subtract(container_width, scrollbar.width)

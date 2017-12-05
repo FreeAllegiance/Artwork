@@ -21,8 +21,8 @@ yres = Point.Y(resolution)
 
 -- declare recurring variables used by multiple functions
 	button_width = 144  -- used below and in render_list()
-	button_normal_color = Color.Create(1, 0.9, 0.8, 0.8)
-	button_hover_color 	= Color.Create(0.9, 0.9, 1, 0.8)
+	button_normal_color = Color.Create(0.9, 0.9, 1, 0.8)
+	button_hover_color 	= Color.Create(1, 0.9, 0.8, 0.8)
 	button_selected_color = Color.Create(1,1,0.9, 0.95)
 	button_shadow_color = Color.Create(0.4,0.4,0.4,0.7)	
 
@@ -192,7 +192,7 @@ function make_gamescreen(Loginstate_container)
 	-------- temp bogus data
 
 	function write(str,fnt,c)
-		font = Global.font.p or fnt
+		font = fnt or Global.font.p
 		color = c or Global.color.white
 		return Image.String(font, color, Number.Subtract(cardwidth, Number.Multiply(cardsinnermargin,2)), str, Justify.Center)
 	end 
@@ -222,27 +222,82 @@ function make_gamescreen(Loginstate_container)
 					[false]="Building Teams",
 				})
 				gamestate = Global.list_concat({gamestatus, "-", gametime, " ", gameplayercount,"/", gamenoat})
-			
-				lst = {}
-				lst["CONQUEST"] = game:GetBool("Has goal conquest")
-				lst["TERRITORY"] = game:GetBool("Has goal territory")
-				lst["PROSPERITY"] = game:GetBool("Has goal prosperity")
-				lst["ARTIFACTS"] = game:GetBool("Has goal artifacts")
-				lst["FLAGS"] = game:GetBool("Has goal flags")
-				lst["DEATHMATCH"] = game:GetBool("Has goal deathmatch")
-				lst["COUNTDOWN"] = game:GetBool("Has goal countdown")
-				function findtruegamestyle()
-					bools = {}
-					for stylename, bool in ipairs(lst) do
-						bools[bool] = stylename -- we don't care about the false values, just the one true value
-					end 
-					return bools[true] 
-				end
 				
+				function gamestylebooleans()
+					lst = {}
+					lst[#lst+1] = String.Switch(
+						game:GetBool("Has goal conquest"),{
+						[true]="CONQUEST", 
+						[false]="",
+					})
+					lst[#lst+1] = String.Switch(
+						game:GetBool("Has goal territory"),{
+						[true]="TERRITORY", 
+						[false]="",
+					})
+					lst[#lst+1] =String.Switch(
+						game:GetBool("Has goal prosperity"),{
+						[true]="PROSPERITY", 
+						[false]="",
+					})
+					lst[#lst+1] =String.Switch(
+						game:GetBool("Has goal artifacts"),{
+						[true]="ARTIFACTS", 
+						[false]="",
+					})
+					lst[#lst+1] = String.Switch(
+						game:GetBool("Has goal flags"),{
+						[true]="FLAGS", 
+						[false]="",
+					})
+					lst[#lst+1] = String.Switch(
+						game:GetBool("Has goal deathmatch"),{
+						[true]="DEATHMATCH", 
+						[false]="",
+					})
+					lst[#lst+1] =String.Switch(
+						game:GetBool("Has goal countdown"),{
+						[true]="COUNTDOWN", 
+						[false]="",
+					})
+					styles.count = Number.Min(Boolean.Count(lst),2)
+					styles.single = Global.list_concat(lst)
+					return styles
+				end
+						
+				function gamestylebools()
+					lst = {}
+					lst[#lst+1] = { name="CONQUEST", boolval = game:GetBool("Has goal conquest")}
+					lst[#lst+1] = { name="TERRITORY", boolval = game:GetBool("Has goal territory")}
+					lst[#lst+1] = { name="PROSPERITY", boolval = game:GetBool("Has goal prosperity")}
+					lst[#lst+1] = { name="ARTIFACTS", boolval = game:GetBool("Has goal artifacts")}
+					lst[#lst+1] = { name="FLAGS", boolval = game:GetBool("Has goal flags")}
+					lst[#lst+1] = { name="DEATHMATCH", boolval = game:GetBool("Has goal deathmatch")}
+					lst[#lst+1] = { name="COUNTDOWN", boolval = game:GetBool("Has goal countdown")}
+
+					selectedstyle = ""
+					trueCount = 0
+					for i, thing in ipairs(lst) do
+						str = String.Switch(
+							thing.boolval,
+							{
+							[true]=thing.name,
+							[false]="",
+							}
+						)
+						selectedstyle = selectedstyle .. str
+						trueCount = trueCount + Boolean.ToNumber(thing.boolval)
+					end
+					styledata = {}
+					styledata.trueCount = trueCount
+					styledata.selected = selectedstyle
+					return styledata
+				end
+				gamestyledata = gamestylebools()
 				gamestyle = String.Switch(
-					Number.Min(Boolean.Count(lst),2),{
+					Number.Min(gamestyledata.trueCount,2),{
 					[0] = "UNKNOWN", 
-					[1] = findtruegamestyle(),
+					[1] = gamestyledata.selected,
 					[2] = "CUSTOM GAME",
 					}
 				)
@@ -250,9 +305,10 @@ function make_gamescreen(Loginstate_container)
 				function makegamecardface(cardcolor) 
 					return Image.Group({
 					Global.create_backgroundpane(cardwidth, cardheight, {color=cardcolor}),	
-					pos(write(gamestyle, Global.font.h1, cardcolor),0,10),
-					pos(write(gamestate, Global.font.h4, cardcolor),0,35), 
-					pos(write(gamename, Global.font.h3, cardcolor),0,60),
+					pos(write(gamestyle, Global.font.h1, cardcolor),cardsinnermargin,10),
+					pos(write(gamestate, Global.font.h4, cardcolor),cardsinnermargin,35), 
+					pos(write(gamename, Global.font.h1, cardcolor),cardsinnermargin,60),
+					pos(write("Server: "..gameserver, Global.font.h4, cardcolor),cardsinnermargin,80),
 				--	pos(write("row: " .. Number.ToString(row), Global.font.h4, cardcolor),0,75), 
 				--	pos(write("col: " .. Number.ToString(col), Global.font.h4, cardcolor),0,90),
 				--	pos(write("rowlen: " .. Number.ToString(cardsrowlen), Global.font.h4, cardcolor),0,105),
@@ -280,7 +336,8 @@ function make_gamescreen(Loginstate_container)
 			[0] = Image.Justify(cardslistImg,cardsarea, Justify.Center), -- then just show the cardsimage, else 
 			[1] = Global.create_vertical_scrolling_container(
 					Image.Justify(cardslistImg,Point.Create(xcardsarea+scrollbarwidth,ycardsarea), Justify.Top),
-					cardsarea
+					cardsarea,
+					button_normal_color
 				)
 			}), -- make a scrolling pane image
 		})

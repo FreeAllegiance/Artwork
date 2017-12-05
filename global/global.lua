@@ -76,10 +76,10 @@ end
 function create_box(w, h, opt)
 	--example create_box(300,700,{border_width=5, border_color=Color.Create(1,1,0), background_color=Color.Create(1,0,0)})
 	-- or create_box(300,700)
-	opt= opt or {}
+	opt = opt or {}
 	borderwidth = opt.border_width or 1
-	bordercolor = opt.border_color or white
-	backgroundcolor = opt.background_color or transparent
+	bordercolor = opt.border_color or color.white
+	backgroundcolor = opt.background_color or color.transparent
 	yoffset = Number.Multiply(borderwidth, 2)
 	boxarea = Image.Extent(Point.Create(w, h), backgroundcolor)
 	borderhoriz = Image.Extent(Point.Create(w, borderwidth), bordercolor)

@@ -222,49 +222,7 @@ function make_gamescreen(Loginstate_container)
 					[false]="Building Teams",
 				})
 				gamestate = Global.list_concat({gamestatus, "-", gametime, " ", gameplayercount,"/", gamenoat})
-				
-				function gamestylebooleans()
-					lst = {}
-					lst[#lst+1] = String.Switch(
-						game:GetBool("Has goal conquest"),{
-						[true]="CONQUEST", 
-						[false]="",
-					})
-					lst[#lst+1] = String.Switch(
-						game:GetBool("Has goal territory"),{
-						[true]="TERRITORY", 
-						[false]="",
-					})
-					lst[#lst+1] =String.Switch(
-						game:GetBool("Has goal prosperity"),{
-						[true]="PROSPERITY", 
-						[false]="",
-					})
-					lst[#lst+1] =String.Switch(
-						game:GetBool("Has goal artifacts"),{
-						[true]="ARTIFACTS", 
-						[false]="",
-					})
-					lst[#lst+1] = String.Switch(
-						game:GetBool("Has goal flags"),{
-						[true]="FLAGS", 
-						[false]="",
-					})
-					lst[#lst+1] = String.Switch(
-						game:GetBool("Has goal deathmatch"),{
-						[true]="DEATHMATCH", 
-						[false]="",
-					})
-					lst[#lst+1] =String.Switch(
-						game:GetBool("Has goal countdown"),{
-						[true]="COUNTDOWN", 
-						[false]="",
-					})
-					styles.count = Number.Min(Boolean.Count(lst),2)
-					styles.single = Global.list_concat(lst)
-					return styles
-				end
-						
+									
 				function gamestylebools()
 					lst = {}
 					lst[#lst+1] = { name="CONQUEST", boolval = game:GetBool("Has goal conquest")}
@@ -304,21 +262,30 @@ function make_gamescreen(Loginstate_container)
 			
 				function makegamecardface(cardcolor) 
 					return Image.Group({
-					Global.create_backgroundpane(cardwidth, cardheight, {color=cardcolor}),	
+					Image.Extent(Point.Create(cardwidth, cardheight), Global.color.transparent),	
 					pos(write(gamestyle, Global.font.h1, cardcolor),cardsinnermargin,10),
 					pos(write(gamestate, Global.font.h4, cardcolor),cardsinnermargin,35), 
 					pos(write(gamename, Global.font.h1, cardcolor),cardsinnermargin,60),
-					pos(write("Server: "..gameserver, Global.font.h4, cardcolor),cardsinnermargin,80),
+					pos(write("Server: "..gameserver, Global.font.h4, cardcolor),cardsinnermargin,105),
 				--	pos(write("row: " .. Number.ToString(row), Global.font.h4, cardcolor),0,75), 
 				--	pos(write("col: " .. Number.ToString(col), Global.font.h4, cardcolor),0,90),
 				--	pos(write("rowlen: " .. Number.ToString(cardsrowlen), Global.font.h4, cardcolor),0,105),
 				--	pos(write("i: " .. Number.ToString(i), Global.font.h4, cardcolor),0,120),
 					})
 				end
-
-				joinbtn_n = makegamecardface(button_normal_color)
-				joinbtn_h = makegamecardface(button_hover_color)
-				joinbtn_s = makegamecardface(button_selected_color)
+				-- Global.create_backgroundpane(cardwidth, cardheight, {color=cardcolor})
+				joinbtn_n = Image.Group({ 
+					Global.create_backgroundpane(cardwidth, cardheight, {color=button_normal_color}),
+					makegamecardface(button_normal_color)
+				})
+				joinbtn_h = Image.Group({ 
+					Global.create_backgroundpane(cardwidth, cardheight, {color=button_hover_color, src=Image.File("/global/images/backgroundpane_highlight.png")}),
+					makegamecardface(button_hover_color)
+				})
+				joinbtn_s = Image.Group({ 
+					Global.create_backgroundpane(cardwidth, cardheight, {color=button_selected_color}),
+					makegamecardface(button_selected_color)
+				})
 
 				card = Button.create_image_button(joinbtn_n, joinbtn_h, joinbtn_s, "Connect To This Game Lobby And Join This Game")
 				hovertext = String.Concat(hovertext, card.btnhovertext) --concatenates the hoverstring with the contents of the toplevel one.
@@ -334,11 +301,14 @@ function make_gamescreen(Loginstate_container)
 			doWeNeedaScrollbar, --if the vertical size of the cardimage < cardsarea (if it fits) return 0, otherwise return 1,
 			{
 			[0] = Image.Justify(cardslistImg,cardsarea, Justify.Center), -- then just show the cardsimage, else 
-			[1] = Global.create_vertical_scrolling_container(
+			[1] = Image.Group({
+					Image.Translate(Global.create_backgroundpane(xcardsarea+50,ycardsarea+30, {color=button_normal_color}), Point.Create(0,-15)),
+					Global.create_vertical_scrolling_container(
 					Image.Justify(cardslistImg,Point.Create(xcardsarea+scrollbarwidth,ycardsarea), Justify.Top),
 					cardsarea,
 					button_normal_color
-				)
+					),	
+				})
 			}), -- make a scrolling pane image
 		})
 

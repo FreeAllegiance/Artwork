@@ -291,33 +291,6 @@ venusFlags = "\n *  Capture and return %d of the enemy flags.";
 venusProsperity = "\n *  Invest in \"Reinforcement\", costing %d credits, whereby reinforcements will be sent immediately to crush the opposition.";
 venusDeathmatch = "\n *  Destroy %d enemy ships.";
 
-///////////////////////////////////////////////////////////////////////////////
-// Wars strings
-
-sw_eTitle = "Galactic Empire";
-sw_eString = "Tactical Briefing";
-sw_eNoWin = "Imperial task force %s has been assigned to %s. Opposition is expected from nearby %s units. These traitors cannot be allowed to survive. Crush them swiftly, the Emperor demands it.";
-sw_eDefault = "Imperial task force %s has been assigned to %s. Opposition is expected from nearby %s units. Locate them, then destroy or capture all of their bases. These traitors cannot be allowed to survive. Crush them swiftly, the Emperor demands it.";
-sw_eSecondaryObjectives = "\n\nOther objectives include:";
-sw_eConquest = "\n *  Control %d%% of the bases.";
-sw_eCountdown = "\n *  Eliminate as many enemies as possible within %d minutes.";
-sw_eArtifacts = "\n *  Capture and return %d of the artifacts.";
-sw_eFlags = "\n *  Capture and return %d of the enemy flags.";
-sw_eProsperity = "\n *  Invest in \"Reinforcement\", costing %d credits, whereby reinforcements will be sent immediately to crush the opposition.";
-sw_eDeathmatch = "\n *  Destroy %d enemy ships.";
-
-sw_rTitle = "Rebel Alliance";
-sw_rString = "Tactical Briefing";
-sw_rNoWin = "Rebel task force %s has been assigned to %s. Opposition is expected from nearby %s units. They must be defeated. We fight for freedom across the galaxy.";
-sw_rDefault = "Rebel task force %s has been assigned to %s. Opposition is expected from nearby %s units. Locate them, then destroy or capture all of their bases. They must be defeated. We fight for freedom across the galaxy.";
-sw_rSecondaryObjectives = "\n\nOther objectives include:";
-sw_rConquest = "\n *  Control %d%% of the bases.";
-sw_rCountdown = "\n *  Eliminate as many enemies as possible within %d minutes.";
-sw_rArtifacts = "\n *  Capture and return %d of the artifacts.";
-sw_rFlags = "\n *  Capture and return %d of the enemy flags.";
-sw_rProsperity = "\n *  Invest in \"Reinforcement\", costing %d credits, whereby reinforcements will be sent immediately to crush the opposition.";
-sw_rDeathmatch = "\n *  Destroy %d enemy ships.";
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // The mission briefing dialog

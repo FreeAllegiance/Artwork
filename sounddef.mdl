@@ -99,93 +99,6 @@ dn_ptlasbls2DropSound        = GainSound(SFXGain, ThreeDSound(100, ASRSound(5.00
 //
 // Dark Nebulae Sounds - End
 //
-
-//
-// Wars Sounds - Begin
-//
-
-sw_000ActivationSound	= GainSound(SFXGain, ThreeDSound(20, ImportWave("sw_000")));
-sw_001ShotSound      	= GainSound(SFXGain, PrioritySound(-1.5, ThreeDSound(100, ImportWave("sw_001"))));
-sw_001BurstSound     	= GainSound(SFXGain, PrioritySound(5, ThreeDSound(100, ASRSound(1.000000, 0.400000, ImportWave("sw_001")))));
-sw_002ShotSound      	= GainSound(SFXGain, PrioritySound(-1.5, ThreeDSound(100, ImportWave("sw_002"))));
-sw_002BurstSound     	= GainSound(SFXGain, PrioritySound(5, ThreeDSound(100, ASRSound(1.000000, 0.400000, ImportWave("sw_002")))));
-sw_003ShotSound      	= GainSound(SFXGain, PrioritySound(-1.5, ThreeDSound(100, ImportWave("sw_003"))));
-sw_003BurstSound     	= GainSound(SFXGain, PrioritySound(5, ThreeDSound(100, ASRSound(1.000000, 0.400000, ImportWave("sw_003")))));
-sw_004ShotSound      	= GainSound(SFXGain, PrioritySound(-1.5, ThreeDSound(100, ImportWave("sw_004"))));
-sw_004BurstSound     	= GainSound(SFXGain, PrioritySound(5, ThreeDSound(100, ASRSound(1.000000, 0.400000, ImportWave("sw_004")))));
-sw_005ShotSound      	= GainSound(SFXGain, PrioritySound(-1.5, ThreeDSound(100, ImportWave("sw_005"))));
-sw_005BurstSound     	= GainSound(SFXGain, PrioritySound(5, ThreeDSound(100, ASRSound(1.000000, 0.400000, ImportWave("sw_005")))));
-sw_006ShotSound      	= GainSound(SFXGain, PrioritySound(-1.5, ThreeDSound(100, ImportWave("sw_006"))));
-sw_006BurstSound     	= GainSound(SFXGain, PrioritySound(5, ThreeDSound(100, ASRSound(1.000000, 0.400000, ImportWave("sw_006")))));
-sw_007ShotSound      	= GainSound(SFXGain, PrioritySound(-1.5, ThreeDSound(100, ImportWave("sw_007"))));
-sw_007BurstSound     	= GainSound(SFXGain, PrioritySound(5, ThreeDSound(100, ASRSound(1.000000, 0.400000, ImportWave("sw_007")))));
-sw_008ShotSound      	= GainSound(SFXGain, PrioritySound(-1.5, ThreeDSound(100, ImportWave("sw_008"))));
-sw_008BurstSound     	= GainSound(SFXGain, PrioritySound(5, ThreeDSound(100, ASRSound(1.000000, 0.400000, ImportWave("sw_008")))));
-sw_009ShotSound      	= GainSound(SFXGain, PrioritySound(-1.5, ThreeDSound(100, ImportWave("sw_009"))));
-sw_009BurstSound     	= GainSound(SFXGain, PrioritySound(5, ThreeDSound(100, ASRSound(1.000000, 0.400000, ImportWave("sw_009")))));
-sw_011MissileLaunch	= GainSound(SFXGain, ThreeDSound(20, ImportWave("sw_011")));
-sw_012MissileLaunch	= GainSound(SFXGain, ThreeDSound(20, ImportWave("sw_012")));
-sw_013MissileLaunch	= GainSound(SFXGain, ThreeDSound(20, ImportWave("sw_013")));
-sw_014MissileLaunch	= GainSound(SFXGain, ThreeDSound(20, ImportWave("sw_014")));
-sw_015MissileLaunch	= GainSound(SFXGain, ThreeDSound(20, ImportWave("sw_015")));
-sw_016probe1Sound	= GainSound(SFXGain, ThreeDSound(100, LoopingSound(ImportWave("sw_016"))));
-sw_017probe1Sound	= GainSound(SFXGain, ThreeDSound(100, LoopingSound(ImportWave("sw_017"))));
-
-EStarbaseInternalSound     = GainSound(SFXGain, 
-                                PairedSound(
-                                    PitchSound(0.5, LoopingSound(ImportWave("shipint"))),
-                                    GainSound(-7, IntermittentSound(10, false, RandomSound([
-                                        (ImportWave("gigambient_1"), 1),
-                                        (ImportWave("gigambient_2"), 1),
-                                        (ImportWave("gigambient_3"), 1),
-                                        (ImportWave("gigambient_4"), 1),
-                                        (ImportWave("gigambient_5"), 1),
-                                        (ImportWave("gigambient_6"), 1),
-                                        (ImportWave("gigambient_7"), 1),
-                                        (ImportWave("gigambient_21"), 1),
-                                        (ImportWave("gigambient_25"), 1)
-                                    ])))
-                                ));
-RStarbaseInternalSound     = GainSound(SFXGain, 
-                                PairedSound(
-                                    PitchSound(0.5, LoopingSound(ImportWave("shipint"))),
-                                    GainSound(-7, IntermittentSound(10, false, RandomSound([
-                                        (ImportWave("gigambient_1"), 1),
-                                        (ImportWave("gigambient_2"), 1),
-                                        (ImportWave("gigambient_3"), 1),
-                                        (ImportWave("gigambient_4"), 1),
-                                        (ImportWave("gigambient_5"), 1),
-                                        (ImportWave("gigambient_6"), 1),
-                                        (ImportWave("gigambient_7"), 1),
-                                        (ImportWave("gigambient_21"), 1),
-                                        (ImportWave("gigambient_25"), 1)
-                                    ])))
-                                ));
-
-//
-// Wars Sounds - End
-//
-
-//BSG sounds
-
-ColonialStarbaseInternalSound  = GainSound(SFXGain, 
-                                PairedSound(
-                                    PitchSound(0.5, LoopingSound(ImportWave("shipint"))),
-                                    GainSound(-7, IntermittentSound(10, false, RandomSound([
-                                        (ImportWave("colonialambient_10"), 1),
-                                        (ImportWave("colonialambient_2"), 1),
-                                        (ImportWave("colonialambient_3"), 1),
-                                        (ImportWave("colonialambient_4"), 1),
-                                        (ImportWave("colonialambient_5"), 1),
-                                        (ImportWave("colonialambient_6"), 1),
-                                        (ImportWave("colonialambient_7"), 1),
-                                        (ImportWave("colonialambient_8"), 1),
-                                        (ImportWave("colonialambient_9"), 1)
-                                    ])))
-                                )); 
-
-//BSG sounds
-
 //
 // Draconium Sounds - Begin
 //
@@ -2033,9 +1946,6 @@ soundList =
 
         (380, ILStationExternalSound),
 
-	(417, ColonialStarbaseInternalSound),
-	(418, EStarbaseInternalSound),
-	(419, RStarbaseInternalSound),
         (420, GCStarbaseInternalSound),
         (425, ILStarbaseInternalSound),
         (430, BOStarbaseInternalSound),
@@ -2140,53 +2050,11 @@ soundList =
         (580, fastShieldActivate),
 
 
-//
-// Wars Sounds - Begin
-//
-
-	(600, sw_000ActivationSound),
-	(601, sw_001ShotSound),
-	(602, sw_001BurstSound),
-	(603, sw_002ShotSound),
-	(604, sw_002BurstSound),
-	(605, sw_003ShotSound),
-	(606, sw_003BurstSound),
-	(607, sw_004ShotSound),
-	(608, sw_004BurstSound),
-	(609, sw_005ShotSound),
-	(610, sw_005BurstSound),
-	(611, sw_006ShotSound),
-	(612, sw_006BurstSound),
-	(613, sw_007ShotSound),
-	(614, sw_007BurstSound),
-	(615, sw_008ShotSound),
-	(616, sw_008BurstSound),
-	(617, sw_009ShotSound),
-	(618, sw_009BurstSound),
 
 //
-// Wars Sounds - End
 //
 
         (620, fastShieldDeactivate),
-
-//
-// Wars Sounds - Begin
-//
-
-	(621, sw_011MissileLaunch),
-	(622, sw_012MissileLaunch),
-	(623, sw_013MissileLaunch),
-	(624, sw_014MissileLaunch),
-	(625, sw_015MissileLaunch),
-	(626, sw_016probe1Sound),
-	(627, sw_017probe1Sound),
-
-//
-// Wars Sounds - End
-//
-
-//
 // Omicron Hive Sounds - Begin
 //
 

@@ -38,10 +38,10 @@ yres = Point.Y(resolution)
  -- declare recurring variables outside of function
 	function create_stringimages(label)
 		return {
-			normal = Image.String(Global.font.h1, button_normal_color, button_width, label, Justify.Center),
-			shadow = Image.String(Global.font.h1, button_shadow_color, button_width, label, Justify.Center),
-			hover = Image.String(Global.font.h1, button_hover_color, button_width, label, Justify.Center),
-			selected = Image.String(Global.font.h1, button_selected_color, button_width, label, Justify.Center),
+			normal = Image.String(Global.font.h1, button_normal_color, label, {}),
+			shadow = Image.String(Global.font.h1, button_shadow_color, label, {}),
+			hover = Image.String(Global.font.h1, button_hover_color, label, {}),
+			selected = Image.String(Global.font.h1, button_selected_color, label, {}),
 		}
 	end
 
@@ -177,7 +177,7 @@ function make_spinner(Loginstate_container)
 		})
 
 stepMsg = Loginstate_container:GetString("Step message")
-stepMsgImg = Image.String(Global.font.h2, Global.color.white, Number.Divide(xres,2), stepMsg, Justify.Center)
+stepMsgImg = Image.String(Global.font.h2, Global.color.white, stepMsg, {Width=Number.Divide(xres,2), Justification=Justify.Center})
 
 	return Image.Group({
 		Image.Justify(spinner, resolution,Justify.Center),
@@ -353,7 +353,8 @@ function make_gamescreen(Loginstate_container)
 		list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.options"), Image.File("menuintroscreen/images/introBtnSettings.png"), "OPTIONS", "Change your graphics, audio and game settings.")
 		list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.training"), Image.File("menuintroscreen/images/introBtnHelp.png"), "TRAINING", "Learn how to play the game.")
 		list[#list+1] = create_mainbutton(Screen.CreateOpenWebsiteSink("https://discord.gg/WcEJ9VH"), Image.File("menuintroscreen/images/introBtnDiscord.png"), "DISCORD", "Join the community Discord server.")
-		-- list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.lobby"), Image.File("menuintroscreen/images/introBtnOnline.png"), "PLAY ONLINE", "Play Allegiance.")
+		list[#list+1] = create_mainbutton(Loginstate_container:GetEventSink("Create game sink"), Image.File("menuintroscreen/images/introBtnLan.png"), "CREATE GAME", "Create your own game on a server.")
+		list[#list+1] = create_mainbutton(Loginstate_container:GetEventSink("Logout sink"), Image.File("menuintroscreen/images/introBtnExit.png"), "BACK", "Go Back To The Main Screen.")
 		return list
 	end
 

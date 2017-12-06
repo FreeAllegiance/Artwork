@@ -1,5 +1,6 @@
 Button = File.LoadLua("button/button.lua")()
 Global = File.LoadLua("global/global.lua")()
+Popup = File.LoadLua("global/popup.lua")()
 introscreenversion = "introscreen alpha v0.04 "
 stage= Screen.GetState("Login state")
 
@@ -110,6 +111,20 @@ yres = Point.Y(resolution)
 ----------------------------------------------
 
 
+function create_credits_image()
+	credits_image = File.LoadLua("menuintroscreen/credits.lua")()
+	return credits_image
+end
+
+credits_popup = Popup.create_single_popup_manager(create_credits_image)
+credits_button = Popup.create_simple_text_button("Credits", 14)
+
+Event.OnEvent(credits_popup.get_is_open(), credits_button.event_click, function ()
+	-- toggle
+	return Boolean.Not(credits_popup.get_is_open())
+end)
+
+
 function make_introscreen(Loginstate_container)
 
 	function create_button_list()
@@ -144,6 +159,11 @@ function make_introscreen(Loginstate_container)
 		Image.Translate(Image.Justify(errortextImg(), resolution, Justify.Bottom),Point.Create(0, -300)),
 		Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -150)),
 		Image.Justify(Image.String(Font.Create("Verdana",12), button_normal_color, 300, String.Concat(buttonversion, introscreenversion), Justify.Right), resolution, Justify.Topright),
+		credits_popup.get_area(Point.Create(
+			Point.X(resolution), 
+			Point.Y(resolution) - 200
+		)),
+		Image.Justify(credits_button.image, resolution, Justify.Bottomright),
 	})
 end
 

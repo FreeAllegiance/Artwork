@@ -1,7 +1,7 @@
 Button = File.LoadLua("button/button.lua")()
 Global = File.LoadLua("global/global.lua")()
 Popup = File.LoadLua("global/popup.lua")()
-introscreenversion = "introscreen alpha v0.04 "
+introscreenversion = "introscreen alpha v0.05 "
 stage= Screen.GetState("Login state")
 
 -------------------------------------------------------
@@ -36,14 +36,12 @@ yres = Point.Y(resolution)
 	})
 
  -- declare recurring variables outside of function
-	introscreenfont = Global.font.h1
-	label_justification 	= Justify.Center
 	function create_stringimages(label)
 		return {
-			normal = Image.String(introscreenfont, button_normal_color, button_width, label, Justify.Center),
-			shadow = Image.String(introscreenfont, button_shadow_color, button_width, label, Justify.Center),
-			hover = Image.String(introscreenfont, button_hover_color, button_width, label, Justify.Center),
-			selected = Image.String(introscreenfont, button_selected_color, button_width, label, Justify.Center),
+			normal = Image.String(Global.font.h1, button_normal_color, button_width, label, Justify.Center),
+			shadow = Image.String(Global.font.h1, button_shadow_color, button_width, label, Justify.Center),
+			hover = Image.String(Global.font.h1, button_hover_color, button_width, label, Justify.Center),
+			selected = Image.String(Global.font.h1, button_selected_color, button_width, label, Justify.Center),
 		}
 	end
 
@@ -52,31 +50,31 @@ yres = Point.Y(resolution)
 	btnimage_position = Point.Create(0,0)
 	btntxt_pt = Point.Create(0,72)
 	btntxtshadow_pt = Point.Create(0,73)
+
 	hovertext = "" -- this will hold the eventual text for other functions to use
-	buttonversion = "" -- this will hold the version of the button function
-	function create_mainbutton(event_sink, argimage, arglabel, arghovertext)
+	function create_mainbutton(event_sink, argimage, arglabel, arghovertext)	
+		btnsize = Point.Create(button_width, Point.Y(Image.Size(argimage))+Font.Height(Global.font.h1)+1)
 		label = create_stringimages(arglabel)
 		image_n = Image.Group({
 			Image.Translate(Image.Multiply(argimage, button_normal_color),btnimage_position),
-			Image.Translate(label.shadow, btntxtshadow_pt),
-			Image.Translate(label.normal, btntxt_pt), 
+			Image.Justify(Image.Translate(label.shadow, btntxtshadow_pt), btnsize, Justify.Bottom),
+			Image.Justify(Image.Translate(label.normal, btntxt_pt), btnsize, Justify.Bottom), 
 			})	
 		image_h = Image.Group({
 				Image.Translate(Image.Multiply(mainbtn_bg1, button_hover_color),btnimage_position),
 				Image.Translate(Image.Multiply(argimage, button_hover_color),btnimage_position),
-				Image.Translate(label.shadow, btntxtshadow_pt),
-				Image.Translate(label.hover, btntxt_pt),
+				Image.Justify(Image.Translate(label.shadow, btntxtshadow_pt), btnsize, Justify.Bottom),
+				Image.Justify(Image.Translate(label.hover, btntxt_pt), btnsize, Justify.Bottom), 
 			})
 		-- selected doesnt need color multiply. 
 		image_s = Image.Group({
 				Image.Translate(mainbtn_bg1,btnimage_position),
 				Image.Translate(argimage,btnimage_position),
-				Image.Translate(label.shadow, btntxtshadow_pt),
-				Image.Translate(label.hover, btntxt_pt),		
+				Image.Justify(Image.Translate(label.shadow, btntxtshadow_pt), btnsize, Justify.Bottom),
+				Image.Justify(Image.Translate(label.selected, btntxt_pt), btnsize, Justify.Bottom), 		
 			})
 		button = Button.create_image_button(image_n, image_h, image_s, arghovertext)
 		hovertext = String.Concat(hovertext, button.btnhovertext) --[[ concatenates the hoverstring with the contents of the toplevel one. Since there's only one 	non-empty string we should wind up with only the text for the button currently hovered over... ]]
-		buttonversion = button.version
 		Event.OnEvent(event_sink, button.events.click)
 		return button.image
 	end
@@ -158,7 +156,6 @@ function make_introscreen(Loginstate_container)
 		Image.Justify(logo, resolution,Justify.Center),
 		Image.Translate(Image.Justify(errortextImg(), resolution, Justify.Bottom),Point.Create(0, -300)),
 		Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -150)),
-		Image.Justify(Image.String(Font.Create("Verdana",12), button_normal_color, 300, String.Concat(buttonversion, introscreenversion), Justify.Right), resolution, Justify.Topright),
 		credits_popup.get_area(Point.Create(
 			Point.X(resolution), 
 			Point.Y(resolution) - 200
@@ -191,6 +188,19 @@ end
 
 --------------- GAME SCREEN --------------------------
 ------------------------------------------------------
+--[[
+to do:
+'create game' button(s)
+back button
+scaling for small resolutions
+better background for scrollbar
+fix hovertext
+fix buttonbar justification
+fix gamecard justification
+]]
+
+
+
 function make_gamescreen(Loginstate_container)
 	cardwidth = 250
 	cardheight = 280
@@ -214,7 +224,12 @@ function make_gamescreen(Loginstate_container)
 	function write(str,fnt,c)
 		font = fnt or Global.font.p
 		color = c or Global.color.white
-		return Image.String(font, color, Number.Subtract(cardwidth, Number.Multiply(cardsinnermargin,2)), str, Justify.Center)
+		return Image.Justify(
+			Image.String(font, color, Number.Subtract(cardwidth, Number.Multiply(cardsinnermargin,2)), str, Justify.Center), 
+			Point.Create(cardwidth-cardsinnermargin, cardheight-cardsinnermargin), 
+			Justify.Top
+			)
+			
 	end 
 
 	function pos(img, x,y)
@@ -379,6 +394,7 @@ stagescreen = Image.Switch(
 
 return Image.Group({
 	Image.ScaleFill(make_background(), resolution, Justify.Center), -- we use the same background image for all of them.
+	Image.Justify(Image.String(Font.Create("Verdana",12), button_normal_color, 200, Button.version.."\n"..introscreenversion.."\n"..Global.version, Justify.Right), resolution, Justify.Topright),
 	stagescreen,
 	})
 

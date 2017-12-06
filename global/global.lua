@@ -1,5 +1,5 @@
 -- NOTE: In order to be called from elsewhere, functions and variables must be returned at the end of this file.
-
+versionstring = "global alpha v0.04 "
 -- VARIABLES. 
 --colors
 color = {}
@@ -240,7 +240,7 @@ end
 
 return {
 	-- other
-	testingstring = testingstring,
+	version = versionstring,
 	--global colors
 	color = color,
 	-- global fonts

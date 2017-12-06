@@ -1,4 +1,4 @@
-version = "button.lua v0.03 "
+version = "button.lua v0.04 "
 
 sound_mouseover = Screen.CreatePlaySoundSink("button/sound/mouseover.ogg")
 sound_click = Screen.CreatePlaySoundSink("button/sound/cancel.ogg")
@@ -54,10 +54,10 @@ function create_image_button(image_n, image_h, image_s, hovertext)
 		image=export_button,
 		events=export_events,
 		btnhovertext = export_text,
-		version = version,
 	}
 end
 
 return {
 	create_image_button=create_image_button,
+	version = version,
 }

@@ -6,7 +6,7 @@ color = {}
 color.white = Color.Create(1,1,1,0.75)
 color.dark = Color.Create(0,0,0,0.5)
 color.transparent = Color.Create(0,0,0,0)
---fonts
+--[[fonts
 font = {}
 font.p = Font.Create("Trebuchet MS", 18)
 font.pbold = Font.Create("Trebuchet MS", 18, {Bold=true})
@@ -14,7 +14,7 @@ font.h1 = Font.Create("Trebuchet MS", 25, {Bold=true})
 font.h2 = Font.Create("Trebuchet MS", 23, {Italic=true, Bold=true})
 font.h3 = Font.Create("Trebuchet MS", 21, {Bold=true})
 font.h4 = Font.Create("Trebuchet MS", 19, {Bold=true})
-
+]]
 -- FUNCTIONS
 -- example: Global.create_backgroundpane(800,600,{src=Image.File("/global/images/backgroundpane.png"), partsize=50, color=button_normal_color})
 -- example: Global.create_backgroundpane(300,150) 
@@ -243,8 +243,6 @@ return {
 	version = versionstring,
 	--global colors
 	color = color,
-	-- global fonts
-	font = font,
 	-- global functions
 	list_sum = list_sum,
 	list_concat = list_concat,

@@ -6,15 +6,7 @@ color = {}
 color.white = Color.Create(1,1,1,0.75)
 color.dark = Color.Create(0,0,0,0.5)
 color.transparent = Color.Create(0,0,0,0)
---[[fonts
-font = {}
-font.p = Font.Create("Trebuchet MS", 18)
-font.pbold = Font.Create("Trebuchet MS", 18, {Bold=true})
-font.h1 = Font.Create("Trebuchet MS", 25, {Bold=true})
-font.h2 = Font.Create("Trebuchet MS", 23, {Italic=true, Bold=true})
-font.h3 = Font.Create("Trebuchet MS", 21, {Bold=true})
-font.h4 = Font.Create("Trebuchet MS", 19, {Bold=true})
-]]
+
 -- FUNCTIONS
 -- example: Global.create_backgroundpane(800,600,{src=Image.File("/global/images/backgroundpane.png"), partsize=50, color=button_normal_color})
 -- example: Global.create_backgroundpane(300,150) 
@@ -207,35 +199,27 @@ function create_vertical_scrolling_container(target_image, container_size, paint
 	target_size = Image.Size(target_image)
 	target_height = Point.Y(target_size)
 
-	position_fraction = Number.CreateEventSink(0)
-
-	grip_height = Number.Max(
-		50,
-		Number.Min( 
-			(container_height/target_height)*container_height,
-			container_height
-		)
-	)
-
-	scrollbar = create_vertical_scrollbar(
-		position_fraction, 
-		container_height, 
-		grip_height,
-		paint
-	)
+	function make_scroll_window()
+		position_fraction = Number.CreateEventSink(0)
+		grip_height = Number.Max(50, Number.Min((container_height/target_height)*container_height,container_height))
+		scrollbar = create_vertical_scrollbar(position_fraction, container_height, grip_height, paint)
+		cut_width = Number.Subtract(container_width, scrollbar.width)
+		offset_x = 0
+		offset_y = Number.Multiply(position_fraction, Number.Subtract(target_height, container_height))
+		scroll_window = Image.Group({
+			Image.Cut(target_image, Rect.Create(offset_x, offset_y, cut_width, Number.Add(offset_y, container_height))),
+			Image.Translate(scrollbar.image, Point.Create(cut_width, 0))
+		})
+		return scroll_window
+	end 
 	
-	cut_width = Number.Subtract(container_width, scrollbar.width)
-
-	offset_x = 0
-
-	offset_y = Number.Multiply(position_fraction, Number.Subtract(target_height, container_height))
-
-	scroll_window = Image.Group({
-		Image.Cut(target_image, Rect.Create(offset_x, offset_y, cut_width, Number.Add(offset_y, container_height))),
-		Image.Translate(scrollbar.image, Point.Create(cut_width, 0))
-	})
-	return scroll_window
-
+	return Image.Switch(
+		Number.Min(1, Number.Max(0,target_height-container_height)),
+		{
+		[0]= Image.Justify(target_image, container_size, Justify.Top),
+		[1]= make_scroll_window(),
+		}
+	)
 end
 
 return {

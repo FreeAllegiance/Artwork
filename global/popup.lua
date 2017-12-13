@@ -1,5 +1,6 @@
 Button = File.LoadLua("button/button.lua")()
 Global = File.LoadLua("global/global.lua")()
+Fonts = File.LoadLua("global/fonts.lua")()
 
 function create_simple_text_button(text, text_height)
 	font = Font.Create("Verdana",text_height)
@@ -46,7 +47,8 @@ function create_single_popup_manager(target_image_getter)
 			target_container_offset = Point.Create(margin, margin)
 			target_container_size = Point.Create(target_container_x, target_container_y)
 			popup_size = Point.Create(popup_x, popup_y)
-
+			
+			-- this doesn't work for me. We don't do simple buttons. 
 			close_button = create_simple_text_button("X", 20)
 
 			Event.OnEvent(popup_is_open, close_button.event_click, function ()

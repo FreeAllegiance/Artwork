@@ -3,10 +3,11 @@ version = "button.lua v0.04 "
 sound_mouseover = Screen.CreatePlaySoundSink("button/sound/mouseover.ogg")
 sound_click = Screen.CreatePlaySoundSink("button/sound/cancel.ogg")
 
-function create_image_button(image_n, image_h, image_s, hovertext)
+function create_image_button(image_n, image_h, image_sl, hovertext)
 	button_image_size = Image.Size(image_n)
 	button_x = Point.X(button_image_size)
 	button_y = Point.Y(button_image_size)
+	image_s = image_sl or image_n
 	h_text = hovertext or "" 
 
 	-- Create a transparant layer, and wrap it inside an image that registers events
@@ -53,7 +54,7 @@ function create_image_button(image_n, image_h, image_s, hovertext)
 	return {
 		image=export_button,
 		events=export_events,
-		btnhovertext = export_text,
+		hovertext = export_text,
 	}
 end
 

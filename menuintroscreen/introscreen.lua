@@ -2,8 +2,9 @@ Button = File.LoadLua("button/button.lua")()
 Global = File.LoadLua("global/global.lua")()
 Fonts = File.LoadLua("global/fonts.lua")()
 Popup = File.LoadLua("global/popup.lua")()
+
 introscreenversion = "introscreen alpha v0.05 "
-stage= Screen.GetState("Login state")
+Login_state= Screen.GetState("Login state")
 
 -------------------------------------------------------
 --[[ SUPER IMPORTANT OBJECT --- 
@@ -20,10 +21,8 @@ Loginstate_container = Loginstate_container
 resolution = Screen.GetResolution()
 xres = Point.X(resolution)
 yres = Point.Y(resolution)
-ScaleX = Number.Min(1.0,Number.Max(0.6, xres/1400))
-ScaleY = Number.Min(1.0,Number.Max(0.6, yres/900))
-UIScaleFactor = Number.Min(ScaleX, ScaleY)
-callback = Number.ToString(UIScaleFactor*1000)
+UIScaleFactor = Number.Clamp(0.7, 1.1, yres/768)
+checktext = ""
 -- declare recurring variables used by multiple functions
 button_width = 200  -- used below and in render_list()
 button_normal_color = Color.Create(0.9, 0.9, 1, 0.8)
@@ -33,27 +32,28 @@ button_shadow_color = Color.Create(0.4,0.4,0.4,0.7)
 
 logo = Image.Group({ 
 Image.Justify(
-	Image.Multiply(Image.File("menuintroscreen/images/menuintroscreen_logo.png"),Global.color.white),
+	Image.Multiply(Image.File("menuintroscreen/images/menuintroscreen_logo.png"),button_normal_color),
 	Point.Create(278,78), 
 	Justify.Topright
 	),
 })
 
-function create_stringimages(label)
-	return {
-		normal = Image.String(Fonts.h1, button_normal_color, label, {Width=200, Justification=Justify.Center}),
-		shadow = Image.String(Fonts.h1, button_shadow_color, label, {Width=200, Justification=Justify.Center}),
-		hover = Image.String(Fonts.h1, button_hover_color, label, {Width=200, Justification=Justify.Center} ),
-		selected = Image.String(Fonts.h1, button_selected_color, label, {Width=200, Justification=Justify.Center}),
-	}
-end
 -- declare recurring variables outside of function
 mainbtn_bg1 = Image.File("menuintroscreen/images/introBtn_border.png")
 --btnimage_position = Point.Create(0,0)
-hovertext = "" -- this will hold the eventual text for other functions to use
-function create_mainbutton(event_sink, argimage, arglabel, arghovertext)
+
+function create_mainbutton(event_sink, argimage, arglabel, arghovertext, argfunction)
 	argimageheight = Point.Y(Image.Size(argimage))
-	label = create_stringimages(arglabel)
+	function create_stringimages(label)
+		labelsize = 25*UIScaleFactor
+		return {
+		normal = Image.String(Fonts.h1, button_normal_color, label),
+		shadow = Image.String(Fonts.h1, button_shadow_color, label),
+		hover = Image.String(Fonts.h1, button_hover_color, label),
+		selected = Image.String(Fonts.h1, button_selected_color, label),
+		}
+	end
+	label = create_stringimages(arglabel)	
 	btnsize = Point.Create(button_width, argimageheight+25+1) -- 25 is 25px height of h1 font, 1px is for text shadow offset.
 	image_n = Image.Group({
 		Image.Justify(Image.Multiply(argimage, button_normal_color),btnsize, Justify.Top),
@@ -80,10 +80,26 @@ function create_mainbutton(event_sink, argimage, arglabel, arghovertext)
 			label.selected,
 			}), 
 		btnsize, Justify.Bottom)
-	})		
+	})	
+	
 	button = Button.create_image_button(image_n, image_h, image_s, arghovertext)
-	hovertext = String.Concat(hovertext, button.btnhovertext) --[[ concatenates the hoverstring with the contents of the toplevel one. Since there's only one 	non-empty string we should wind up with only the text for the button currently hovered over... ]]
-	Event.OnEvent(event_sink, button.events.click)
+	hovertext = String.Concat(hovertext, button.hovertext) --[[ concatenates the hoverstring with the contents of the toplevel one. Since there's only one 	non-empty string we should wind up with only the text for the button currently hovered over... ]]
+	
+	if argfunction then
+		Event.OnEvent(event_sink, button.events.click, argfunction)
+		else 
+		Event.OnEvent(event_sink, button.events.click)
+	end 
+
+	
+	--[[
+	Event.OnEvent(
+		create_mission_popup.get_is_open(), 
+		create_mission_button.event_click, 
+		function ()
+			return Boolean.Not(create_mission_popup.get_is_open()) -- toggle get_is_open() on and off
+		end)
+	]]	
 	return button.image
 end
 
@@ -118,23 +134,8 @@ end
 -------     INTROSCREEN --------
 ----------------------------------------------
 
-
-function create_credits_image()
-	credits_image = File.LoadLua("menuintroscreen/credits.lua")()
-	return credits_image
-end
-
-credits_popup = Popup.create_single_popup_manager(create_credits_image)
-credits_button = Popup.create_simple_text_button("Credits", 14)
-
-Event.OnEvent(credits_popup.get_is_open(), credits_button.event_click, function ()
-	-- toggle
-	return Boolean.Not(credits_popup.get_is_open())
-end)
-
-
 function make_introscreen(Loginstate_container)
-
+hovertext = ""
 	function create_button_list()
 		list = {}
 		list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.exit"), Image.File("menuintroscreen/images/introBtnExit.png"), "EXIT", "Exit the game.")
@@ -161,7 +162,7 @@ function make_introscreen(Loginstate_container)
 	return Image.Group({
 		Image.Translate(Image.Justify(create_buttonbar(create_button_list()), resolution, Justify.Bottom), Point.Create(0,-30)),
 		Image.Justify(logo, resolution,Justify.Center),
-		Image.Translate(Image.Justify(errortextImg(), resolution, Justify.Bottom),Point.Create(0, -300)),
+		Image.Translate(Image.Justify(errortextImg(), resolution, Justify.Bottom),Point.Create(0, -175)),
 		Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -150)),
 		credits_popup.get_area(Point.Create(
 			Point.X(resolution), 
@@ -179,12 +180,12 @@ function make_spinner(Loginstate_container)
 	spinnerpoint = Point.Create(136,136) -- roughly the size of the diagonal of the spinner image. 
 	spinner = Image.Group({
 		Image.Extent(spinnerpoint, Global.color.transparent),
-		Image.Justify(Image.Multiply(Image.File("menuintroscreen/images/spinner_aleph.png"),Global.color.white), spinnerpoint, Justify.Center),
-		Image.Justify(Image.Rotate(Image.Multiply(Image.File("menuintroscreen/images/spinner.png"),Global.color.white), Number.Multiply(Screen.GetNumber("time"), 3.14)), spinnerpoint, Justify.Center),
+		Image.Justify(Image.Multiply(Image.File("menuintroscreen/images/spinner_aleph.png"),button_normal_color), spinnerpoint, Justify.Center),
+		Image.Justify(Image.Rotate(Image.Multiply(Image.File("menuintroscreen/images/spinner.png"),button_normal_color), Number.Multiply(Screen.GetNumber("time"), 3.14)), spinnerpoint, Justify.Center),
 		})
 
 stepMsg = Loginstate_container:GetString("Step message")
-stepMsgImg = Image.String(Fonts.h2, Global.color.white, stepMsg, {Width=Number.Divide(xres,2), Justification=Justify.Center})
+stepMsgImg = Image.String(Fonts.h2, button_normal_color, stepMsg, {Width=Number.Divide(xres,2), Justification=Justify.Center})
 
 	return Image.Group({
 		Image.Justify(spinner, resolution,Justify.Center),
@@ -209,10 +210,11 @@ fix hovertext
 
 
 function make_missionscreen(Loginstate_container)
+	hovertext = "" -- this will hold the eventual text for other functions to use
 	cardwidth = 250
 	cardheight = 280
-	scaledcardwidth = cardwidth*UIScaleFactor -- we can't apply the scale factor yet because we can't dynamically scale fonts.
-	scaledcardheight = cardheight*UIScaleFactor -- we have to apply the scaling after all the stringimages have been created.
+	scaledcardwidth = Number.Round(cardwidth*UIScaleFactor) -- we can't apply the scale factor yet because we can't dynamically scale fonts.
+	scaledcardheight = Number.Round(cardheight*UIScaleFactor) -- we have to apply the scaling after all the stringimages have been created.
 	xmargin = Number.Round(Number.Multiply(xres,0.1), 1)*UIScaleFactor
 	ytopmargin = 100*UIScaleFactor --Number.Round(Number.Multiply(yres,0.10),0)
 	ybottommargin = 180*UIScaleFactor
@@ -222,20 +224,24 @@ function make_missionscreen(Loginstate_container)
 	ycardsarea = yres-(ybottommargin+ytopmargin) -- Number.Subtract(yres,Number.Add(ybottommargin,ytopmargin))
 	cardsarea = Point.Create(xcardsarea+scrollbarwidth,ycardsarea)
 	cardsinnermargin = 15
-	cardsoutermargin = 10
+	cardsoutermargin = Number.Round(10*UIScaleFactor)
 	--calculate the number of cards that fit into a horizontal row on the screen
-	cardsrowlen = xcardsarea/(scaledcardwidth+(2*cardsoutermargin))
+	-- we're using pre-scaled dimensions since we can't render the whole thing in one size 
+	-- and scale down/up as needed, because the number of cards we can show 
+	-- varies with the screen ratio.  
+	cardsrowlen_fl = xcardsarea/(scaledcardwidth+(2*cardsoutermargin))
 	-- and round down by subtracting the Modulo.
-	cardsrowlen = cardsrowlen-Number.Mod(cardsrowlen,1)
-	hovertext = "" 
-	callback = ""
-	-------- temp bogus data
+	cardsrowlen = cardsrowlen_fl - Number.Mod(cardsrowlen_fl,1)
+	--checktext = Number.ToString(cardsrowlen)
+	
+	create_mission_screen = Global.create_box(600,500,{})
+	create_mission_popup = Popup.create_single_popup_manager(create_mission_screen)
 
 	function write(str,fnt,c)
 		fnt = fnt or Fonts.p
 		color = c or Global.color.white
 		return Image.Justify(
-			Image.String(fnt, color, str), 
+			Image.String(fnt, color, str, {Width=scaledcardwidth-cardsinnermargin*2}), 
 			Point.Create(cardwidth-cardsinnermargin, cardheight-cardsinnermargin), 
 			Justify.Top
 			)		
@@ -251,12 +257,10 @@ function make_missionscreen(Loginstate_container)
 		List.MapToImages(
 			mission_container,
 			function (mission, i)
-				row = i/(cardsrowlen)
-				row = row-Number.Mod(row,1)
-				col = i - (row*cardsrowlen)
-				posx = col*(scaledcardwidth+cardsoutermargin+cardsoutermargin)
-				posy = row*(scaledcardheight+cardsoutermargin+cardsoutermargin)
-
+				j=i+1
+				row_fl = j/cardsrowlen -- calculate how many rows are needed to display this mission 
+				row = row_fl-Number.Mod(row_fl,1) -- rounddown that number because we don't want half a card in view
+				col = j - (row*cardsrowlen) -- calculate the column this mission would be in.
 				missionname = mission:GetString("Name")
 				missionplayercount = Number.ToString(mission:GetNumber("Player count"))
 				missionnoat =  Number.ToString(mission:GetNumber("Player noat count"))			
@@ -293,7 +297,7 @@ function make_missionscreen(Loginstate_container)
 
 					selectedstyle = ""
 					trueCount = 0
-					for i, thing in ipairs(lst) do
+					for k, thing in ipairs(lst) do
 						str = String.Switch(
 							thing.boolval,
 							{
@@ -322,7 +326,7 @@ function make_missionscreen(Loginstate_container)
 				function makemissioncardface(cardcolor) 
 					missioncardface = Image.Group({
 							Image.Extent(Point.Create(cardwidth, cardheight), Global.color.transparent),	
-							pos(write(missionstyle, Fonts.h1, cardcolor),cardsinnermargin,10),
+							pos(write(missionstyle, Fonts.h1, cardcolor),cardsinnermargin,12),
 							pos(write(missionstate, Fonts.h4, cardcolor),cardsinnermargin,35), 
 							pos(write(missionname, Fonts.h1, cardcolor),cardsinnermargin,60),
 							pos(write("Server: "..missionserver, Fonts.h4, cardcolor),cardsinnermargin,105),
@@ -344,17 +348,57 @@ function make_missionscreen(Loginstate_container)
 					Global.create_backgroundpane(scaledcardwidth, scaledcardheight, {color=button_selected_color}),
 					makemissioncardface(button_selected_color)
 				})
-
 				card = Button.create_image_button(joinbtn_n, joinbtn_h, joinbtn_s, "Connect To This Lobby And Join This Mission")
-				hovertext = String.Concat(hovertext, card.btnhovertext) --concatenates the hoverstring with the contents of the toplevel one.
+				hovertext = hovertext .. card.hovertext --concatenates the hoverstring with the contents of the toplevel one.
 				Event.OnEvent(mission:GetEventSink("Join"), card.events.click)
-				return  pos(card.image,posx,posy) 
+				--positioning
+				-- we're using pre-scaled dimension because this is also about the space between the cards.
+				posx = col*(scaledcardwidth+cardsoutermargin+cardsoutermargin) -- 
+				posy = row*(scaledcardheight+cardsoutermargin+cardsoutermargin)
+				
+				function make_create_missioncard()
+					missionstyle = "NEW MISSION"
+					missionstate = ""
+					missionname = "CREATE NEW MISSION" 
+					missionserver = " - "
+					missioncore = " - "
+					joinbtn_n = Image.Group({ 
+					Global.create_backgroundpane(scaledcardwidth, scaledcardheight, {color=button_normal_color}),
+					makemissioncardface(button_normal_color)
+					})
+					joinbtn_h = Image.Group({ 
+						Global.create_backgroundpane(scaledcardwidth, scaledcardheight, {color=button_hover_color, src=Image.File("/global/images/backgroundpane_highlight.png")}),
+						makemissioncardface(button_hover_color)
+					})
+					joinbtn_s = Image.Group({ 
+						Global.create_backgroundpane(scaledcardwidth, scaledcardheight, {color=button_selected_color}),
+						makemissioncardface(button_selected_color)
+					})
+					create_missioncard = Button.create_image_button(joinbtn_n, joinbtn_h, joinbtn_s, "Create your own game on a server.")
+					hovertext = hovertext .. create_missioncard.hovertext --concatenates the hoverstring with the contents of the toplevel one.
+					Event.OnEvent(create_mission_popup.get_is_open(), 
+						create_missioncard.events.click,
+						function () return Boolean.Not(create_mission_popup.get_is_open()) end
+						)
+					return create_missioncard.image
+				end
+				
+				missioncard = Image.Switch(
+					Number.Clamp(0,1,i),
+					{
+						[0] = Image.Group({
+							make_create_missioncard(),
+							pos(card.image,posx,posy),
+							}),
+						[1] = pos(card.image,posx,posy)			
+					})			
+				return missioncard
 			end	
 		)
 	) 
 	-- cardslistImg =Image.Extent(Point.Create(xcardsarea, 1250), Global.color.transparent)
 	--if the vertical size of the cardimage < cardsarea (if it fits) return 0, otherwise return 1,
-	doWeNeedaScrollbar = Number.Min(Number.Max(0, Point.Y(Image.Size(cardslistImg))-ycardsarea),1)
+	doWeNeedaScrollbar = Number.Clamp(0,1, Point.Y(Image.Size(cardslistImg))-ycardsarea)
 	missioncards = Image.Group({
 		Image.Extent(cardsarea, Global.color.transparent),
 		Image.Switch(
@@ -371,29 +415,33 @@ function make_missionscreen(Loginstate_container)
 				})
 			}), -- make a scrolling pane image
 		})
-
-	function create_button_list()
+		
+	function button_list()
 		list = {}
 		list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.exit"), Image.File("menuintroscreen/images/introBtnExit.png"), "EXIT", "Exit the game.")
 		list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.options"), Image.File("menuintroscreen/images/introBtnSettings.png"), "OPTIONS", "Change your graphics, audio and game settings.")
 		list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.training"), Image.File("menuintroscreen/images/introBtnHelp.png"), "TRAINING", "Learn how to play the game.")
 		list[#list+1] = create_mainbutton(Screen.CreateOpenWebsiteSink("https://discord.gg/WcEJ9VH"), Image.File("menuintroscreen/images/introBtnDiscord.png"), "DISCORD", "Join the community Discord server.")
-		list[#list+1] = create_mainbutton(Loginstate_container:GetEventSink("Create mission dialog"), Image.File("menuintroscreen/images/introBtnLan.png"), "CREATE GAME", "Create your own game on a server.")
+		list[#list+1] = create_mainbutton(
+			create_mission_popup.get_is_open(), 
+			Image.File("menuintroscreen/images/introBtnLan.png"), 
+			"CREATE GAME", 
+			"Create your own game on a server.", 
+			function () return Boolean.Not(create_mission_popup.get_is_open()) end
+		)
 		list[#list+1] = create_mainbutton(Loginstate_container:GetEventSink("Logout"), Image.File("menuintroscreen/images/introBtnBack.png"), "BACK", "Go Back To The Main Screen.")
 		return list
 	end
-	
+
 	-- create the mission creation dialog
 
 	return Image.Group({
-																																											   
+			Image.Translate(Image.Justify(logo, resolution, Justify.Top), Point.Create(0,15)),	
+			Image.Translate(Image.Justify(Image.Extent(Point.Create(xcardsarea, 3), button_normal_color), resolution, Justify.Top), Point.Create(0,95)),	
 			Image.Translate(missioncards, Point.Create(xmargin, ytopmargin)),
-																						 
+			Image.Translate(Image.Justify(create_buttonbar(button_list()), resolution, Justify.Bottom), Point.Create(0,-30)),
 			Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -150)),
-			Image.Translate(Image.Justify(create_buttonbar(create_button_list()), resolution, Justify.Bottom), Point.Create(0,-30)),
 		})
-
-	
 end	
 
 
@@ -413,16 +461,29 @@ end
 
 ---------------------- Final Screen Switch Section ---------
 
-stagescreen = Image.Switch(
-	stage,{
-	["Logged out"]=make_introscreen,
+function create_credits_image()
+	credits_image = File.LoadLua("menuintroscreen/credits.lua")()
+	return credits_image
+end
+
+credits_popup = Popup.create_single_popup_manager(create_credits_image)
+credits_button = Popup.create_simple_text_button("Credits", 14)
+
+Event.OnEvent(credits_popup.get_is_open(), credits_button.event_click, function ()
+	-- toggle
+	return Boolean.Not(credits_popup.get_is_open())
+end)
+
+statescreen = Image.Switch(
+	Login_state,{
+	["Logged out"]=make_introscreen, 
 	["Logging in"]=make_spinner,
 	["Logged in"]=make_missionscreen,
 	})
 
 return Image.Group({
 	Image.ScaleFill(make_background(), resolution, Justify.Center), -- we use the same background image for all of them.
-	stagescreen,
-	Image.Justify(Image.String(Font.Create("Verdana",12), button_normal_color, Button.version.."\n"..introscreenversion.."\n"..Global.version .."\n".. callback, {Width=200, Justification=Justify.Right}), resolution, Justify.Topright),
+	statescreen,
+	Image.Justify(Image.String(Font.Create("Verdana",12), button_normal_color, Button.version.."\n"..introscreenversion.."\n"..Global.version .."\n".. checktext, {Width=200, Justification=Justify.Right}), resolution, Justify.Topright),
 	})
 

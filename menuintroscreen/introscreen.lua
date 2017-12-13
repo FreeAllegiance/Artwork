@@ -21,8 +21,8 @@ Loginstate_container = Loginstate_container
 resolution = Screen.GetResolution()
 xres = Point.X(resolution)
 yres = Point.Y(resolution)
-UIScaleFactor = Number.Clamp(0.7, 1.1, yres/768)
-checktext = ""
+UIScaleFactor = Number.Min(Number.Clamp(0.7,1.1, xres/1366), Number.Clamp(0.7, 1.1, yres/768))
+checktext = Number.ToString(UIScaleFactor*1000)
 -- declare recurring variables used by multiple functions
 button_width = 200  -- used below and in render_list()
 button_normal_color = Color.Create(0.9, 0.9, 1, 0.8)
@@ -45,7 +45,7 @@ mainbtn_bg1 = Image.File("menuintroscreen/images/introBtn_border.png")
 function create_mainbutton(event_sink, argimage, arglabel, arghovertext, argfunction)
 	argimageheight = Point.Y(Image.Size(argimage))
 	function create_stringimages(label)
-		labelsize = 25*UIScaleFactor
+		--labelsize = 25*UIScaleFactor
 		return {
 		normal = Image.String(Fonts.h1, button_normal_color, label),
 		shadow = Image.String(Fonts.h1, button_shadow_color, label),
@@ -126,7 +126,7 @@ function create_buttonbar(btnlist)
 	bby = Point.Y(bbs) -- get BB height as a point val y coordinate
 	fctr = Number.Min(1, (0.5*xres)/bbx) -- if smaller than 1, return ratio of the horizontal resolution and the Button Bar width.
 	bbres = Point.Create(Number.Multiply(bbx, fctr), Number.Multiply(bby, fctr)) 
-	btnbardiv = Point.Create(bbx*UIScaleFactor, bby*UIScaleFactor)
+	btnbardiv = Point.Create((bbx*UIScaleFactor)-60, (bby*UIScaleFactor)-30)
 	-- old calc: bbres = Point.Create(Number.Multiply(bbx, fctr), Number.Multiply(bby, fctr))
 	return Image.ScaleFill(bbimg, btnbardiv, Justify.Center)
 end
@@ -164,10 +164,6 @@ hovertext = ""
 		Image.Justify(logo, resolution,Justify.Center),
 		Image.Translate(Image.Justify(errortextImg(), resolution, Justify.Bottom),Point.Create(0, -175)),
 		Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -150)),
-		credits_popup.get_area(Point.Create(
-			Point.X(resolution), 
-			Point.Y(resolution) - 200
-		)),
 		Image.Justify(credits_button.image, resolution, Justify.Bottomright),
 	})
 end
@@ -477,6 +473,10 @@ statescreen = Image.Switch(
 return Image.Group({
 	Image.ScaleFill(make_background(), resolution, Justify.Center), -- we use the same background image for all of them.
 	statescreen,
+	credits_popup.get_area(Point.Create(
+			Point.X(resolution), 
+			Point.Y(resolution) - 200
+		)),
 	Image.Justify(Image.String(Font.Create("Verdana",12), button_normal_color, Button.version.."\n"..introscreenversion.."\n"..Global.version .."\n".. checktext, {Width=200, Justification=Justify.Right}), resolution, Justify.Topright),
 	})
 

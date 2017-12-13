@@ -39,7 +39,7 @@ function create_single_popup_manager(target_image_getter)
 			target_container_maximum_y = area_y - 2 * margin
 
 			target_container_x = Number.Min(target_container_maximum_x, target_x + scrollbar_width)
-			target_container_y = target_container_maximum_y
+			target_container_y = Number.Min(target_container_maximum_y, target_y)
 
 			popup_x = target_container_x + 2 * margin
 			popup_y = target_container_y + 2 * margin

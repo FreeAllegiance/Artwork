@@ -233,9 +233,6 @@ function make_missionscreen(Loginstate_container)
 	-- and round down by subtracting the Modulo.
 	cardsrowlen = cardsrowlen_fl - Number.Mod(cardsrowlen_fl,1)
 	--checktext = Number.ToString(cardsrowlen)
-	
-	create_mission_screen = Global.create_box(600,500,{})
-	create_mission_popup = Popup.create_single_popup_manager(create_mission_screen)
 
 	function write(str,fnt,c)
 		fnt = fnt or Fonts.p
@@ -250,7 +247,14 @@ function make_missionscreen(Loginstate_container)
 	function pos(img, x,y)
 		return Image.Translate(img, Point.Create(x,y))
 	end	
-
+	
+	function create_mission_screen()
+		return Image.Group({
+			Image.Extent(Point.Create(300, 200), Global.color.transparent),
+			write("help", Fonts.h1),
+		})		
+	end
+	create_mission_popup = Popup.create_single_popup_manager(create_mission_screen)	
 	mission_container = Loginstate_container:GetList("Mission list")
 	
 	cardslistImg = Image.Group(
@@ -283,8 +287,7 @@ function make_missionscreen(Loginstate_container)
 					[true]="In Progress: " .. missiontime .. " - " .. missionplayercount .. "/" .. missionnoat ,
 					[false]="Building Teams" .. "- " .. missionplayercount .. "/" .. missionnoat ,
 				})
-
-									
+								
 				function missionstylebools()
 					lst = {}
 					lst[#lst+1] = { name="CONQUEST", boolval = mission:GetBool("Has goal conquest")}
@@ -381,8 +384,7 @@ function make_missionscreen(Loginstate_container)
 						function () return Boolean.Not(create_mission_popup.get_is_open()) end
 						)
 					return create_missioncard.image
-				end
-				
+				end			
 				missioncard = Image.Switch(
 					Number.Clamp(0,1,i),
 					{
@@ -415,32 +417,24 @@ function make_missionscreen(Loginstate_container)
 				})
 			}), -- make a scrolling pane image
 		})
-		
 	function button_list()
 		list = {}
 		list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.exit"), Image.File("menuintroscreen/images/introBtnExit.png"), "EXIT", "Exit the game.")
 		list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.options"), Image.File("menuintroscreen/images/introBtnSettings.png"), "OPTIONS", "Change your graphics, audio and game settings.")
 		list[#list+1] = create_mainbutton(Screen.GetExternalEventSink("open.training"), Image.File("menuintroscreen/images/introBtnHelp.png"), "TRAINING", "Learn how to play the game.")
 		list[#list+1] = create_mainbutton(Screen.CreateOpenWebsiteSink("https://discord.gg/WcEJ9VH"), Image.File("menuintroscreen/images/introBtnDiscord.png"), "DISCORD", "Join the community Discord server.")
-		list[#list+1] = create_mainbutton(
-			create_mission_popup.get_is_open(), 
-			Image.File("menuintroscreen/images/introBtnLan.png"), 
-			"CREATE GAME", 
-			"Create your own game on a server.", 
-			function () return Boolean.Not(create_mission_popup.get_is_open()) end
-		)
 		list[#list+1] = create_mainbutton(Loginstate_container:GetEventSink("Logout"), Image.File("menuintroscreen/images/introBtnBack.png"), "BACK", "Go Back To The Main Screen.")
 		return list
 	end
-
 	-- create the mission creation dialog
-
 	return Image.Group({
 			Image.Translate(Image.Justify(logo, resolution, Justify.Top), Point.Create(0,15)),	
 			Image.Translate(Image.Justify(Image.Extent(Point.Create(xcardsarea, 3), button_normal_color), resolution, Justify.Top), Point.Create(0,95)),	
 			Image.Translate(missioncards, Point.Create(xmargin, ytopmargin)),
 			Image.Translate(Image.Justify(create_buttonbar(button_list()), resolution, Justify.Bottom), Point.Create(0,-30)),
 			Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -150)),
+			Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -150)),
+			Image.Justify(create_mission_popup.get_area(cardsarea), resolution, Justify.Center)
 		})
 end	
 
@@ -468,7 +462,6 @@ end
 
 credits_popup = Popup.create_single_popup_manager(create_credits_image)
 credits_button = Popup.create_simple_text_button("Credits", 14)
-
 Event.OnEvent(credits_popup.get_is_open(), credits_button.event_click, function ()
 	-- toggle
 	return Boolean.Not(credits_popup.get_is_open())

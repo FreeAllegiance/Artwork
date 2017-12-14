@@ -416,9 +416,12 @@ function make_missionscreen(Loginstate_container)
 		Image.Switch(
 			doWeNeedaScrollbar,
 			{
-			[0] = Image.Justify(cardslistImg,cardsarea, Justify.Center), -- then just show the cardsimage, else 
+			[0] = Image.Group({
+					Image.Translate(Image.Justify(Image.Extent(Point.Create(xcardsarea, 3), button_normal_color), cardsarea, Justify.Top), Point.Create(0,-10)),	
+					Image.Justify(cardslistImg,cardsarea, Justify.Center),
+					}), -- then just show the cardsimage, else 
 			[1] = Image.Group({
-					Image.Translate(Global.create_backgroundpane(xcardsarea+50,ycardsarea+30, {color=button_normal_color}), Point.Create(0,-15)),
+					Image.Translate(Global.create_backgroundpane(xcardsarea+50,ycardsarea+20, {color=button_normal_color}), Point.Create(0,-15)),
 					Global.create_vertical_scrolling_container(
 					Image.Justify(cardslistImg,Point.Create(xcardsarea+scrollbarwidth,ycardsarea), Justify.Top),
 					cardsarea,
@@ -439,7 +442,6 @@ function make_missionscreen(Loginstate_container)
 	-- create the mission creation dialog
 	return Image.Group({
 			Image.Translate(Image.Justify(Image.Scale(logo, Point.Create(UIScaleFactor,UIScaleFactor)), resolution, Justify.Top), Point.Create(0,15*UIScaleFactor)),	
-			Image.Translate(Image.Justify(Image.Extent(Point.Create(xcardsarea, 3), button_normal_color), resolution, Justify.Top), Point.Create(0,95*UIScaleFactor)),	
 			Image.Translate(missioncards, Point.Create(xmargin, ytopmargin)),
 			Image.Translate(Image.Justify(create_buttonbar(button_list()), resolution, Justify.Bottom), Point.Create(0,-30*UIScaleFactor)),
 			Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -150*UIScaleFactor)),

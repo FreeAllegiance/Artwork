@@ -21,22 +21,28 @@ Loginstate_container = Loginstate_container
 resolution = Screen.GetResolution()
 xres = Point.X(resolution)
 yres = Point.Y(resolution)
-UIScaleFactor = Number.Min(Number.Clamp(0.7,1.1, xres/1366), Number.Clamp(0.7, 1.1, yres/768))
+UIScaleFactor = Number.Min(Number.Clamp(0.6,1.1, xres/1366), Number.Clamp(0.6, 1.1, yres/768))
 checktext = Number.ToString(UIScaleFactor*1000)
+fontheader1 = Fonts.create_scaled("Trebuchet MS", 26*UIScaleFactor, {Bold=true})
+fontheader2 = Fonts.create_scaled("Trebuchet MS", 23*UIScaleFactor, {Italic=true, Bold=true})
+fontheader4 = Fonts.create_scaled("Trebuchet MS", 19*UIScaleFactor, {Bold=true})
+
 -- declare recurring variables used by multiple functions
-button_width = 200  -- used below and in render_list()
+button_width = UIScaleFactor*200  -- used below and in render_list()
 button_normal_color = Color.Create(0.9, 0.9, 1, 0.8)
 button_hover_color 	= Color.Create(1, 0.9, 0.8, 0.8)
 button_selected_color = Color.Create(1,1,0.9, 0.95)
-button_shadow_color = Color.Create(0.4,0.4,0.4,0.7)	
+button_shadow_color = Color.Create(0.4,0.4,0.4,0.7)
+
+
 
 logo = Image.Group({ 
-Image.Justify(
-	Image.Multiply(Image.File("menuintroscreen/images/menuintroscreen_logo.png"),button_normal_color),
-	Point.Create(278,78), 
-	Justify.Topright
-	),
-})
+		Image.Justify(
+			Image.Multiply(Image.File("menuintroscreen/images/menuintroscreen_logo.png"),button_normal_color),
+			Point.Create(278,78), 
+			Justify.Topright
+		),
+	})
 
 -- declare recurring variables outside of function
 mainbtn_bg1 = Image.File("menuintroscreen/images/introBtn_border.png")
@@ -44,27 +50,28 @@ mainbtn_bg1 = Image.File("menuintroscreen/images/introBtn_border.png")
 
 function create_mainbutton(event_sink, argimage, arglabel, arghovertext, argfunction)
 	argimageheight = Point.Y(Image.Size(argimage))
+	scaledpt = Point.Create(UIScaleFactor, UIScaleFactor)
 	function create_stringimages(label)
 		--labelsize = 25*UIScaleFactor
 		return {
-		normal = Image.String(Fonts.h1, button_normal_color, label),
-		shadow = Image.String(Fonts.h1, button_shadow_color, label),
-		hover = Image.String(Fonts.h1, button_hover_color, label),
-		selected = Image.String(Fonts.h1, button_selected_color, label),
+		normal = Image.String(fontheader1, button_normal_color, label),
+		shadow = Image.String(fontheader1, button_shadow_color, label),
+		hover = Image.String(fontheader1, button_hover_color, label),
+		selected = Image.String(fontheader1, button_selected_color, label),
 		}
 	end
 	label = create_stringimages(arglabel)	
-	btnsize = Point.Create(button_width, argimageheight+25+1) -- 25 is 25px height of h1 font, 1px is for text shadow offset.
+	btnsize = Point.Create(button_width, UIScaleFactor*(argimageheight+25+1)) -- 25 is 25px height of h1 font, 1px is for text shadow offset.
 	image_n = Image.Group({
-		Image.Justify(Image.Multiply(argimage, button_normal_color),btnsize, Justify.Top),
+		Image.Justify(Image.Scale(Image.Multiply(argimage, button_normal_color),scaledpt),btnsize, Justify.Top),
 		Image.Justify(Image.Group({
 			Image.Translate(label.shadow, Point.Create(1,1)),
 			label.normal,
 		}), btnsize, Justify.Bottom),
 	})
 	image_h = Image.Group({
-		Image.Justify(Image.Multiply(mainbtn_bg1, button_hover_color),btnsize, Justify.Top),
-		Image.Justify(Image.Multiply(argimage, button_hover_color),btnsize, Justify.Top),
+		Image.Justify(Image.Scale(Image.Multiply(mainbtn_bg1, button_hover_color),scaledpt),btnsize, Justify.Top),
+		Image.Justify(Image.Scale(Image.Multiply(argimage, button_hover_color),scaledpt),btnsize, Justify.Top),
 		Image.Justify(Image.Group({
 			Image.Translate(label.shadow, Point.Create(1,1)),
 			label.hover,
@@ -73,8 +80,8 @@ function create_mainbutton(event_sink, argimage, arglabel, arghovertext, argfunc
 	})
 	-- selected doesnt need color multiply. 
 	image_s = Image.Group({
-			Image.Justify(mainbtn_bg1, btnsize, Justify.Top),
-			Image.Justify(argimage, btnsize, Justify.Top),
+			Image.Justify(Image.Scale(mainbtn_bg1,scaledpt), btnsize, Justify.Top),
+			Image.Justify(Image.Scale(argimage,scaledpt), btnsize, Justify.Top),
 		Image.Justify(Image.Group({
 			Image.Translate(label.shadow, Point.Create(1,1)),
 			label.selected,
@@ -83,7 +90,7 @@ function create_mainbutton(event_sink, argimage, arglabel, arghovertext, argfunc
 	})	
 	
 	button = Button.create_image_button(image_n, image_h, image_s, arghovertext)
-	hovertext = String.Concat(hovertext, button.hovertext) --[[ concatenates the hoverstring with the contents of the toplevel one. Since there's only one 	non-empty string we should wind up with only the text for the button currently hovered over... ]]
+	hovertext = hovertext .. button.hovertext --[[ concatenates the hoverstring with the contents of the toplevel one. Since there's only one 	non-empty string we should wind up with only the text for the button currently hovered over... ]]
 	
 	if argfunction then
 		Event.OnEvent(event_sink, button.events.click, argfunction)
@@ -104,7 +111,7 @@ function create_mainbutton(event_sink, argimage, arglabel, arghovertext, argfunc
 end
 
 function create_hovertextimg(str)
-	return Image.String(Fonts.h2, Global.color.white, Number.Divide(xres,2), hovertext, Justify.Center)
+	return Image.String(fontheader2, Global.color.white, Number.Divide(xres,2), hovertext, Justify.Center)
 end
 
 function render_list(list)
@@ -120,7 +127,8 @@ function render_list(list)
 end
 
 function create_buttonbar(btnlist)
-	bbimg = render_list(btnlist)  -- compile the Button Bar (BB) image
+	bbimg = render_list(btnlist) 
+	--[[-- compile the Button Bar (BB) image
 	bbs = Image.Size(bbimg) -- get BB size as a point value
 	bbx = Point.X(bbs) -- get BB width as a point val x coordinate
 	bby = Point.Y(bbs) -- get BB height as a point val y coordinate
@@ -129,6 +137,8 @@ function create_buttonbar(btnlist)
 	btnbardiv = Point.Create((bbx*UIScaleFactor)-60, (bby*UIScaleFactor)-30)
 	-- old calc: bbres = Point.Create(Number.Multiply(bbx, fctr), Number.Multiply(bby, fctr))
 	return Image.ScaleFill(bbimg, btnbardiv, Justify.Center)
+	]]
+	return bbimg
 end
 
 -------     INTROSCREEN --------
@@ -153,7 +163,7 @@ hovertext = ""
 				["No"] = function(Loginstate_container) return Image.Empty() end,
 				["Yes"] = function (Loginstate_container)
 						errMsg = Loginstate_container:GetString("Message") 
-						errimg = Image.String(Fonts.h2, Global.color.white, Number.Divide(xres,2), errMsg, Justify.Center)
+						errimg = Image.String(fontheader2, Global.color.white, Number.Divide(xres,2), errMsg, Justify.Center)
 						return errimg
 					end,
 			})
@@ -181,7 +191,7 @@ function make_spinner(Loginstate_container)
 		})
 
 stepMsg = Loginstate_container:GetString("Step message")
-stepMsgImg = Image.String(Fonts.h2, button_normal_color, stepMsg, {Width=Number.Divide(xres,2), Justification=Justify.Center})
+stepMsgImg = Image.String(fontheader2, button_normal_color, stepMsg, {Width=Number.Divide(xres,2), Justification=Justify.Center})
 
 	return Image.Group({
 		Image.Justify(spinner, resolution,Justify.Center),
@@ -209,17 +219,16 @@ function make_missionscreen(Loginstate_container)
 	hovertext = "" -- this will hold the eventual text for other functions to use
 	cardwidth = 250
 	cardheight = 280
-	scaledcardwidth = Number.Round(cardwidth*UIScaleFactor) -- we can't apply the scale factor yet because we can't dynamically scale fonts.
-	scaledcardheight = Number.Round(cardheight*UIScaleFactor) -- we have to apply the scaling after all the stringimages have been created.
+	scaledcardwidth = Number.Round(cardwidth*UIScaleFactor) 
+	scaledcardheight = Number.Round(cardheight*UIScaleFactor)
 	xmargin = Number.Round(Number.Multiply(xres,0.1), 1)*UIScaleFactor
 	ytopmargin = 100*UIScaleFactor --Number.Round(Number.Multiply(yres,0.10),0)
 	ybottommargin = 180*UIScaleFactor
-	
 	scrollbarwidth = 26
 	xcardsarea = (xres-scrollbarwidth)-(2*xmargin) -- Number.Subtract(xres,Global.list_sum({xmargin, xmargin}))
 	ycardsarea = yres-(ybottommargin+ytopmargin) -- Number.Subtract(yres,Number.Add(ybottommargin,ytopmargin))
 	cardsarea = Point.Create(xcardsarea+scrollbarwidth,ycardsarea)
-	cardsinnermargin = 15
+	cardsinnermargin = Number.Round(15*UIScaleFactor)
 	cardsoutermargin = Number.Round(10*UIScaleFactor)
 	--calculate the number of cards that fit into a horizontal row on the screen
 	-- we're using pre-scaled dimensions since we can't render the whole thing in one size 
@@ -233,11 +242,11 @@ function make_missionscreen(Loginstate_container)
 	function write(str,fnt,c)
 		fnt = fnt or Fonts.p
 		color = c or Global.color.white
-		return Image.Justify(
-			Image.String(fnt, color, str, {Width=scaledcardwidth-cardsinnermargin*2}), 
-			Point.Create(cardwidth-cardsinnermargin, cardheight-cardsinnermargin), 
-			Justify.Top
-			)		
+		textblock = Point.Create(scaledcardwidth-cardsinnermargin, 5)
+		return Image.Group({
+			Image.Extent(textblock, Global.color.transparent),
+			Image.Justify(Image.String(fnt, color, str), textblock, Justify.Top),
+		})
 	end 
 
 	function pos(img, x,y)
@@ -283,7 +292,8 @@ function make_missionscreen(Loginstate_container)
 					[true]="In Progress: " .. missiontime .. " - " .. missionplayercount .. "/" .. missionnoat ,
 					[false]="Building Teams" .. "- " .. missionplayercount .. "/" .. missionnoat ,
 				})
-								
+		-- figure out whether there is a single or multiple win condition set for the mission				
+		-- first collect all the booleans from the mission container
 				function missionstylebools()
 					lst = {}
 					lst[#lst+1] = { name="CONQUEST", boolval = mission:GetBool("Has goal conquest")}
@@ -293,7 +303,7 @@ function make_missionscreen(Loginstate_container)
 					lst[#lst+1] = { name="FLAGS", boolval = mission:GetBool("Has goal flags")}
 					lst[#lst+1] = { name="DEATHMATCH", boolval = mission:GetBool("Has goal deathmatch")}
 					lst[#lst+1] = { name="COUNTDOWN", boolval = mission:GetBool("Has goal countdown")}
-
+		-- now loop through	the list of booleans. On true concat the list index and add 1 to the counter.
 					selectedstyle = ""
 					trueCount = 0
 					for k, thing in ipairs(lst) do
@@ -307,12 +317,11 @@ function make_missionscreen(Loginstate_container)
 						selectedstyle = selectedstyle .. str
 						trueCount = trueCount + Boolean.ToNumber(thing.boolval)
 					end
-					styledata = {}
-					styledata.trueCount = trueCount
-					styledata.selected = selectedstyle
-					return styledata
-				end
-				
+					return {
+						trueCount = trueCount,
+						selected = selectedstyle,
+					}
+				end			
 				missionstyledata = missionstylebools()
 				missionstyle = String.Switch(
 					Number.Min(missionstyledata.trueCount,2),{
@@ -321,18 +330,23 @@ function make_missionscreen(Loginstate_container)
 					[2] = "CUSTOM MISSION",
 					}
 				)
-			
-				function makemissioncardface(cardcolor) 
+					
+				function makemissioncardface(cardcolor)
+					carddims = Point.Create(scaledcardwidth, scaledcardheight)
 					missioncardface = Image.Group({
-							Image.Extent(Point.Create(cardwidth, cardheight), Global.color.transparent),	
-							pos(write(missionstyle, Fonts.h1, cardcolor),cardsinnermargin,12),
-							pos(write(missionstate, Fonts.h4, cardcolor),cardsinnermargin,35), 
-							pos(write(missionname, Fonts.h1, cardcolor),cardsinnermargin,60),
-							pos(write("Server: "..missionserver, Fonts.h4, cardcolor),cardsinnermargin,105),
-							pos(write("Core: "..missioncore, Fonts.h4, cardcolor),cardsinnermargin,120),
-							})
-				
-					return Image.Scale(missioncardface, Point.Create(UIScaleFactor,UIScaleFactor))
+						Image.Extent(carddims, Global.color.transparent),
+						pos(Image.StackVertical({
+								write(missionstyle, fontheader1, cardcolor),
+								write(missionstate, fontheader4, cardcolor), 
+								write(missionname, fontheader1, cardcolor),
+								write("Server: "..missionserver, fontheader4, cardcolor),
+								write("Core: "..missioncore, fontheader4, cardcolor),
+							}),
+							cardsinnermargin,
+							cardsinnermargin
+						)
+					})
+					return missioncardface
 				end
 				-- Global.create_backgroundpane(cardwidth, cardheight, {color=cardcolor})
 				joinbtn_n = Image.Group({ 
@@ -424,12 +438,12 @@ function make_missionscreen(Loginstate_container)
 	end
 	-- create the mission creation dialog
 	return Image.Group({
-			Image.Translate(Image.Justify(logo, resolution, Justify.Top), Point.Create(0,15)),	
-			Image.Translate(Image.Justify(Image.Extent(Point.Create(xcardsarea, 3), button_normal_color), resolution, Justify.Top), Point.Create(0,95)),	
+			Image.Translate(Image.Justify(Image.Scale(logo, Point.Create(UIScaleFactor,UIScaleFactor)), resolution, Justify.Top), Point.Create(0,15*UIScaleFactor)),	
+			Image.Translate(Image.Justify(Image.Extent(Point.Create(xcardsarea, 3), button_normal_color), resolution, Justify.Top), Point.Create(0,95*UIScaleFactor)),	
 			Image.Translate(missioncards, Point.Create(xmargin, ytopmargin)),
-			Image.Translate(Image.Justify(create_buttonbar(button_list()), resolution, Justify.Bottom), Point.Create(0,-30)),
-			Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -150)),
-			Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -150)),
+			Image.Translate(Image.Justify(create_buttonbar(button_list()), resolution, Justify.Bottom), Point.Create(0,-30*UIScaleFactor)),
+			Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -150*UIScaleFactor)),
+			Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -150*UIScaleFactor)),
 			Image.Justify(create_mission_popup.get_area(cardsarea), resolution, Justify.Center)
 		})
 end	

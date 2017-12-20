@@ -18,7 +18,18 @@ function create_simple_text_button(text, text_height)
 	}
 end
 
-function create_single_popup_manager(target_image_getter)
+function create_single_popup_manager(target_image_getter, opts)
+	opts = {}
+	controls = opts.control_maker or function (popup_is_open)
+			close_btn = create_simple_text_button("X", 20)
+			Event.OnEvent(popup_is_open, close_btn.event_click, function ()
+				return false
+			end)
+			return 	Image.Translate(
+						close_btn.image,
+						Point.Create(popup_x - 40, 15)
+					)
+		end
 	local popup_is_open = Boolean.CreateEventSink(false)
 
 	function get_area(size)
@@ -47,25 +58,15 @@ function create_single_popup_manager(target_image_getter)
 			target_container_offset = Point.Create(margin, margin)
 			target_container_size = Point.Create(target_container_x, target_container_y)
 			popup_size = Point.Create(popup_x, popup_y)
-			
-			-- this doesn't work for me. We don't do simple buttons. 
-			close_button = create_simple_text_button("X", 20)
-
-			Event.OnEvent(popup_is_open, close_button.event_click, function ()
-				return false
-			end)
 
 			return Image.Justify(
 				Image.Group({
-					Global.create_backgroundpane(popup_x, popup_y, {color=button_normal_color}),
+					Global.create_backgroundpane(popup_x, popup_y, {color=button_normal_color, src=Image.File("/global/images/backgroundpane_80pcOpacity.png")}),
 					Image.Translate(
 						Global.create_vertical_scrolling_container(target_image, target_container_size, button_normal_color),
 						target_container_offset
 					),
-					Image.Translate(
-						close_button.image,
-						Point.Create(popup_x - 40, 15)
-					)
+					controls(popup_is_open)
 				}),
 				size,
 				Justify.Center

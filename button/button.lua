@@ -1,3 +1,5 @@
+Colors = File.LoadLua("global/colors.lua")()
+Global = File.LoadLua("global/global.lua")()
 version = "button.lua v0.04 "
 
 sound_mouseover = Screen.CreatePlaySoundSink("button/sound/mouseover.ogg")
@@ -58,7 +60,35 @@ function create_image_button(image_n, image_h, image_sl, hovertext)
 	}
 end
 
+function create_standard_textbutton(string, font, width, height)
+	-- example: create_standard_textbutton("Hello World", Fonts.h1, 144, 72)
+	string = string
+	font = font	
+	color_n = Colors.standard_ui
+	color_h = Colors.button_hover_color
+	btn_text_n = Image.String(font, color_n, string)
+	btn_text_h = Image.String(font, color_h, string)
+	width = width or Point.X(Image.Size(btn_text_n))+16
+	height = height or Font.Height(font)+16
+	background_src = Image.File("/button/images/default_bg.png")
+	-- background_h = Image.Multiply(background_n, color_h)
+	button_n = Image.Group({
+		Global.create_backgroundpane(width,height,{src=background_src, partsize=16, color=color_n}),
+		Image.Justify(btn_text_n, Point.Create(width,height), Justify.Center)
+	})
+	button_h = Image.Group({
+		Global.create_backgroundpane(width,height,{src=background_src, partsize=16, color=color_h}),
+		Image.Justify(btn_text_h, Point.Create(width,height), Justify.Center)
+	})
+	button = create_image_button(button_n, button_h)
+	return {
+		image=button.image,
+		events=button.events,
+	}
+end 
+
 return {
 	create_image_button=create_image_button,
+	create_standard_textbutton = create_standard_textbutton,
 	version = version,
 }

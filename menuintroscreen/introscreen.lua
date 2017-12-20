@@ -291,12 +291,13 @@ function make_missionscreen(Loginstate_container)
 		})
 	end
 	-- create the controls for the mission creation popup
-	function control_maker_function(popup_is_open)
+	function control_maker_function(popup_is_open, sink)
 			close_btn = Button.create_standard_textbutton("CANCEL", Fonts.h1, 144, 72)
 			create_btn = Button.create_standard_textbutton("CREATE", Fonts.h1, 144,72)
 			Event.OnEvent(popup_is_open, close_btn.events.click, function () return false end)
-			Event.OnEvent(Loginstate_container:GetEventSink("Create Mission"), create_btn.events.click)
-			controlpanesize = Point.Create(250, 72)
+			--Event.OnEvent(popup_is_open, create_btn.events.click, function () return false end)
+			--Event.OnEvent(sink, create_btn.events.click)
+			controlpanesize = Point.Create(300, 72)
 			controlpane = Image.Group({
 				Image.Extent(controlpanesize, Colors.transparent),
 				Image.Justify(close_btn.image, controlpanesize, Justify.Right),
@@ -304,9 +305,9 @@ function make_missionscreen(Loginstate_container)
 			})
 			return Image.Justify(controlpane, Point.Create(popup_x,popup_y), Justify.Bottom)
 		end
-	--control_maker_function(true)
+	-- control_maker_function(true)
 	-- note that create_single_popup_manager takes a function as argument, not the image returned by that function
-	create_mission_popup = Popup.create_single_popup_manager(create_mission_screen, {control_maker=control_maker_function})
+	create_mission_popup = Popup.create_single_popup_manager(create_mission_screen, {control_maker=control_maker_function, sink=Loginstate_container:GetEventSink("Logout")})
 	
 	----------
 	---- MISSION CARDS SECTION

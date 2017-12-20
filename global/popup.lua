@@ -1,6 +1,7 @@
 Button = File.LoadLua("button/button.lua")()
 Global = File.LoadLua("global/global.lua")()
 Fonts = File.LoadLua("global/fonts.lua")()
+Colors = File.LoadLua("global/colors.lua")()
 
 function create_simple_text_button(text, text_height)
 	font = Font.Create("Verdana",text_height)
@@ -20,7 +21,8 @@ end
 
 function create_single_popup_manager(target_image_getter, opts)
 	opts = {}
-	controls = opts.control_maker or function (popup_is_open)
+	sink = opts.sink
+	controls  = opts.control_maker --[[or function (popup_is_open)
 			close_btn = create_simple_text_button("X", 20)
 			Event.OnEvent(popup_is_open, close_btn.event_click, function ()
 				return false
@@ -29,7 +31,7 @@ function create_single_popup_manager(target_image_getter, opts)
 						close_btn.image,
 						Point.Create(popup_x - 40, 15)
 					)
-		end
+		end ]]
 	local popup_is_open = Boolean.CreateEventSink(false)
 
 	function get_area(size)

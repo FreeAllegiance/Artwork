@@ -30,7 +30,6 @@ function create_image_button(image_n, image_h, image_sl, hovertext)
 		[button_enter]=1,
 		[button_click]=2,
 	}, 0 )
-
 	-- we return the hovertext based on the hover status.
 	export_text = Event.ToString({
 		[button_leave]="",
@@ -50,7 +49,9 @@ function create_image_button(image_n, image_h, image_sl, hovertext)
 	})
 
 	export_events = {
-		click=button_click
+		click=button_click,
+		enter=button_enter,
+		leave=button_leave,
 	}
 
 	return {

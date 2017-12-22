@@ -28,7 +28,8 @@ checktext = Number.ToString(UIScaleFactor*1000)
 fontheader1 = Fonts.create_scaled("Trebuchet MS", 26*UIScaleFactor, {Bold=true})
 fontheader2 = Fonts.create_scaled("Trebuchet MS", 23*UIScaleFactor, {Italic=true, Bold=true})
 fontheader4 = Fonts.create_scaled("Trebuchet MS", 19*UIScaleFactor, {Bold=true})
-
+local e_hovertext = String.CreateEventSink("")
+e_errormessage = String.CreateEventSink("")
 -- declare recurring variables used by multiple functions
 button_width = UIScaleFactor*200  -- used below and in render_list()
 button_normal_color = Color.Create(0.9, 0.9, 1, 0.8)
@@ -90,8 +91,9 @@ function create_mainbutton(event_sink, argimage, arglabel, arghovertext, argfunc
 		btnsize, Justify.Bottom)
 	})	
 	button = Button.create_image_button(image_n, image_h, image_s, arghovertext)
-	hovertext = hovertext .. button.hovertext --[[ concatenates the hoverstring with the contents of the toplevel one. Since there's only one 	non-empty string we should wind up with only the text for the button currently hovered over... ]]
-	
+	--hovertext = hovertext .. button.hovertext --[[ concatenates the hoverstring with the contents of the toplevel one. Since there's only one 	non-empty string we should wind up with only the text for the button currently hovered over... ]]
+	Event.OnEvent(e_hovertext, button.events.enter, function() return arghovertext end)
+	Event.OnEvent(e_hovertext, button.events.leave, function() return "" end)
 	if argfunction then
 		Event.OnEvent(event_sink, button.events.click, argfunction)
 		else 
@@ -99,10 +101,6 @@ function create_mainbutton(event_sink, argimage, arglabel, arghovertext, argfunc
 	end 
 
 	return button.image
-end
-
-function create_hovertextimg(str)
-	return Image.String(fontheader2, Colors.white, Number.Divide(xres,2), hovertext, Justify.Center)
 end
 
 function render_list(list)
@@ -116,6 +114,9 @@ function render_list(list)
 
 	return Image.Group(translated_list)
 end
+
+
+
 
 -------     INTROSCREEN --------
 ----------------------------------------------
@@ -132,25 +133,24 @@ hovertext = ""
 		list[#list+1] = create_mainbutton(Loginstate_container:GetEventSink("Login"), Image.File("menuintroscreen/images/introBtnOnline.png"), "PLAY", "Play Allegiance.")
 		return list
 	end
-
-	function errortextImg() 
-		return Image.Switch(
-			Loginstate_container:GetState("Has error"), {
-				["No"] = function(Loginstate_container) return Image.Empty() end,
-				["Yes"] = function (Loginstate_container)
-						errMsg = Loginstate_container:GetString("Message") 
-						errimg = Image.String(fontheader2, Colors.white, Number.Divide(xres,2), errMsg, Justify.Center)
-						return errimg
-					end,
-			})
-	end
 	
+	function errortextImg() 
+	return Image.Switch(
+		Loginstate_container:GetState("Has error"), {
+			["No"] = function(Loginstate_container) return Image.Empty() end,
+			["Yes"] = function (Loginstate_container)
+					errMsg = Loginstate_container:GetString("Message") 
+					errimg = Image.String(fontheader2, Colors.white, Number.Divide(xres,2), errMsg, Justify.Center)
+					return errimg
+				end,
+		})
+	end
+
 	return Image.Group({
 		Image.Translate(Image.Justify(render_list(create_button_list()), resolution, Justify.Bottom), Point.Create(0,-30)),
 		Image.Justify(logo, resolution,Justify.Center),
 		Image.Translate(Image.Justify(errortextImg(), resolution, Justify.Bottom),Point.Create(0, -175)),
-		Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -150)),
-
+		-- Image.Translate(Image.Justify(create_hovertextimg(hovertext), resolution, Justify.Bottom),Point.Create(0, -150)),
 	})
 end
 
@@ -277,32 +277,39 @@ function make_missionscreen(Loginstate_container)
 		dialogheight = 400
 		return Image.Group({
 			Image.Extent(Point.Create(dialogwidth,dialogheight), Colors.transparent),
-			Global.create_box(450,400),
+			--Global.create_box(450,400),
 			Image.Justify(
 				Image.StackVertical({
 					Image.Justify(Image.String(fontheader1, Colors.white, "CREATE MISSION"), Point.Create(dialogwidth, 20),Justify.Center),
 					Image.Justify(Image.String(Fonts.create_scaled("Trebuchet MS", 23, {Bold=true}), Colors.white, "MISSION NAME:", {Width=140}), Point.Create(dialogwidth, 20),Justify.Center),
 					Image.Justify(Global.create_box(dialogwidth-140, 28), Point.Create(dialogwidth-20, 20), Justify.Center),
-					Image.String(fontheader4, Colors.white, "Select a server near your physical location to play on. Then select a game core. \n Cores are sets of game rules. Different cores may have different factions, weapons and balance values.", 
-						{Width=dialogwidth}
+					Image.String(fontheader4, Colors.white, "Select a server near your physical location to play on. Then select a game core. \n \n Cores are sets of game rules. Different cores may have different factions, weapons and balance values.", 
+						{Width=dialogwidth, Justification=Justify.Center}
 					),
-					Image.Extent(Point.Create(50, 30), Colors.transparent),
-					Image.Group({
-						Image.Translate(
-							Image.StackVertical({
-								Image.String(fontheader4, Colors.white, "Servers"),
-								serverlistbox,
-							}),
-							Point.Create(40,0)
-						),
-						Image.Translate(
-							Image.StackVertical({
-								Image.String(fontheader4, Colors.white, "Cores"),
-								corelistbox,
-							}),
-							Point.Create(dialogwidth-corelistboxwidth-50,0)
-						),	
-					}),
+					Image.Extent(Point.Create(dialogwidth, 30), Colors.transparent),
+					Image.Justify(
+						Image.Group({
+							Image.Extent(Point.Create(dialogwidth-200, 30), Colors.transparent),
+							Image.Justify(
+								Image.StackVertical({
+									Image.String(fontheader4, Colors.white, "Servers"),
+									serverlistbox,
+								}),
+								Point.Create(dialogwidth-200, listboxheight+35),
+								Justify.Left
+							),
+							Image.Justify(
+								Image.StackVertical({
+									Image.String(fontheader4, Colors.white, "Cores"),
+									corelistbox,
+								}),
+								Point.Create(dialogwidth-200, listboxheight+35),
+								Justify.Right
+							),	
+						}),
+						Point.Create(dialogwidth, listboxheight+35),
+						Justify.Top
+					)
 				}),
 				Point.Create(dialogwidth, dialogheight),
 				Justify.Top
@@ -316,17 +323,14 @@ function make_missionscreen(Loginstate_container)
 			Event.OnEvent(popup_is_open, close_btn.events.click, function () return false end)
 			--Event.OnEvent(popup_is_open, create_btn.events.click, function () return false end)
 			--Event.OnEvent(sink, create_btn.events.click)
-			controlpanesize = Point.Create(260, 50)
-			popuppanelmargin = Point.Create(75, 40)
-			controlpane = Image.Translate(
-				Image.Group({
+			controlpanesize = Point.Create(250, 50)
+			popuppanelmargin = Point.Create(40, 20)
+			controlpane = Image.Group({
 					Image.Extent(controlpanesize, Colors.transparent),
 					Image.Justify(close_btn.image, controlpanesize, Justify.Right),
 					Image.Justify(create_btn.image, controlpanesize, Justify.Left),
-				}),
-			popuppanelmargin
-			)
-			return Image.Justify(controlpane, Point.Create(500,420), Justify.Bottom)
+				})
+			return Image.Translate(Image.Justify(controlpane, Point.Create(450,420), Justify.Bottom), popuppanelmargin)
 		end
 	-- control_maker_function(true)
 	-- note that create_single_popup_manager takes a function as argument, not the image returned by that function
@@ -435,7 +439,13 @@ function make_missionscreen(Loginstate_container)
 					Global.create_backgroundpane(scaledcardwidth, scaledcardheight, {color=button_selected_color}),
 					makemissioncardface(button_selected_color)
 				})
-				card = Button.create_image_button(joinbtn_n, joinbtn_h, joinbtn_s, "Connect To This Lobby And Join This Mission")
+				missionhovertext = String.Switch(
+					mission:GetBool("Is in progress"),{
+					[true]="Join This Mission." ,
+					[false]="Connect To The Lobby For This Mission.",
+				})
+				
+				card = Button.create_image_button(joinbtn_n, joinbtn_h, joinbtn_s, "Join This Mission")
 				hovertext = hovertext .. card.hovertext --concatenates the hoverstring with the contents of the toplevel one.
 				Event.OnEvent(mission:GetEventSink("Join"), card.events.click)
 				--positioning
@@ -522,7 +532,7 @@ function make_missionscreen(Loginstate_container)
 			--buttonbar
 			Image.Translate(Image.Justify(render_list(button_list()), resolution, Justify.Bottom), Point.Create(0,-30*UIScaleFactor)),
 			-- hovertext
-			Image.Translate(Image.Justify(create_hovertextimg("hovertext"..hovertext), resolution, Justify.Bottom),Point.Create(0, -150*UIScaleFactor)),
+			-- Image.Translate(Image.Justify(create_hovertextimg("hovertext"..hovertext), resolution, Justify.Bottom),Point.Create(0, -150*UIScaleFactor)),
 			-- popups
 			Image.Justify(create_mission_popup.get_area(cardsarea), resolution, Justify.Center),	
 		})
@@ -557,6 +567,10 @@ Event.OnEvent(credits_popup.get_is_open(), credits_button.event_click, function 
 	return Boolean.Not(credits_popup.get_is_open())
 end)
 
+function create_hovertextimg(str)
+	return Image.String(fontheader2, Colors.standard_ui, Number.Divide(xres,2), str, Justify.Center)
+end
+
 statescreen = Image.Switch(
 	Login_state,{
 	["Logged out"]=make_introscreen, 
@@ -571,6 +585,7 @@ return Image.Group({
 			Point.X(resolution), 
 			Point.Y(resolution) - 200
 		)),
+	Image.Translate(Image.Justify(create_hovertextimg(e_hovertext), resolution, Justify.Bottom),Point.Create(0, -150*UIScaleFactor)),
 	Image.Justify(Image.String(Font.Create("Verdana",12), button_normal_color, Button.version.."\n"..introscreenversion.."\n"..Global.version .."\n".. checktext, {Width=200, Justification=Justify.Right}), resolution, Justify.Topright),
 	Image.Justify(credits_button.image, resolution, Justify.Bottomright),
 	})

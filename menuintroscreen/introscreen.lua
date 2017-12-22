@@ -268,42 +268,65 @@ function make_missionscreen(Loginstate_container)
 					Global.create_vertical_scrolling_container(
 						Control.string.create_listbox(ChosenCore_eventsink, c_cores, {entry_to_string=entry_to_string,entry_renderer= entry_renderer}),
 						Point.Create(corelistboxwidth, listboxheight),
-						button_normal_color
+						button_normal_color  
 					),
 					Point.Create(5, 2)
 				),
 			})
+		dialogwidth = 450
+		dialogheight = 400
 		return Image.Group({
-			Image.Extent(Point.Create(350,150), Colors.transparent),
-			Image.StackVertical({
-				Image.Justify(Image.String(fontheader1, Colors.white, "CREATE MISSION"), Point.Create(350,30), Justify.Top),
-				Image.String(fontheader4, Colors.white, "Select a server near your physical location to play on. Then select a game core. \n Cores are sets of game rules. Different cores may have different factions, weapons and balance values.", {Width=350}),
-				Image.Extent(Point.Create(50, 30), Colors.transparent),
-				Image.Group({
-					Image.String(fontheader4, Colors.white, "Servers"),
-					Image.Translate(Image.String(fontheader4, Colors.white, "Cores"), Point.Create(200,0)),
+			Image.Extent(Point.Create(dialogwidth,dialogheight), Colors.transparent),
+			Global.create_box(450,400),
+			Image.Justify(
+				Image.StackVertical({
+					Image.Justify(Image.String(fontheader1, Colors.white, "CREATE MISSION"), Point.Create(dialogwidth, 20),Justify.Center),
+					Image.Justify(Image.String(Fonts.create_scaled("Trebuchet MS", 23, {Bold=true}), Colors.white, "MISSION NAME:", {Width=140}), Point.Create(dialogwidth, 20),Justify.Center),
+					Image.Justify(Global.create_box(dialogwidth-140, 28), Point.Create(dialogwidth-20, 20), Justify.Center),
+					Image.String(fontheader4, Colors.white, "Select a server near your physical location to play on. Then select a game core. \n Cores are sets of game rules. Different cores may have different factions, weapons and balance values.", 
+						{Width=dialogwidth}
+					),
+					Image.Extent(Point.Create(50, 30), Colors.transparent),
+					Image.Group({
+						Image.Translate(
+							Image.StackVertical({
+								Image.String(fontheader4, Colors.white, "Servers"),
+								serverlistbox,
+							}),
+							Point.Create(40,0)
+						),
+						Image.Translate(
+							Image.StackVertical({
+								Image.String(fontheader4, Colors.white, "Cores"),
+								corelistbox,
+							}),
+							Point.Create(dialogwidth-corelistboxwidth-50,0)
+						),	
+					}),
 				}),
-				Image.Group({
-					serverlistbox,
-					Image.Translate(corelistbox, Point.Create(200, 0)),
-				}),	
-			})
+				Point.Create(dialogwidth, dialogheight),
+				Justify.Top
+			),
 		})
 	end
 	-- create the controls for the mission creation popup
 	function control_maker_function(popup_is_open, sink)
-			close_btn = Button.create_standard_textbutton("CANCEL", Fonts.h1, 144, 72)
-			create_btn = Button.create_standard_textbutton("CREATE", Fonts.h1, 144,72)
+			close_btn = Button.create_standard_textbutton("CANCEL", Fonts.h1, 120, 40)
+			create_btn = Button.create_standard_textbutton("CREATE", Fonts.h1, 120, 40)
 			Event.OnEvent(popup_is_open, close_btn.events.click, function () return false end)
 			--Event.OnEvent(popup_is_open, create_btn.events.click, function () return false end)
 			--Event.OnEvent(sink, create_btn.events.click)
-			controlpanesize = Point.Create(300, 72)
-			controlpane = Image.Group({
-				Image.Extent(controlpanesize, Colors.transparent),
-				Image.Justify(close_btn.image, controlpanesize, Justify.Right),
-				Image.Justify(create_btn.image, controlpanesize, Justify.Left),
-			})
-			return Image.Justify(controlpane, Point.Create(popup_x,popup_y), Justify.Bottom)
+			controlpanesize = Point.Create(260, 50)
+			popuppanelmargin = Point.Create(75, 40)
+			controlpane = Image.Translate(
+				Image.Group({
+					Image.Extent(controlpanesize, Colors.transparent),
+					Image.Justify(close_btn.image, controlpanesize, Justify.Right),
+					Image.Justify(create_btn.image, controlpanesize, Justify.Left),
+				}),
+			popuppanelmargin
+			)
+			return Image.Justify(controlpane, Point.Create(500,420), Justify.Bottom)
 		end
 	-- control_maker_function(true)
 	-- note that create_single_popup_manager takes a function as argument, not the image returned by that function

@@ -13,8 +13,8 @@ function create_backgroundpane(width, height, opt)
 	srcimgh = Point.Y(Image.Size(imagesrc))
 	partsize = opt.partsize or 50 --the partsize is one number. parts must be square.
 	dblsize = Number.Multiply(partsize,2) -- just convenient because it's used a lot
-	stretchfactorw = (width-dblsize)/partsize+0.01 -- calculate how much we need to stretch the parts 
-	stretchfactorh = (height-dblsize)/partsize+0.01
+	stretchfactorw = (width-dblsize)/partsize+0.0001 -- calculate how much we need to stretch the parts 
+	stretchfactorh = (height-dblsize)/partsize+0.0001
 	--[[
 	we're cutting the image up in 9 sections as follows
 	tlc		tb		trc   
@@ -160,7 +160,8 @@ function create_vertical_scrollbar(position_fraction, height, grip_height, paint
 	grip_original = Image.Multiply(Image.File("global/images/scrollbargrip_roundedline.png"), paint)
 	staticEndSize = 14 -- in px
 	grip = scale_scrollbarpart(grip_original, grip_height, staticEndSize)
-	scrollbarbg_original = Image.Multiply(Image.File("global/images/scrollbar_bg_thin.png"), paint)
+	--scrollbarbg_original = Image.Multiply(Image.File("global/images/scrollbar_bg_thin.png"), paint)
+	scrollbarbg_original = Image.Multiply(Image.File("global/images/scrollbargrip_roundedline.png"), Color.Create(1,1,1,0.25))
 	scrollbarbg = scale_scrollbarpart(scrollbarbg_original, height, staticEndSize)
 	scrollbar_width = Point.X(Image.Size(scrollbarbg))
 	

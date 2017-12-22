@@ -20,7 +20,7 @@ function create_simple_text_button(text, text_height)
 end
 
 function create_single_popup_manager(target_image_getter, opts)
-	opts = {}
+	opts = opts or {}
 	sink = opts.sink
 	controls  = opts.control_maker --[[or function (popup_is_open)
 			close_btn = create_simple_text_button("X", 20)

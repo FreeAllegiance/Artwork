@@ -94,6 +94,7 @@ function create_mainbutton(event_sink, argimage, arglabel, arghovertext, argfunc
 	--hovertext = hovertext .. button.hovertext --[[ concatenates the hoverstring with the contents of the toplevel one. Since there's only one 	non-empty string we should wind up with only the text for the button currently hovered over... ]]
 	Event.OnEvent(e_hovertext, button.events.enter, function() return arghovertext end)
 	Event.OnEvent(e_hovertext, button.events.leave, function() return "" end)
+	Event.OnEvent(e_hovertext, button.events.click, function() return "" end)
 	if argfunction then
 		Event.OnEvent(event_sink, button.events.click, argfunction)
 		else 

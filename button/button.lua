@@ -69,16 +69,17 @@ function create_standard_textbutton(string, font, width, height)
 	btn_text_n = Image.String(font, color_n, string)
 	btn_text_h = Image.String(font, color_h, string)
 	width = width or Point.X(Image.Size(btn_text_n))+16
-	height = height or Font.Height(font)+16
+	height = height or 30
 	background_src = Image.File("/button/images/default_bg.png")
-	-- background_h = Image.Multiply(background_n, color_h)
+	-- NOTE: To work around a bug that is soon to be fixed, I've put the button text below the button background in these groupimages. 
+	-- please switch around when bug is fixed.
 	button_n = Image.Group({
-		Global.create_backgroundpane(width,height,{src=background_src, partsize=16, color=color_n}),
-		Image.Justify(btn_text_n, Point.Create(width,height), Justify.Center)
+	Image.Justify(btn_text_n, Point.Create(width,height), Justify.Center),
+	Global.create_backgroundpane(width,height,{src=background_src, partsize=16, color=color_n}),
 	})
 	button_h = Image.Group({
-		Global.create_backgroundpane(width,height,{src=background_src, partsize=16, color=color_h}),
-		Image.Justify(btn_text_h, Point.Create(width,height), Justify.Center)
+	Image.Justify(btn_text_h, Point.Create(width,height), Justify.Center),
+	Global.create_backgroundpane(width,height,{src=background_src, partsize=16, color=color_h}),
 	})
 	button = create_image_button(button_n, button_h)
 	return {

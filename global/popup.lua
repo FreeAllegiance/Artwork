@@ -22,7 +22,7 @@ end
 function create_single_popup_manager(target_image_getter, opts)
 	opts = opts or {}
 	sink = opts.sink
-	controls  = opts.control_maker --[[or function (popup_is_open)
+	controls  = opts.control_maker or function (popup_is_open)
 			close_btn = create_simple_text_button("X", 20)
 			Event.OnEvent(popup_is_open, close_btn.event_click, function ()
 				return false
@@ -31,7 +31,7 @@ function create_single_popup_manager(target_image_getter, opts)
 						close_btn.image,
 						Point.Create(popup_x - 40, 15)
 					)
-		end ]]
+		end
 	local popup_is_open = Boolean.CreateEventSink(false)
 
 	function get_area(size)

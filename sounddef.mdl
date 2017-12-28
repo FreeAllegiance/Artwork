@@ -1283,6 +1283,12 @@ probe1Sound                 = GainSound(SFXGain, ThreeDSound(100, LoopingSound(I
 tm_4_17rSound               = GainSound(VoiceOverGain, ImportWave("tm_4_17r")); 
 
 //
+//Sidethrusters
+//
+SidethrustInteriorSound        = GainSound(SFXGain, ThreeDSound(100, LoopingSound(ImportWave("accelSmall"))));
+SidethrustExteriorSound        = GainSound(SFXGain, ThreeDSound(100, LoopingSound(ImportWave("accelSmall"))));
+
+//
 // mapping to game sounds
 //
 
@@ -2262,6 +2268,10 @@ soundList =
         (943, newMissilesCompletedSound),
         (944, newEquipmentCompletedSound),
         (945, newStationUpgradeSound),
+	
+	//Sidethrusters
+	(SidethrustInteriorSoundId, SidethrustInteriorSound),
+	(SidethrustExteriorSoundId, SidethrustExteriorSound),
 
         // training mission sounds
         (tm_slide_1_01SoundId,  tm_slide_1_01Sound),

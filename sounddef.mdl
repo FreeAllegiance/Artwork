@@ -1285,8 +1285,8 @@ tm_4_17rSound               = GainSound(VoiceOverGain, ImportWave("tm_4_17r"));
 //
 //Sidethrusters
 //
-SidethrustInteriorSound        = GainSound(SFXGain, ThreeDSound(100, LoopingSound(ImportWave("accelSmall"))));
-SidethrustExteriorSound        = GainSound(SFXGain, ThreeDSound(100, LoopingSound(ImportWave("accelSmall"))));
+SidethrustInteriorSound        = GainSound(-25, ThreeDSound(100, LoopingSound(ImportWave("accelSmall"))));
+SidethrustExteriorSound        = GainSound(-25, ThreeDSound(100, LoopingSound(ImportWave("accelSmall"))));
 
 //
 // mapping to game sounds

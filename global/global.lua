@@ -157,6 +157,13 @@ end
 
 
 function create_vertical_scrollbar(position_fraction, height, grip_height, paint)
+	--[[
+	Im considering doing this completely differently, without artwork.
+	basically make a the parts by using Image.Extents to make vertical / horizontal lines.
+	a 4px wide line with a slightly longer, 2px wide line on top, sticking out 1px on both ends.
+	maybe apply an 'antialiasing effect' by adding a semi-transparent line to finish up.
+	saves a lot of scaling, cutting and painting.
+	]]
 	grip_original = Image.Multiply(Image.File("global/images/scrollbargrip_roundedline.png"), paint)
 	staticEndSize = 14 -- in px
 	grip = scale_scrollbarpart(grip_original, grip_height, staticEndSize)
@@ -167,7 +174,7 @@ function create_vertical_scrollbar(position_fraction, height, grip_height, paint
 	
  	scrollbar_translation_per_fraction = Number.Subtract(height, grip_height)
 	fraction_per_scrollbar_translation = Number.Divide(1, scrollbar_translation_per_fraction)
-
+	
 	grip_translation = Point.Create(0, Number.Add(0, Number.Multiply(position_fraction, scrollbar_translation_per_fraction)))
 
 	grip_translated = Image.MouseEvent(Image.Translate(grip, grip_translation))

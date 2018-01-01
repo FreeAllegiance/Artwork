@@ -1,5 +1,6 @@
 Global = File.LoadLua("global/global.lua")()
 Fonts = File.LoadLua("global/fonts.lua")()
+Colors = File.LoadLua("global/colors.lua")()
 
 -- Control.String.create_listbox(target, list, {entry_to_string=MyListItemModificationFunction, entry_renderer=MyLineFormattingFunction})
 function create_listbox(target, list, opts)	
@@ -33,7 +34,32 @@ function create_listbox(target, list, opts)
 	rendered_entries = List.MapToImages(list, clickable_entry_renderer)
 	return Image.StackVertical(rendered_entries)
 end
-
+--[[
+function create_selectbox(target, list, opts)
+ opts = opts or {}
+ local show_menu = Boolean.CreateEventSink(false)
+ local selected = target 
+ values = create_listbox(target, list, opts)
+ main_field = Image.Group({
+	Global.create_box(75, 20),
+	Image.String(Fonts.p, Colors.standard_ui, selected),
+	Image.Translate(Image.String(Fonts.h1,Colors.standard_ui, "V"), Point.Create(75,0)), -- standin for arrow down symbol
+ })
+ mainfield_btn = Button.create_image_button(main_field, main_field)
+ 
+ selectmenu = Image.Switch(
+	show_menu,
+	{
+	[false]=Image.Empty(),
+	[true]=values
+	}
+ )
+ return Image.StackVertical({
+	main_field_btn,
+	selectmenu,
+ })
+end
+]] 
 return {
 	string = {
 		create_listbox=create_listbox,

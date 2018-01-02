@@ -2,6 +2,8 @@ Global = File.LoadLua("global/global.lua")()
 Fonts = File.LoadLua("global/fonts.lua")()
 Colors = File.LoadLua("global/colors.lua")()
 
+ControlStringInput = File.LoadLua("global/control_string_input.lua")()
+
 -- Control.String.create_listbox(target, list, {entry_to_string=MyListItemModificationFunction, entry_renderer=MyLineFormattingFunction})
 function create_listbox(target, list, opts)	
 	-- I think we can pass a function as an optional argument to this function
@@ -60,8 +62,11 @@ function create_selectbox(target, list, opts)
  })
 end
 ]] 
+
+
 return {
 	string = {
 		create_listbox=create_listbox,
+		create_input=ControlStringInput.create,
 	}
 }

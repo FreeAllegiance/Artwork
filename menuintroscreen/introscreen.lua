@@ -358,7 +358,13 @@ function make_missionscreen(Loginstate_container)
 	mission_container = Loginstate_container:GetList("Mission list")
 	cardslistImg = Image.Group(
 		List.Map(
-			mission_container,
+			List.Sort(
+				mission_container,
+				function (mission)
+					-- Negate the count to turn it from asc to desc
+					return 0 - mission:Get("Player count")
+				end
+			),
 			function (mission, i)
 				j=i+1
 				row_fl = j/cardsrowlen -- calculate how many rows are needed to display this mission 

@@ -1,9 +1,10 @@
 
 data = File.LoadLua("menuintroscreen/credits_data.lua")()
+Fonts = File.LoadLua("global/fonts.lua")()
 
-header_font = Font.Create("Trebuchet MS", 25, {Bold=true})
-description_font = Font.Create("Trebuchet MS", 18, {Bold=true})
-names_font = Font.Create("Trebuchet MS", 18)
+header_font = Fonts.h1
+description_font = Fonts.h4
+names_font = Fonts.p
 
 header_color = Color.Create(1, 1, 1)
 description_color = Color.Create(1, 1, 1)

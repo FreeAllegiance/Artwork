@@ -114,16 +114,6 @@ venlobby = ImportImage("venuslobbybmp", false); //Lobby
 venloadout = ImportImage("venusloadoutpanebmp", false); //Loadout background
 venicon = ImportImage("iconvenusbmp", false); //Icon for F6/Briefing
 
-//Define the Galactic Empire images we need
-gelobby = ImportImage("sw_elobbybmp", false); //Lobby
-geloadout = ImportImage("sw_eloadoutpanebmp", false); //Loadout background
-geicon = ImportImage("iconsw_ebmp", false); //Icon for F6/Briefing
-
-//Define the Rebel Alliance images we need
-ralobby = ImportImage("sw_rlobbybmp", false); //Lobby
-raloadout = ImportImage("sw_rloadoutpanebmp", false); //Loadout background
-raicon = ImportImage("iconsw_rbmp", false); //Icon for F6/Briefing
-
 //Define the default watermark for a lobby image
 deflobby = ImportImage("defaultwatermarkbmp", false); //Lobby
 

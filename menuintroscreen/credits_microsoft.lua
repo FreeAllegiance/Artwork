@@ -1,0 +1,51 @@
+
+
+return {
+	Title="Microsoft Allegiance",
+	Description="The original developers\n\nBased on an original concept by Rick Rashid",
+	Columns={
+		{
+			{ "MS Research Games"},
+			{ "Executive Producer", { "Joel \"solap\" Dehlin"} },
+			{ "Lead Game Designer & Art Director", {  "Robert \"ribski\" Girling"} },
+			{ "Lead Developer", { "Curt \"dontmess\" Carpenter"} },
+			{ "Test Manager", { "Mark \"bugman\" Snyder"} },
+			{ "Designers", { "Robert \"ribski\" Girling", "David \"Tkela\" Pugh", "nJoel \"solap\" Dehlin"} },
+			{ "3D Art Lead", { "Peter \"repete\" Arisman"} },
+			{ "Artists", { "Rick \"GothicGrey\" Winter", "Gordon Nealy ", "Jim Deal", "Karen Yamigawa ", "David Choi ", "Jason Waskey ", "Irvin Gee"} },
+			{ "Additional Developers", { "Bretton \"toast\" Wade ", "Mark \"Conan\" Currie ", "John \"Taz\" Tasler", "Lee Dicks \"LilDixieCup\" Clark ", "Russ Tendrake", "Rick \"DocMach\" Rashid"} },
+			{ "Training Mission Designers", { "Bretton \"toast\" Wade ", "Joel \"solap\" Dehlin"} },
+			{ "Story Development", { "Eric Trautman ", "Tim O'Brien ", "James Maliszewski ", "John Howard"} },
+			{ "Developers", { "David \"Tkela\"Pugh ", "Mike \"Lordzilla\" Kerekes ", "Kendrick \"tesegar\" Shaw"} },
+			{ "Testers", { "Mark \"DarthGrimm\"Grimm ", "Slava \"luhb\" Mikhailiouk", "John \"Taz\" Tasler ", "Farris Rashid ", "Matt \"Grendel\"Lee"} },
+			{ "UI Graphics Designer", { "Jonah Hudgins"} },
+			{ "Unit Design", { "Eddie Smith ", "Todd Downing ", "Robert \"ribski\" Girling ", "Peter \"repete\" Arisman"} },
+			{ "Music", { "Gus Apostol ", "Josh Helm"} },
+			{ "Voice Talent", { "Craig English ", "Susanna Burney ", "John Armstrong ", "Lance Brodie ", "Dex Manley"} },
+			{ "Special thanks to", { "Gene Ball", "Don Gilette", "Scott Wilson", "Jonathan Fricke", "James Hendergart", "Jeff Fink", "John Pella", "Seth Rosenthal", "Jordan Weisman", "Reek Havok", "Michael Warch", "Hank Mauret", "Daniel Robbins", "Garret Loporto", "David Stiner", "Peter Comley", "and all the playtesters and Beta testers - You ROCK!"} },
+		},
+		{
+			{ "The Zone"},
+			{ "Program Manager", { "Wes Yanagi"} },
+			{ "Test Lead", { "Richard Rowan"} },
+			{ "Content/Writer", { "Dave Hasle"} },
+			{ "Marketing", { "Eddie Ranchigoda"} },
+			{ "Planning", { "Jon Grande"} },
+			{ "Product Support", { "Steve Kastner"} },
+			{ "Beta Coordinator", { "Jamie Spiezio", "Matt \"Megaman\" Alderman"} },
+			{ "Special thanks to", { "Matt Wilson", "Adam Waalkes", "Ed Fries", "Stuart Moulder", "Chris Di Cesare", "Dave Steele", "Craig Link", "Terry Hostetler", "Scott Tomlin", "Dean Pachosa", "John Smith", "Bill Sundberg", "David McMurray", "Ravi Mehta", "Ian Banks", "and all members of ZOTPlay and Team Recon"} },
+			{ ""},
+			{ "AAS USER EDUCATION"},
+			{ "User Education Lead", { "Jo Tyo"} },
+			{ "Editor", { "Dana Fos"} },
+			{ "Print Designer", { "JoAnne Williams"} },
+			{ "Help Developer", { "Robbie Booth"} },
+			{ "Artists", { "Lead - Doug Herring", "Dale Cody", "Todd Lubsen", "Sandra Garavito"} },
+			{ "Localization", { "Laurence Krzemien-Smith"} },
+			{ "Usability Testing", { "Michael Medlock"} },
+			{ "EBU AUDIO", { "Jerry Schroeder ", "Duane Decker"} },
+			{ "Zone Testers", { "Rich Bonny", "Scott Murray", "Myong Yi", "Brian Lemon", "Mark Fassett"} },
+			{ "PSS Rep", { "Greg Frankovic"} },
+		}
+	}
+}

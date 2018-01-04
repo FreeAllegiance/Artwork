@@ -67,6 +67,8 @@ devs = {
 }
 
 return {
+	Title="FreeAllegiance",
+	Description="The community",
 	Columns={
 		{
 			admins,

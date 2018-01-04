@@ -1,0 +1,2 @@
+use "model";
+ss301bmp = ImportImageFromFile("Textures/ss301.png", true);

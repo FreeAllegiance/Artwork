@@ -1,0 +1,2 @@
+use "model";
+ss105bmp = ImportImageFromFile("Textures/ss105.png", false);

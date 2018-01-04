@@ -1,2 +1,0 @@
-use "model";
-ss102bmp = ImportImageFromFile("Textures/ss102.png", false);

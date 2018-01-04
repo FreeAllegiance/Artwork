@@ -1,2 +1,2 @@
 use "model";
-beltersbaybmp = ImportImageFromFile("Textures/beltersbay.png", true);
+beltersbaybmp = ImportImageFromFile("beltersbay.png", true);

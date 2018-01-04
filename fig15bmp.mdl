@@ -1,2 +1,2 @@
 use "model";
-fig15bmp = ImportImageFromFile("Textures/fig15.png", false);
+fig15bmp = ImportImageFromFile("fig15.png", false);

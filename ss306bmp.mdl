@@ -1,2 +1,2 @@
 use "model";
-ss306bmp = ImportImageFromFile("Textures/ss306.png", true);
+ss306bmp = ImportImageFromFile("ss306.png", true);

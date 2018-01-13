@@ -371,8 +371,8 @@ function make_missionscreen(Loginstate_container)
 				row = row_fl-Number.Mod(row_fl,1) -- rounddown that number because we don't want half a card in view
 				col = j - (row*cardsrowlen) -- calculate the column this mission would be in.
 				missionname = mission:GetString("Name")
-				missionplayercount = Number.ToString(mission:GetNumber("Player count"))
-				missionnoat =  Number.ToString(mission:GetNumber("Player noat count"))			
+				missionplayercount = mission:GetNumber("Player count")
+				missionnoat =  mission:GetNumber("Player noat count")		
 				missiont = mission:GetNumber("Time in progress")
 				missionhours = missiont/3600
 				missionminutes = Number.Mod(missionhours,1)
@@ -387,10 +387,12 @@ function make_missionscreen(Loginstate_container)
 				})
 				missionserver = mission:GetString("Server name")
 				missioncore = mission:GetString("Core name")
+
+				mission_playercount_string = Number.ToString(missionplayercount - missionnoat) .. "/" .. Number.ToString(missionplayercount)
 				missionstate = String.Switch(
 					mission:GetBool("Is in progress"),{
-					[true]="In Progress: " .. missiontime .. " - " .. missionplayercount .. "/" .. missionnoat ,
-					[false]="Building Teams" .. "- " .. missionplayercount .. "/" .. missionnoat ,
+					[true]="In Progress: " .. missiontime .. " (" .. mission_playercount_string .. ")",
+					[false]="Building Teams" .. " (" .. mission_playercount_string .. ")",
 				})
 		-- figure out whether there is a single or multiple win condition set for the mission				
 		-- first collect all the booleans from the mission container

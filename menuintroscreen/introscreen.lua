@@ -373,7 +373,7 @@ function make_missionscreen(Loginstate_container)
 				missionname = mission:GetString("Name")
 				missionplayercount = Number.ToString(mission:GetNumber("Player count"))
 				missionnoat =  Number.ToString(mission:GetNumber("Player noat count"))			
-				missiont = mission:GetNumber("Time in progress")/1000
+				missiont = mission:GetNumber("Time in progress")
 				missionhours = missiont/3600
 				missionminutes = Number.Mod(missionhours,1)
 				missionhours = missionhours-missionminutes

@@ -1,34 +1,20 @@
--- NOTE: In order to be called from elsewhere, functions and variables must be returned at the end of this file.
+Colors = File.LoadLua("global/colors.lua")()
 
--- VARIABLES. 
---colors
-color = {}
-color.white = Color.Create(1,1,1,0.75)
-color.dark = Color.Create(0,0,0,0.5)
-color.transparent = Color.Create(0,0,0,0)
---fonts
-font = {}
-font.p = Font.Create("Trebuchet MS", 18)
-font.pbold = Font.Create("Trebuchet MS", 18, {Bold=true})
-font.h1 = Font.Create("Trebuchet MS", 25, {Bold=true})
-font.h2 = Font.Create("Trebuchet MS", 23, {Italic=true, Bold=true})
-font.h3 = Font.Create("Trebuchet MS", 21, {Bold=true})
-font.h4 = Font.Create("Trebuchet MS", 19, {Bold=true})
-
+versionstring = "global alpha v0.04 "
 -- FUNCTIONS
 -- example: Global.create_backgroundpane(800,600,{src=Image.File("/global/images/backgroundpane.png"), partsize=50, color=button_normal_color})
 -- example: Global.create_backgroundpane(300,150) 
 function create_backgroundpane(width, height, opt)
 	opt = opt or {}
 	imagesrc = opt.src or Image.File("/global/images/backgroundpane.png") --the image must be at least 3x partsize in height and width.
-	paintcolor = opt.color or white
+	paintcolor = opt.color or Colors.white
 	imagesrc = Image.Multiply(imagesrc,paintcolor)
 	srcimgw = Point.X(Image.Size(imagesrc))
 	srcimgh = Point.Y(Image.Size(imagesrc))
 	partsize = opt.partsize or 50 --the partsize is one number. parts must be square.
 	dblsize = Number.Multiply(partsize,2) -- just convenient because it's used a lot
-	stretchfactorw = (width-dblsize)/partsize+0.001 -- calculate how much we need to stretch the parts 
-	stretchfactorh = (height-dblsize)/partsize+0.001
+	stretchfactorw = (width-dblsize)/partsize+0.0001 -- calculate how much we need to stretch the parts 
+	stretchfactorh = (height-dblsize)/partsize+0.0001
 	--[[
 	we're cutting the image up in 9 sections as follows
 	tlc		tb		trc   
@@ -51,7 +37,7 @@ function create_backgroundpane(width, height, opt)
 	row = Image.Group({
 		Image.Translate(lb, Point.Create(0,0)),
 		Image.Translate(mid, Point.Create(partsize,0)),
-		Image.Translate(rb, Point.Create(Number.Subtract(width,partsize),0)),
+		Image.Translate(rb, Point.Create(width-partsize,0)),
 		})
 	--stretch the completed middle row vertically
 	row = Image.Scale(row, Point.Create(1, stretchfactorh)) 
@@ -64,22 +50,22 @@ function create_backgroundpane(width, height, opt)
 	parts = {}
 	parts[#parts+1] = tlc
 	parts[#parts+1] = Image.Translate(tb, Point.Create(partsize,0))
-	parts[#parts+1] = Image.Translate(trc, Point.Create(Number.Subtract(width,partsize),0))
+	parts[#parts+1] = Image.Translate(trc, Point.Create(width-partsize,0))
 	parts[#parts+1] = Image.Translate(row, Point.Create(0, partsize))
-	parts[#parts+1] = Image.Translate(blc, Point.Create(0, Number.Subtract(height, partsize)))
-	parts[#parts+1] = Image.Translate(bb, Point.Create(partsize, Number.Subtract(height, partsize)))
-	parts[#parts+1] = Image.Translate(brc, Point.Create(Number.Subtract(width,partsize), Number.Subtract(height, partsize)))
+	parts[#parts+1] = Image.Translate(blc, Point.Create(0, height-partsize))
+	parts[#parts+1] = Image.Translate(bb, Point.Create(partsize, height-partsize))
+	parts[#parts+1] = Image.Translate(brc, Point.Create(width-partsize,height-partsize))
 
 	return Image.Group(parts)
 end
 
 function create_box(w, h, opt)
-	--example create_box(300,700,{border_width=5, border_color=Color.Create(1,1,0), background_color=Color.Create(1,0,0)})
+	--example Global.create_box(300,700,{border_width=5, border_color=Color.Create(1,1,0), background_color=Color.Create(1,0,0)})
 	-- or create_box(300,700)
 	opt = opt or {}
 	borderwidth = opt.border_width or 1
-	bordercolor = opt.border_color or color.white
-	backgroundcolor = opt.background_color or color.transparent
+	bordercolor = opt.border_color or Colors.white
+	backgroundcolor = opt.background_color or Colors.transparent
 	yoffset = Number.Multiply(borderwidth, 2)
 	boxarea = Image.Extent(Point.Create(w, h), backgroundcolor)
 	borderhoriz = Image.Extent(Point.Create(w, borderwidth), bordercolor)
@@ -171,17 +157,24 @@ end
 
 
 function create_vertical_scrollbar(position_fraction, height, grip_height, paint)
+	--[[
+	Im considering doing this completely differently, without artwork.
+	basically make a the parts by using Image.Extents to make vertical / horizontal lines.
+	a 4px wide line with a slightly longer, 2px wide line on top, sticking out 1px on both ends.
+	maybe apply an 'antialiasing effect' by adding a semi-transparent line to finish up.
+	saves a lot of scaling, cutting and painting.
+	]]
 	grip_original = Image.Multiply(Image.File("global/images/scrollbargrip_roundedline.png"), paint)
 	staticEndSize = 14 -- in px
 	grip = scale_scrollbarpart(grip_original, grip_height, staticEndSize)
-	
-	scrollbarbg_original = Image.Multiply(Image.File("global/images/scrollbar_bg_thin.png"), paint)
+	--scrollbarbg_original = Image.Multiply(Image.File("global/images/scrollbar_bg_thin.png"), paint)
+	scrollbarbg_original = Image.Multiply(Image.File("global/images/scrollbargrip_roundedline.png"), Color.Create(1,1,1,0.25))
 	scrollbarbg = scale_scrollbarpart(scrollbarbg_original, height, staticEndSize)
 	scrollbar_width = Point.X(Image.Size(scrollbarbg))
 	
  	scrollbar_translation_per_fraction = Number.Subtract(height, grip_height)
 	fraction_per_scrollbar_translation = Number.Divide(1, scrollbar_translation_per_fraction)
-
+	
 	grip_translation = Point.Create(0, Number.Add(0, Number.Multiply(position_fraction, scrollbar_translation_per_fraction)))
 
 	grip_translated = Image.MouseEvent(Image.Translate(grip, grip_translation))
@@ -207,44 +200,32 @@ function create_vertical_scrolling_container(target_image, container_size, paint
 	target_size = Image.Size(target_image)
 	target_height = Point.Y(target_size)
 
-	position_fraction = Number.CreateEventSink(0)
-
-	grip_height = Number.Max(
-		50,
-		Number.Min( 
-			(container_height/target_height)*container_height,
-			container_height
-		)
-	)
-
-	scrollbar = create_vertical_scrollbar(
-		position_fraction, 
-		container_height, 
-		grip_height,
-		paint
-	)
+	function make_scroll_window()
+		position_fraction = Number.CreateEventSink(0)
+		grip_height = Number.Max(50, Number.Min(Number.Round((container_height/target_height)*container_height,0),container_height))
+		scrollbar = create_vertical_scrollbar(position_fraction, container_height, grip_height, paint)
+		cut_width = Number.Subtract(container_width, scrollbar.width)
+		offset_x = 0
+		offset_y = Number.Round(Number.Multiply(position_fraction, Number.Subtract(target_height, container_height)),0)
+		scroll_window = Image.Group({
+			Image.Cut(target_image, Rect.Create(offset_x, offset_y, cut_width, Number.Add(offset_y, container_height))),
+			Image.Translate(scrollbar.image, Point.Create(cut_width, 0))
+		})
+		return scroll_window
+	end 
 	
-	cut_width = Number.Subtract(container_width, scrollbar.width)
-
-	offset_x = 0
-
-	offset_y = Number.Multiply(position_fraction, Number.Subtract(target_height, container_height))
-
-	scroll_window = Image.Group({
-		Image.Cut(target_image, Rect.Create(offset_x, offset_y, cut_width, Number.Add(offset_y, container_height))),
-		Image.Translate(scrollbar.image, Point.Create(cut_width, 0))
-	})
-	return scroll_window
-
+	return Image.Switch(
+		Number.Min(1, Number.Max(0,target_height-container_height)),
+		{
+		[0]= target_image,
+		[1]= make_scroll_window(),
+		}
+	)
 end
 
 return {
 	-- other
-	testingstring = testingstring,
-	--global colors
-	color = color,
-	-- global fonts
-	font = font,
+	version = versionstring,
 	-- global functions
 	list_sum = list_sum,
 	list_concat = list_concat,

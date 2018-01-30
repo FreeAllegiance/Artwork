@@ -1,12 +1,15 @@
-version = "button.lua v0.03 "
+Colors = File.LoadLua("global/colors.lua")()
+Global = File.LoadLua("global/global.lua")()
+version = "button.lua v0.04 "
 
 sound_mouseover = Screen.CreatePlaySoundSink("button/sound/mouseover.ogg")
 sound_click = Screen.CreatePlaySoundSink("button/sound/cancel.ogg")
 
-function create_image_button(image_n, image_h, image_s, hovertext)
+function create_image_button(image_n, image_h, image_sl, hovertext)
 	button_image_size = Image.Size(image_n)
 	button_x = Point.X(button_image_size)
 	button_y = Point.Y(button_image_size)
+	image_s = image_sl or image_n
 	h_text = hovertext or "" 
 
 	-- Create a transparant layer, and wrap it inside an image that registers events
@@ -27,7 +30,6 @@ function create_image_button(image_n, image_h, image_s, hovertext)
 		[button_enter]=1,
 		[button_click]=2,
 	}, 0 )
-
 	-- we return the hovertext based on the hover status.
 	export_text = Event.ToString({
 		[button_leave]="",
@@ -47,17 +49,48 @@ function create_image_button(image_n, image_h, image_s, hovertext)
 	})
 
 	export_events = {
-		click=button_click
+		click=button_click,
+		enter=button_enter,
+		leave=button_leave,
 	}
 
 	return {
 		image=export_button,
 		events=export_events,
-		btnhovertext = export_text,
-		version = version,
+		hovertext = export_text,
 	}
 end
 
+function create_standard_textbutton(string, font, width, height)
+	-- example: create_standard_textbutton("Hello World", Fonts.h1, 144, 72)
+	string = string
+	font = font	
+	color_n = Colors.standard_ui
+	color_h = Colors.button_hover_color
+	btn_text_n = Image.String(font, color_n, string)
+	btn_text_h = Image.String(font, color_h, string)
+	width = width or Point.X(Image.Size(btn_text_n))+16
+	height = height or 30
+	background_src = Image.File("/button/images/default_bg.png")
+	-- NOTE: To work around a bug that is soon to be fixed, I've put the button text below the button background in these groupimages. 
+	-- please switch around when bug is fixed.
+	button_n = Image.Group({
+	Image.Justify(btn_text_n, Point.Create(width,height), Justify.Center),
+	Global.create_backgroundpane(width,height,{src=background_src, partsize=16, color=color_n}),
+	})
+	button_h = Image.Group({
+	Image.Justify(btn_text_h, Point.Create(width,height), Justify.Center),
+	Global.create_backgroundpane(width,height,{src=background_src, partsize=16, color=color_h}),
+	})
+	button = create_image_button(button_n, button_h)
+	return {
+		image=button.image,
+		events=button.events,
+	}
+end 
+
 return {
 	create_image_button=create_image_button,
+	create_standard_textbutton = create_standard_textbutton,
+	version = version,
 }

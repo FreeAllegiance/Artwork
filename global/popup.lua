@@ -1,5 +1,7 @@
 Button = File.LoadLua("button/button.lua")()
 Global = File.LoadLua("global/global.lua")()
+Fonts = File.LoadLua("global/fonts.lua")()
+Colors = File.LoadLua("global/colors.lua")()
 
 function create_simple_text_button(text, text_height)
 	font = Font.Create("Verdana",text_height)
@@ -17,7 +19,18 @@ function create_simple_text_button(text, text_height)
 	}
 end
 
-function create_single_popup_manager(target_image_getter)
+function create_single_popup_manager(target_image_getter, opts)
+	opts = opts or {}
+	controls  = opts.control_maker or function (popup_is_open)
+			close_btn = create_simple_text_button("X", 20)
+			Event.OnEvent(popup_is_open, close_btn.event_click, function ()
+				return false
+			end)
+			return 	Image.Translate(
+						close_btn.image,
+						Point.Create(popup_x - 40, 15)
+					)
+		end
 	local popup_is_open = Boolean.CreateEventSink(false)
 
 	function get_area(size)
@@ -38,7 +51,7 @@ function create_single_popup_manager(target_image_getter)
 			target_container_maximum_y = area_y - 2 * margin
 
 			target_container_x = Number.Min(target_container_maximum_x, target_x + scrollbar_width)
-			target_container_y = target_container_maximum_y
+			target_container_y = Number.Min(target_container_maximum_y, target_y)
 
 			popup_x = target_container_x + 2 * margin
 			popup_y = target_container_y + 2 * margin
@@ -47,23 +60,14 @@ function create_single_popup_manager(target_image_getter)
 			target_container_size = Point.Create(target_container_x, target_container_y)
 			popup_size = Point.Create(popup_x, popup_y)
 
-			close_button = create_simple_text_button("X", 20)
-
-			Event.OnEvent(popup_is_open, close_button.event_click, function ()
-				return false
-			end)
-
 			return Image.Justify(
 				Image.Group({
-					Global.create_backgroundpane(popup_x, popup_y, {color=button_normal_color}),
+					Global.create_backgroundpane(popup_x, popup_y, {color=button_normal_color, src=Image.File("/global/images/backgroundpane_80pcOpacity.png")}),
 					Image.Translate(
 						Global.create_vertical_scrolling_container(target_image, target_container_size, button_normal_color),
 						target_container_offset
 					),
-					Image.Translate(
-						close_button.image,
-						Point.Create(popup_x - 40, 15)
-					)
+					controls(popup_is_open)
 				}),
 				size,
 				Justify.Center

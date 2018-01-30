@@ -1,73 +1,195 @@
 
-data = File.LoadLua("menuintroscreen/credits_data.lua")()
+Popup = File.LoadLua("global/popup.lua")()
+Fonts = File.LoadLua("global/fonts.lua")()
 
-header_font = Font.Create("Trebuchet MS", 25, {Bold=true})
-description_font = Font.Create("Trebuchet MS", 18, {Bold=true})
-names_font = Font.Create("Trebuchet MS", 18)
+data = File.LoadLua("menuintroscreen/credits_data.lua")()
+data_ms = File.LoadLua("menuintroscreen/credits_microsoft.lua")()
+data_libs = File.LoadLua("menuintroscreen/credits_libraries.lua")()
+
+header_font = Fonts.h1
+subheader_font = Fonts.h3
+description_font = Fonts.p
+names_font = Fonts.p
 
 header_color = Color.Create(1, 1, 1)
+subheader_color = Color.Create(1, 1, 1)
 description_color = Color.Create(1, 1, 1)
 names_color = Color.Create(1, 1, 1)
 
-columns = {}
-for column_index_onebased, column in pairs(data.Columns) do 
-	column_width_without_margins = 200
-	column_width_with_margins = 250
-
-	sections = {}
-	for section_index_onebased, section in pairs(column) do
-
-		names = "- " .. table.concat(section[3], "\n- ")
-
-		description_image = Image.String(
-			description_font, 
-			description_color, 
-			column_width_without_margins, 
-			section[2], 
-			Justify.Left
-		)
-
- 		section_image = Image.StackVertical({
- 			Image.String(
- 				header_font, 
-				header_color, 
-				column_width_without_margins, 
-				section[1], 
-				Justify.Left
-			),
-			description_image,
-			Image.Extent(Point.Create(0, 10), Color.Create(0,0,0,0)),
-			Image.String(
- 				names_font, 
-				names_color, 
-				column_width_without_margins, 
-				names, 
-				Justify.Left
-			),
-		})
-
-		sections[#sections+1] = section_image
-	end
-	column_image = Image.StackVertical(sections, 20)
-
-	columns[#columns+1] = Image.Translate(column_image, Point.Create((column_index_onebased-1) * column_width_with_margins, 0))
+function whitespace(height)
+	return Image.Extent(Point.Create(0, height), Color.Create(0,0,0,0))
 end
 
-return Image.StackVertical({
-	Image.String(
-		header_font, 
-		header_color, 
-		column_width_without_margins, 
-		"FreeAllegiance", 
-		Justify.Left
-	),
-	Image.String(
-		description_font, 
-		description_color, 
-		column_width_without_margins, 
-		"The community\nblabla\nwe are important", 
-		Justify.Left
-	),
-	Image.Extent(Point.Create(0, 20), Color.Create(0,0,0,0)),
-	Image.Group(columns),
+total_width = 450
+
+column_width_without_margins = 200
+column_width_with_margins = 250
+
+function create_columns_from_data(data)
+	columns = {}
+	for column_index_onebased, column in pairs(data.Columns) do 
+
+		sections = {}
+		for section_index_onebased, section in pairs(column) do
+
+			if #section == 1 then
+				section = {
+					section[1],
+					"",
+					{},
+				}
+			elseif #section == 2 then
+				section = {
+					"",
+					section[1],
+					section[2],
+				}
+			end
+
+			if #section[3] > 0 then
+				names = "- " .. table.concat(section[3], "\n- ")
+			else
+				names = ""
+			end
+
+			description_image = Image.String(
+				description_font, 
+				description_color, 
+				column_width_without_margins, 
+				section[2], 
+				Justify.Left
+			)
+
+	 		section_image = Image.StackVertical({
+	 			Image.String(
+	 				subheader_font, 
+					subheader_color, 
+					column_width_without_margins, 
+					section[1], 
+					Justify.Left
+				),
+				description_image,
+				whitespace(10),
+				Image.String(
+	 				names_font, 
+					names_color, 
+					column_width_without_margins, 
+					names, 
+					Justify.Left
+				),
+			})
+
+			sections[#sections+1] = section_image
+		end
+		column_image = Image.StackVertical(sections, 20)
+
+		columns[#columns+1] = Image.Translate(column_image, Point.Create((column_index_onebased-1) * column_width_with_margins, 0))
+	end
+	return columns
+end
+
+popup_areas = {}
+function render_libs(data_libs)
+	rows = {}
+	for index_onebased, lib in pairs(data_libs) do
+
+		if lib["License"] ~= nil then
+
+			function create_license_image()
+				return Image.String(
+	 				names_font, 
+					names_color, 
+					500, 
+					lib["License"], 
+					Justify.Left
+				)
+			end
+
+			license_popup = Popup.create_single_popup_manager(create_license_image)
+			license_button = Popup.create_simple_text_button("Show license", 12)
+			Event.OnEvent(license_popup.get_is_open(), license_button.event_click, function ()
+				-- toggle
+				return Boolean.Not(license_popup.get_is_open())
+			end)
+
+
+			popup_areas[#popup_areas + 1] = license_popup.get_area(Point.Create(
+				500, 
+				500
+			))
+
+			license_link = license_button.image
+		else
+			license_link = Image.Empty()
+		end
+
+ 		row_image = Image.StackVertical({
+ 			Image.String(
+ 				names_font, 
+				names_color, 
+				total_width,
+				lib["Name"], 
+				Justify.Left
+			),
+			license_link,
+		})
+
+		rows[#rows+1] = row_image
+	end
+
+	return Image.StackVertical(rows, 20)
+end
+
+function create_introduction_from_data(data)
+	return Image.StackVertical({
+		Image.String(
+			header_font, 
+			header_color, 
+			total_width, 
+			data["Title"], 
+			Justify.Left
+		),
+		Image.String(
+			description_font, 
+			description_color, 
+			total_width, 
+			data["Description"], 
+			Justify.Left
+		)
+	})
+end
+
+return Image.Group({
+	Image.StackVertical({
+		-- FreeAllegiance
+		create_introduction_from_data(data),
+		whitespace(20),
+		Image.Group(create_columns_from_data(data)),
+		whitespace(50),
+
+		-- Microsoft
+		create_introduction_from_data(data_ms),
+		whitespace(20),
+		Image.Group(create_columns_from_data(data_ms)),
+		whitespace(50),
+
+		-- 3rd party libs
+		Image.String(
+			header_font, 
+			header_color, 
+			total_width, 
+			"Code projects used by Allegiance", 
+			Justify.Left
+		),
+		Image.String(
+			description_font, 
+			description_color, 
+			total_width, 
+			"", 
+			Justify.Left
+		),
+		whitespace(20),
+		render_libs(data_libs),
+	}),
+	Image.Group(popup_areas),
 })

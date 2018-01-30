@@ -1054,8 +1054,8 @@ RUStarbaseInternalSound     = GainSound(SFXGain,
                                         (ImportWave("amb10_48int"), 1),
                                         (ImportWave("amb10_49int"), 1),
                                         (ImportWave("amb10_50int"), 1),
-                                        (ImportWave("amb10_52int"), 1),
                                         (ImportWave("amb10_53int"), 1),
+                                        (ImportWave("amb10_52int"), 1),
                                         (ImportWave("amb10_54int"), 1),
                                         (ImportWave("amb10_55int"), 1),
                                         (ImportWave("amb10_56int"), 1),
@@ -1281,6 +1281,15 @@ probe1Sound                 = GainSound(SFXGain, ThreeDSound(100, LoopingSound(I
 // 
 
 tm_4_17rSound               = GainSound(VoiceOverGain, ImportWave("tm_4_17r")); 
+
+//
+//Sidethrusters
+//
+SidethrustInteriorSound        = GainSound(-25, ThreeDSound(100, LoopingSound(ImportWave("accelSmall"))));
+SidethrustExteriorSound        = GainSound(SFXGain, ThreeDSound(100, LoopingSound(ImportWave("accelSmall"))));
+CapSidethrustInteriorSound = GainSound(-25, ThreeDSound(300, LoopingSound(ImportWave("accelCapital"))));
+CapSidethrustExteriorSound = GainSound(SFXGain, ThreeDSound(300, LoopingSound(ImportWave("accelCapital"))));
+
 
 //
 // mapping to game sounds
@@ -2262,6 +2271,12 @@ soundList =
         (943, newMissilesCompletedSound),
         (944, newEquipmentCompletedSound),
         (945, newStationUpgradeSound),
+	
+	//Sidethrusters
+	(SidethrustInteriorSoundId, SidethrustInteriorSound),
+	(SidethrustExteriorSoundId, SidethrustExteriorSound),
+	(CapSidethrustInteriorSoundId, CapSidethrustInteriorSound),
+	(CapSidethrustExteriorSoundId, CapSidethrustExteriorSound),
 
         // training mission sounds
         (tm_slide_1_01SoundId,  tm_slide_1_01Sound),

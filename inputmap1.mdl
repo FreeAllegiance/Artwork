@@ -213,7 +213,7 @@ mouseButtonCommandMap =
 //////////////////////////////////////////////////////////////////////////////
 
 buttonCommandMap =
-    [
+    [   // (joystick #, button #, command)
     ];
 
 //////////////////////////////////////////////////////////////////////////////
@@ -226,7 +226,7 @@ buttonCommandMap =
 //  changed, because the original values give Papsmear weird issues
 
 numericValuesNew =
-    [
+    [   // (joystick #, value #)
         (-842150451, -842150451),
         (-842150451, -842150451),
         (-842150451, -842150451),

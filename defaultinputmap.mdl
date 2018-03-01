@@ -214,11 +214,6 @@ mouseButtonCommandMap =
 
 buttonCommandMap =
     [   // (joystick #, button #, command)
-        (0,  0, CommandFireWeapon ),
-        (0,  1, CommandFireMissile),
-        (0,  2, CommandFireBooster),
-        (0,  3, CommandTargetCenter),
-        (0,  4, CommandDropChaff  )
     ];
 
 //////////////////////////////////////////////////////////////////////////////
@@ -228,12 +223,14 @@ buttonCommandMap =
 //////////////////////////////////////////////////////////////////////////////
 
 // there must be exactly five pairs in this list
+//  changed, because the original values give Papsmear weird issues
 
 numericValuesNew =
     [   // (joystick #, value #)
-        (0, 0),
-        (0, 1),
-        (0, 3),
-        (0, 2),
-        (0, 4)
+        (-842150451, -842150451),
+        (-842150451, -842150451),
+        (-842150451, -842150451),
+        (-842150451, -842150451),
+        (-842150451, -842150451),
+        (-842150451, -842150451)
 ];

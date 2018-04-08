@@ -1,5 +1,4 @@
 use "gamepanes";
-use "musicdef";
 use "trainingsounddef";
 
 DefaultVOTimeout = 10;
@@ -1410,20 +1409,6 @@ soundList =
         (ripcord3SoundId, ripcord3Sound),
         (ripcord2SoundId, ripcord2Sound),
         (ripcord1SoundId, ripcord1Sound),
-
-        (flightMusic1ASoundId, flightMusic1ASound),
-        (flightMusic1BSoundId, flightMusic1BSound),
-        (flightMusic1CSoundId, flightMusic1CSound),
-        (flightMusic2ASoundId, flightMusic2ASound),
-        (flightMusic2BSoundId, flightMusic2BSound),
-        (flightMusic2CSoundId, flightMusic2CSound),
-        (flightMusic3ASoundId, flightMusic3ASound),
-        (flightMusic3BSoundId, flightMusic3BSound),
-        (flightMusic3CSoundId, flightMusic3CSound),
-        (gameScreenMusicSoundId, gameScreenMusicSound),
-        (deathMusicSoundId, deathMusicSound),
-        (gameOverWonMusicSoundId, gameOverWonMusicSound),
-        (gameOverLostMusicSoundId, gameOverLostMusicSound),
 
         (missileLockSoundId, missileLockSound),
         (missileToneSoundId, missileToneSound),

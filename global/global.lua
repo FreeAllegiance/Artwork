@@ -6,15 +6,15 @@ versionstring = "global alpha v0.04 "
 -- example: Global.create_backgroundpane(300,150) 
 function create_backgroundpane(width, height, opt)
 	opt = opt or {}
-	imagesrc = opt.src or Image.File("/global/images/backgroundpane.png") --the image must be at least 3x partsize in height and width.
+	imagesrc = opt.src or Image.File("/global/images/backgroundpane_80pcOpacity.png") --the image must be at least 3x partsize in height and width.
 	paintcolor = opt.color or Colors.white
 	imagesrc = Image.Multiply(imagesrc,paintcolor)
 	srcimgw = Point.X(Image.Size(imagesrc))
 	srcimgh = Point.Y(Image.Size(imagesrc))
-	partsize = opt.partsize or 50 --the partsize is one number. parts must be square.
-	dblsize = Number.Multiply(partsize,2) -- just convenient because it's used a lot
-	stretchfactorw = (width-dblsize)/partsize+0.0001 -- calculate how much we need to stretch the parts 
-	stretchfactorh = (height-dblsize)/partsize+0.0001
+	partsize = opt.partsize or (Number.Min(srcimgw, srcimgh) / 3) --the partsize is one number. parts must be square.
+	dblcornersize = Number.Multiply(partsize,2) -- just convenient because it's used a lot
+	stretchfactorw = (width-dblcornersize)/(srcimgw-dblcornersize) -- calculate how much we need to stretch the parts 
+	stretchfactorh = (height-dblcornersize)/(srcimgh-dblcornersize)
 	--[[
 	we're cutting the image up in 9 sections as follows
 	tlc		tb		trc   
@@ -23,29 +23,29 @@ function create_backgroundpane(width, height, opt)
  	]]
 	-- toprow
 	tlc = Image.Cut(imagesrc, Rect.Create(0,0,partsize,partsize)) -- top left corner
-	tb = Image.Cut(imagesrc, Rect.Create(partsize, 0, dblsize, partsize)) -- top border
+	tb = Image.Cut(imagesrc, Rect.Create(partsize, 0, srcimgw - partsize, partsize)) -- top border
 	-- we stretch the top border part
 	tb = Image.Scale(tb, Point.Create(stretchfactorw,1))
-	trc = Image.Cut(imagesrc, Rect.Create(Number.Subtract(srcimgw, partsize),0,srcimgw,partsize)) -- top right corner
+	trc = Image.Cut(imagesrc, Rect.Create(srcimgw - partsize,0,srcimgw,partsize)) -- top right corner
 	-- mid row
-	lb = Image.Cut(imagesrc, Rect.Create(0, partsize, partsize, dblsize)) -- left border
-	mid = Image.Cut(imagesrc, Rect.Create(partsize, partsize, dblsize, dblsize)) -- middle 
+	lb = Image.Cut(imagesrc, Rect.Create(0, partsize, partsize, srcimgh - partsize)) -- left border
+	mid = Image.Cut(imagesrc, Rect.Create(partsize, partsize, srcimgw - partsize, srcimgh - partsize)) -- middle 
+	rb = Image.Cut(imagesrc, Rect.Create(srcimgw - partsize, partsize, srcimgw, srcimgh - partsize)) -- right border
 	-- stretch the middle part
-	mid = Image.Scale(mid, Point.Create(stretchfactorw,1))
-	rb = Image.Cut(imagesrc, Rect.Create(Number.Subtract(srcimgw, partsize), partsize, srcimgw, dblsize)) -- right border
+	lb = Image.Scale(lb, Point.Create(1,stretchfactorh))
+	mid = Image.Scale(mid, Point.Create(stretchfactorw,stretchfactorh))
+	rb = Image.Scale(rb, Point.Create(1,stretchfactorh))
 	-- combine middle images in a single middle row.
 	row = Image.Group({
 		Image.Translate(lb, Point.Create(0,0)),
 		Image.Translate(mid, Point.Create(partsize,0)),
 		Image.Translate(rb, Point.Create(width-partsize,0)),
 		})
-	--stretch the completed middle row vertically
-	row = Image.Scale(row, Point.Create(1, stretchfactorh)) 
 	-- bottom row
-	blc = Image.Cut(imagesrc, Rect.Create(0, Number.Subtract(srcimgh, partsize),partsize,srcimgh)) -- bottom left corner
-	bb = Image.Cut(imagesrc, Rect.Create(partsize, Number.Subtract(srcimgh, partsize), dblsize, srcimgh)) 
+	blc = Image.Cut(imagesrc, Rect.Create(0, srcimgh - partsize,partsize,srcimgh)) -- bottom left corner
+	bb = Image.Cut(imagesrc, Rect.Create(partsize, srcimgh - partsize, srcimgw - partsize, srcimgh)) 
 	bb = Image.Scale(bb, Point.Create(stretchfactorw,1))
-	brc = Image.Cut(imagesrc, Rect.Create(Number.Subtract(srcimgw, partsize), Number.Subtract(srcimgh, partsize),srcimgw,srcimgh)) --bottom right corner
+	brc = Image.Cut(imagesrc, Rect.Create(srcimgw - partsize, srcimgh - partsize,srcimgw,srcimgh)) --bottom right corner
 	-- position all parts relative to top left corner
 	parts = {}
 	parts[#parts+1] = tlc

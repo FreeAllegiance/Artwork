@@ -3,7 +3,7 @@ Global = File.LoadLua("global/global.lua")()
 
 function create_scaled(fontname, size, options)
 	options = options or {}
-	Ltd_size = Number.Clamp(8, 26, Number.Round(size,0))
+	Ltd_size = Number.Round(size,0)
 	b_bold = options.Bold or false
 	b_italic = options.Italic or false
 	b_underline = options.Underline or false 

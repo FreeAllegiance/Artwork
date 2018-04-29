@@ -4,7 +4,7 @@ use "gamepanes";
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// Training Screen 
+// Training Screen
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -12,12 +12,8 @@ use "gamepanes";
 // Normal buttons
 //
 
-
-
 backButtonPane          = SoundButtonPane(ImportImage("btnzone2mainmenubmp", true), ButtonNormal, false, negativeButtonClickSoundId);
-//trainButtonPane         = ButtonPane(ImportImage("btntrainbmp", false), ButtonNormal, false);
-
-
+trainButtonPane         = ButtonPane(ImportImage("btntrainbmp",      false), ButtonNormal, false);
 trainMission1ButtonPane = ButtonPane(ImportImage("btnmission1bmp",   false), ButtonNormal, false);
 trainMission2ButtonPane = ButtonPane(ImportImage("btnmission2bmp",   false), ButtonNormal, false);
 trainMission3ButtonPane = ButtonPane(ImportImage("btnmission3bmp",   false), ButtonNormal, false);
@@ -47,13 +43,12 @@ missionNumber6          = 6;
 missionNumber7          = 7;
 missionNumber8          = 8;
 
-
 missionInfoImage =
     SwitchImage(
         missionNumber,
-        emptyImage, 
+        emptyImage,
         [
-            (missionNumber1 , ImportImageFromFile("menutraining/missionsdisabled.png", true)),
+            (missionNumber1 , missionNumber1Bmp),
             (missionNumber2 , missionNumber2Bmp),
             (missionNumber3 , missionNumber3Bmp),
             (missionNumber4 , missionNumber4Bmp),
@@ -65,23 +60,6 @@ missionInfoImage =
     );
 
 missionInfoPane = AnimatedImagePaneRect(missionInfoImage, Rect(0, 0, 400, 327));
-
-
-trainButtonPane         = ButtonPane(ImportImage("btntrainbmp", false), ButtonNormal, false);
-transbtnimg = AnimatedImagePaneRect(emptyImage,Rect(0, 0, 80, 80));
-
-trainButtonDisplay = 
-    SwitchPane(
-        Max(missionNumber,5),
-        [
-			(transbtnimg, 5 ),
-			(trainButtonPane, 6 ),
-			(trainButtonPane, 7 ),
-			(trainButtonPane, 8 )			
-		]
-	);
-		
-
 //
 // Titles
 //
@@ -98,10 +76,10 @@ missionInfoTextPane =
         missionNumber,
         [
             (
-                StringPane("", whiteText, missionInfoTextSize, JustifyLeft, promptFont), NoMissionSelected
+                StringPane("CHOOSE A LESSON FROM THE LIST ON THE LEFT.", whiteText, missionInfoTextSize, JustifyLeft, promptFont), NoMissionSelected
             ),
             (
-                StringPane("", whiteText, missionInfoTextSize, JustifyLeft, promptFont), missionNumber1
+                StringPane("INTRODUCTION TO ALLEGIANCE AND THE HANGAR.", whiteText, missionInfoTextSize, JustifyLeft, promptFont), missionNumber1
             ),
             (
                 StringPane("LEARN THE BASICS OF SPACEFLIGHT.", whiteText, missionInfoTextSize, JustifyLeft, promptFont), missionNumber2
@@ -132,10 +110,10 @@ missionInfoLaunchTextPane =
         missionNumber,
         [
             (
-                StringPane("Training Mission 1-5 have been disabled.", whiteText, missionInfoTextSize, JustifyLeft, promptFont), NoMissionSelected
+                StringPane("", whiteText, missionInfoTextSize, JustifyLeft, promptFont), NoMissionSelected
             ),
             (
-                StringPane("SELECT A TRAINING MISSION", whiteText, missionInfoTextSize, JustifyLeft, promptFont), missionNumber1
+                StringPane("CLICK THE LAUNCH BUTTON ON THE RIGHT TO BEGIN.", whiteText, missionInfoTextSize, JustifyLeft, promptFont), missionNumber1
             ),
             (
                 StringPane("CLICK THE LAUNCH BUTTON ON THE RIGHT TO BEGIN.", whiteText, missionInfoTextSize, JustifyLeft, promptFont), missionNumber2
@@ -164,17 +142,6 @@ missionInfoLaunchTextPane =
 //
 // The background and control positions
 //
-DisabledMissionFont = Win32Font("Verdana", 16, true, 0);
-DMFColor = Color(1,0.2,0.2);
-DisabledMissions = GroupImage([
-	TranslateImage(StringImage(JustifyLeft, 200, DisabledMissionFont, DMFColor, "1. INTRODUCTION"),Point(0,136)),
-	TranslateImage(StringImage(JustifyLeft, 200, DisabledMissionFont, DMFColor, "2. BASIC FLIGHT"),Point(0,110)),
-	TranslateImage(StringImage(JustifyLeft, 200, DisabledMissionFont, DMFColor, "3. BASIC WEAPONRY"),Point(0,84)),
-	TranslateImage(StringImage(JustifyLeft, 200, DisabledMissionFont, DMFColor, "4. ENEMY ENGAGEMENT"),Point(0,58)),
-	TranslateImage(StringImage(JustifyLeft, 200, DisabledMissionFont, DMFColor, "5. COMMAND VIEW"),Point(0,32))
-	]);
-
-DisabledMissionsPane = AnimatedImagePane(DisabledMissions);
 
 screen =
     ScreenPane(
@@ -183,19 +150,18 @@ screen =
 			(titlePane,					Point( 15,   5)),
 			(captionPane,				Point( 75,  32)),
             (backButtonPane,            Point( 24, 523)),
-            (DisabledMissionsPane,   Point( 37, 153)),
-//            (trainMission1ButtonPane,   Point( 28, 148)),
-//            (trainMission2ButtonPane,   Point( 28, 174)),
-//            (trainMission3ButtonPane,   Point( 28, 200)),
-//            (trainMission4ButtonPane,   Point( 28, 226)),
-//            (trainMission5ButtonPane,   Point( 28, 252)),
+            (trainMission1ButtonPane,   Point( 28, 148)),
+            (trainMission2ButtonPane,   Point( 28, 174)),
+            (trainMission3ButtonPane,   Point( 28, 200)),
+            (trainMission4ButtonPane,   Point( 28, 226)),
+            (trainMission5ButtonPane,   Point( 28, 252)),
             (trainMission6ButtonPane,   Point( 28, 278)),
 //          (trainMission7ButtonPane,   Point( 28, 304)),
 			(trainMission8ButtonPane,   Point( 28, 304)),
             (missionInfoPane,           Point(283,  65)),
             (missionInfoTextPane,       Point(283, 450)),
             (missionInfoLaunchTextPane, Point(283, 490)),
-            (trainButtonDisplay,        Point(700, 175))
+            (trainButtonPane,           Point(700, 175))
         ]
     );
 

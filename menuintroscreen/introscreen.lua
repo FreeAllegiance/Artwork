@@ -26,7 +26,7 @@ Loginstate_container = Loginstate_container
 resolution = Screen.GetResolution()
 xres = Point.X(resolution)
 yres = Point.Y(resolution)
-UIScaleFactor = Number.Min(Number.Clamp(0.6,1.1, xres/1366), Number.Clamp(0.6, 1.1, yres/768))
+UIScaleFactor = Number.Min(Number.Clamp(xres/1366,0.6,1.1), Number.Clamp(yres/768,0.6, 1.1))
 checktext = Number.ToString(UIScaleFactor*1000)
 fontheader1 = Fonts.create_scaled("Trebuchet MS", 26*UIScaleFactor, {Bold=true})
 fontheader2 = Fonts.create_scaled("Trebuchet MS", 23*UIScaleFactor, {Italic=true, Bold=true})
@@ -241,7 +241,7 @@ function make_missionscreen(Loginstate_container)
 		listboxheight = 100 -- Point.Y(Image.Size(serverlistbox))
 		corelistboxwidth = 110
 		-- functions to pass as arguments to the listboxmaker function
-		function entry_to_string (c_item)
+		local function entry_to_string (c_item)
 			return c_item:GetString("Name") 
 		end
 		function entry_renderer(entry, index, target)
@@ -266,7 +266,7 @@ function make_missionscreen(Loginstate_container)
 				Image.Translate(Global.create_box(serverlistboxwidth, listboxheight, {background_color=Colors.dark}), Point.Create(-5,0)),
 				Image.Translate(				
 				Global.create_vertical_scrolling_container(
-					Control.string.create_listbox(ChosenServer_eventsink, c_servers,{entry_to_string=entry_to_string,entry_renderer= entry_renderer}),
+					Control.string.create_listbox(ChosenServer_eventsink, c_servers,{entry_to_label=entry_to_string,entry_to_value=entry_to_string,entry_renderer= entry_renderer}),
 					Point.Create(serverlistboxwidth, listboxheight),
 					button_normal_color
 					),
@@ -277,7 +277,7 @@ function make_missionscreen(Loginstate_container)
 				Image.Translate(Global.create_box(corelistboxwidth, listboxheight, {background_color=Colors.dark}), Point.Create(-5,0)),
 				Image.Translate(
 					Global.create_vertical_scrolling_container(
-						Control.string.create_listbox(ChosenCore_eventsink, c_cores, {entry_to_string=entry_to_string,entry_renderer= entry_renderer}),
+						Control.string.create_listbox(ChosenCore_eventsink, c_cores, {entry_to_label=entry_to_string,entry_to_value=entry_to_string,entry_renderer= entry_renderer}),
 						Point.Create(corelistboxwidth, listboxheight),
 						button_normal_color  
 					),
@@ -293,7 +293,7 @@ function make_missionscreen(Loginstate_container)
 				Image.StackVertical({
 					Image.Justify(Image.String(fontheader1, Colors.white, "CREATE MISSION"), Point.Create(dialogwidth, 20),Justify.Center),
 					Image.Justify(Image.String(Fonts.create_scaled("Trebuchet MS", 23, {Bold=true}), Colors.white, "MISSION NAME:", {Width=140}), Point.Create(dialogwidth, 20),Justify.Center),
-					Image.Justify(Control.string.create_input(context, fontheader1, mission_name, dialogwidth-40), Point.Create(dialogwidth-20, 20), Justify.Center),
+					Image.Justify(Control.string.create_input(context, mission_name, {width=dialogwidth-40}), Point.Create(dialogwidth-20, 20), Justify.Center),
 					Image.Extent(Point.Create(0, 10), Colors.transparent),
 					Image.String(fontheader4, Colors.white, "Select a server near your physical location to play on. Then select a game core. \n \n Cores are sets of game rules. Different cores may have different factions, weapons and balance values.", 
 						{Width=dialogwidth, Justification=Justify.Center}
@@ -380,7 +380,7 @@ function make_missionscreen(Loginstate_container)
 				missionminutes = missionminutes*60
 				missionminutes = missionminutes-Number.Mod(missionminutes,1)
 				missiontime = String.Switch(
-					Number.Clamp(0, 1, missionminutes-9),
+					Number.Clamp(missionminutes-9, 0, 1),
 					{
 					[0]=Number.ToString(missionhours) .. ":0" .. Number.ToString(missionminutes),
 					[1]=Number.ToString(missionhours) .. ":" .. Number.ToString(missionminutes),
@@ -514,7 +514,7 @@ function make_missionscreen(Loginstate_container)
 					return create_missioncard.image
 				end			
 				missioncard = Image.Switch(
-					Number.Clamp(0,1,i),
+					Number.Clamp(i, 0,1),
 					{
 						[0] = Image.Group({
 							make_create_missioncard(),
@@ -528,7 +528,7 @@ function make_missionscreen(Loginstate_container)
 	) 
 	-- cardslistImg =Image.Extent(Point.Create(xcardsarea, 1250), Colors.transparent)
 	--if the vertical size of the cardimage < cardsarea (if it fits) return 0, otherwise return 1,
-	doWeNeedaScrollbar = Number.Clamp(0,1, Point.Y(Image.Size(cardslistImg))-ycardsarea)
+	doWeNeedaScrollbar = Number.Clamp(Point.Y(Image.Size(cardslistImg))-ycardsarea,0,1)
 	missioncards = Image.Group({
 		Image.Extent(cardsarea, Colors.transparent),
 		Image.Switch(

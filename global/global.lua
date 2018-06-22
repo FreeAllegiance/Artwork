@@ -180,7 +180,7 @@ function create_vertical_scrollbar(position_fraction, height, grip_height, paint
 	grip_translated = Image.MouseEvent(Image.Translate(grip, grip_translation))
 
 	Event.OnEvent(position_fraction, Event.GetPoint(grip_translated, "drag"), function (dragged)
-		return Number.Clamp(0, 1, Number.Add(position_fraction, Number.Multiply(fraction_per_scrollbar_translation, Point.Y(dragged))))
+		return Number.Clamp(Number.Add(position_fraction, Number.Multiply(fraction_per_scrollbar_translation, Point.Y(dragged))), 0, 1)
 	end)
 
 	return {

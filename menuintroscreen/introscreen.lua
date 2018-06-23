@@ -351,6 +351,55 @@ function make_missionscreen(Loginstate_container)
 	-- control_maker_function(true)
 	-- note that create_single_popup_manager takes a function as argument, not the image returned by that function
 	create_mission_popup = Popup.create_single_popup_manager(create_mission_screen, {control_maker=control_maker_function})
+
+	local currentpassword = String.CreateEventSink("")
+	function create_joining_popup()
+
+		function with_transparent_background(img)
+			return Image.Group({
+				-- make sure we can't click on anything else by having a transparent background
+				Image.Extent(cardsarea, Color.Create(0, 0, 0, 0)),
+				Image.Justify(img, cardsarea, Justify.Center),
+			})
+		end
+
+		return Image.Switch(Loginstate_container:GetState("Join mission state"), {
+			Joining=function ()
+				return with_transparent_background(Image.String(Fonts.h1, Color.Create(0.8, 0.8, 0.8), "Joining mission..."))
+			end,
+			Idle=function (obj)
+				return Image.Switch(obj:Get("Has error"), {
+					Yes = function (error_obj)
+						local show_error = Boolean.CreateEventSink(true)
+
+						local cancel_button = Button.create_standard_textbutton("Cancel", Fonts.h1, 120, 40)
+						Event.OnEvent(show_error, cancel_button.events.click, function () return false end)
+
+						local retry_button = Button.create_standard_textbutton("Retry", Fonts.h1, 120, 40)
+						Event.OnEvent(error_obj:Get("Retry"), retry_button.events.click, function ()
+							return currentpassword
+						end)
+
+						return Image.Switch(show_error, {
+							[ true ]=with_transparent_background(Image.StackVertical({
+								Image.String(Fonts.h1, Color.Create(0.8, 0.8, 0.8), "Failed: " .. error_obj:Get("Reason")),
+								Image.Switch(error_obj:Get("Reason is incorrect password"), {
+									[ true ] = Image.StackVertical({
+										Image.StackHorizontal({
+											Image.String(Fonts.h1, Color.Create(0.8, 0.8, 0.8), "Password: "),
+											Control.string.create_input(context, currentpassword),
+										}),
+										retry_button.image,
+									})
+								}),
+								cancel_button.image,
+							}))
+						})
+					end,
+				})
+			end
+		})
+	end
 	
 	----------
 	---- MISSION CARDS SECTION
@@ -477,7 +526,9 @@ function make_missionscreen(Loginstate_container)
 				Event.OnEvent(e_hovertext, card.events.enter, function() return missionhovertext end)
 				Event.OnEvent(e_hovertext, card.events.leave, function() return "" end)
 				Event.OnEvent(e_hovertext, card.events.click, function() return "" end)
-				Event.OnEvent(mission:GetEventSink("Join"), card.events.click)
+				Event.OnEvent(mission:Get("Join"), card.events.click, function ()
+					return currentpassword
+				end)
 				--positioning
 				-- we're using pre-scaled dimension because this is also about the space between the cards.
 				posx = col*(scaledcardwidth+cardsoutermargin+cardsoutermargin) -- 
@@ -569,6 +620,7 @@ function make_missionscreen(Loginstate_container)
 			-- Image.Translate(Image.Justify(create_hovertextimg("hovertext"..hovertext), resolution, Justify.Bottom),Point.Create(0, -150*UIScaleFactor)),
 			-- popups
 			Image.Justify(create_mission_popup.get_area(cardsarea), resolution, Justify.Center),	
+			Image.Justify(create_joining_popup(), resolution, Justify.Center),	
 		})
 end	
 

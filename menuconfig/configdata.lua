@@ -9,13 +9,14 @@ local section_labels = {
 	Mouse="Mouse & Joystick",
 	Keybindings="Keybindings",
 	Sound="Sound",
+	Modding="Modding",
 	Debug="Debug",
 }
 
 local section_order = {
 	"Online", "UI", 
 	"Graphics", 
-	"Mouse", "Keybindings", "Sound", "Debug"
+	"Mouse", "Keybindings", "Sound", "Modding", "Debug"
 }
 
 function entry_to_label_with_none(entry)
@@ -210,6 +211,22 @@ function create_section_entries(context, create_configuration)
 			return {
 				create_configuration("Effect volume", Control.int.create_input(context, Screen.Get("Configuration.Sound.EffectVolume"))),
 				create_configuration("Voice over volume", Control.int.create_input(context, Screen.Get("Configuration.Sound.VoiceVolume"))),
+			}
+		end,
+		Modding=function ()
+			function image_string(text)
+				return Image.String(Font.Create("Verdana", 14), Color.Create(0.8, 0.8, 0.8), text)
+			end
+			return {
+				create_configuration("Mod directory", image_string(Screen.Get("Configuration.Modding.Path"))),
+				create_configuration(
+					"Found mods", 
+					Image.Switch(List.Count(Screen.Get("Installed mods")), {
+						[ 0 ] = image_string("No mods found")
+					}, Image.StackVertical(List.Map(Screen.Get("Installed mods"), function (mod)
+						return image_string(mod:Get("Name"))
+					end)))
+				),
 			}
 		end,
 		Debug=function ()

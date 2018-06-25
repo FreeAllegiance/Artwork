@@ -136,7 +136,9 @@ local divider_position = 200
 local divider_margin = 10
 function create_configuration(label, configuration_image)
 	local label_font = Font.Create("Verdana", 16)
-	local label_image = Image.String(label_font, Color.Create(0.8, 0.8, 0.8), label)
+	local label_image = Image.String(label_font, Color.Create(0.8, 0.8, 0.8), label, {
+		Width=190
+		})
 
 	local configuration_image_height = Point.Y(Image.Size(configuration_image))
 	local label_image_height = Point.Y(Image.Size(label_image))

@@ -59,10 +59,60 @@ function create_context()
 		}
 	end
 
+	local popup_list = List.CreateEventSink({})
+	local popup_list_ids = List.CreateEventSink({})
+	local popup_count = 0
+	function create_popup(image)
+		local popup_id = popup_count
+		popup_count = popup_count + 1
+
+		local popup_list_index = List.Find(popup_list_ids, function (id)
+			return Number.Equals(id, popup_id)
+		end)
+		local popup_is_closed = Number.Equals(popup_list_index, -1)
+		local popup_is_open = Boolean.Not(popup_is_closed)
+
+		function add_open_source(open_source)
+			local filtered_source = Event.Filter(open_source, popup_is_closed)
+
+			Event.OnEvent(popup_list_ids:Get("append entry"), filtered_source, function ()
+				return popup_id
+			end)
+			Event.OnEvent(popup_list:Get("append entry"), filtered_source, function ()
+				return image
+			end)
+		end
+
+		function add_close_source(close_source)
+			local filtered_source = Event.Filter(close_source, popup_is_open)
+
+			Event.OnEvent(popup_list_ids:Get("remove entry"), filtered_source, function () 
+				return popup_list_index
+			end)
+			Event.OnEvent(popup_list:Get("remove entry"), filtered_source, function () 
+				return popup_list_index
+			end)
+		end
+
+		return {
+			get_is_open=function ()
+				return popup_is_open
+			end,
+			get_is_closed=function ()
+				return popup_is_closed
+			end,
+			add_open_source=add_open_source,
+			add_close_source=add_close_source,
+		}
+	end
+
 	function create_result_image(size, image)
 		local catchall_image = Image.MouseEvent(Image.Group({
 			Image.Extent(size, Color.Create(0,0,0,0)),
 			image,
+			Image.Group(List.Map(popup_list, function (popup_image)
+				return popup_image
+			end)),
 		}))
 
 		local click_event = Event.Get(catchall_image, "mouse.left.click")
@@ -73,6 +123,7 @@ function create_context()
 
 	return {
 		create_focus_target=create_focus_target,
+		create_popup=create_popup,
 		create_result_image=create_result_image
 	}
 end

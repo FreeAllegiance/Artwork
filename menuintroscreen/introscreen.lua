@@ -1,3 +1,5 @@
+
+
 Button = File.LoadLua("button/button.lua")()
 Global = File.LoadLua("global/global.lua")()
 Fonts = File.LoadLua("global/fonts.lua")()
@@ -48,7 +50,7 @@ logo = Image.Group({
 		),
 	})
 
--- declare recurring variables outside of function
+-- -- declare recurring variables outside of function
 mainbtn_bg1 = Image.File("menuintroscreen/images/introBtn_border.png")
 --btnimage_position = Point.Create(0,0)
 
@@ -122,7 +124,6 @@ function render_list(list)
 
 	return Image.Group(translated_list)
 end
-
 
 
 
@@ -235,6 +236,13 @@ function make_missionscreen(Loginstate_container)
 		ChosenCore_eventsink = String.CreateEventSink("")
 
 		mission_name = String.CreateEventSink(Loginstate_container:Get("Callsign") .. "'s game")
+
+
+		local create_btn = Button.create_standard_textbutton("CREATE", Fonts.h1, 120, 40)
+
+		Event.OnEvent(Loginstate_container:Get("Create mission"), create_btn.events.click, function ()
+			return ChosenServer_eventsink, ChosenCore_eventsink, mission_name
+		end)
 		
 		-- dimensions		
 		serverlistboxwidth = 110
@@ -321,36 +329,22 @@ function make_missionscreen(Loginstate_container)
 						}),
 						Point.Create(dialogwidth, listboxheight+35),
 						Justify.Top
-					)
+					),
+					Image.Switch(Loginstate_container:Get("Server has core")(ChosenServer_eventsink, ChosenCore_eventsink), {
+						[ true ]=create_btn.image
+					}),
 				}),
 				Point.Create(dialogwidth, dialogheight),
 				Justify.Top
 			),
 		})
 	end
-	-- create the controls for the mission creation popup
-	function control_maker_function(popup_is_open)
-			close_btn = Button.create_standard_textbutton("CANCEL", Fonts.h1, 120, 40)
-			create_btn = Button.create_standard_textbutton("CREATE", Fonts.h1, 120, 40)
-			Event.OnEvent(popup_is_open, close_btn.events.click, function () return false end)
-			-- Event.OnEvent(popup_is_open, create_btn.events.click, function () return false end)
-			Event.OnEvent(Loginstate_container:Get("Create mission"), create_btn.events.click, function ()
-				return ChosenServer_eventsink, ChosenCore_eventsink, mission_name
-			end)
-			controlpanesize = Point.Create(250, 50)
-			popuppanelmargin = Point.Create(40, 20)
-			controlpane = Image.Group({
-					Image.Extent(controlpanesize, Colors.transparent),
-					Image.Justify(close_btn.image, controlpanesize, Justify.Right),
-					Image.Switch(Loginstate_container:Get("Server has core")(ChosenServer_eventsink, ChosenCore_eventsink), {
-						[ true ]=Image.Justify(create_btn.image, controlpanesize, Justify.Left)
-					})
-				})
-			return Image.Translate(Image.Justify(controlpane, Point.Create(450,420), Justify.Bottom), popuppanelmargin)
-		end
-	-- control_maker_function(true)
-	-- note that create_single_popup_manager takes a function as argument, not the image returned by that function
-	create_mission_popup = Popup.create_single_popup_manager(create_mission_screen, {control_maker=control_maker_function})
+
+	local create_mission_window = Popup.create_popup_window(Image.Lazy(create_mission_screen))
+
+	local create_mission_popup = context.create_popup(create_mission_window.image);
+
+	create_mission_popup.add_close_source(create_mission_window.close_source)
 
 	local currentpassword = String.CreateEventSink("")
 	function create_joining_popup()
@@ -558,10 +552,8 @@ function make_missionscreen(Loginstate_container)
 					Event.OnEvent(e_hovertext, create_missioncard.events.enter, function() return create_mission_hovertext end)
 					Event.OnEvent(e_hovertext, create_missioncard.events.leave, function() return "" end)
 					Event.OnEvent(e_hovertext, create_missioncard.events.click, function() return "" end)
-					Event.OnEvent(create_mission_popup.get_is_open(), 
-						create_missioncard.events.click,
-						function () return Boolean.Not(create_mission_popup.get_is_open()) end
-						)
+
+					create_mission_popup.add_open_source(create_missioncard.events.click)
 					return create_missioncard.image
 				end			
 				missioncard = Image.Switch(
@@ -619,7 +611,6 @@ function make_missionscreen(Loginstate_container)
 			-- hovertext
 			-- Image.Translate(Image.Justify(create_hovertextimg("hovertext"..hovertext), resolution, Justify.Bottom),Point.Create(0, -150*UIScaleFactor)),
 			-- popups
-			Image.Justify(create_mission_popup.get_area(cardsarea), resolution, Justify.Center),	
 			Image.Justify(create_joining_popup(), resolution, Justify.Center),	
 		})
 end	
@@ -641,17 +632,21 @@ end
 
 ---------------------- Final Screen Switch Section ---------
 
-function create_credits_image()
-	credits_image = File.LoadLua("menuintroscreen/credits.lua")()
-	return credits_image
+function create_credits_button()
+	local credits_window = Popup.create_popup_window(Image.Lazy(function ()
+		return File.LoadLua("menuintroscreen/credits.lua")().create(context)
+	end))
+
+	local credits_popup = context.create_popup(credits_window.image);
+
+	local credits_button = Popup.create_simple_text_button("Credits", 14);
+
+	credits_popup.add_open_source(credits_button.event_click)
+	credits_popup.add_close_source(credits_window.close_source)
+
+	return credits_button.image
 end
 
-credits_popup = Popup.create_single_popup_manager(create_credits_image)
-credits_button = Popup.create_simple_text_button("Credits", 14)
-Event.OnEvent(credits_popup.get_is_open(), credits_button.event_click, function ()
-	-- toggle
-	return Boolean.Not(credits_popup.get_is_open())
-end)
 
 function create_hovertextimg(str)
 	return Image.String(fontheader2, Colors.standard_ui, str, {Width=Number.Divide(xres,2), Justification=Justify.Center})
@@ -669,12 +664,12 @@ return context.create_result_image(
 	Image.Group({
 		Image.ScaleFill(make_background(), resolution, Justify.Center), -- we use the same background image for all of them.
 		statescreen,
-		credits_popup.get_area(Point.Create(
-				Point.X(resolution), 
-				Point.Y(resolution) - 200
-			)),
+		-- credits_popup.get_area(Point.Create(
+		-- 		Point.X(resolution), 
+		-- 		Point.Y(resolution) - 200
+		-- 	)),
 		Image.Translate(Image.Justify(create_hovertextimg(e_hovertext), resolution, Justify.Bottom),Point.Create(0, -150*UIScaleFactor)),
 		Image.Justify(Image.String(Font.Create("Verdana",12), button_normal_color, Button.version.."\n"..introscreenversion.."\n"..Global.version .."\n".. checktext, {Width=200, Justification=Justify.Right}), resolution, Justify.Topright),
-		Image.Justify(credits_button.image, resolution, Justify.Bottomright),
+		Image.Justify(create_credits_button(), resolution, Justify.Bottomright),
 	})
 )

@@ -164,6 +164,15 @@ function create_section_entries(context, create_configuration)
 			return {
 				create_configuration("Use mouse as joystick (virtual joystick)", Control.boolean.create_listbox(Screen.Get("Configuration.Joystick.UseMouseAsJoystick"))),
 				create_configuration("Show turn rate indicator", Control.boolean.create_listbox(Screen.Get("Configuration.Joystick.ShowDirectionIndicator"))),
+
+				create_configuration("Mouse input method", Control.boolean.create_listbox(Screen.Get("Configuration.Mouse.UseRawInput"), {
+					entry_to_label=function (entry)
+						return String.Switch(entry, {
+							[true] = "Raw",
+							[false] = "DirectInput",
+						})
+					end
+				})),
 				
 				create_configuration("Mouse sensitivity", Control.number.create_input(context, Screen.Get("Configuration.Mouse.Sensitivity"), {
 					decimals=2

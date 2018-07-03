@@ -3,7 +3,7 @@ Control = File.LoadLua("global/control.lua")()
 Button = File.LoadLua("button/button.lua")()
 
 local section_labels = {
-	Online="Online",
+	Online="Profile",
 	UI="User interface",
 	Graphics="Graphics",
 	Mouse="Mouse & Joystick",

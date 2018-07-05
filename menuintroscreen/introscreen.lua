@@ -162,20 +162,13 @@ function make_introscreen(Loginstate_container)
 	})
 end
 
-
-
 ---------------------- Connecting   ----------------
 ----------------------------------------------------------------------------------------------------------------------------------
 function make_spinner(Loginstate_container)
-	spinnerpoint = Point.Create(136,136) -- roughly the size of the diagonal of the spinner image. 
-	spinner = Image.Group({
-		Image.Extent(spinnerpoint, Colors.transparent),
-		Image.Justify(Image.Multiply(Image.File("menuintroscreen/images/spinner_aleph.png"),button_normal_color), spinnerpoint, Justify.Center),
-		Image.Justify(Image.Rotate(Image.Multiply(Image.File("menuintroscreen/images/spinner.png"),button_normal_color), Number.Multiply(Screen.GetNumber("time"), 3.14)), spinnerpoint, Justify.Center),
-		})
+	local spinner = File.LoadLua("global/loading_icon.lua")()
 
-stepMsg = Loginstate_container:GetString("Step message")
-stepMsgImg = Image.String(fontheader2, button_normal_color, stepMsg, {Width=Number.Divide(xres,2), Justification=Justify.Center})
+	stepMsg = Loginstate_container:GetString("Step message")
+	stepMsgImg = Image.String(fontheader2, button_normal_color, stepMsg, {Width=Number.Divide(xres,2), Justification=Justify.Center})
 
 	return Image.Group({
 		Image.Justify(spinner, resolution,Justify.Center),

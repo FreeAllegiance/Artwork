@@ -226,6 +226,14 @@ function create_section_entries(context, create_configuration)
 			function image_string(text)
 				return Image.String(Font.Create("Verdana", 14), Color.Create(0.8, 0.8, 0.8), text)
 			end
+
+			local create_mod_name = String.CreateEventSink("My new mod")
+
+			local create_button = Button.create_standard_textbutton("Create", Font.Create("Verdana", 16), 200, 50)
+			Event.OnEvent(Screen.Get("Create mod"), create_button.events.click, function ()
+				return create_mod_name
+			end)
+
 			return {
 				create_configuration("Mod directory", image_string(Screen.Get("Configuration.Modding.Path"))),
 				create_configuration(
@@ -233,9 +241,53 @@ function create_section_entries(context, create_configuration)
 					Image.Switch(List.Count(Screen.Get("Installed mods")), {
 						[ 0 ] = image_string("No mods found")
 					}, Image.StackVertical(List.Map(Screen.Get("Installed mods"), function (mod)
-						return image_string(mod:Get("Name"))
-					end)))
+						local upload_button = Button.create_standard_textbutton("Upload new version", Font.Create("Verdana", 16), 200, 50)
+						Event.OnEvent(mod:Get("Upload"), upload_button.events.click)
+
+						return Image.Group({
+							image_string(String.Join({
+								mod:Get("Name"),
+								" (SteamId=",
+								mod:Get("Identifier"),
+								")",
+							})),
+							Image.Switch(mod:Get("IsOwned"), {
+								[ true ]= Image.Translate(
+									Image.Switch(mod:GetState("Upload state"), {
+										NotOwned=function ()
+											return image_string("Author: " .. "Not you")
+										end,
+										Idle=function ()
+											local boolCanUpload = Boolean.Or(
+												String.Equals(mod:Get("Identifier"), ""),
+												mod:Get("IsOwned")
+											)
+
+											return Image.Switch(boolCanUpload, {
+												[ true ]=upload_button.image,
+											})
+										end,
+										Uploading=function (obj)
+											return image_string(obj:Get("Status"))
+										end,
+									}),
+									Point.Create(300, 0)
+								),
+							}),
+						})
+					end), 5))
 				),
+				image_string("-----------------------------------------------------------"),
+				image_string([[
+Very rough guide:
+-Type a name and click the create button. This creates a directory in your [install dir]/Mods
+-Add whatever you need in that directory
+-Whenever you want to upload your mod (or publish a new version), press the 'Update' button next to the installed mod
+
+More mod details, including the actual publishing of the mod happen on the steam website.
+You probably don't want to subscribe to your own mods.]]),
+				create_configuration("Create mod with name", Control.string.create_input(context, create_mod_name)),
+				create_button.image,
 			}
 		end,
 		Debug=function ()

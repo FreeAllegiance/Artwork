@@ -321,7 +321,7 @@ hoverSite = HoverSite(0);
 HintText = 
 	SwitchString(
 		HoverSiteGetID(hoverSite),
-		"If you don't see a mouse pointer, press TAB to disable mouse flight.",
+		"If you don't see a mouse pointer, press V to disable mouse flight.",
 		[
 		(1, "Go to the Allegiance Wiki page."),
 		(2, "Join the community discord channels."),
@@ -344,7 +344,7 @@ KeyboardImageUI = ImagePane(
 
 helpPane = 
     ImagePane(
-        ImportImageFromFile("menuhelp/keyboardLayout.png", true),
+        ImportImageFromFile("menuhelp/keyboardLayout.png", false),
         [
 		(KeyboardImageUI, Point(1123, 19))
         ]

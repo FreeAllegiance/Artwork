@@ -200,6 +200,8 @@ function create_vertical_scrolling_container(target_image, container_size, paint
 	target_size = Image.Size(target_image)
 	target_height = Point.Y(target_size)
 
+	paint = paint or Color.Create(0.6, 0.6, 0.6)
+
 	function make_scroll_window()
 		position_fraction = Number.CreateEventSink(0)
 		grip_height = Number.Max(50, Number.Min(Number.Round((container_height/target_height)*container_height,0),container_height))

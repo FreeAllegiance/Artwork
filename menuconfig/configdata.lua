@@ -244,48 +244,47 @@ function create_section_entries(context, create_configuration)
 						local upload_button = Button.create_standard_textbutton("Upload new version", Font.Create("Verdana", 16), 200, 50)
 						Event.OnEvent(mod:Get("Upload"), upload_button.events.click)
 
-						return Image.Group({
-							image_string(String.Join({
-								mod:Get("Name"),
-								" (SteamId=",
-								mod:Get("Identifier"),
-								")",
-							})),
-							Image.Switch(mod:Get("IsOwned"), {
-								[ true ]= Image.Translate(
-									Image.Switch(mod:GetState("Upload state"), {
-										NotOwned=function ()
-											return image_string("Author: " .. "Not you")
-										end,
-										Idle=function ()
-											local boolCanUpload = Boolean.Or(
-												String.Equals(mod:Get("Identifier"), ""),
-												mod:Get("IsOwned")
-											)
+						return image_string(mod:Get("Name"))
 
-											return Image.Switch(boolCanUpload, {
-												[ true ]=upload_button.image,
-											})
-										end,
-										Uploading=function (obj)
-											return image_string(obj:Get("Status"))
-										end,
-									}),
-									Point.Create(300, 0)
-								),
-							}),
-						})
+						-- return Image.Group({
+						-- 	image_string(String.Join({
+						-- 		mod:Get("Name"),
+						-- 		" (SteamId=",
+						-- 		mod:Get("Identifier"),
+						-- 		")",
+						-- 	})),
+						-- 	Image.Switch(mod:Get("IsOwned"), {
+						-- 		[ true ]= Image.Translate(
+						-- 			Image.Switch(mod:GetState("Upload state"), {
+						-- 				NotOwned=function ()
+						-- 					return image_string("Author: " .. "Not you")
+						-- 				end,
+						-- 				Idle=function ()
+						-- 					local boolCanUpload = Boolean.Or(
+						-- 						String.Equals(mod:Get("Identifier"), ""),
+						-- 						mod:Get("IsOwned")
+						-- 					)
+
+						-- 					return Image.Switch(boolCanUpload, {
+						-- 						[ true ]=upload_button.image,
+						-- 					})
+						-- 				end,
+						-- 				Uploading=function (obj)
+						-- 					return image_string(obj:Get("Status"))
+						-- 				end,
+						-- 			}),
+						-- 			Point.Create(300, 0)
+						-- 		),
+						-- 	}),
+						-- })
 					end), 5))
 				),
 				image_string("-----------------------------------------------------------"),
 				image_string([[
-Very rough guide:
--Type a name and click the create button. This creates a directory in your [install dir]/Mods
--Add whatever you need in that directory
--Whenever you want to upload your mod (or publish a new version), press the 'Update' button next to the installed mod
-
-More mod details, including the actual publishing of the mod happen on the steam website.
-You probably don't want to subscribe to your own mods.]]),
+How to create a mod (this is a work in progress):
+- Below, type a name and click the create button. This creates a directory in your '[install dir]/Mods'
+- By placing files in this directory ('[install dir]/Mods/[your mod name]'), you can overwrite a lot of the game assets that would normally be loaded from '[install dir]/Artwork'.
+]]),
 				create_configuration("Create mod with name", Control.string.create_input(context, create_mod_name)),
 				create_button.image,
 			}

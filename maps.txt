@@ -1,4 +1,9 @@
-30
+35
+2,AA19CirCros,m2xibcircros
+2,AA19SpiderW,m2xspiderw
+2,AA19Destroy,m2xibdestroy
+2,AA19Crush,m2xibcrush
+2,AA19CrshMod,m2xibcrshmod
 2,Agate,m2x3agate
 2,Amber,m2x3amber
 2,Ammolite,m2x3ammolite

@@ -5,4 +5,4 @@ wc_04
 rc_03
 PCore016
 rc_04
-beta1999
+zone_core

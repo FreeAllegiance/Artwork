@@ -1,4 +1,5 @@
-35
+36
+2,WaspNova,m2waspnova
 2,AA19CirCros,m2xibcircros
 2,AA19SpiderW,m2xspiderw
 2,AA19Destroy,m2xibdestroy

@@ -1,0 +1,4 @@
+use "model";
+
+eyebmp = 
+	ImportImageFromFile("eye.png", true);

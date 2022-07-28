@@ -1,15 +1,15 @@
 36
 2,WaspNova,m2waspnova
-2,AA19CirCros,m2xibcircros
+2,Sideways,m2sideways
+2,Slither,m2slither
+2,Scatter,m2scatter
 2,AA19SpiderW,m2xspiderw
 2,AA19Destroy,m2xibdestroy
 2,AA19Crush,m2xibcrush
-2,AA19CrshMod,m2xibcrshmod
 2,Agate,m2x3agate
 2,Amber,m2x3amber
 2,Ammolite,m2x3ammolite
 2,Blender,m2xibblender
-2,Boron,m2xibboron
 2,Brass,m2x3brass
 2,Bronze,m2x3bronze
 2,Constellation,m2x3const
@@ -28,7 +28,7 @@
 2,Polished Pyrite,m2x3pyritep
 2,Schist,m2x3schist
 2,Serpentine,m2x3serp
-2,Slate,m2x3slate
+2,Split,m2split
 2,Silver,m2xibsilver
 2,Starflake,m2x3starfl
 2,Topaz,m2xibtopaz

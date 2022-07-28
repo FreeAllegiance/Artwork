@@ -1,0 +1,4 @@
+use "model";
+
+toparrowbmp = 
+	ImportImageFromFile("toparrow32.png", true);

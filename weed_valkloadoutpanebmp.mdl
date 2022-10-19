@@ -1,0 +1,2 @@
+use "model";
+weed_valkloadoutpanebmp = ImportImageFromFile("weed_valkloadoutpane.png", false);

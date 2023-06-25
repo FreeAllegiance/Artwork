@@ -1,0 +1,2 @@
+use "model";
+weed_valklobbybmp = ImportImageFromFile("weed_valklobby.png", false);

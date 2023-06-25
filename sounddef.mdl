@@ -184,7 +184,29 @@ faohomega3BurstSound       = GainSound(SFXGain, PrioritySound(5, ThreeDSound(500
 // Omicron Hive Sounds - End
 //
 
+//
+// Valkyrie Sounds - Begin
+//
 
+weed_valkStarbaseInternalSound     = GainSound(SFXGain, 
+                                PairedSound(
+                                    PitchSound(0.5, LoopingSound(ImportWave("shipint"))),
+                                    GainSound(-7, IntermittentSound(5, false, RandomSound([
+                                        (ImportWave("weed_valkamb01"), 1),
+                                        (ImportWave("weed_valkamb02"), 1),
+                                        (ImportWave("weed_valkamb03"), 1),
+                                        (ImportWave("weed_valkamb04"), 1),
+                                        (ImportWave("weed_valkamb05"), 1),
+                                        (ImportWave("weed_valkamb06"), 1),
+                                        (ImportWave("weed_valkamb07"), 1),
+                                        (ImportWave("weed_valkamb08"), 1),
+					(ImportWave("weed_valkamb09"), 1)
+				    ])))
+                                ));
+
+//
+// Valkyrie Sounds - End
+//
 
 newShipSound                = GainSound(SFXGain, ImportWave("newtarget"));
 newEnemySound               = GainSound(SFXGain, ImportWave("newtargetenemy"));
@@ -1946,10 +1968,11 @@ soundList =
         (435, BLStarbaseInternalSound),
         (440, RUStarbaseInternalSound),
         (445, DEStarbaseInternalSound),
-	  (450, TFStarbaseInternalSound),
-	  (451, dn_PhStarbaseInternalSound),
-	  (452, OHStarbaseInternalSound),
-	  (453, ta_dracStarbaseInternalSound),
+	(450, TFStarbaseInternalSound),
+	(451, dn_PhStarbaseInternalSound),
+	(452, OHStarbaseInternalSound),
+	(453, ta_dracStarbaseInternalSound),
+	(454, weed_valkStarbaseInternalSound),
 
 
         (460, ILStarbaseAlertSound),

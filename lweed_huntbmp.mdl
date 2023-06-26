@@ -1,0 +1,2 @@
+use "model";
+lweed_huntbmp = ImportImageFromFile("lweed_hunt.png", true);

@@ -1,0 +1,2 @@
+use "model";
+iconweed_valkbmp = ImportImageFromFile("iconweed_valk.png", false);

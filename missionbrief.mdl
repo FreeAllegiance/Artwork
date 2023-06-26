@@ -197,13 +197,9 @@ faohbkProsperity = "\n * Invest in \"Reinforcement\", costing %d credits, whereb
 faohbkDeathmatch = "\n *  Destroy %d enemy ships.";
 
 ta_dracTitle = "Draconium";
-
 ta_dracString = "Security Squadron";
-
 ta_dracNoWin = "Long-range enforcement %s, intelligence has uncovered enemy movement in area %s. Set up regional detainment centers, apprehend the enemy %s forces and incarcerate them.  Should they resist, deadly force has been authorized.";
-
 ta_dracDefault = "Long-range enforcement %s, intelligence has uncovered enemy movement in area %s. Set up regional detainment centers, apprehend the enemy %s forces and incarcerate them.  Should they resist, deadly force has been authorized.";
-
 ta_dracSecondaryObjectives = "\n\nOther objectives include:";
 ta_dracConquest = "\n *  Control %d%% of the bases.";
 ta_dracCountdown = "\n *  Eliminate as many enemies as possible within %d minutes.";
@@ -211,6 +207,18 @@ ta_dracArtifacts = "\n *  Capture and return %d of the artifacts.";
 ta_dracFlags = "\n *  Capture and return %d of the enemy flags.";
 ta_dracProsperity = "\n * Invest in \"Reinforcement\", costing %d credits, whereby reinforcements will be sent immediately to crush the opposition.";
 ta_dracDeathmatch = "\n *  Destroy %d enemy ships.";
+
+weed_valkTitle = "Valkyrie";
+weed_valkString = "Immortals";
+weed_valkNoWin = "Odin's finest %s, scouts have observed outlanders in %s. Deny all %s entrance to Valhalla.";
+weed_valkDefault = "Odin's finest %s, scouts have observed outlanders in %s. Deny all %s entrance to Valhalla.";
+weed_valkSecondaryObjectives = "\n\nOther objectives include:";
+weed_valkConquest = "\n *  Control %d%% of the bases.";
+weed_valkCountdown = "\n *  Eliminate as many enemies as possible within %d minutes.";
+weed_valkArtifacts = "\n *  Capture and return %d of the artifacts.";
+weed_valkFlags = "\n *  Capture and return %d of the enemy flags.";
+weed_valkProsperity = "\n * Invest in \"Reinforcement\", costing %d credits, whereby reinforcements will be sent immediately to crush the opposition.";
+weed_valkDeathmatch = "\n *  Destroy %d enemy ships.";
 
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -85,9 +85,9 @@ screen =
             //(zoneClubButtonPane,    Point( 86, 535)),
             //(creditsButtonPane,     Point(355, 553)),
             (trainBigButtonPane,    Point( 9, 535)),
-            (discordButtonPane,		Point(86, 535)),
-            (steamLeaderboardButtonPane, Point(163, 535)),
-            (playIntButtonPane,     Point(217, 535)),
+            (discordButtonPane,		Point(73, 535)),
+            (steamLeaderboardButtonPane, Point(137, 535)),
+            (playIntButtonPane,     Point(201, 535)),
             
             (introButtonPane,       Point(290, 553)),
             (zoneWebButtonPane,     Point(290, 568)),

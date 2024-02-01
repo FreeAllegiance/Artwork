@@ -166,9 +166,9 @@ faohhammer3BurstSound      = GainSound(SFXGain, PrioritySound(5, ThreeDSound(250
 faohpsi1BurstSound         = GainSound(SFXGain, PrioritySound(5, ThreeDSound(200, ASRSound(0.000023, 0.382404, ImportWave("faohpsi1")))));
 faohpsi2BurstSound         = GainSound(SFXGain, PrioritySound(5, ThreeDSound(200, ASRSound(0.000023, 0.383084, ImportWave("faohpsi2")))));
 faohpsi3BurstSound         = GainSound(SFXGain, PrioritySound(5, ThreeDSound(200, ASRSound(0.000023, 0.383220, ImportWave("faohpsi3")))));
-faohtau1BurstSound         = GainSound(SFXGain, PrioritySound(5, ThreeDSound(200, ASRSound(0.000023, 0.082404, ImportWave("faohtau1")))));
-faohtau2BurstSound         = GainSound(SFXGain, PrioritySound(5, ThreeDSound(200, ASRSound(0.000023, 0.083084, ImportWave("faohtau2")))));
-faohtau3BurstSound         = GainSound(SFXGain, PrioritySound(5, ThreeDSound(200, ASRSound(0.000023, 0.083220, ImportWave("faohtau3")))));
+faohtau1BurstSound         = GainSound(SFXGain, PrioritySound(5, ThreeDSound(200, ASRSound(0.000023, 0.333, ImportWave("faohtau1")))));
+faohtau2BurstSound         = GainSound(SFXGain, PrioritySound(5, ThreeDSound(200, ASRSound(0.000023, 0.333, ImportWave("faohtau2")))));
+faohtau3BurstSound         = GainSound(SFXGain, PrioritySound(5, ThreeDSound(200, ASRSound(0.000023, 0.333, ImportWave("faohtau3")))));
 faohtheta1BurstSound       = GainSound(SFXGain, PrioritySound(5, ThreeDSound(150, RepeatingFireSound(0.1, ImportWave("faohtheta1")))));
 faohtheta2BurstSound       = GainSound(SFXGain, PrioritySound(5, ThreeDSound(150, RepeatingFireSound(0.1, ImportWave("faohtheta2")))));
 faohtheta3BurstSound       = GainSound(SFXGain, PrioritySound(5, ThreeDSound(150, RepeatingFireSound(0.1, ImportWave("faohtheta3")))));
@@ -804,6 +804,8 @@ oink5Sound                  = SerializedSound(MutexVO, DefaultVOTimeout, 0, true
 // Weapon sounds
 //
 
+ta_taserShotSound           = GainSound(SFXGain, PrioritySound(-1.5, ThreeDSound(100, ImportWave("ta_taser")))); 
+
 antiBaseCap1ShotSound       = GainSound(SFXGain, PrioritySound(-1.5, ThreeDSound(100, ImportWave("turretgun1")))); 
 antiBaseCap2ShotSound       = GainSound(SFXGain, PrioritySound(-1.5, ThreeDSound(100, ImportWave("turretgun2")))); 
 
@@ -865,6 +867,7 @@ strikerShotSound	    = GainSound(SFXGain, PrioritySound(-1.5, ThreeDSound(200, I
 pulselaserBurstSound        = GainSound(SFXGain, PrioritySound(5, ThreeDSound(100, RepeatingFireSound(0.125, ImportWave("pulselaser"))))); 
 strikerBurstSound           = GainSound(SFXGain, PrioritySound(5, ThreeDSound(100, RepeatingFireSound(0.25, ImportWave("striker"))))); 
 
+ta_taserBurstSound          = GainSound(SFXGain, PrioritySound(5, ThreeDSound(200, ASRSound(0.000023, 0.09, ImportWave("ta_taser")))));
 
 antiBaseCap1BurstSound      = GainSound(SFXGain, PrioritySound(5, ThreeDSound(100, RepeatingFireSound(0.125, ImportWave("turretgun1"))))); 
 antiBaseCap2BurstSound      = GainSound(SFXGain, PrioritySound(5, ThreeDSound(100, RepeatingFireSound(0.125, ImportWave("turretgun2"))))); 
@@ -2144,6 +2147,8 @@ soundList =
         
         (700, afterburner1OutSound),
 
+		(710, ta_taserBurstSound),
+		(711, ta_taserShotSound),
 
         (720, probe1Sound),
 

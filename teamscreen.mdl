@@ -224,11 +224,11 @@ screen =
             (textFor,              Point(170,   3)), 
             (textTitle,            Point(230,   3)),
             (textPrompt,           Point(100,  28)),
-            (textScoresCount,      Point(500,  30)),
+            (textScoresCount,      Point(500,  50)),
             (textTimerType,        Point(698,  56)),
             (textTimer,            Point(695,  70)),
-            (textServername,       Point(500,   3)), // R4
-            (textCorename,         Point(500,  15)), // R4
+            (textServername,       Point(500,  23)), // R4
+            (textCorename,         Point(500,  35)), // R4
  
             (HoverPane(hoverSite,   1,  teamListPane),              Point( 45,  85)),
 

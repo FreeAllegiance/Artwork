@@ -1,0 +1,2 @@
+use "model";
+iconp1_bmp = ImportImageFromFile("iconp1_.png", true);

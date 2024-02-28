@@ -1,0 +1,2 @@
+use "model";
+p1_lobbybmp = ImportImageFromFile("p1_lobby.png", false);

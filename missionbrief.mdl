@@ -220,6 +220,17 @@ weed_valkFlags = "\n *  Capture and return %d of the enemy flags.";
 weed_valkProsperity = "\n * Invest in \"Reinforcement\", costing %d credits, whereby reinforcements will be sent immediately to crush the opposition.";
 weed_valkDeathmatch = "\n *  Destroy %d enemy ships.";
 
+p1_Title = "Mars Defense Force";
+p1_String = "Martians";
+p1_NoWin = "To Battlegroup %s, sensors detect the presence of potential hostiles in %s. Contact %s, determine friend or foe. If foe, eliminate.";
+p1_Default = "To Battlegroup %s, sensors detect the presence of potential hostiles in %s. Contact %s, determine friend or foe. If foe, eliminate.";
+p1_SecondaryObjectives = "\n\nOther objectives include:";
+p1_Conquest = "\n *  Control %d%% of the bases.";
+p1_Countdown = "\n *  Eliminate as many enemies as possible within %d minutes.";
+p1_Artifacts = "\n *  Capture and return %d of the artifacts.";
+p1_Flags = "\n *  Capture and return %d of the enemy flags.";
+p1_Prosperity = "\n * Invest in \"Reinforcement\", costing %d credits, whereby reinforcements will be sent immediately to crush the opposition.";
+p1_Deathmatch = "\n *  Destroy %d enemy ships.";
 
 ///////////////////////////////////////////////////////////////////////////////
 // BSG strings

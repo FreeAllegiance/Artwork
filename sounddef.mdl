@@ -115,6 +115,9 @@ ta_dracStarbaseInternalSound     = GainSound(SFXGain,
 				    ])))
                                 ));
 
+ta_taserShotSound           = GainSound(SFXGain, PrioritySound(-1.5, ThreeDSound(100, ImportWave("ta_taser"))));
+ta_taserBurstSound          = GainSound(SFXGain, PrioritySound(5, ThreeDSound(200, ASRSound(0.000023, 0.09, ImportWave("ta_taser")))));
+
 //
 // Draconium Sounds - End
 //
@@ -204,8 +207,41 @@ weed_valkStarbaseInternalSound     = GainSound(SFXGain,
 				    ])))
                                 ));
 
+weed_burniInSound            = GainSound(SFXGain, ASRSound(2.093878, 1.514421, ImportWave("weed_burni")));
+weed_burnoOutSound           = GainSound(SFXGain, ThreeDSound(200, ASRSound(2.357211, 2.490862, ImportWave("weed_burno"))));
+
 //
 // Valkyrie Sounds - End
+//
+
+//
+// Mars Sounds - Begin
+//
+
+p1_StarbaseInternalSound     = GainSound(SFXGain, 
+                                PairedSound(
+                                    PitchSound(0.5, LoopingSound(ImportWave("shipint"))),
+                                    GainSound(-7, IntermittentSound(5, false, RandomSound([
+                                        (ImportWave("p1_ambient1"), 1),
+										(ImportWave("p1_ambient2"), 1),
+										(ImportWave("p1_ambient3"), 1),
+										(ImportWave("p1_ambient4"), 1),
+										(ImportWave("p1_ambient5"), 1),						
+										(ImportWave("p1_ambient6"), 1),
+                                        (ImportWave("p1_ambient7"), 1),
+                                        (ImportWave("p1_ambient8"), 1),
+                                        (ImportWave("p1_ambient9"), 1),
+										(ImportWave("p1_ambient10"), 1),
+										(ImportWave("p1_ambient11"), 1),
+					(ImportWave("p1_ambient12"), 1)
+				    ])))
+                                ));
+
+p1_hyperiInSound            = GainSound(SFXGain, ASRSound(2.093878, 1.514421, ImportWave("p1_hyperi")));
+p1_hyperoOutSound           = GainSound(SFXGain, ThreeDSound(400, ASRSound(2.357211, 2.490862, ImportWave("p1_hypero"))));
+
+//
+// Mars Sounds - End
 //
 
 newShipSound                = GainSound(SFXGain, ImportWave("newtarget"));
@@ -804,8 +840,6 @@ oink5Sound                  = SerializedSound(MutexVO, DefaultVOTimeout, 0, true
 // Weapon sounds
 //
 
-ta_taserShotSound           = GainSound(SFXGain, PrioritySound(-1.5, ThreeDSound(100, ImportWave("ta_taser")))); 
-
 antiBaseCap1ShotSound       = GainSound(SFXGain, PrioritySound(-1.5, ThreeDSound(100, ImportWave("turretgun1")))); 
 antiBaseCap2ShotSound       = GainSound(SFXGain, PrioritySound(-1.5, ThreeDSound(100, ImportWave("turretgun2")))); 
 
@@ -866,8 +900,6 @@ pulselaserShotSound	    = GainSound(SFXGain, PrioritySound(-1.5, ThreeDSound(200
 strikerShotSound	    = GainSound(SFXGain, PrioritySound(-1.5, ThreeDSound(200, ImportWave("striker")))); 
 pulselaserBurstSound        = GainSound(SFXGain, PrioritySound(5, ThreeDSound(100, RepeatingFireSound(0.125, ImportWave("pulselaser"))))); 
 strikerBurstSound           = GainSound(SFXGain, PrioritySound(5, ThreeDSound(100, RepeatingFireSound(0.25, ImportWave("striker"))))); 
-
-ta_taserBurstSound          = GainSound(SFXGain, PrioritySound(5, ThreeDSound(200, ASRSound(0.000023, 0.09, ImportWave("ta_taser")))));
 
 antiBaseCap1BurstSound      = GainSound(SFXGain, PrioritySound(5, ThreeDSound(100, RepeatingFireSound(0.125, ImportWave("turretgun1"))))); 
 antiBaseCap2BurstSound      = GainSound(SFXGain, PrioritySound(5, ThreeDSound(100, RepeatingFireSound(0.125, ImportWave("turretgun2"))))); 
@@ -1971,12 +2003,12 @@ soundList =
         (435, BLStarbaseInternalSound),
         (440, RUStarbaseInternalSound),
         (445, DEStarbaseInternalSound),
-	(450, TFStarbaseInternalSound),
-	(451, dn_PhStarbaseInternalSound),
-	(452, OHStarbaseInternalSound),
-	(453, ta_dracStarbaseInternalSound),
-	(454, weed_valkStarbaseInternalSound),
-
+		(450, TFStarbaseInternalSound),
+		(451, dn_PhStarbaseInternalSound),
+		(452, OHStarbaseInternalSound),
+		(453, ta_dracStarbaseInternalSound),
+		(454, weed_valkStarbaseInternalSound),
+		(455, p1_StarbaseInternalSound),
 
         (460, ILStarbaseAlertSound),
 
@@ -2146,9 +2178,39 @@ soundList =
         (680, afterburner1InSound),
         
         (700, afterburner1OutSound),
+		
+//
+// Mars Sounds - Begin
+//
+
+		(701, p1_hyperiInSound),
+		(702, p1_hyperoOutSound),
+		
+//
+// Mars Sounds - End
+//
+
+//
+// Valkyrie Sounds - Begin
+//
+
+		(708, weed_burniInSound),
+		(709, weed_burnoOutSound),
+		
+//
+// Valkyrie Sounds - End
+//
+
+//
+// Draconium Sounds - Begin
+//		
 
 		(710, ta_taserBurstSound),
 		(711, ta_taserShotSound),
+		
+//
+// Draconium Sounds - End
+//
 
         (720, probe1Sound),
 

@@ -403,8 +403,9 @@ CommPane =
         ImportImage("concommdisplaybmp", false),
         [
             (
+            //width, height, size (1-3), showScrollbar
                 ChatListPane(
-                    Point(232,66)
+                    355, 66, ChatFontSize, false
                 ),
                 Point(1,16)
             )

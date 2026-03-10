@@ -176,7 +176,8 @@ ChatCompositionImage = PaneImage(ComposingPane, false, true);
 //////////////////////////////////////////////////////
 
 // #294 - Turkey - make number of chat lines dynamic. // BT - 10/17 - Make scrollbar truely hidden.
-chatListPane = ChatListPane(Point(355,  Add(8,Multiply(12,NumChatLines))  ), false );
+//width, height, size (1-3), showScrollbar
+chatListPane = ChatListPane(355,  Add(8,Multiply(ChatFontSize,NumChatLines)), ChatFontSize, false);
 
 CommPane =
     ImagePane(

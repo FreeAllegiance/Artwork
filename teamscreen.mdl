@@ -10,7 +10,8 @@ chatColumns    = [126, 236, 357];
 chatHeader     = ButtonBarPane(ImportImage("headerchatbmp", false), Button3State, chatColumns, true);
 chatEditPane   = EditPane(Point(375, 19), largeFont); //Point(375, 23)
 sendButtonPane = ButtonPane(ImportImage("btnsendbmp", false), ButtonNormal, false);
-chatText       = ChatListPane(Point(407,123), true);
+//width, height, size (1-3), showScrollbar
+chatText       = ChatListPane(407, 123, 1, true);
 
 //
 // Player list
